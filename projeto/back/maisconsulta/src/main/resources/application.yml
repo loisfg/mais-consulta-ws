@@ -11,7 +11,7 @@ logging:
 
 database:
   schema: maisconsulta
-  driver: com.mysql.jdbc.Driver
+  driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
   url: ${DB_URL:jdbc:mysql://maisconsulta.mysql.database.azure.com:3306/maisconsulta}
   username: ${DB_USERNAME:grupo02@maisconsulta}
   password: ${DB_PASSWORDS:IXzGiRLOa%!6kqfYdsYBskbEu2d0%WQ9J4wxdZkcH9KBHOZJqz}
