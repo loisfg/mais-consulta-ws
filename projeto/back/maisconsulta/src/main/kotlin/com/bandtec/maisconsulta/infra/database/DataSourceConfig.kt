@@ -8,21 +8,13 @@ import java.util.*
 import javax.sql.DataSource
 
 @Configuration
-class DataSourceConfig {
-    @Value("\${database.url}")
-    var URL: String? = null
-
-    @Value("\${database.username}")
-    var USERNAME: String? = null
-
-    @Value("\${database.password}")
-    var PASSWORD: String? = null
-
-    @Value("\${database.driver}")
-    var DRIVER: String? = null
-
-    @Value("\${database.schema}")
-    var DATABASE: String? = null
+class DataSourceConfig(
+    @Value("\${database.url}") var URL: String? = null,
+    @Value("\${database.username}") var USERNAME: String? = null,
+    @Value("\${database.password}") var PASSWORD: String? = null,
+    @Value("\${database.driver}") var DRIVER: String? = null,
+    @Value("\${database.schema}") var DATABASE: String? = null
+) {
 
     @Bean
     fun dataSource(): DataSource {
