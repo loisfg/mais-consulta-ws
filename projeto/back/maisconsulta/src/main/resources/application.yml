@@ -1,0 +1,17 @@
+server:
+  port: 8080
+  servlet:
+    context-path: "/mais-consulta"
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+
+database:
+  schema: maisconsulta
+  driver: com.mysql.jdbc.Driver
+  url: ${DB_URL:jdbc:mysql://maisconsulta.mysql.database.azure.com:3306/maisconsulta}
+  username: ${DB_USERNAME:grupo02@maisconsulta}
+  password: ${DB_PASSWORDS:IXzGiRLOa%!6kqfYdsYBskbEu2d0%WQ9J4wxdZkcH9KBHOZJqz}
