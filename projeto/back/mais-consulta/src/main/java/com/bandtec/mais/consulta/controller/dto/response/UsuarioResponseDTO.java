@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.controller.dto.response;
 
+import com.bandtec.mais.consulta.models.dto.UsuarioAutenticadoDTO;
 import lombok.*;
 
 @NoArgsConstructor
@@ -9,5 +10,5 @@ import lombok.*;
 @Setter
 @ToString
 public class UsuarioResponseDTO {
-
+    private UsuarioAutenticadoDTO usuario;
 }
