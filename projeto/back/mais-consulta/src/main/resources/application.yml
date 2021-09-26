@@ -5,9 +5,16 @@ server:
 
 logging:
   level:
-    org:
-      hibernate:
-        SQL: DEBUG
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:bandtec
+  jpa:
+    properties.hibernate.format_sql: TRUE
+    show-sql: TRUE
 
 database:
   schema: maisconsulta

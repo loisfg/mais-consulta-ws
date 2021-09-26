@@ -2,9 +2,15 @@ package com.bandtec.mais.consulta.gateway.database.repository;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
-    Usuario findByLoginAndPassword (String login, String senha);
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
+    Optional<Usuario> findByCpfAndPassword (String cpf, String senha);
+
+    boolean existsByCpf(String cpf);
 }

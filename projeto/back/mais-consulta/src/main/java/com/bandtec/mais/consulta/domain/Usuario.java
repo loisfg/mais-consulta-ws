@@ -1,44 +1,57 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.*;
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
-import java.util.Objects;
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
 @Entity
 @Table(name = "usuario")
-@AllArgsConstructor
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    protected Long idUsuario;
+    @Column(name = "idUsuario")
+    private Integer idUsuario;
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "cpf")
+    private String cpf;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
-    @Getter(AccessLevel.PROTECTED) protected String password;
+    protected String password;
 
-    public String pegarSenha() {
+    @Column(name = "telefone")
+    private String telefone;
+
+
+    @OneToOne(mappedBy = "usuario")
+    private Paciente paciente;
+
+    public String pegarSenha(){
         return password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Usuario usuario = (Usuario) o;
-        return Objects.equals(idUsuario, usuario.idUsuario);
+    public String getCpf() {
+        return cpf;
     }
 
-    @Override
-    public int hashCode() {
-        return 0;
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
