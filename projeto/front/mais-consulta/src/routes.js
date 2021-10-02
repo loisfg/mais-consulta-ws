@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { isAuth } from "./services/auth";
 import Initial from "../src/pages/Initial";
+import PatientSystem from "../src/pages/patientSystem";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -20,6 +21,7 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={Initial} />
+      <Route exact path="/home" component={PatientSystem} />
       <PrivateRoute path="/app" component={() => <h1> App </h1>} />
       <Route path="*" component={() => <h1> Page Not Found </h1>} />
     </Switch>
