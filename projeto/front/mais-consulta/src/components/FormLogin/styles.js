@@ -1,26 +1,22 @@
 import styled from 'styled-components';
-import { TextField } from '@material-ui/core';
-import { Checkbox } from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 
-export const Container = styled.div`
-  height: 40rem;
+export const Container = styled.div `
+  height: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  margin-top: 40px;
+  margin: 0  0 40px 0;
   justify-content: center;
-  img{
-      width: 25%;
-  }
 `;
 
-export const CustomTextField = styled(TextField)`
+export const CustomTextField = styled(TextField)
+`
   margin-top: 30px !important;
   width: 300px;
 `
 
-export const Button = styled.button`
+export const Button = styled.button `
   height: 32px;
   width: 95px;
   font-size: 12px;
@@ -32,8 +28,7 @@ export const Button = styled.button`
   cursor: pointer;
 `
 
-export const Div = styled.div`
-  /* background-color: pink; */
+export const Div = styled.div `
   display: flex;
   align-items: center;
   justify-content: space-between;

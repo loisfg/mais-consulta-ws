@@ -3,7 +3,6 @@ import { Container, CustomTextField, Button, Div } from './styles';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 
 function FormLogin() {
-  // const label = { inputProps: { 'aria-label': 'thais' } };
   return (
     <Container>
       <CustomTextField required label="CPF"></CustomTextField>
@@ -12,8 +11,6 @@ function FormLogin() {
         <FormControlLabel
           control={
             <Checkbox
-                name="SomeName"
-                value="SomeValue"
                 defaultChecked
                 sx={{ '& .MuiSvgIcon-root': { fontSize: 24, color: "#3C5D7C" } }}
             />
