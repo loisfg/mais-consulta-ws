@@ -1,16 +1,27 @@
-import React from 'react';
-import { Container, CustomTextField } from './styles';
-import photo from '../../assets/logo.svg';
-
-import { TextField } from '@material-ui/core';
-
+import * as React from 'react';
+import { Container, CustomTextField, Button, Div } from './styles';
+import { Checkbox, FormControlLabel } from '@material-ui/core';
 
 function FormLogin() {
+  // const label = { inputProps: { 'aria-label': 'thais' } };
   return (
     <Container>
-      <img src={photo} alt="Logo +Consulta" />
       <CustomTextField required label="CPF"></CustomTextField>
       <CustomTextField required label="Senha"></CustomTextField>
+      <Div>
+        <FormControlLabel
+          control={
+            <Checkbox
+                name="SomeName"
+                value="SomeValue"
+                defaultChecked
+                sx={{ '& .MuiSvgIcon-root': { fontSize: 24, color: "#3C5D7C" } }}
+            />
+          }
+          label="Lembrar de mim"
+        />
+        <Button>Entrar</Button>
+      </Div>
     </Container>
   );
 }
