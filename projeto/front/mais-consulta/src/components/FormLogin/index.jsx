@@ -7,12 +7,13 @@ function FormLogin() {
     <Container>
       <CustomTextField required label="CPF"></CustomTextField>
       <CustomTextField required label="Senha"></CustomTextField>
+      <br></br>
       <Div>
         <FormControlLabel
           control={
             <Checkbox
-                defaultChecked
-                sx={{ '& .MuiSvgIcon-root': { fontSize: 24, color: "#3C5D7C" } }}
+              defaultChecked
+              sx={{ '& .MuiSvgIcon-root': { fontSize: 24, color: "#3C5D7C" } }}
             />
           }
           label="Lembrar de mim"

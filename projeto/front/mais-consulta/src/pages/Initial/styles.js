@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import photo from "../../assets/initialPhoto.jpg";
-import { ToggleButton,ToggleButtonGroup } from "@material-ui/core";
+import { ToggleButton, ToggleButtonGroup, Tabs, Tab, Box, Typography } from "@material-ui/core";
 
 export const Page = styled.section`
   display: flex;
@@ -38,7 +38,7 @@ export const DivLogo = styled.div`
   justify-content: center;
   margin-top: 40px;
   img{
-      width: 100%;
+      width: 150%;
   }
 `
 export const CustomToggleGroup = styled(ToggleButtonGroup)`
@@ -46,14 +46,20 @@ export const CustomToggleGroup = styled(ToggleButtonGroup)`
 `
 
 export const CustomToggleButton = styled(ToggleButton)`
-  /* border: transparent !important; */
+  border: transparent !important;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
   font-weight: bold !important;
-  color: ${props => props.theme.main};
 `
 
-// CustomToggleButton.defaultProps = {
-//   theme: {
-//     main: "#12A583"
-//   }
-// }
+export const CustomTabs = styled(Tabs)``
+
+export const CustomTab = styled(Tab)`
+  
+`
+
+export const CustomBox = styled(Box)`  
+  
+`
+
+export const CustomTypography = styled(Typography)`
+`
