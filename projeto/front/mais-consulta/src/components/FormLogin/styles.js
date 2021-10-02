@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { TextField } from '@material-ui/core';
+
 
 export const Container = styled.div`
   height: 40rem;
@@ -12,3 +14,7 @@ export const Container = styled.div`
       width: 30%;
   }
 `;
+
+export const CustomTextField = styled(TextField)`
+  margin-top: 10px !important
+`
