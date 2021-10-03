@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { isAuth } from "./services/auth";
-import Initial from "../src/pages/Initial";
+import { Initial } from "../src/pages/";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route

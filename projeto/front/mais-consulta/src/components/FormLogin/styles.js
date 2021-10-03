@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {TextField} from '@material-ui/core';
 
 export const Container = styled.div `
   height: 20rem;
@@ -9,24 +8,6 @@ export const Container = styled.div `
   margin: 0  0 40px 0;
   justify-content: center;
 `;
-
-export const CustomTextField = styled(TextField)
-`
-  margin-top: 30px !important;
-  width: 300px;
-`
-
-export const Button = styled.button `
-  height: 32px;
-  width: 95px;
-  font-size: 12px;
-  border-style: none;
-  border-radius: 5px;
-  color: white;
-  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: #12A583;
-  cursor: pointer;
-`
 
 export const Div = styled.div `
   display: flex;
