@@ -17,6 +17,7 @@ export const RightSide = styled.div`
   opacity: 87%;
   background: url(${photo}) center no-repeat;
   background-size: cover;
+  background-color: red;
 `;
 
 export const LeftSide = styled.div`

@@ -1,14 +1,23 @@
 import React from 'react';
-import { Page } from './styles';
-import { divUsuario } from './styles';
+import { Page} from "./styles"
+import { DivUsuario } from "../patientSystem/styles"
 
-const patientSystem = (props) =>{
+
+
+
+const patientSystem = () =>{
+
+
     return (
-        <Page>
-            <divUsuario>
-                O
-            </divUsuario>
+        <Page >
+            <DivUsuario >
+              <Padding>
+                  ola
+              </Padding>
+            </DivUsuario>
+            
         </Page> 
+        
     )
 
 }
