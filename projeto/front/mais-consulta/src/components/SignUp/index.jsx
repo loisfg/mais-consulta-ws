@@ -1,45 +1,7 @@
 import React, { useState } from "react";
 import { Form, Container } from "./styles";
 
-const SignUp = (props) => {
-  const [userData, setUserData] = useState();
-
-  // setUserData({
-  //   nome: "",
-  //   dtNascimento: "",
-  //   numeroCartaoSus: "",
-  //   cep: "",
-  //   cidade: "",
-  //   estado: "",
-  //   bairro: "",
-  //   logradouro: "",
-  //   numero: "",
-  //   complemento: "",
-  //   cpf: "",
-  //   email: "",
-  //   password: "",
-  //   telefone: "",
-  //   error: "",
-  //   sexo: [
-  //     { id: 0, text: "Selecione o sexo: " },
-  //     { id: 1, text: "M" },
-  //     { id: 2, text: "F" },
-  //     { id: 3, text: "Outros" },
-  //   ],
-  //   selectItem: 0,
-  // });
-
-  // this.handleSelectItem = this.handleSelectItem.bind(this);
-
-  // const handleSelectItem = (e) => {
-  //   this.setState({ selectItem: e.target.value });
-  // };
-
-  // const handleSignUp = (e) => {
-  //   e.preventDefault();
-  //   alert("Bem vindo usuário");
-  // };
-
+export const SignUp = (props) => {
   return (
     <Container>
       {/* <Form onSubmit={this.handleSignUp} /> */}
@@ -66,5 +28,3 @@ const SignUp = (props) => {
     </Container>
   );
 };
-
-export default SignUp;

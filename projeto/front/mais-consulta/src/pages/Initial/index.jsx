@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { RightSide, LeftSide, Page, DivLogo, CustomTabs, CustomTab, CustomBox, CustomTypography } from "./styles"
-import Login from "../../components/FormLogin"
-import SignUp from "../../components/SignUp"
+import { FormLogin, SignUp } from '../../components'
 import Logo from '../../assets/logo.svg';
 import PropTypes from 'prop-types';
 
-
-const Initial = () => {
-
+export const Initial = () => {
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -60,17 +57,15 @@ const Initial = () => {
         </CustomTabs>
 
         <TabPanel value={value} index={0}>
-          <Login />
+          <FormLogin />
         </TabPanel>
+        
         <TabPanel value={value} index={1}>
           <SignUp />
         </TabPanel>
-
-
       </LeftSide>
       <RightSide />
     </Page>
   );
 };
 
-export default Initial;

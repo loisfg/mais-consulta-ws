@@ -4,6 +4,8 @@ import { ToggleButton, ToggleButtonGroup, Tabs, Tab, Box, Typography } from "@ma
 
 export const Page = styled.section`
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100vw;
 `;
@@ -32,14 +34,14 @@ export const LeftSide = styled.div`
 
 export const DivLogo = styled.div`
   height: 100px;
-  width: 100px;
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 40px;
   img{
-      width: 150%;
+      width: 100%;
   }
 `
 export const CustomToggleGroup = styled(ToggleButtonGroup)`

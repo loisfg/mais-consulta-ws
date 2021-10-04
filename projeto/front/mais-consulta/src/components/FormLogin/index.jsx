@@ -1,27 +1,13 @@
 import * as React from 'react';
-import { Container, CustomTextField, Button, Div } from './styles';
-import { Checkbox, FormControlLabel } from '@material-ui/core';
+import { Container, Div } from './styles';
+import { Button, Input, Checkbox } from '../'
 
-function FormLogin() {
-  return (
-    <Container>
-      <CustomTextField required label="CPF"></CustomTextField>
-      <CustomTextField required label="Senha"></CustomTextField>
-      <br></br>
-      <Div>
-        <FormControlLabel
-          control={
-            <Checkbox
-              defaultChecked
-              sx={{ '& .MuiSvgIcon-root': { fontSize: 24, color: "#3C5D7C" } }}
-            />
-          }
-          label="Lembrar de mim"
-        />
-        <Button>Entrar</Button>
-      </Div>
-    </Container>
-  );
-}
-
-export default FormLogin;
+export const FormLogin = () => 
+<Container>
+  <Input label='CPF'/>
+  <Input label='Senha'/>
+  <Div>
+    <Checkbox label='Lembrar de mim'/>
+    <Button text='Entrar'/>
+  </Div>
+</Container>
