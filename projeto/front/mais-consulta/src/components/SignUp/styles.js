@@ -8,4 +8,8 @@ export const Container = styled.div`
   margin: 0  0 40px 0;
   justify-content: center;
 `;
-export const Form = styled.form``;
+export const DivInput = styled.div`
+  display: flex;
+  width: 400px;
+  padding: 0 10px 0 0;
+`;

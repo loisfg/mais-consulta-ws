@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const Page = styled.section`
-display: flex;
 height: 100vh;
-width: 100vw;
+width: 85vw;
 background-color: red;
+right: 0%;
+position: fixed;
+display: flex;
 
 `;
 
@@ -12,7 +14,7 @@ background-color: red;
 export const DivUsuario = styled.div`
 height: 15%;
 width: 100%;
-background-color: blue;
+background-color: #FFF;
 display: flex;
 justify-content: flex-end;
 
