@@ -11,14 +11,13 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:bandtec
-  jpa:
-    properties.hibernate.format_sql: TRUE
-    show-sql: TRUE
+    url: jdbc:sqlserver://maisconsultadb.database.windows.net:1433;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: mais-consulta
+    password: "#Grupo02"
 
-database:
-  schema: maisconsulta
-  driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
-  url: ${DB_URL:jdbc:sqlserver://grupo02.database.windows.net:1433}
-  username: ${DB_USERNAME:Grupo02@grupo02}
-  password: ${DB_PASSWORDS:IXzGiRLOa%!6kqfYdsYBskbEu2d0%WQ9J4wxdZkcH9KBHOZJqz}
+  jpa:
+    show-sql: TRUE
+    format_sql: TRUE
+    properties.hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
