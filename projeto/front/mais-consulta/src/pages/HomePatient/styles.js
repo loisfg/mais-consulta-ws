@@ -4,7 +4,7 @@ export const Page = styled.section`
 display: flex;
 height: 100vh;
 width: 100vw;
-background-color: red;
+background-color: pink;
 
 `;
 
