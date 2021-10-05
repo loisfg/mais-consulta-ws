@@ -33,13 +33,13 @@ export const LeftSide = styled.div`
 `;
 
 export const DivLogo = styled.div`
-  height: 100px;
+  height: 56px;
   width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 0;
   img{
       width: 100%;
   }
@@ -54,7 +54,9 @@ export const CustomToggleButton = styled(ToggleButton)`
   font-weight: bold !important;
 `
 
-export const CustomTabs = styled(Tabs)``
+export const CustomTabs = styled(Tabs)`
+  margin-bottom: 21px;
+`
 
 export const CustomTab = styled(Tab)`
   

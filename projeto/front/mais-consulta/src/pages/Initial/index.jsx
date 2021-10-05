@@ -51,7 +51,10 @@ export const Initial = () => {
           <img src={Logo} alt="Logo +Consulta" />
         </DivLogo>
 
-        <CustomTabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <CustomTabs value={value} 
+        onChange={handleChange} 
+        aria-label="basic tabs example"
+        >
           <CustomTab label="Login" {...a11yProps(0)} />
           <CustomTab label="Cadastro" {...a11yProps(1)} />
         </CustomTabs>

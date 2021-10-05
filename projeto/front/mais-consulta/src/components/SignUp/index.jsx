@@ -1,30 +1,15 @@
 import React, { useState } from "react";
-import { Form, Container } from "./styles";
+import { Container } from "./styles";
+import { Stepper, Input } from '../'
 
-export const SignUp = (props) => {
+export const SignUp = ({activeStep}) => {
   return (
     <Container>
-      {/* <Form onSubmit={this.handleSignUp} /> */}
-      <input
-        type="text"
-        placeholder="Nome completo"
-        onChange={(e) => this.setState({ nome: e.target.value })}
-      />
-      <input
-        type="password"
-        placeholder="CPF"
-        onChange={(e) => this.setState({ cpf: e.target.value })}
-      />
-      <input
-        type="text"
-        placeholder="RG"
-        onChange={(e) => this.setState({ rg: e.target.value })}
-      />
-      <input
-        type="text"
-        placeholder="RG"
-        onChange={(e) => this.setState({ rg: e.target.value })}
-      />
+      <Stepper steps={["Dados pessoais", "Endereço", "Dados de acesso"]} 
+               activeStep= {activeStep}/>
+      <Input size='small' label="Nome completo"/>
+      <Input size='small' label="CPF"/>
+      <Input size='small' label="RG"/>
     </Container>
   );
 };
