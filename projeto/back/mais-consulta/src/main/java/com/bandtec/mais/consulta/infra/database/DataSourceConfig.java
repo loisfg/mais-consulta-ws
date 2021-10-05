@@ -10,7 +10,7 @@ import java.util.Properties;
 
 //@Configuration
 public class DataSourceConfig {
-//
+
 //
 //    @Value("${database.url}")
 //    String URL;
@@ -43,7 +43,7 @@ public class DataSourceConfig {
 //    @Bean
 //    public Properties additionalProperties() {
 //        Properties props = new Properties();
-//        props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+//        props.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLServer2012Dialect");
 //        props.setProperty("hibernate.show_sql", "true");
 //        props.setProperty("hibernate.hbm2ddl.auto", "update");
 //
