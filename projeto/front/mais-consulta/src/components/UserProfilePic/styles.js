@@ -1,11 +1,49 @@
 import styled from "styled-components";
+import { Avatar } from "@material-ui/core";
 
-export const Padding = styled.section`
-height: 100vh;
-width: 20vw;
-`;
+export const CustomAvatar = styled(Avatar)`
+    height: 600px;
 
-export const UserComponent = styled.div`
-height: 100%;
-width: 50%;
+`
+
+export const Container = styled.div`
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px 0 10px;
+    width: 20%;
+`
+export const H3 = styled.h3`
+    color: #366273;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`
+
+
+export const H4 = styled.h4`
+    color: #366273;
+    font-size: 13px;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`
+
+export const AlignText = styled.div`
+    /* height: 100%; */
+    text-align: end;
+    padding: 0 10px 0 0;
+`
+
+export const DivNotifications = styled.div`
+  height: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  padding-right: 12px;
+  img{
+      width: 70%;
+      
+  }
 `
