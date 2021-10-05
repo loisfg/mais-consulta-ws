@@ -1,6 +1,8 @@
 package com.bandtec.mais.consulta.domain;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
@@ -23,9 +25,23 @@ public class Usuario {
     @Column(name = "telefone")
     private String telefone;
 
-
     @OneToOne(mappedBy = "usuario")
     private Paciente paciente;
+
+    @OneToMany(mappedBy="usuario",fetch = FetchType.LAZY)
+    private Set<Alergia> alergia;
+
+    @OneToMany(mappedBy= "usuario", fetch = FetchType.LAZY)
+    private Set<Doenca> doenca;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Remedio> remedio;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Deficiencia> deficiencia;
+
+    public Usuario() {
+    }
 
     public String pegarSenha(){
         return password;
