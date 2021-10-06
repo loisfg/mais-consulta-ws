@@ -13,9 +13,9 @@ align-items: flex-end;
 
 
 export const DivUsuario = styled.div`
-height: 100vh;
-width: 100vw;
-background-color: blue;
+height: 15vh;
+width: 20vw;
+background-color: #fff;
 display: flex;
 justify-content: flex-end;
 
