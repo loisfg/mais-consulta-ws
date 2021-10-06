@@ -1,20 +1,17 @@
-import React from 'react';
-import { Page } from "./styles"
-import { DivUsuario } from "./styles"
-import { Menu } from '../../components/Menu';
-import { UserProfilePic } from '../../components/';
+import React from "react";
+import { Page } from "./styles";
+import { DivUsuario } from "./styles";
+import { UserProfilePic, VerticalTabs } from "../../components/";
 
 const HomePatient = () => {
+  return (
+    <Page>
+      <DivUsuario>
+        <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
+        <VerticalTabs />
+      </DivUsuario>
+    </Page>
+  );
+};
 
-    return (
-        <Page>
-            <DivUsuario >
-                <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
-            </DivUsuario>
-        </Page>
-    )
-
-}
-
-
-export default HomePatient; 
+export default HomePatient;
