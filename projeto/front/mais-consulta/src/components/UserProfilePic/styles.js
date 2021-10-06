@@ -7,12 +7,12 @@ export const CustomAvatar = styled(Avatar)`
 `
 
 export const Container = styled.div`
-    height: 80%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 10px 0 10px;
-    width: 20%;
+    padding: 0 10px 0 0px;
+    width: 100%;
 `
 export const H3 = styled.h3`
     color: #366273;
@@ -29,7 +29,6 @@ export const H4 = styled.h4`
 `
 
 export const AlignText = styled.div`
-    /* height: 100%; */
     text-align: end;
     padding: 0 10px 0 0;
 `

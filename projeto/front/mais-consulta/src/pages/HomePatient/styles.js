@@ -2,19 +2,20 @@ import styled from "styled-components";
 
 export const Page = styled.section`
 height: 100vh;
-width: 85vw;
+width: 100vw;
 background-color: red;
 right: 0%;
-position: fixed;
+/* position: fixed; */
 display: flex;
-
+flex-direction: column;
+align-items: flex-end;
 `;
 
 
 export const DivUsuario = styled.div`
-height: 15%;
-width: 100%;
-background-color: #FFF;
+height: 15vh;
+width: 20vw;
+background-color: #fff;
 display: flex;
 justify-content: flex-end;
 

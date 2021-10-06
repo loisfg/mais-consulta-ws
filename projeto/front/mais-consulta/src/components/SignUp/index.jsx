@@ -7,10 +7,10 @@ export const SignUp = ({activeStep}) => {
     <Container>
       <Stepper steps={["Dados pessoais", "Endereço", "Dados de acesso"]} 
                activeStep= {activeStep}/>
-      <Input size='small' label="Nome completo"/>
+      <Input required='required' label="Nome completo"/>
       <DivInput>
-        <Input size='small' label="CPF"/>
-        <Input size='small' label="RG"/>
+        <Input label="CPF"/>
+        <Input label="RG"/>
       </DivInput>
     </Container>
   );
