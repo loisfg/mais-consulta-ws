@@ -1,7 +1,7 @@
 import React from "react";
 import { Page } from "./styles";
 import { DivUsuario } from "./styles";
-import { UserProfilePic, VerticalTabs } from "../../components/";
+import { UserProfilePic, VerticalTabs, FullScreen } from "../../components/";
 
 const HomePatient = () => {
   return (
@@ -13,5 +13,4 @@ const HomePatient = () => {
     </Page>
   );
 };
-
-export default HomePatient;
+export default HomePatient; 
