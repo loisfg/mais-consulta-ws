@@ -27,14 +27,12 @@ export const FormLogin = () => {
           const response = await api.post("/auth/login", params)
           if (response.status === 200) {
 
-            // const usuarioString = JSON.stringify(response.data)
+            const usuarioString = JSON.stringify(response.data)
 
-            localStorage.setItem("usuario", response.data)
+            localStorage.setItem("usuario", usuarioString)
 
-            const objetoEmFormatoDeString = localStorage.getItem('usuario');
-            const objetoMesmo = JSON.parse(objetoEmFormatoDeString)
-
-            console.log(objetoMesmo);
+            // const objetoEmFormatoDeString = localStorage.getItem('usuario');
+            // const objetoMesmo = JSON.parse(objetoEmFormatoDeString)
 
             history.push("/home")
           }
