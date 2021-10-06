@@ -2,7 +2,7 @@ import React from 'react';
 import { Page } from "./styles"
 import { DivUsuario } from "./styles"
 import { Menu } from '../../components/Menu';
-import { UserProfilePic } from '../../components/';
+import { UserProfilePic, Slider } from '../../components/';
 
 const HomePatient = () => {
 
@@ -11,6 +11,7 @@ const HomePatient = () => {
             <DivUsuario >
                 <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
             </DivUsuario>
+            <Slider></Slider>
         </Page>
     )
 
