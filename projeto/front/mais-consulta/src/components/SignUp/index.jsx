@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, DivInput } from "./styles";
-import { Stepper, Input } from '../'
+import { Stepper, Input, Select } from '../'
 
 export const SignUp = ({activeStep}) => {
   return (
@@ -11,6 +11,10 @@ export const SignUp = ({activeStep}) => {
       <DivInput>
         <Input label="CPF"/>
         <Input label="RG"/>
+      </DivInput>
+      <DivInput>
+        <Select/>
+        <Input label="Celular" size='small'/>
       </DivInput>
     </Container>
   );

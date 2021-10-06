@@ -10,6 +10,8 @@ export const Container = styled.div`
 `;
 export const DivInput = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 400px;
-  padding: 0 10px 0 0;
+  padding: 0 7px 0 0;
 `;
