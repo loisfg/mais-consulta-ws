@@ -6,5 +6,6 @@ export * from "./Checkbox";
 export * from "./TabPanel";
 export * from "./Stepper";
 export * from "./UserProfilePic";
-export * from "./VerticalTabs";
 export * from "./FullScreen";
+export * from "./Select";
+export * from "./Menu";

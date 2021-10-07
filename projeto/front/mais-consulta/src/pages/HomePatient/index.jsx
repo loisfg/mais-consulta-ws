@@ -1,16 +1,16 @@
-import React from "react";
 import { Page } from "./styles";
 import { DivUsuario } from "./styles";
-import { UserProfilePic, VerticalTabs, FullScreen } from "../../components/";
+import { UserProfilePic, Menu } from "../../components"
 
-const HomePatient = () => {
+function HomePatient() {
   return (
     <Page>
+      <Menu/>
       <DivUsuario>
         <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
-        <VerticalTabs />
       </DivUsuario>
     </Page>
   );
 };
-export default HomePatient; 
+
+export default HomePatient;
