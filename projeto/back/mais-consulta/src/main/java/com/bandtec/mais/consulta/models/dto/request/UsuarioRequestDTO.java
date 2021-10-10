@@ -9,13 +9,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Getter
-@Setter
-@ToString
 public class UsuarioRequestDTO {
-
     private String cpf;
     private String password;
     private Paciente paciente;
-
 }
