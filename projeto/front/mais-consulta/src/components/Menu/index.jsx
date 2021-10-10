@@ -7,8 +7,9 @@ import History from '../../assets/historico.png';
 import Unidades from '../../assets/unidades.png';
 import Calendar from '../../assets/calendar.png';
 import Logoff from '../../assets/sair.png';
-import { style } from '@material-ui/system';
+
 export const Menu = () => {
+ 
   return(
     <DivMenu>
       <img src={Logo} alt="" />
@@ -37,7 +38,7 @@ export const Menu = () => {
         <LinkDivTab>
         <img src={Unidades} alt="" />
           <Tab>
-            Mapa de agendamento
+            Mapa de unidades
           </Tab>  
         </LinkDivTab>
 

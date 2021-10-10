@@ -12,7 +12,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 10px 0 0px;
-    width: 100%;
+    width: 100vh;
 `
 export const H3 = styled.h3`
     color: #366273;
@@ -43,6 +43,5 @@ export const DivNotifications = styled.div`
   padding-right: 12px;
   img{
       width: 70%;
-      
   }
 `

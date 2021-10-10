@@ -1,6 +1,6 @@
 import { Page } from "./styles";
 import { DivUsuario } from "./styles";
-import { UserProfilePic, Menu } from "../../components"
+import { UserProfilePic, Menu, Message, CustomBox, DivLeft, DivRight } from "../../components"
 
 function HomePatient() {
   return (
@@ -9,6 +9,9 @@ function HomePatient() {
       <DivUsuario>
         <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
       </DivUsuario>
+      <Message textOne="Bem vindo" textOne="Agende agora" />
+      <CustomBox />
+       
     </Page>
   );
 };
