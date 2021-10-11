@@ -1,17 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 20rem;
+  height: 60vh;
+  width: 35vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0  0 40px 0;
   justify-content: center;
 `;
+
+export const InputFamily = styled.div`
+  height: 68%;
+  width: 100%;
+  padding: 0 10px 0 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 export const DivInput = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 400px;
-  padding: 0 7px 0 0;
+  width: 326px;
 `;

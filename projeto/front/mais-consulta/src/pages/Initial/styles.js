@@ -45,7 +45,6 @@ export const DivLogo = styled.div`
   }
 `
 export const CustomToggleGroup = styled(ToggleButtonGroup)`
-  /* color: white; */
 `
 
 export const CustomToggleButton = styled(ToggleButton)`
@@ -55,7 +54,6 @@ export const CustomToggleButton = styled(ToggleButton)`
 `
 
 export const CustomTabs = styled(Tabs)`
-  margin-bottom: 21px;
 `
 
 export const CustomTab = styled(Tab)`

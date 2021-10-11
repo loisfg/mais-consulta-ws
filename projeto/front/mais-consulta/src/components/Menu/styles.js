@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import logo from '../../assets/logo.svg';
 
 export const DivMenu = styled.div`
   height: 100vh;

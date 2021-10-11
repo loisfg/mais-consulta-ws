@@ -54,12 +54,14 @@ export const FormLogin = () => {
           label='CPF'
           type="cpf"
           id="cpf"
+          size= 'big'
           onChange={e => setCpf(e.target.value)}
         />
         <Input
           label='Senha'
           type="password"
           id="password"
+          size= 'big'
           onChange={e => setPassword(e.target.value)}
         />
         <Div>

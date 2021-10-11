@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, DivInput } from "./styles";
+import { Container, DivInput, InputFamily } from "./styles";
 import { Stepper, Input, Select } from '../'
 
 export const SignUp = ({activeStep}) => {
@@ -7,15 +7,24 @@ export const SignUp = ({activeStep}) => {
     <Container>
       <Stepper steps={["Dados pessoais", "Endereço", "Dados de acesso"]} 
                activeStep= {activeStep}/>
-      <Input required='required' label="Nome completo"/>
-      <DivInput>
-        <Input label="CPF"/>
-        <Input label="RG"/>
-      </DivInput>
-      <DivInput>
-        <Select/>
-        <Input label="Celular" size='small'/>
-      </DivInput>
+      <InputFamily>
+        <Input 
+        size='big' 
+        required='required' 
+        label="Nome completo"/>
+        <DivInput>
+          <Input size='small' label="CPF"/>
+          <Input size= 'small' label="RG"/>
+        </DivInput>
+        <DivInput>
+          <Select/>
+          <Input size='small' label="Celular"/>
+        </DivInput>
+        <Input 
+        size='big' 
+        required='required' 
+        label="Número da carteirinha do SUS"/>
+      </InputFamily>
     </Container>
   );
 };
