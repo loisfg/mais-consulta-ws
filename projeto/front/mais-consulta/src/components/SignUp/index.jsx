@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, DivInput, InputFamily } from "./styles";
-import { Stepper, Input, Select } from '../'
+import { Stepper, Input, Select, IconButton } from '../'
 
 export const SignUp = ({activeStep}) => {
   return (
@@ -25,6 +25,7 @@ export const SignUp = ({activeStep}) => {
         required='required' 
         label="Número da carteirinha do SUS"/>
       </InputFamily>
+      <IconButton/>
     </Container>
   );
 };
