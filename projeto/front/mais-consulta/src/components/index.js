@@ -12,3 +12,4 @@ export * from "./Menu";
 export * from "./Message";
 export * from "./CustomBox";
 export * from "./List";
+export * from "./IconButton";

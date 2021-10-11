@@ -5,7 +5,6 @@ export const CustomForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0  0 40px 0;
   justify-content: center;
 `;
 
@@ -15,5 +14,6 @@ export const Div = styled.div`
   justify-content: space-between;
   height: 8vh;
   width: 28vw;
+  padding: 0 0 20px 0;
   margin-top: 10px;
 `
