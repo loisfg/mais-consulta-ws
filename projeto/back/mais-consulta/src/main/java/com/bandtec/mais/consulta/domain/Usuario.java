@@ -28,18 +28,6 @@ public class Usuario {
     @OneToOne(mappedBy = "usuario")
     private Paciente paciente;
 
-    @OneToMany(mappedBy="usuario",fetch = FetchType.LAZY)
-    private Set<Alergia> alergia;
-
-    @OneToMany(mappedBy= "usuario", fetch = FetchType.LAZY)
-    private Set<Doenca> doenca;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Remedio> remedio;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Deficiencia> deficiencia;
-
     public Usuario() {
     }
 
@@ -91,35 +79,4 @@ public class Usuario {
         this.paciente = paciente;
     }
 
-    public Set<Alergia> getAlergia() {
-        return alergia;
-    }
-
-    public void setAlergia(Set<Alergia> alergia) {
-        this.alergia = alergia;
-    }
-
-    public Set<Doenca> getDoenca() {
-        return doenca;
-    }
-
-    public void setDoenca(Set<Doenca> doenca) {
-        this.doenca = doenca;
-    }
-
-    public Set<Remedio> getRemedio() {
-        return remedio;
-    }
-
-    public void setRemedio(Set<Remedio> remedio) {
-        this.remedio = remedio;
-    }
-
-    public Set<Deficiencia> getDeficiencia() {
-        return deficiencia;
-    }
-
-    public void setDeficiencia(Set<Deficiencia> deficiencia) {
-        this.deficiencia = deficiencia;
-    }
 }
