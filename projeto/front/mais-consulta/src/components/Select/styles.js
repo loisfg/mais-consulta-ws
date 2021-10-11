@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import { Select, InputLabel } from '@material-ui/core';
+import { Select, InputLabel, FormControl } from '@material-ui/core';
 
 export const CustomSelect = styled(Select)`
-    margin: 0px 15px 9px 0 !important;
-    width: 160px !important;
+    width: 100% !important;
 `;
 
 export const CustomSelectLabel = styled(InputLabel)`
-    margin: 5px 0 0 0 !important;
+`
+
+export const CustomFormControl = styled(FormControl)`
+    width: 45% !important;
+    margin: 0 !important;
+    padding: 0 !important;
 `

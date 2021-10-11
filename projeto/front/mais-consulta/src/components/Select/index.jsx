@@ -1,19 +1,24 @@
 import React from 'react';
-import { CustomSelect, CustomSelectLabel } from './styles';
+import { CustomSelect, CustomSelectLabel, CustomFormControl } from './styles';
 import { MenuItem } from '@material-ui/core';
 
 export const Select = () => {
+  const [sex, setAge] = React.useState('');
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   return (
-    <div>
-      <CustomSelectLabel>Sexo</CustomSelectLabel>
-      <CustomSelect variant='standard' size='medium'>
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+    <CustomFormControl variant="standard" sx={{ m: 1 }}>
+      <CustomSelectLabel id = 'select-label'>Sexo</CustomSelectLabel>
+      <CustomSelect variant='standard' 
+                    size='medium' 
+                    id= 'select'
+                    labelId = 'select-label'
+                    label="Sexo">
+          <MenuItem value={"feminino"}>Feminino</MenuItem>
+          <MenuItem value={"masculino"}>Masculino</MenuItem>
+          <MenuItem value={"outros"}>Outros</MenuItem>
       </CustomSelect>
-    </div>
+    </CustomFormControl>
   );
 }
