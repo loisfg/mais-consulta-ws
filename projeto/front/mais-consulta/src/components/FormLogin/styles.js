@@ -14,6 +14,6 @@ export const Div = styled.div`
   justify-content: space-between;
   height: 8vh;
   width: 28vw;
-  padding: 0 0 20px 0;
-  margin-top: 10px;
+  padding: 20px 0 0px 0;
+  margin-top: 30px;
 `

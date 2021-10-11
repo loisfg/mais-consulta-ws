@@ -14,11 +14,3 @@ export const CustomIconButton = styled.button `
       height: 12em;
   }
 `;
-
-export const CustomStack = styled.div`
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-    margin: 0;
-    padding: 0 18px 0 0;
-`

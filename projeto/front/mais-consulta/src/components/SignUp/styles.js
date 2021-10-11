@@ -17,8 +17,10 @@ export const InputFamily = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
 `
-export const DivInput = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
+
+export const CustomStack = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 18px 0 18px;
+`

@@ -47,9 +47,7 @@ export const FormLogin = () => {
 
     <>
       <CustomForm onSubmit={handleLogin}>
-
         {error && <p>{error}</p>}
-
         <Input
           label='CPF'
           type="cpf"

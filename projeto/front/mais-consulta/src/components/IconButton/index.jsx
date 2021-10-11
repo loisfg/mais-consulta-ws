@@ -1,13 +1,10 @@
 import React from 'react';
-import { CustomIconButton, CustomStack, } from './styles'
-import ArrowRight from '../../assets/arrow_right.svg'
+import { CustomIconButton } from './styles'
 
-export const IconButton = () => {
+export const IconButton = ({onClick, Arrow}) => {
   return (
-    <CustomStack>
-      <CustomIconButton>
-        <img src={ArrowRight} alt="" />
+      <CustomIconButton onClick= {onClick}>
+        <img src={Arrow} alt="" />
       </CustomIconButton>
-    </CustomStack>
   );
 }
