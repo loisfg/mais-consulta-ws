@@ -1,9 +1,8 @@
 package com.bandtec.mais.consulta.usecase.userinfo;
 
 import com.bandtec.mais.consulta.domain.Alergia;
-
-import java.util.List;
+import com.bandtec.mais.consulta.models.dto.ListaObj;
 
 public interface GetAlergia {
-    List<Alergia> execute(Integer idUser);
+    ListaObj<Alergia> execute(Integer idUser);
 }

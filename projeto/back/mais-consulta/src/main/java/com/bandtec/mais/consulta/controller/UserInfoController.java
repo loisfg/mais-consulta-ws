@@ -4,6 +4,7 @@ import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.domain.Deficiencia;
 import com.bandtec.mais.consulta.domain.Doenca;
 import com.bandtec.mais.consulta.domain.Remedio;
+import com.bandtec.mais.consulta.models.dto.ListaObj;
 import com.bandtec.mais.consulta.usecase.userinfo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -56,9 +57,9 @@ public class UserInfoController {
     }
 
     @GetMapping("/{idUser}/alergia")
-    public ResponseEntity<List<Alergia>> getAlergias(@PathVariable Integer idUser) {
-        List<Alergia> alergiaList = getAlergia.execute(idUser);
-        if (alergiaList.isEmpty()) {
+    public ResponseEntity<ListaObj<Alergia>> getAlergias(@PathVariable Integer idUser) {
+        ListaObj<Alergia> alergiaList = getAlergia.execute(idUser);
+        if (alergiaList.estaVazia()) {
             return ResponseEntity.status(204).build();
         }
         return ResponseEntity.status(200).body(alergiaList);
