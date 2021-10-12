@@ -81,7 +81,7 @@ export const ListDays = styled.div`
     align-items: center;
     cursor: pointer;
     color: #515151;
-
+    opacity: ${({weight}) => weight === 'light' ? 0.5 : 1};
     &:hover:not(.today) {
     cursor: pointer;
     background: #19A795;
