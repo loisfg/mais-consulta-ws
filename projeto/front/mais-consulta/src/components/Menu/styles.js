@@ -9,8 +9,8 @@ export const DivMenu = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   img {
-    height: 180px;
-    width: 180px;
+    height: 160px;
+    width: 160px;
     align-self: center;
     justify-self: flex-start;
   }

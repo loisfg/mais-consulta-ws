@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { isAuth } from "./services/auth";
 import { Initial } from "../src/pages/";
 import HomePatient from "./pages/HomePatient";
-import { List } from "./components/List";
+import { Calendar } from "./components/Calendar";
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -24,7 +24,7 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={Initial} />
       <Route path="/home" component={HomePatient} />
-      <Route path="/list" component={List} />
+      <Route path="/calendar" component={Calendar} />
       <PrivateRoute path="/app" component={() => <h1> App </h1>} />
       <Route path="*" component={() => <h1> Page Not Found </h1>} />
     </Switch>
