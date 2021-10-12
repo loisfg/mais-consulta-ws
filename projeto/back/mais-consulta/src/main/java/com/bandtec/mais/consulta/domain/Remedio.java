@@ -1,23 +1,19 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
-@Table(name = "remedios")
+@Setter
+@Table(name = "alergia")
 @Entity
 public class Remedio {
-    @ManyToOne
-    @JoinColumn(name = "usuario_id_usuario")
-    private Usuario usuario;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "", nullable = false)
-    private Integer idRemedio;
-
-    private Integer fkUsuario;
+    private Integer id;
+    private String nome;
+    private Boolean controlado;
 }

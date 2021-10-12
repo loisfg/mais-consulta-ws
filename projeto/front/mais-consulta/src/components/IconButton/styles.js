@@ -11,6 +11,6 @@ export const CustomIconButton = styled.button `
   background-color: #fff;
   cursor: pointer;
   img{
-      height: 12em;
+      height: 8em;
   }
 `;
