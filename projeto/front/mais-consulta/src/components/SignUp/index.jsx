@@ -5,18 +5,20 @@ import { PersonalData } from "./PersonalData";
 import { Address } from "./Address";
 import { AccessData } from './AccessData';
 import ArrowRight from '../../assets/arrow_right.svg';
-import LeftArrow from '../../assets/left_arrow.svg';
 import Check from '../../assets/check.svg';
 
 export const SignUp = () => {
   const [activeStep, setActiveStep] = useState(0)
   function handleStepCompleted(event) {
-    alert('Cadastro Concluído!')
+    event.preventDefault()
+    console.log(document.querySelector('form'))
   }
   function handleNextStep(event) {
+    event.preventDefault()
     setActiveStep(activeStep+1)
   }
   function handleBackStep(event) {
+    event.preventDefault()
     setActiveStep(activeStep-1)
   }
   return (
@@ -34,10 +36,10 @@ export const SignUp = () => {
         activeStep === 2 && <AccessData/>
       }
       </InputFamily>
-      <CustomStack>
-        { activeStep >= 1 && <IconButton onClick={handleBackStep} Arrow= {LeftArrow}/>}
+      <CustomStack isFirst = {activeStep === 0}>
+        {activeStep >= 1 && <IconButton onClick={handleBackStep}/>}
         {activeStep >= 0 && activeStep < 2 ? <IconButton onClick={handleNextStep} Arrow= {ArrowRight} /> : 
-        <IconButton onClick={handleStepCompleted} Arrow= {Check}/> }
+        <IconButton onSubmit={handleStepCompleted} Arrow= {Check}/> }
       </CustomStack>
     </Container>
   );
