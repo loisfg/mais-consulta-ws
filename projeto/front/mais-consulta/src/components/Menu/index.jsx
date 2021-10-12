@@ -9,7 +9,6 @@ import Calendar from '../../assets/calendar.png';
 import Logoff from '../../assets/sair.png';
 
 export const Menu = () => {
- 
   return(
     <DivMenu>
       <img src={Logo} alt="" />

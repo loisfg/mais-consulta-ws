@@ -1,17 +1,19 @@
 import { Page } from "./styles";
-import { DivUsuario } from "./styles";
-import { UserProfilePic, Menu, Message, CustomBox, DivLeft, DivRight } from "../../components"
+import { DivUsuario, AuxDiv, Content } from "./styles";
+import { UserProfilePic, Menu, Message, CustomBox, DivLeft, DivRight, Calendar } from "../../components"
 
 function HomePatient() {
   return (
     <Page>
       <Menu/>
-      <DivUsuario>
-        <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
-      </DivUsuario>
-      <Message textOne="Bem vindo" textOne="Agende agora" />
-      <CustomBox />
-       
+      <AuxDiv>
+        <DivUsuario>
+          <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
+        </DivUsuario>
+        <Content>
+          <Calendar/>
+        </Content>
+      </AuxDiv>
     </Page>
   );
 };
