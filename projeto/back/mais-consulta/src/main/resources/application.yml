@@ -9,11 +9,11 @@ logging:
     org.springframework.web: DEBUG
     org.hibernate: INFO
 
-#spring:
-#  datasource:
-#    url: jdbc:sqlserver://maisconsultadb.database.windows.net:1433;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-#    username: mais-consulta
-#    password: "#Grupo02"
+  #spring:
+  #  datasource:
+  #    url: jdbc:sqlserver://maisconsultadb.database.windows.net:1433;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+  #    username: mais-consulta
+  #    password: "#Grupo02"
 
   jpa:
     show-sql: TRUE

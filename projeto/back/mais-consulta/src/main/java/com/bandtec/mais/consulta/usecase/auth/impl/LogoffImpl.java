@@ -1,8 +1,8 @@
-package com.bandtec.mais.consulta.usecase.impl;
+package com.bandtec.mais.consulta.usecase.auth.impl;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.UsuarioRequestDTO;
-import com.bandtec.mais.consulta.usecase.Logoff;
+import com.bandtec.mais.consulta.usecase.auth.Logoff;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

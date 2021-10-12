@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -15,11 +14,9 @@ import javax.persistence.*;
 @Table(name = "doenca")
 @Entity
 public class Doenca {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String nome;
     private Boolean hereditaria;
     private Boolean cronico;

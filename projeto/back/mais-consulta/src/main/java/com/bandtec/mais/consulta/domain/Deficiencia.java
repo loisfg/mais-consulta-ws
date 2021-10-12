@@ -14,11 +14,8 @@ import javax.persistence.*;
 @Table(name = "deficiencia")
 @Entity
 public class Deficiencia {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String nome;
-
 }
