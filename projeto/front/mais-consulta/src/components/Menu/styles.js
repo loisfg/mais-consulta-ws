@@ -26,15 +26,15 @@ export const LinkDivTab = styled.div`
   flex-direction: row;
   justify-content:center;
   img {
-    height: 3vh;
-    width: 3vh;
+    height: 2vh;
+    width: 2vh;
   }
   &:hover {
     border-left: 5px solid #19A795;
   }
 `
 export const Tab = styled.button`
-  font-size: 17px;
+  font-size: 16px;
   border-style: none;
   background:white;
   height:100%;
