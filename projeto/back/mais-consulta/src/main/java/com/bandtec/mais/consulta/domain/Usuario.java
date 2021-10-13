@@ -28,8 +28,8 @@ public class Usuario {
     @OneToOne(mappedBy = "usuario")
     private Paciente paciente;
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public String pegarSenha(){
+        return password;
     }
 
     public String getCpf() {
@@ -38,6 +38,22 @@ public class Usuario {
 
     public Paciente getPaciente() {
         return paciente;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
