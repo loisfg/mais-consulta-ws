@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Page = styled.section`
     height: 100vh;
     width: 100vw;
-    background-color: pink;
     display: flex;
     justify-content: space-between;
 `;
@@ -21,10 +20,8 @@ export const DivUsuario = styled.div`
 export const Componente = styled.div`
     height: 100%;
     width: 30%;
-    background-color: green;
 `
 export const Message = styled.div`
-    background-color: blue;
     height: 10%;
     width: 30%;
 `

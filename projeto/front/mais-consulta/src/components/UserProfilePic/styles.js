@@ -10,7 +10,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 0px 0 115px;
+    padding: 10px 0 0 115px;
     width: 62vh;
 `
 export const H3 = styled.h3`
