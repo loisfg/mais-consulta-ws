@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DivMenu = styled.div`
   height: 100vh;
   background-color: #fff;
-  width: 22vw;
+  width: 19vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@ export const DivMenu = styled.div`
   }
 `
 export const DivTab = styled.div`
-  height: 65%;
+  height: 66%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -28,8 +28,8 @@ export const LinkDivTab = styled.div`
   flex-direction: row;
   justify-content:center;
   img {
-    height: 2vh;
-    width: 2vh;
+    height: 3.5vh;
+    width: 3.5vh;
   }
   &:hover {
     border-left: 5px solid #19A795;
