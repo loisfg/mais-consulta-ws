@@ -11,7 +11,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 0px 0 115px;
-    width: 50vh;
+    width: 62vh;
 `
 export const H3 = styled.h3`
     color: #366273;
@@ -19,7 +19,6 @@ export const H3 = styled.h3`
     font-weight: bold;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
-
 
 export const H4 = styled.h4`
     color: #366273;

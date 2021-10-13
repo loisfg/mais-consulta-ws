@@ -10,7 +10,7 @@ export const Page = styled.section`
 
 
 export const DivUsuario = styled.div`
-    height: 8vh;
+    height: 11vh;
     width: 100%;
     background-color: #fff;
     display: flex;
@@ -33,7 +33,7 @@ export const AuxDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 78vw;
+    width: 80vw;
 `
 
 export const Content = styled.div`
