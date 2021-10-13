@@ -1,5 +1,7 @@
 package com.bandtec.mais.consulta.models.dto;
 
+import java.util.Arrays;
+
 public class ListaObj<T> {
     // Atributos
     private T[] vetor;    // vetor onde será armazenado os elementos da lista
@@ -85,8 +87,12 @@ public class ListaObj<T> {
         return removePeloIndice(busca(valor));
     }
 
-    public int getTamanho() {
-        return nroElem;
+//    public int getTamanho() {
+//        return nroElem;
+//    }
+
+    public T[] getElemento(){
+        return vetor;
     }
 
     public T getElemento(int indice) {
