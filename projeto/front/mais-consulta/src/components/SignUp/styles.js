@@ -9,7 +9,7 @@ export const Container = styled.form`
   justify-content: center;
 `;
 
-export const InputFamily = styled.div`
+export const InputFamily = styled.form`
   height: 68%;
   width: 100%;
   padding: 0 25px !important;

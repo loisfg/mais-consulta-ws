@@ -1,21 +1,46 @@
 import React, { useState } from "react";
-import { Container, InputFamily, CustomStack, CustomCheckIcon } from "./styles";
+import { Container, InputFamily, CustomStack } from "./styles";
 import { Stepper, IconButton } from '../'
 import { PersonalData } from "./PersonalData";
 import { Address } from "./Address";
 import { AccessData } from './AccessData';
 import ArrowRight from '../../assets/arrow_right.svg';
 import Check from '../../assets/check.svg';
+import swal from 'sweetalert';
 
 export const SignUp = () => {
+  const dataForm = {
+    personalData: {
+      name: '',
+      cpf: '',
+      rg: '',
+      sex: '',
+      cellphone: '',
+      susCard: ''
+    },
+    address: {
+      cep: '',
+      city: '',
+      state: '',
+      street: '',
+      number: '',
+      complement: '',
+    },
+    accessData: {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
+  }
+  const [form, setForm ] = useState(dataForm);
   const [activeStep, setActiveStep] = useState(0)
   function handleStepCompleted(event) {
-    event.preventDefault()
-    console.log(document.querySelector('form'))
+    swal("Cadastro realizado com sucesso!")
   }
   function handleNextStep(event) {
     event.preventDefault()
     setActiveStep(activeStep+1)
+    console.log(form.personalData)
   }
   function handleBackStep(event) {
     event.preventDefault()
@@ -27,7 +52,7 @@ export const SignUp = () => {
                activeStep= {activeStep}/>
       <InputFamily>
       {
-        activeStep === 0 && <PersonalData/>
+        activeStep === 0 && <PersonalData data={form.personalData}/>
       }
       {
         activeStep === 1 && <Address/>
