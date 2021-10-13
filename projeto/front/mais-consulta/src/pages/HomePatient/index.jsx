@@ -1,6 +1,6 @@
 import { Page } from "./styles";
 import { DivUsuario, AuxDiv, Content } from "./styles";
-import { UserProfilePic, Menu, Message, CustomBox, DivLeft, DivRight, Calendar } from "../../components"
+import { UserProfilePic, Menu, Schedule } from "../../components"
 
 function HomePatient() {
   return (
@@ -11,7 +11,8 @@ function HomePatient() {
           <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
         </DivUsuario>
         <Content>
-          <Calendar/>
+          <Schedule/>
+          {/* <Calendar/> */}
         </Content>
       </AuxDiv>
     </Page>
