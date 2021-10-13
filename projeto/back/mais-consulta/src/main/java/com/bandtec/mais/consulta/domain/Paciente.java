@@ -32,7 +32,6 @@ public class Paciente {
     @Column(name = "numeroCarteiraSus")
     private String numeroCarteiraSus;
 
-
     @PrimaryKeyJoinColumn(name = "idEndereco", referencedColumnName = "idPaciente")
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
@@ -41,6 +40,5 @@ public class Paciente {
     @PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idPaciente")
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
-
 
 }
