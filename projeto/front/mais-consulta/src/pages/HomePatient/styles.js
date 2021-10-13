@@ -33,7 +33,7 @@ export const AuxDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80vw;
+    width: 81vw;
 `
 
 export const Content = styled.div`

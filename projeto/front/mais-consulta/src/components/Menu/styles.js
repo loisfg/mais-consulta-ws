@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DivMenu = styled.div`
   height: 100vh;
   background-color: #fff;
-  width: 20vw;
+  width: 19vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@ export const DivMenu = styled.div`
   }
 `
 export const DivTab = styled.div`
-  height: 65%;
+  height: 66%;
   width: 100%;
   display: flex;
   flex-direction: column;
