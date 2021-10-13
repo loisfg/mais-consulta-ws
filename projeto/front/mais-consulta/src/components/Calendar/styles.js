@@ -88,25 +88,3 @@ export const ListDays = styled.div`
     border-radius: 100px;
     }
 `
-export const NextDate = styled.div`
-    font-size: 1.5rem;
-    font-weight: 400;
-    letter-spacing: 0.1rem;
-    width: calc(44.2rem / 7);
-    height: 4.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.5;
-`
-export const PrevDate = styled.div`
-    font-size: 1.5rem;
-    font-weight: 400;
-    letter-spacing: 0.1rem;
-    width: calc(44.2rem / 7);
-    height: 4.5rem;
-    display: flex;
-    justify-content: center;
-    opacity: 0.5;
-    align-items: center;
-`
