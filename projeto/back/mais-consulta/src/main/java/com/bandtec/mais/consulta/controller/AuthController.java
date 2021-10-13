@@ -39,11 +39,10 @@ public class AuthController {
         Optional<Usuario> oUsuario = signup.execute(usuario);
 
         if (oUsuario.isPresent()) {
-            return ResponseEntity.ok(oUsuario.get());
+            return ResponseEntity.status(HttpStatus.CREATED).body(oUsuario.get());
         } else {
             return new ResponseEntity<>("CPF JA CADASTRADO", HttpStatus.BAD_REQUEST);
         }
-
 
     }
 
