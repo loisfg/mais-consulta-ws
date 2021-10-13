@@ -1,9 +1,9 @@
-package com.bandtec.mais.consulta.usecase.userinfo.impl;
+package com.bandtec.mais.consulta.usecase.info.impl;
 
 import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.gateway.database.repository.AlergiaRepository;
 import com.bandtec.mais.consulta.models.dto.ListaObj;
-import com.bandtec.mais.consulta.usecase.userinfo.GetAlergia;
+import com.bandtec.mais.consulta.usecase.info.GetAlergia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

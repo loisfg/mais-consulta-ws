@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Calendario, Month, Dates, Weekdays, ListItem, Days, ListDays, ListNextDates, ListPrevDates, PrevDate, NextDate } from "./styles";
+import { Calendario, Month, Dates, Weekdays, ListItem, Days, ListDays } from "./styles";
 
 export const Calendar = () => {
     const [days, setDays] =useState([])
     const [backDays, setBackDays] =useState([])
+    const [nextDays, setNextDays] =useState([])
+
     const date = new Date();
     date.setDate(1);
 
@@ -20,7 +22,7 @@ export const Calendar = () => {
         date.getMonth(), + 1
     ).getDate();
 
-    const nextDays = 7 - lastDayIndex - 1;
+    // const nextDays = 7 - lastDayIndex - 1;
 
     const months = [
         "Janeiro",
@@ -37,9 +39,9 @@ export const Calendar = () => {
         "Dezembro",
     ];
 
-    document.querySelectorAll("h1").innerHTML = months[date.getMonth()];
+    // document.querySelectorAll("h1").innerHTML = months[date.getMonth()];
 
-    document.querySelectorAll("p").innerHTML = new Date().toDateString();
+    // document.querySelectorAll("p").innerHTML = new Date().toDateString();
 
     useEffect(() => {
         const aux_array = []
@@ -49,14 +51,17 @@ export const Calendar = () => {
                 date.getMonth() === new Date().getMonth()
             ) {
                 console.log("today tem que existir");
-                //   days += `<div class="today background-color: #19A795;">${i}</div>`;
+                //   days += <ListDays style="background:#19A795">${i}</ListDays>;
             } else {
                 aux_array.push(i)
             }
         }    
-        const anteriores = [27, 28, 29]
-        setBackDays([...anteriores])
+        const anteriores = [26, 27, 28, 29, 30, 31]
+        const proximos = [1, 2, 3, 4, 5]
+        
+        setBackDays([...anteriores]);
         setDays([...aux_array]);
+        setNextDays([...proximos]);
     },[])
 
     useEffect(() => console.log('days', days), [days])
@@ -74,8 +79,8 @@ export const Calendar = () => {
             <Month>
                 <i class="fas fa-angle-left prev"></i>
                 <Dates>
-                    <h1></h1>
-                    <p></p>
+                    <h1>{months[date.getMonth()]}</h1>
+                    <p>{new Date().toDateString()}</p>
                 </Dates>
                 <i class="fas fa-angle-right next"></i>
             </Month>
@@ -83,14 +88,15 @@ export const Calendar = () => {
                 {listItem}
             </Weekdays>
             <Days>
-                {/* {daysp} */} 
                 {backDays.map(day=>
                     <ListDays weight='light'>{day}</ListDays>
                 )}
                 {days.map(day=>
                     <ListDays weight='bold'>{day}</ListDays>
                 )}
-                {/* {daysn} */}
+                {nextDays.map(day=>
+                    <ListDays weight='light'>{day}</ListDays>
+                )}
             </Days>
         </Calendario>
     );

@@ -1,8 +1,7 @@
-package com.bandtec.mais.consulta.usecase.userinfo;
+package com.bandtec.mais.consulta.usecase.info;
 
 import com.bandtec.mais.consulta.domain.Deficiencia;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public interface PutDeficiencia {
