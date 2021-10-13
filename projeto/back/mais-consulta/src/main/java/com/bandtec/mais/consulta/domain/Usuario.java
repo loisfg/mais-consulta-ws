@@ -28,6 +28,10 @@ public class Usuario {
     @OneToOne(mappedBy = "usuario")
     private Paciente paciente;
 
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
     public String getCpf() {
         return cpf;
     }

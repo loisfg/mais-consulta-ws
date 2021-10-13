@@ -5,7 +5,7 @@ import com.bandtec.mais.consulta.domain.Deficiencia;
 import com.bandtec.mais.consulta.domain.Doenca;
 import com.bandtec.mais.consulta.domain.Remedio;
 import com.bandtec.mais.consulta.models.dto.ListaObj;
-import com.bandtec.mais.consulta.usecase.userinfo.*;
+import com.bandtec.mais.consulta.usecase.info.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("infos")
-public class UserInfoController {
+public class InfoController {
 
     private final PostAlergia postAlergia;
     private final GetAlergia getAlergia;
@@ -35,7 +35,7 @@ public class UserInfoController {
     private final PutDoenca putDoenca;
 
     @Autowired
-    public UserInfoController(PostAlergia postAlergia, GetAlergia getAlergia, PutAlergia putAlergia, PostRemedio postRemedio, GetRemedio getRemedio, PutRemedio putRemedio, PostDeficiencia postDeficiencia, GetDeficiencia getDeficiencia, PutDeficiencia putDeficiencia, PostDoenca postDoenca, GetDoenca getDoenca, PutDoenca putDoenca) {
+    public InfoController(PostAlergia postAlergia, GetAlergia getAlergia, PutAlergia putAlergia, PostRemedio postRemedio, GetRemedio getRemedio, PutRemedio putRemedio, PostDeficiencia postDeficiencia, GetDeficiencia getDeficiencia, PutDeficiencia putDeficiencia, PostDoenca postDoenca, GetDoenca getDoenca, PutDoenca putDoenca) {
         this.postAlergia = postAlergia;
         this.getAlergia = getAlergia;
         this.putAlergia = putAlergia;
