@@ -4,7 +4,7 @@ import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.domain.Deficiencia;
 import com.bandtec.mais.consulta.domain.Doenca;
 import com.bandtec.mais.consulta.domain.Remedio;
-import com.bandtec.mais.consulta.models.dto.ListaObj;
+import com.bandtec.mais.consulta.models.ListaObj;
 import com.bandtec.mais.consulta.usecase.info.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

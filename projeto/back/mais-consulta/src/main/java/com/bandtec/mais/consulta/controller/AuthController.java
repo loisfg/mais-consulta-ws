@@ -1,7 +1,8 @@
 package com.bandtec.mais.consulta.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.models.dto.request.UsuarioRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.UsuarioSignUpRequestDTO;
 import com.bandtec.mais.consulta.usecase.auth.SignIn;
 import com.bandtec.mais.consulta.usecase.auth.Logoff;
 import com.bandtec.mais.consulta.usecase.auth.Signup;
@@ -34,31 +35,29 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> signup(@RequestBody UsuarioSignUpRequestDTO usuarioSignUpRequestDTO) {
 
-        Optional<Usuario> oUsuario = signup.execute(usuario);
+        Optional<Usuario> oUsuario = signup.execute(usuarioSignUpRequestDTO);
 
-        if (oUsuario.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(oUsuario.get());
-        } else {
-            return new ResponseEntity<>("CPF JA CADASTRADO", HttpStatus.BAD_REQUEST);
-        }
+        return oUsuario
+                .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build());
 
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<Usuario> signin(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+    public ResponseEntity<Usuario> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
 
-        Optional<Usuario> oUsuario = signIn.execute(usuarioRequestDTO, usuariosLogados);
+        Optional<Usuario> oUsuario = signIn.execute(usuarioSignInRequestDTO, usuariosLogados);
 
         return oUsuario
                 .map(ResponseEntity::ok)
                 .orElseGet(ResponseEntity.status(HttpStatus.UNAUTHORIZED)::build);
     }
 
-    @PostMapping("/logoff")
-    public ResponseEntity<String> logoff(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
-        return ResponseEntity.ok(logoff.execute(usuarioRequestDTO, usuariosLogados));
+    @PostMapping("/{idUsuario}/logoff")
+    public ResponseEntity<?> logoff(@PathVariable Integer idUsuario) {
+        return ResponseEntity.of(logoff.execute(idUsuario, usuariosLogados));
     }
 
 }

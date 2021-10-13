@@ -56,4 +56,19 @@ public class Usuario {
         this.password = password;
     }
 
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
 }
