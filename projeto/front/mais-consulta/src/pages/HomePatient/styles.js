@@ -13,7 +13,7 @@ justify-content: space-between;
 
 
 export const DivUsuario = styled.div`
-height: 15vh;
+height: 8vh;
 width: 100%;
 background-color: #fff;
 display: flex;
@@ -30,4 +30,19 @@ export const Message = styled.div`
 background-color: blue;
 height: 10%;
 width: 30%;
+`
+
+export const AuxDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 78vw;
+`
+
+export const Content = styled.div`
+    height: 92vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `

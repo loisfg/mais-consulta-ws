@@ -17,7 +17,6 @@ export const Select = () => {
                     label="Sexo">
           <MenuItem value={"feminino"}>Feminino</MenuItem>
           <MenuItem value={"masculino"}>Masculino</MenuItem>
-          <MenuItem value={"outros"}>Outros</MenuItem>
       </CustomSelect>
     </CustomFormControl>
   );

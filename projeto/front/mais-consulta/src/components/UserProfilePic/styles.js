@@ -3,7 +3,6 @@ import { Avatar } from "@material-ui/core";
 
 export const CustomAvatar = styled(Avatar)`
     height: 600px;
-
 `
 
 export const Container = styled.div`
@@ -11,7 +10,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 10px 0 0px;
+    padding: 0 0px 0 115px;
     width: 50vh;
 `
 export const H3 = styled.h3`

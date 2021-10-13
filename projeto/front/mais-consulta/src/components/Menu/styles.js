@@ -6,17 +6,19 @@ export const DivMenu = styled.div`
   width: 22vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
+  border-right: 3px solid #B0B0B0;
   img {
-    height: 180px;
+    height: 35%;
     width: 180px;
     align-self: center;
-    justify-self: flex-start;
+    justify-self: center;
   }
 `
 export const DivTab = styled.div`
-  height: 60%;
+  height: 65%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 `
@@ -32,6 +34,7 @@ export const LinkDivTab = styled.div`
   &:hover {
     border-left: 5px solid #19A795;
   }
+  
 `
 export const Tab = styled.button`
   font-size: 16px;
@@ -45,7 +48,6 @@ export const Tab = styled.button`
   padding-left: 28px;
   font-weight: 600;
   cursor:pointer; 
-  
   &:hover {
     color: #19A795;
   }
