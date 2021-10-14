@@ -16,3 +16,4 @@ export * from "./IconButton";
 export * from './Calendar';
 export * from './Schedule'
 export * from './TextSubtext';
+export * from './Stickers';

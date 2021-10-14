@@ -10,12 +10,15 @@ export const BoxText = styled.div `
     align-items: center;
 `
 export const Text = styled.label`
-    color: white;
+    color: #000000;
+    opacity: 90%;
     font-size: 16px;
     font-weight: lighter;
 `
 export const SubText = styled.label`
-    color: white;
+    color: #000000;
+    opacity: 90%;
     font-size: 14px;
     font-weight: lighter;
 `
+

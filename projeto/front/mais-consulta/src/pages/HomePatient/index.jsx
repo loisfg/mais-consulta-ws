@@ -11,8 +11,10 @@ function HomePatient() {
           <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
         </DivUsuario>
         <Content>
-          <Schedule/>
-          {/* <Calendar/> */}
+          <Schedule>
+            
+          </Schedule>
+          
         </Content>
       </AuxDiv>
     </Page>
