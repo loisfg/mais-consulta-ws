@@ -57,8 +57,8 @@ export const Calendar = () => {
                 aux_array.push(i)
             }
         }    
-        const anteriores = [26, 27, 28, 29, 30, 31]
-        const proximos = [1, 2, 3, 4, 5]
+        const anteriores = [27, 28, 29, 30, 31]
+        const proximos = [1, 2, 3, 4, 5, 6]
         
         setBackDays([...anteriores]);
         setDays([...aux_array]);
