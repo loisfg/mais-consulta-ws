@@ -5,6 +5,7 @@ export const Calendar = () => {
     const [days, setDays] =useState([])
     const [backDays, setBackDays] =useState([])
     const [nextDays, setNextDays] =useState([])
+    const [isToDays, setToDays] =useState()
 
     const date = new Date();
     date.setDate(1);
@@ -42,7 +43,6 @@ export const Calendar = () => {
     // document.querySelectorAll("h1").innerHTML = months[date.getMonth()];
 
     // document.querySelectorAll("p").innerHTML = new Date().toDateString();
-
     useEffect(() => {
         const aux_array = []
         for (let i = 1; i <= lastDay; i++) {
@@ -50,8 +50,9 @@ export const Calendar = () => {
                 i === new Date().getDate() &&
                 date.getMonth() === new Date().getMonth()
             ) {
-                console.log("today tem que existir");
-                //   days += <ListDays style="background:#19A795">${i}</ListDays>;
+                aux_array.push(i)
+                setToDays(i);
+                
             } else {
                 aux_array.push(i)
             }
@@ -92,7 +93,7 @@ export const Calendar = () => {
                     <ListDays weight='light'>{day}</ListDays>
                 )}
                 {days.map(day=>
-                    <ListDays weight='bold'>{day}</ListDays>
+                    <ListDays weight='bold' isToDay={isToDays==day} >{day}</ListDays>
                 )}
                 {nextDays.map(day=>
                     <ListDays weight='light'>{day}</ListDays>
