@@ -25,19 +25,12 @@ public class Usuario {
     @Column(name = "telefone")
     private String telefone;
 
-    @OneToOne(mappedBy = "usuario")
-    private Paciente paciente;
-
     public String pegarSenha(){
         return password;
     }
 
     public String getCpf() {
         return cpf;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
     }
 
     public Integer getIdUsuario() {
@@ -68,7 +61,4 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
 }

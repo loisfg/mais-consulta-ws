@@ -1,11 +1,14 @@
 package com.bandtec.mais.consulta.controller;
 
+import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
-import com.bandtec.mais.consulta.models.dto.request.UsuarioSignUpRequestDTO;
-import com.bandtec.mais.consulta.usecase.auth.SignIn;
+import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
+import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
+import com.bandtec.mais.consulta.usecase.auth.PacienteSignIn;
 import com.bandtec.mais.consulta.usecase.auth.Logoff;
-import com.bandtec.mais.consulta.usecase.auth.Signup;
+import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,22 +25,36 @@ public class AuthController {
 
     private final List<Usuario> usuariosLogados;
 
-    private final Signup signup;
-    private final SignIn signIn;
+    private final MedicoSignUp medicoSignup;
+
+    private final PacienteSignup pacienteSignup;
+    private final PacienteSignIn pacienteSignIn;
     private final Logoff logoff;
 
     @Autowired
-    public AuthController(Signup signup, SignIn signIn, Logoff logoff) {
-        this.signup = signup;
-        this.signIn = signIn;
+    public AuthController(MedicoSignUp medicoSignup, PacienteSignup pacienteSignup, PacienteSignIn pacienteSignIn, Logoff logoff) {
+        this.medicoSignup = medicoSignup;
+        this.pacienteSignup = pacienteSignup;
+        this.pacienteSignIn = pacienteSignIn;
         this.logoff = logoff;
         usuariosLogados = new ArrayList<>();
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<Usuario> signup(@RequestBody UsuarioSignUpRequestDTO usuarioSignUpRequestDTO) {
+    @PostMapping("/paciente/signup")
+    public ResponseEntity<Usuario> pacienteSignUp(@RequestBody PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
 
-        Optional<Usuario> oUsuario = signup.execute(usuarioSignUpRequestDTO);
+        Optional<Usuario> oUsuario = pacienteSignup.execute(pacienteSignUpRequestDTO);
+
+        return oUsuario
+                .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build());
+
+    }
+
+    @PostMapping("/medico/signup")
+    public ResponseEntity<Usuario> medicoSignUp(@RequestBody MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
+
+        Optional<Usuario> oUsuario = medicoSignup.execute(medicoSignUpRequestDTO);
 
         return oUsuario
                 .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
@@ -48,7 +65,7 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<Usuario> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
 
-        Optional<Usuario> oUsuario = signIn.execute(usuarioSignInRequestDTO, usuariosLogados);
+        Optional<Usuario> oUsuario = pacienteSignIn.execute(usuarioSignInRequestDTO, usuariosLogados);
 
         return oUsuario
                 .map(ResponseEntity::ok)

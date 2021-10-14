@@ -1,6 +1,5 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,5 +29,9 @@ public class Agendamento {
     @PrimaryKeyJoinColumn(name = "idMedico", referencedColumnName = "idAgendamento")
     @OneToOne(cascade = CascadeType.ALL)
     protected Medico medico;
+
+    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName = "idAgendamento")
+    @OneToOne(cascade = CascadeType.ALL)
+    protected Ubs ubs;
 
 }

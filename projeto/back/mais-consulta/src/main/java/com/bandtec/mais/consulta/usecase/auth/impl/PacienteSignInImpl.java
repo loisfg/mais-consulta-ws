@@ -3,7 +3,7 @@ package com.bandtec.mais.consulta.usecase.auth.impl;
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.gateway.database.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
-import com.bandtec.mais.consulta.usecase.auth.SignIn;
+import com.bandtec.mais.consulta.usecase.auth.PacienteSignIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SignInImpl implements SignIn {
+public class PacienteSignInImpl implements PacienteSignIn {
 
     @Autowired
     private UsuarioRepository usuarioRepository;

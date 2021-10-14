@@ -36,9 +36,64 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
-    @Getter(AccessLevel.PROTECTED)
     @PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idPaciente")
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
 
+
+    public Integer getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(Integer idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public LocalDate getDtNascimento() {
+        return dtNascimento;
+    }
+
+    public void setDtNascimento(LocalDate dtNascimento) {
+        this.dtNascimento = dtNascimento;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getNumeroCarteiraSus() {
+        return numeroCarteiraSus;
+    }
+
+    public void setNumeroCarteiraSus(String numeroCarteiraSus) {
+        this.numeroCarteiraSus = numeroCarteiraSus;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
