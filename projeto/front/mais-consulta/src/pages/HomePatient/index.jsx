@@ -1,20 +1,22 @@
 import { Page } from "./styles";
 import { DivUsuario, AuxDiv, Content} from "./styles";
-import { UserProfilePic, Menu, Schedule, WelcomeMessage } from "../../components"
+import { UserProfilePic, Menu, Schedule, WelcomeMessage, NextWeek } from "../../components"
 
 function HomePatient() {
   return (
     <Page>
        
       <Menu/>
-      <WelcomeMessage>
-       
-       </WelcomeMessage>
+    
       <AuxDiv>
         <DivUsuario>
           <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
         </DivUsuario>
         <Content>
+        
+        <WelcomeMessage/>
+        <NextWeek/>
+        
           <Schedule>
             
           </Schedule>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BoxSticker = styled.div`
-width: 35%;
+width: 40%;
 height: 50%;
 background-color: #B0DBD5;
 align-items: center;

@@ -18,3 +18,4 @@ export * from './Schedule'
 export * from './TextSubtext';
 export * from './Stickers';
 export * from './WelcomeMessage';
+export * from './NextWeek';

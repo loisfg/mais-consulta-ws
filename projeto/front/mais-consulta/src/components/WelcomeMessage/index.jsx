@@ -5,7 +5,7 @@ export const WelcomeMessage = () => {
     return(
         <Text>
             <TextOne>
-                Bem Vindoaaa
+                Bem Vindo
             </TextOne>
             <TextTwo>
             Esses são seus agendamentos :)
