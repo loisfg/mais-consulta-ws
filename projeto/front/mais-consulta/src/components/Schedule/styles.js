@@ -23,6 +23,7 @@ height: 100%;
 width: 90%;
 display: flex;
 flex-direction: column;
+
 `
 
 export const Line = styled.div`
@@ -35,4 +36,7 @@ background-color: #fff;
 opacity: 60%;
 border-bottom: #12A583 1.5px solid;
 border-radius: 6px;
+display: flex;
+justify-content: space-around;
+
 `

@@ -10,7 +10,7 @@ background-color: blue;
 `
 
 export const CustomTypography = styled(Typography)`
-
+background-color: red;
 
 
 `

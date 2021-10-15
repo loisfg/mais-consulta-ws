@@ -5,6 +5,7 @@ export const Page = styled.section`
     width: 100vw;
     display: flex;
     justify-content: space-between;
+    
 `;
 
 
@@ -39,4 +40,6 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+   
 `
+

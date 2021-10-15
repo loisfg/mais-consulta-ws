@@ -1,11 +1,15 @@
 import { Page } from "./styles";
-import { DivUsuario, AuxDiv, Content } from "./styles";
-import { UserProfilePic, Menu, Schedule } from "../../components"
+import { DivUsuario, AuxDiv, Content} from "./styles";
+import { UserProfilePic, Menu, Schedule, WelcomeMessage } from "../../components"
 
 function HomePatient() {
   return (
     <Page>
+       
       <Menu/>
+      <WelcomeMessage>
+       
+       </WelcomeMessage>
       <AuxDiv>
         <DivUsuario>
           <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
@@ -14,9 +18,11 @@ function HomePatient() {
           <Schedule>
             
           </Schedule>
-          
+         
         </Content>
       </AuxDiv>
+   
+     
     </Page>
   );
 };
