@@ -1,54 +1,57 @@
 import styled from "styled-components";
 
-export const DivMenu = styled.div`
+export const Container = styled.div`
   height: 100vh;
-  background-color: #fff;
-  width: 19vw;
+  width: 23rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white-standard);
+  border-right: 3px solid var( --light-grey);
+`
+export const SpaceLogo = styled.div`
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem; 
+  img{ 
+    width: 100%;
+    min-width: 15rem;
+  }
+  `
+
+export const ListOfTabs = styled.ul`
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  border-right: 3px solid #B0B0B0;
-  img {
-    height: 35%;
-    width: 180px;
-    align-self: center;
-    justify-self: center;
-  }
-`
-export const DivTab = styled.div`
-  height: 66%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`
-export const LinkDivTab = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content:center;
-  img {
-    height: 3.5vh;
-    width: 3.5vh;
-  }
-  &:hover {
-    border-left: 5px solid #19A795;
-  }
-  
-`
-export const Tab = styled.button`
-  font-size: 16px;
-  border-style: none;
-  background:white;
-  height:100%;
-  text-align: start;
-  color: #515151;
-  width: 70%;
-  margin: 0 0 40px 0px;
-  padding-left: 28px;
-  font-weight: 600;
+  `
+export const Tab = styled.li`
   cursor:pointer; 
-  &:hover {
-    color: #19A795;
+  padding: 0 0.1rem;
+  height: 5rem;
+  width: 100%;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-content: space-between;
+  a{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    img {
+      width: 3rem;
+      margin-left: 2rem;
+    }
+    &:hover {
+      border-left: 5px solid var(--green-standard);
+    }
   }
-` 
+  span{
+    font-size: 1.6rem;
+    color: var(--grey);
+    font-weight: 600;
+    padding-left: 2rem;
+  }
+`
