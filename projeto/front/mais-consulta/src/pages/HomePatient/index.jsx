@@ -1,32 +1,20 @@
 import { Page } from "./styles";
 import { DivUsuario, AuxDiv, Content} from "./styles";
-import { UserProfilePic, Menu, Schedule, WelcomeMessage, NextWeek } from "../../components"
+import { UserProfilePic, Schedule, WelcomeMessage, NextWeek } from "../../components"
 
-function HomePatient() {
+export const HomePatient = () => {
   return (
     <Page>
-       
-      <Menu/>
-    
       <AuxDiv>
         <DivUsuario>
           <UserProfilePic nome="Tha Calazans" subtexto=" Paciente" />
         </DivUsuario>
         <Content>
-        
-        <WelcomeMessage/>
-        <NextWeek/>
-        
-          <Schedule>
-            
-          </Schedule>
-         
+          <WelcomeMessage/>
+          <NextWeek/>
+          <Schedule/>
         </Content>
       </AuxDiv>
-   
-     
     </Page>
   );
 };
-
-export default HomePatient;
