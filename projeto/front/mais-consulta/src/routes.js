@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Calendar, Menu } from "../src/components"
-import { HomePatient, Initial, Profile } from "../src/pages"
+import { HomePatient, Initial, Profile, Scheduling } from "../src/pages"
 
  const Routes =  () => {
   return (
@@ -13,6 +13,7 @@ import { HomePatient, Initial, Profile } from "../src/pages"
               <Route path="/home" component={HomePatient} />
               <Route path="/calendar" component={Calendar} />
               <Route path="/perfil" component={Profile} />
+              <Route path="/agendamento" component={Scheduling} />
               <Route path="*" component={() => <h1> Page Not Found </h1>} />
           </Switch>
       </div>

@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const Text = styled.div`
 height: 15%;
-width: 25%;
+width: 30%;
 display: flex;
 justify-content: flex-start;
 align-items: flex-start;
 flex-direction: column;
-font-size: 25px;
+font-size: 20px;
 margin: 0 500px 0 0 ;
 text-align: right;
 
