@@ -3,12 +3,12 @@ import styled from "styled-components";
 export const P = styled.p`
     color:#515151;
     font-weight: 600;
-    margin-bottom: 10px;
     font-size: 16px;
     margin-top: 0;
+    margin-bottom:8px;
 `
 export const Lista = styled.div`
-    height: 23vw;
+    height: 90%;
     width: 23vw;
     display: block;
     flex-direction: column;

@@ -9,17 +9,19 @@ const list = [
 ];
 
 const listItem = list.map((props) =>
-    <ListItem>
+    <ListItem onClick={() => {
+        alert(props+"selecionado")
+    }}>
         <H3>{props.ubs}</H3>
         <H2>{props.endereco}</H2>
         <H1>tel: {props.tel}</H1>
     </ListItem>
 );
-export const List  = ({props}) => {
+export const List  = ({props, text}) => {
 
     return(
         <>
-            <P>Escolha a unidade desejada</P>
+            <P>{text}</P>
             <Lista>
             {listItem}
             </Lista>
