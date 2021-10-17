@@ -9,10 +9,11 @@ export const Text = styled.div`
     font-size: 25px;
 `
 export const TextOne = styled.div`
-padding: 0 0 7px 0;
-font-weight: 700;
+    padding: 0 0 7px 0;
+    font-weight: 700;
+    font-size: 18px;
 `
 
 export const TextTwo = styled.div`
-
+    font-size: 16px;
 `

@@ -25,8 +25,6 @@ export const Calendar = () => {
         date.getMonth(), + 1
     ).getDate();
 
-    // const nextDays = 7 - lastDayIndex - 1;
-
     const months = [
         "Janeiro",
         "Fevereiro",
@@ -66,6 +64,8 @@ export const Calendar = () => {
         setBackDays([...anteriores]);
         setDays([...aux_array]);
         setNextDays([...proximos]);
+
+        
     },[])
 
     useEffect(() => console.log('days', days), [days])
@@ -77,17 +77,9 @@ export const Calendar = () => {
             {weekday}
         </ListItem>
     );
-
-    // document.querySelector('.back').addEventListener("click",function() {
-        function next(){
-            console.log("clique")            
-        }
-        // date.setMonth(date.getMonth() - 1)
-    // });
-    // document.querySelector(".next").addEventListener("click",() => {
-    //     date.setMonth(date.getMonth() + 1)
-    // });
-
+    
+    const dateSelected = 0;
+    
     return (
         <Calendario>
             <P>Selecione a data do agendamento</P>
@@ -107,7 +99,9 @@ export const Calendar = () => {
                     <ListDays weight='light'>{day}</ListDays>
                 )}
                 {days.map(day=>
-                    <ListDays weight='bold' isToDay={isToDays==day} >{day}</ListDays>
+                    <ListDays weight='bold' isToDay={isToDays==day} onClick={() => { 
+                        alert(day+"selecionado")
+                    }} >{day}</ListDays>
                 )}
                 {nextDays.map(day=>
                     <ListDays weight='light'>{day}</ListDays>

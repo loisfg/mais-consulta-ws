@@ -8,7 +8,7 @@ export const P = styled.p`
     margin-bottom:8px;
 `
 export const Lista = styled.div`
-    height: 90%;
+    height: 100%;
     width: 23vw;
     display: block;
     flex-direction: column;

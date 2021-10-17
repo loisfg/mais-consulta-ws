@@ -30,6 +30,11 @@ export const BoxLeft = styled.div`
     justify-content: space-evenly;
     border-right: 2px solid #19A795;
 `
+export const BoxAux = styled.div`
+    width: 60%;
+    height: 55%;
+`
+
 export const BoxRight = styled.div`
     height: 100%;
     width: 50%;
