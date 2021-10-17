@@ -23,7 +23,7 @@ export default [
     },
     {
         title: 'Mapa de unidades',
-        path: '/mapa',
+        path: '/mapa-de-unidades',
         icon: Unidades
     },
     {

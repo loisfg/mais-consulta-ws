@@ -12,12 +12,12 @@ export const Schedules = () => {
                 <BoxLeft>
                     <Message textOne="Bem-vindo!" textTwo="Agende agora" />
                     <Specialty nameSpecialty="Dermatologia" />
-                    <List/>
+                    <List text="Escolha a unidade desejada" />
                 </BoxLeft>
                 <BoxRight>
                     <Calendar />
                     <Hours />
-                    <Button text="Agendar atendimento" /> 
+                    <Button type="submit" text="Agendar atendimento" /> 
                 </BoxRight>
             </Content>
        </Page>

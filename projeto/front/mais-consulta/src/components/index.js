@@ -23,3 +23,5 @@ export * from './NoScheduling';
 export * from './Hours';
 export * from './Specialty';
 export * from './Wrapper';
+export * from './Maps';
+
