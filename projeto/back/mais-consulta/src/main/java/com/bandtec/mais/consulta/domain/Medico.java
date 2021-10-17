@@ -1,8 +1,13 @@
 package com.bandtec.mais.consulta.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "medico")
 @Entity
 public class Medico {
@@ -14,22 +19,25 @@ public class Medico {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "dtNascimento")
-    private LocalDate dtNascimento;
-
-    @Column(name = "sexo")
-    private String sexo;
-
-    @Column(name = "especialidade")
-    private String especialidade;
-
-    @PrimaryKeyJoinColumn(name = "idEndereco", referencedColumnName = "idMedico")
+    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName = "idMedico")
     @OneToOne(cascade = CascadeType.ALL)
-    private Endereco endereco;
+    private Ubs ubs;
 
     @PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idMedico")
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
+
+    @PrimaryKeyJoinColumn(name = "idEspecialidade", referencedColumnName = "idMedico")
+    @OneToOne(cascade = CascadeType.ALL)
+    protected Especialidade especialidade;
+
+    public Especialidade getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
+    }
 
     public Integer getIdMedico() {
         return idMedico;
@@ -47,40 +55,12 @@ public class Medico {
         this.nome = nome;
     }
 
-    public LocalDate getDtNascimento() {
-        return dtNascimento;
+    public Ubs getUbs() {
+        return ubs;
     }
 
-    public void setDtNascimento(LocalDate dtNascimento) {
-        this.dtNascimento = dtNascimento;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
+    public void setUbs(Ubs ubs) {
+        this.ubs = ubs;
     }
 
     public void setUsuario(Usuario usuario) {

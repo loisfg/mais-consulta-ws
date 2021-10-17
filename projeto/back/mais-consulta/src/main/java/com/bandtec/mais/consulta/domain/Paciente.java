@@ -26,6 +26,9 @@ public class Paciente {
     @Column(name = "dtNascimento")
     private LocalDate dtNascimento;
 
+    @Column(name = "telefone")
+    private String telefone;
+
     @Column(name = "sexo")
     private String sexo;
 

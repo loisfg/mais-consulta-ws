@@ -12,6 +12,5 @@ public class MedicoSignUpRequestDTO {
     private String cpf;
     private String email;
     protected String password;
-    private String telefone;
     private Medico medico;
 }

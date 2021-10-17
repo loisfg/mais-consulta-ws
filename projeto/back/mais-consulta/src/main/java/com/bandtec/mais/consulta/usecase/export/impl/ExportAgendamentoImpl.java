@@ -13,7 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Formatter;
 import java.util.FormatterClosedException;
-import java.util.Optional;
 
 @Service
 public class ExportAgendamentoImpl implements ExportAgendamento {
@@ -58,7 +57,7 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
             saida.format("%d;%s;%s;%s\n",
                     agendamento.getIdAgendamento(),
                     agendamento.getDataHr(),
-                    agendamento.getUsuario(),
+                    agendamento.getPaciente(),
                     agendamento.getMedico());
         } catch (FormatterClosedException erro) {
             System.out.println("Erro ao gravar no arquivo");

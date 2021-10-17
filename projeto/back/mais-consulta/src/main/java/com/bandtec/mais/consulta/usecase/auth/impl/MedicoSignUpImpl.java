@@ -37,7 +37,6 @@ public class MedicoSignUpImpl implements MedicoSignUp {
     }
 
     private void buildNewUsuario(MedicoSignUpRequestDTO medicoSignUpRequestDTO, Usuario usuario) {
-        usuario.setTelefone(medicoSignUpRequestDTO.getTelefone());
         usuario.setPassword(medicoSignUpRequestDTO.getPassword());
         usuario.setEmail(medicoSignUpRequestDTO.getEmail());
         usuario.setCpf(medicoSignUpRequestDTO.getCpf());

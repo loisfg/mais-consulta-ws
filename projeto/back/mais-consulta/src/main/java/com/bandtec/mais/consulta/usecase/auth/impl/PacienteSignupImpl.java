@@ -40,6 +40,5 @@ public class PacienteSignupImpl implements PacienteSignup {
         usuario.setCpf(pacienteSignUpRequestDTO.getCpf());
         usuario.setEmail(pacienteSignUpRequestDTO.getEmail());
         usuario.setPassword(pacienteSignUpRequestDTO.getPassword());
-        usuario.setTelefone(pacienteSignUpRequestDTO.getTelefone());
     }
 }

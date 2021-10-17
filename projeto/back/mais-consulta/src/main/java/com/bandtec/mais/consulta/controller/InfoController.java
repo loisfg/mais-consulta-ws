@@ -66,7 +66,8 @@ public class InfoController {
     }
 
     @PutMapping("/{id}/alergia")
-    public ResponseEntity<Alergia> putAlergia(@PathVariable Integer id, @RequestBody Alergia alergia) {
+    public ResponseEntity<Alergia> putAlergia(@PathVariable Integer id,
+                                              @RequestBody Alergia alergia) {
         Optional<Alergia> oAlergia = putAlergia.execute(id, alergia);
         return ResponseEntity.of(oAlergia);
     }
@@ -87,7 +88,8 @@ public class InfoController {
     }
 
     @PutMapping("/{id}/remedio")
-    public ResponseEntity<Remedio> putRemedio(@PathVariable Integer id, @RequestBody Remedio remedio) {
+    public ResponseEntity<Remedio> putRemedio(@PathVariable Integer id,
+                                              @RequestBody Remedio remedio) {
         Optional<Remedio> oRemedio = putRemedio.execute(id, remedio);
         return ResponseEntity.of(oRemedio);
     }
@@ -99,9 +101,7 @@ public class InfoController {
     }
 
     @GetMapping("/{idUser}/deficiencia")
-    public ResponseEntity<List<Deficiencia>> getDeficiencias(
-            @PathVariable Integer idUser
-    ) {
+    public ResponseEntity<List<Deficiencia>> getDeficiencias(@PathVariable Integer idUser) {
         List<Deficiencia> deficienciaList = getDeficiencia.execute(idUser);
         if (deficienciaList.isEmpty()) {
             return ResponseEntity.status(204).build();
@@ -124,9 +124,7 @@ public class InfoController {
     }
 
     @GetMapping("/{idUser}/doenca")
-    public ResponseEntity<List<Doenca>> getDoenca(
-            @PathVariable Integer idUser
-    ) {
+    public ResponseEntity<List<Doenca>> getDoenca(@PathVariable Integer idUser) {
         List<Doenca> doencaList = getDoenca.execute(idUser);
         if (doencaList.isEmpty()) {
             return ResponseEntity.status(204).build();

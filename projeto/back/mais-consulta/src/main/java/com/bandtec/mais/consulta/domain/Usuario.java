@@ -22,9 +22,6 @@ public class Usuario {
     @Column(name = "password")
     protected String password;
 
-    @Column(name = "telefone")
-    private String telefone;
-
     public String pegarSenha(){
         return password;
     }
@@ -41,10 +38,6 @@ public class Usuario {
         return email;
     }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -55,10 +48,6 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
 }
