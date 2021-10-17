@@ -9,9 +9,8 @@ export const Container = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px 0 0 115px;
-    width: 62vh;
+    justify-content: flex-end;
+    width: 100%;
 `
 export const H3 = styled.h3`
     color: #366273;

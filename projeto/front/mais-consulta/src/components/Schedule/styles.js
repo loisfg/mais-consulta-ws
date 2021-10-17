@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 65vh;
   width: 60vw;
   border-radius: 6px;
-  border: #12A583 1.5px solid;
+  border: var(--green-standard) 1.5px solid;
 `;
 
 export const  LeftSide = styled.div `
@@ -23,7 +23,6 @@ height: 100%;
 width: 90%;
 display: flex;
 flex-direction: column;
-
 `
 
 export const Line = styled.div`
@@ -32,11 +31,10 @@ width: 100%;
 display: flex;
 align-items: center;
 padding: 0 0 0 20px;
-background-color: #fff;
+background-color: var(--white-standard);
 opacity: 60%;
-border-bottom: #12A583 1.5px solid;
+border-bottom: var(--green-standard) 1.5px solid;
 border-radius: 6px;
 display: flex;
 justify-content: space-around;
-
 `

@@ -1,34 +1,33 @@
 import styled from 'styled-components';
 
 export const BoxSticker = styled.div`
-width: 40%;
-height: 50%;
-background-color: #B0DBD5;
-align-items: center;
-font-size: 12px;
-display: flex;
-justify-content: space-between;
-border-radius: 3px;
-color: #000000;
-font-size: 14px;
-border-left: 10px solid #19A795;
-
+    width: 30%;
+    height: 50%;
+    background-color: ${({color}) => color === 'green'? 'var(--light-green)' : 
+    color === 'purple'? 'var(--light-purple)' :
+    color === 'blue'? 'var(--light-purple)' : 'var(--light-green)'};
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 3px;
+    border-left: 10px solid var(--green-standard);
+    color: black;
+    font-weight: bold;
+    font-size: 13px;
 `
 
 export const  RightSide = styled.div`
-height: 100%;
-width: 30%;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 14px;
+    height: 100%;
+    width: 11rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export const  LeftSide = styled.div`
-height: 100%;
-width: 30%;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 14px;
+    height: 100%;
+    width: 11rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `

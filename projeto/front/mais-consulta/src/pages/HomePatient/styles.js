@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Page = styled.section`
     height: 100vh;
+    min-width: 70vw;
     display: flex;
     justify-content: space-between;
 `;
@@ -14,7 +15,6 @@ export const DivUsuario = styled.div`
     display: flex;
     justify-content: flex-end;
 `;
-
 
 export const Componente = styled.div`
     height: 100%;
@@ -39,6 +39,4 @@ export const Content = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
 `
-

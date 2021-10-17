@@ -26,7 +26,7 @@ const Routes =  () => {
               <Route exact path="/" render = { props => 
                 isAuth() ? (
                   <Redirect to={ {pathname: '/home', state: { from: props.location} }} />
-                  ) : (<Initial {...props}/>)
+                ) : (<Initial {...props}/>)
               } />
               <PrivateRoute path="/home" component={HomePatient} />
               <PrivateRoute path="/calendar" component={Calendar} />
