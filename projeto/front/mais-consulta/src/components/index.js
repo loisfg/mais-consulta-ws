@@ -20,3 +20,5 @@ export * from './Stickers';
 export * from './WelcomeMessage';
 export * from './NextWeek';
 export * from './NoScheduling';
+export * from './Hours';
+export * from './Specialty';

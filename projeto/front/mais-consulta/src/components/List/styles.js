@@ -1,36 +1,12 @@
 import styled from "styled-components";
 
-// export const ContainerLista = styled.div`
-//     height: 23vw;
-//     width: 24vw;
-//     overflow-y: scroll;
-//     scroll-behavior: smooth;
-//     border-radius: 6px;
-//     background-color: chocolate;
-//     border: 1px solid #f4f4f4;   
-//     display: block;
-// /* width */
-// ::-webkit-scrollbar {
-//   width: 8px;
-// }
-
-// /* Track */
-// ::-webkit-scrollbar-track {
-//   background: #f1f1f1; 
-// }
- 
-// /* Handle */
-// ::-webkit-scrollbar-thumb {
-//   background: #19A795; 
-//   border-radius: 50px;
-// }
-
-// /* Handle on hover */
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #127569; 
-// }
-// `
-
+export const P = styled.p`
+    color:#515151;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 16px;
+    margin-top: 0;
+`
 export const Lista = styled.div`
     height: 23vw;
     width: 23vw;
@@ -39,9 +15,10 @@ export const Lista = styled.div`
     justify-content: flex-start;
     overflow-y: scroll;
     scroll-behavior: smooth;
+    border: 2px solid #f4f4f4;
     align-items: center;
     ::-webkit-scrollbar {
-  width: 8px;
+      width: 8px;
 }
 
 /* Track */

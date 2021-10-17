@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Calendario, Month, Dates, Weekdays, ListItem, Days, ListDays } from "./styles";
+import { P, Calendario, Month, Dates, Weekdays, ListItem, Days, ListDays } from "./styles";
+import Next from '../../assets/voltar.png';
+import Back from '../../assets/proximo.png';
 
 export const Calendar = () => {
     const [days, setDays] =useState([])
@@ -40,9 +42,10 @@ export const Calendar = () => {
         "Dezembro",
     ];
 
-    // document.querySelectorAll("h1").innerHTML = months[date.getMonth()];
+    document.querySelectorAll("h1").innerHTML = months[date.getMonth()];
 
-    // document.querySelectorAll("p").innerHTML = new Date().toDateString();
+    document.querySelectorAll("p").innerHTML = new Date().toDateString();
+    
     useEffect(() => {
         const aux_array = []
         for (let i = 1; i <= lastDay; i++) {
@@ -75,15 +78,26 @@ export const Calendar = () => {
         </ListItem>
     );
 
+    // document.querySelector('.back').addEventListener("click",function() {
+        function next(){
+            console.log("clique")            
+        }
+        // date.setMonth(date.getMonth() - 1)
+    // });
+    // document.querySelector(".next").addEventListener("click",() => {
+    //     date.setMonth(date.getMonth() + 1)
+    // });
+
     return (
         <Calendario>
+            <P>Selecione a data do agendamento</P>
             <Month>
-                <i class="fas fa-angle-left prev"></i>
+                <img class="next" onclick="next()" src= {Next} alt="" />
                 <Dates>
                     <h1>{months[date.getMonth()]}</h1>
                     <p>{new Date().toDateString()}</p>
                 </Dates>
-                <i class="fas fa-angle-right next"></i>
+                <img class="back" src={Back} alt="" />
             </Month>
             <Weekdays>
                 {listItem}

@@ -1,5 +1,5 @@
 import React from "react";
-import {  Lista, ListItem, H3, H2, H1 } from "./styles";
+import {  P, Lista, ListItem, H3, H2, H1 } from "./styles";
 
 const list = [
     {ubs: "UBS Vila Bartira", endereco: "Rua da saudade, 73", tel: "(11)98304-5357"},
@@ -18,10 +18,11 @@ const listItem = list.map((props) =>
 export const List  = ({props}) => {
 
     return(
-        // <ContainerLista>
+        <>
+            <P>Escolha a unidade desejada</P>
             <Lista>
             {listItem}
             </Lista>
-        // </ContainerLista>
+        </>
     );
 }

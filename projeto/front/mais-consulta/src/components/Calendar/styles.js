@@ -1,15 +1,21 @@
 import styled from "styled-components";
 
+export const P = styled.p`
+    color:#515151;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 16px;
+`
+
 export const Calendario = styled.div`
     width: 58vh;
     height: 42vh;
     background-color: #fefefe;
-    box-shadow: 0 0.1rem 1rem rgba(0.1, 0.1, 0.1, 0.1);
     border-radius: 6px;
 `
 export const Month = styled.div`
     width: 100%;
-    height: 4vw;
+    height: 3.5vw;
     background-color: #19A795;
     display: flex;
     justify-content: space-around;
@@ -38,6 +44,11 @@ export const Month = styled.div`
     color:white;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+
+    img {
+        height:2vh;
+        width:2vh;
+    }
 `
 
 export const Dates = styled.div`
@@ -79,7 +90,7 @@ export const ListDays = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    color: #515151;
+    color: ${({isToDay}) => isToDay ? "#fff" : "#515151"};
     border-radius: 100px;
     background-color: ${({isToDay}) => isToDay ? "#19A795" : "#fff"};
     opacity: ${({weight}) => weight === 'light' ? 0.5 : 1};
@@ -88,9 +99,7 @@ export const ListDays = styled.div`
     cursor: pointer;
     background-color: #19A795;
     border-radius: 100px;
-
     }
-
 
 // import styled from "styled-components";
 
