@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
-  height: 32px;
   width: auto;
-  font-size: 16px;
+
+  padding: 1rem 1.4rem;
+  font-size: 1.6rem;
   border-style: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   color: white;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: #19A795;

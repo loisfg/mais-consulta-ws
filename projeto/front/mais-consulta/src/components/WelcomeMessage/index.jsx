@@ -11,9 +11,5 @@ export const WelcomeMessage = () => {
             Esses são seus agendamentos :)
             </TextTwo>
         </Text>
-       
-     
-
     );
 }
-

@@ -1,32 +1,30 @@
 import styled from "styled-components";
 
-export const Page = styled.section`
+export const Page = styled.div`
     height: 100vh;
-`
-export const AuxDiv = styled.div`
+    width: 100%;
     display: flex;
+    padding: 0% 5% 4%;
     flex-direction: column;
-    align-items: center;
-    width: 172vh;
+    justify-content: space-between;
 `
 export const DivUsuario = styled.div`
     height: 11vh;
     width: 100%;
     background-color: #fff;
-    display: flex;
     justify-content: flex-end;
 `
 export const Content = styled.div`
-    height: 78%;
+    height: 79vh;
+    min-width: 90%;
     width: 100%;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 `
 export const BoxLeft = styled.div`
     height: 100%;
-    width: 35%;
+    width: 50%;
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -34,18 +32,9 @@ export const BoxLeft = styled.div`
 `
 export const BoxRight = styled.div`
     height: 100%;
-    width: 43%;
+    width: 50%;
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
-`
-export const Footer = styled.div`
-    height: 6%;
-    width: 92%;
-    margin:0;
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
 `

@@ -2,5 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
-  width: 100%;
-`; 
+  width: 100vw;
+  > section {
+    padding-left: 23rem;
+  }
+`;

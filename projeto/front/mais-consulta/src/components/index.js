@@ -22,3 +22,4 @@ export * from './NextWeek';
 export * from './NoScheduling';
 export * from './Hours';
 export * from './Specialty';
+export * from './Wrapper';

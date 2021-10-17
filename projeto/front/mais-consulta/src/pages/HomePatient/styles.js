@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const Page = styled.section`
+export const Page = styled.div`
     height: 100vh;
-    min-width: 70vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 `;
