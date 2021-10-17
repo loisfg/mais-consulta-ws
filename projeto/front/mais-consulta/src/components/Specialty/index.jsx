@@ -5,9 +5,7 @@ export const Specialty = ({ nameSpecialty }) => {
     return (
         <>
             <P>Especialidade</P>
-            <Especialidade>
-                {nameSpecialty}
-            </Especialidade>
+            <Especialidade variant="standard" value={nameSpecialty} disabled/>
         </>
     );
 }

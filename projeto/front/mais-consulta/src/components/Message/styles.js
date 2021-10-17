@@ -9,15 +9,15 @@ export const BoxText = styled.div `
 `
 export const H1 = styled.h1`
     color: #515151;
-    font-size: 20px;
+    font-size: 3rem;
     width:auto;
     font-weight: 600;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
 export const H2 = styled.h2`
     color: #515151;
-    font-size: 17px;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 500;
     width:auto;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { TextField } from "@material-ui/core";
 
 export const P = styled.p`
     color:#515151;
@@ -7,13 +8,17 @@ export const P = styled.p`
     font-size: 16px;
     margin:0;
 `
-export const Especialidade = styled.div`
-    width:45%;
-    font-size: 16px;
-    height:5vh;
-    margin:0;
-    color:#515151;
+export const Especialidade = styled(TextField)`
+    height: 3rem !important;
+    width: 35rem !important;
+    font-size: 16rem !important;
     text-align: initial;
-    background: #e4e4e4;
-    border-bottom: 2px solid #19A795;
+    > div {
+        font-size: 1.8rem;
+    }
+    margin-bottom: 2rem !important;
+    input:disabled {
+        border-bottom: 2px solid #19A795 !important;
+        -webkit-text-fill-color: var(--grey) !important;
+    }
 `
