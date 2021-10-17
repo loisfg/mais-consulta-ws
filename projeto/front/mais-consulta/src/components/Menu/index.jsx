@@ -1,10 +1,14 @@
-import * as React from 'react';
-import { Tab, Container, ListOfTabs, SpaceLogo } from './styles';
+import React from 'react';
+import { Tab, Container, ListOfTabs, SpaceLogo, Text, Redirect } from './styles';
 import Logo from '../../assets/logo.svg';
+import Logoff from '../../assets/sair.png';
 import MenuData from './MenuData'
-import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import { logout } from '../../services/auth'
 
 export const Menu = () => {
+  const location = useLocation()
+
   return(
     <Container>
       <SpaceLogo>
@@ -13,14 +17,22 @@ export const Menu = () => {
       <ListOfTabs>
         {MenuData.map((item,index) =>
           <Tab key={index}>
-            <Link to={item.path}>
+            <Redirect to={item.path} isActive={location.pathname === item.path}> 
               <img src={item.icon} alt="" />
-              <span>
+              <Text isActive={location.pathname === item.path}>
                 {item.title}
-              </span>
-            </Link>
+              </Text>
+            </Redirect>
           </Tab>
         )}
+        <Tab key={'sair'}>
+          <a href={'/'} onClick={logout}>
+            <img src={Logoff} alt="" />
+            <Text isActive = {false}>
+              Sair
+            </Text>
+          </a>
+        </Tab>
       </ListOfTabs>
     </Container>
   );

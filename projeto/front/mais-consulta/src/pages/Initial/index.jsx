@@ -51,7 +51,8 @@ export const Initial = () => {
           <img src={Logo} alt="Logo +Consulta" />
         </DivLogo>
 
-        <CustomTabs value={value} 
+        <CustomTabs 
+        value={value} 
         onChange={handleChange} 
         >
           <CustomTab label="Login" {...a11yProps(0)} />

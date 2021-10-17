@@ -4,7 +4,6 @@ import User from '../../assets/user.png';
 import History from '../../assets/historico.png';
 import Unidades from '../../assets/unidades.png';
 import Calendar from '../../assets/calendar.png';
-import Logoff from '../../assets/sair.png';
 
 export default [
     {
@@ -31,10 +30,5 @@ export default [
         title: 'Perfil',
         path: '/perfil',
         icon: User
-    },
-    {
-        title: 'Sair',
-        path: '/logoff',
-        icon: Logoff
     }
 ]

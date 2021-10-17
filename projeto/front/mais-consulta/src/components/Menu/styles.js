@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   height: 100vh;
@@ -35,7 +36,7 @@ export const Tab = styled.li`
   display: flex;
   justify-content: space-around;
   align-content: space-between;
-  a{
+  a {
     width: 100%;
     display: flex;
     align-items: center;
@@ -48,10 +49,16 @@ export const Tab = styled.li`
       border-left: 5px solid var(--green-standard);
     }
   }
-  span{
-    font-size: 1.6rem;
-    color: var(--grey);
-    font-weight: 600;
-    padding-left: 2rem;
-  }
+  
+`
+
+export const Redirect = styled(Link)`
+  border-left: ${({isActive}) => isActive ? '5px solid var(--green-standard)' : 'none'};
+`
+
+export const Text = styled.span`
+  font-size: 1.6rem;
+  color: ${({isActive}) => isActive ? 'var(--green-standard)' : 'var(--grey)' };
+  font-weight: 600;
+  padding-left: 2rem;
 `
