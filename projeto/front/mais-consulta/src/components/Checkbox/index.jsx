@@ -6,7 +6,7 @@ export const Checkbox = ({label}) =>
 control={
   <StyledCheckbox
     defaultChecked
-    sx={{ '& .MuiSvgIcon-root': { fontSize: 24, color: "#3C5D7C" } }}
+    sx={{ '& .MuiSvgIcon-root': { fontSize: '2.7rem', color: "#3C5D7C" } }}
   />
 }
 label= {label}

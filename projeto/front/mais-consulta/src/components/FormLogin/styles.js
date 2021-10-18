@@ -6,6 +6,7 @@ export const CustomForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 3rem;
 `;
 
 export const Div = styled.div`
@@ -16,4 +17,7 @@ export const Div = styled.div`
   width: 28vw;
   padding: 20px 0 0px 0;
   margin-top: 30px;
+  > span {
+    font-size: 1.2rem;
+  }
 `
