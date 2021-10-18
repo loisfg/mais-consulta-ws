@@ -22,23 +22,16 @@ public class MedicoSignUpImpl implements MedicoSignUp {
 
     @Override
     public Optional<Usuario> execute(MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
-        Usuario usuario = new Usuario();
         Medico medico = medicoSignUpRequestDTO.getMedico();
-
-        buildNewUsuario(medicoSignUpRequestDTO, usuario);
-        medico.setUsuario(usuario);
+        Usuario usuario = MedicoSignUpRequestDTO.convertFromController(medicoSignUpRequestDTO);
 
         if (usuarioRepository.existsByCpf(usuario.getCpf())) {
             return Optional.empty();
         } else {
+            medico.setUsuario(usuario);
             medicoRepository.save(medico);
             return Optional.of(usuarioRepository.save(usuario));
         }
     }
 
-    private void buildNewUsuario(MedicoSignUpRequestDTO medicoSignUpRequestDTO, Usuario usuario) {
-        usuario.setPassword(medicoSignUpRequestDTO.getPassword());
-        usuario.setEmail(medicoSignUpRequestDTO.getEmail());
-        usuario.setCpf(medicoSignUpRequestDTO.getCpf());
-    }
 }

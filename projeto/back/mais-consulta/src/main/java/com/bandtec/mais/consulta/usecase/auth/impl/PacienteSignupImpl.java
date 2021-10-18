@@ -22,23 +22,17 @@ public class PacienteSignupImpl implements PacienteSignup {
 
     @Override
     public Optional<Usuario> execute(PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
-        Usuario usuario = new Usuario();
         Paciente paciente = pacienteSignUpRequestDTO.getPaciente();
-
-        buildNewUsuario(pacienteSignUpRequestDTO, usuario);
-        paciente.setUsuario(usuario);
+        Usuario usuario = PacienteSignUpRequestDTO.convertFromController(pacienteSignUpRequestDTO);
 
         if (usuarioRepository.existsByCpf(usuario.getCpf())) {
             return Optional.empty();
         } else {
+            paciente.setUsuario(usuario);
             pacienteRepository.save(paciente);
             return Optional.of(usuarioRepository.save(usuario));
         }
     }
 
-    private void buildNewUsuario(PacienteSignUpRequestDTO pacienteSignUpRequestDTO, Usuario usuario) {
-        usuario.setCpf(pacienteSignUpRequestDTO.getCpf());
-        usuario.setEmail(pacienteSignUpRequestDTO.getEmail());
-        usuario.setPassword(pacienteSignUpRequestDTO.getPassword());
-    }
+
 }

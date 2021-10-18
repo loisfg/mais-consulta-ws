@@ -22,6 +22,12 @@ public class Usuario {
     @Column(name = "password")
     protected String password;
 
+    public Usuario(String cpf, String email, String password) {
+        this.cpf = cpf;
+        this.email = email;
+        this.password = password;
+    }
+
     public String pegarSenha(){
         return password;
     }
