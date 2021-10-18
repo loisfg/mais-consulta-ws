@@ -15,8 +15,8 @@ export const Schedule = ({date}) => {
           </LeftSide>
           <RightSide>
             <Line>
-              <Stickers color="purple" specialty="Dentista"  hour="10am-11am"/>
-              <Stickers specialty="Dermatologista"  hour="07am-08am"/>
+              <Stickers specialty="Dentista" hour="08am">
+              </Stickers>
             </Line>
             <Line/>
             <Line/>

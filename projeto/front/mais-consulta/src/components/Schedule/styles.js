@@ -30,6 +30,7 @@ height: 20%;
 width: 100%;
 display: flex;
 align-items: center;
+justify-content: space-between;
 padding: 0 0 0 20px;
 background-color: var(--white-standard);
 opacity: 60%;
