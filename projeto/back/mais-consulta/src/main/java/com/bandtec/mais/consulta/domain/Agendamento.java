@@ -29,20 +29,49 @@ public class Agendamento {
     private String especialidade;
 
     @PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idAgendamento")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Usuario usuario;
 
     @PrimaryKeyJoinColumn(name = "idMedico", referencedColumnName = "idAgendamento")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     protected Medico medico;
 
-    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName = "idAgendamento")
-    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn(name = "idPaciente", referencedColumnName = "idAgendamento")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    protected Paciente paciente;
+
+    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName =  "idAgendamento")
+    @OneToOne(cascade = CascadeType.PERSIST)
     protected Ubs ubs;
 
-    @PrimaryKeyJoinColumn(name = "idPaciente", referencedColumnName = "idAgendamento")
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Paciente paciente;
+    public Agendamento(LocalDate dtAtendimento, String especialidade) {
+        this.dtAtendimento = dtAtendimento;
+        this.especialidade = especialidade;
+    }
+
+    public Ubs getUbs() {
+        return ubs;
+    }
+
+    public void setUbs(Ubs ubs) {
+        this.ubs = ubs;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
 
     public Paciente getPaciente() {
         return paciente;
@@ -50,6 +79,14 @@ public class Agendamento {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public Integer getIdAgendamento() {
@@ -74,22 +111,6 @@ public class Agendamento {
 
     public void setDtAtendimento(LocalDate dtAtendimento) {
         this.dtAtendimento = dtAtendimento;
-    }
-
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
     }
 
 }

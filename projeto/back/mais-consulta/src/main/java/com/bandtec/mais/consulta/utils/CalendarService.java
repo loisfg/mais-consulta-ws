@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class CalendarService {
 
     private CalendarService() {
     }
+
 
     private static class HolidayVO {
         Integer dtReference;
@@ -111,7 +113,7 @@ public class CalendarService {
         return (int) nroHoras / 24;
     }
 
-    public Calendar getDate(Integer date) throws ParseException {
+    public Calendar getDate(LocalDate date) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
         Calendar dtDate = Calendar.getInstance();
         dtDate.setTime(formato.parse(date.toString()));
