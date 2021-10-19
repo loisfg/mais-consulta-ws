@@ -45,8 +45,6 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
             agendamento.setPaciente(paciente);
             agendamento.setMedico(medico);
             agendamento.setUbs(ubs);
-            agendamento.setDataHr(LocalDate.now());
-            agendamento.setDtAtendimento(exame.getAgendamento().getDtAtendimento());
 
             exameRepository.save(exame);
             agendamentoRepository.save(agendamento);

@@ -43,8 +43,6 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
             agendamento.setPaciente(paciente);
             agendamento.setMedico(medico);
             agendamento.setUbs(ubs);
-            agendamento.setDataHr(LocalDate.now());
-            agendamento.setDtAtendimento(consulta.getAgendamento().getDtAtendimento());
 
             consultaRepository.save(consulta);
             agendamentoRepository.save(agendamento);
