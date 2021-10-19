@@ -46,14 +46,12 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
             agendamento.setDataHr(LocalDate.now());
             agendamento.setDtAtendimento(consulta.getAgendamento().getDtAtendimento());
 
-
             consultaRepository.save(consulta);
             agendamentoRepository.save(agendamento);
 
 
             return Optional.of(consulta);
         }
-
 
         return Optional.empty();
     }

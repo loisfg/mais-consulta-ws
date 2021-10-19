@@ -22,7 +22,7 @@ public class AgendamentoConsultaRequestDTO {
     Integer idUbs;
 
     public static Consulta convertFromController(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO) {
-        log.debug("{}", agendamentoConsultaRequestDTO);
+        log.info("Consulta DTO {}", agendamentoConsultaRequestDTO);
         return new Consulta(
                 agendamentoConsultaRequestDTO.getDescrição(),
                 new Agendamento(

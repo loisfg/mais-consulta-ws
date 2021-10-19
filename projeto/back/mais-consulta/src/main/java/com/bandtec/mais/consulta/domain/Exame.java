@@ -23,4 +23,9 @@ public class Exame {
     @PrimaryKeyJoinColumn(name = "idAgendamento", referencedColumnName = "idExame")
     @OneToOne(cascade = CascadeType.ALL)
     protected Agendamento agendamento;
+
+    public Exame(String descricao, Agendamento agendamento) {
+        this.descricao = descricao;
+        this.agendamento = agendamento;
+    }
 }

@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.controller;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.domain.Consulta;
+import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
@@ -28,15 +29,15 @@ public class AgendamentoController {
     }
 
     @PostMapping("/{idPaciente}/{idMedico}/{idUbs}/agendar/exame")
-    public ResponseEntity<Agendamento> createAgendamentoExame(
+    public ResponseEntity<Exame> createAgendamentoExame(
             @PathVariable("idPaciente")Integer idPaciente,
             @PathVariable("idMedico") Integer idMedico,
             @PathVariable("idUbs") Integer idUbs,
             @RequestBody AgendamentoExameRequestDTO agendamentoExameRequestDTO
     ) {
-        Optional<Agendamento> oAgendamento = Optional.ofNullable(postAgendamentoExame.execute(agendamentoExameRequestDTO));
+        Optional<Exame> oExame = postAgendamentoExame.execute(agendamentoExameRequestDTO);
 
-        return oAgendamento
+        return oExame
                 .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
