@@ -14,7 +14,7 @@ public class Ubs {
     private String nome;
 
     @PrimaryKeyJoinColumn(name = "idEndereco", referencedColumnName = "idUbs")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
 
     public String getNome() {

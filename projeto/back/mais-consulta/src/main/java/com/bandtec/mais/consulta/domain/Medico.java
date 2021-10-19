@@ -19,10 +19,6 @@ public class Medico {
     @Column(name = "nome")
     private String nome;
 
-    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName = "idMedico")
-    @OneToOne(cascade = CascadeType.ALL)
-    private Ubs ubs;
-
     @PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idMedico")
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
@@ -53,14 +49,6 @@ public class Medico {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Ubs getUbs() {
-        return ubs;
-    }
-
-    public void setUbs(Ubs ubs) {
-        this.ubs = ubs;
     }
 
     public void setUsuario(Usuario usuario) {
