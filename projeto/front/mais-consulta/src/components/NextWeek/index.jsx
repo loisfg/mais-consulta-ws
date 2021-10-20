@@ -4,7 +4,7 @@ import { Weeks } from './styles';
 
 export const NextWeek = () =>{
   return (
-      <Weeks count={5}>
+      <Weeks count={5} fontSize="14px">
       </Weeks>
   );
 }
