@@ -9,13 +9,12 @@ export const P = styled.p`
 `
 export const Lista = styled.div`
     height: 100%;
-    width: 23vw;
+    width: 100%;
     display: block;
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    border: 2px solid #f4f4f4;
     align-items: center;
     ::-webkit-scrollbar {
       width: 8px;
@@ -45,7 +44,7 @@ export const ListItem = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
-    margin: 0px 0px 0px 15px;
+    margin: 0px 0px 0px 0px;
     cursor: pointer;
 `
 export const H3 = styled.div`

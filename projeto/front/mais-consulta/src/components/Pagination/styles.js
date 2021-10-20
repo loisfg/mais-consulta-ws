@@ -11,8 +11,7 @@ background-color: blue;
 
 export const CustomTypography = styled(Typography)`
 background-color: red;
-
-
+font-size: 16px;
 `
 export const CustomPagination = styled(Pagination)`
 

@@ -29,7 +29,8 @@ export const AuxDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 81vw;
+    justify-content: flex-end;
+    width: 90%;
 `
 
 export const Content = styled.div`

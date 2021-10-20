@@ -24,20 +24,21 @@ export const Content = styled.div`
 `
 export const BoxLeft = styled.div`
     height: 100%;
-    width: 50%;
+    width: 45%;
     display:flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    align-items: flex-start;
     border-right: 2px solid #19A795;
 `
 export const BoxAux = styled.div`
-    width: 60%;
-    height: 55%;
+    width: 85%;
+    height: 75%;
 `
 
 export const BoxRight = styled.div`
     height: 100%;
-    width: 50%;
+    width: 55%;
     display:flex;
     flex-direction: column;
     justify-content: space-around;

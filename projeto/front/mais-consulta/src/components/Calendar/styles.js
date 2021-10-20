@@ -30,7 +30,7 @@ export const Month = styled.div`
   }
 
     h1 {
-        font-size: 17px;
+        font-size: 16px;
         font-weight: 500;
         text-transform: capitalize;
         letter-spacing: 0.2rem;
@@ -48,6 +48,7 @@ export const Month = styled.div`
     img {
         height:2vh;
         width:2vh;
+        cursor: pointer;
     }
 `
 
@@ -64,7 +65,7 @@ export const Weekdays = styled.div`
     flex-wrap:wrap;
 `
 export const ListItem = styled.div`
-    font-size: 1.1rem;
+    font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.1rem;
     width: calc(57vh / 7);
@@ -81,7 +82,7 @@ export const Days = styled.div`
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
 export const ListDays = styled.div`
-    font-size: 1.1rem;
+    font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.1rem;
     width: calc(57vh / 7);

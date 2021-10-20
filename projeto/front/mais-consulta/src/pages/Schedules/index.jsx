@@ -10,8 +10,8 @@ export const Schedules = () => {
             </DivUsuario>
             <Content>
                 <BoxLeft>
-                    <Message textOne="Bem-vindo!" textTwo="Agende agora" />
-                    <Specialty nameSpecialty="Dermatologia" />
+                    <Message textOne="Novo agendamento de consulta" textTwo="" />
+                    {/* <Specialty nameSpecialty="Dermatologia" /> */}
                     <BoxAux>
                         <List text="Escolha a unidade desejada" />
                     </BoxAux>

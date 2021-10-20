@@ -11,9 +11,9 @@ export const Text = styled.div`
 export const TextOne = styled.div`
     padding: 0 0 7px 0;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
 `
 
 export const TextTwo = styled.div`
-    font-size: 16px;
+    font-size: 18px;
 `

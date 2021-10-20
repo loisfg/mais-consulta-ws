@@ -10,7 +10,7 @@ export const UnitMaps = () => {
             </DivUsuario>
             <Content>
                 <BoxLeft>
-                    <Message textOne="" textTwo="Essas são as unidades próximas a você" />
+                    <Message textOne="Unidades próximas a você" textTwo="" />
                     <List />
                 </BoxLeft>
                 <BoxRight>

@@ -43,7 +43,6 @@ export const Calendar = () => {
     document.querySelectorAll("h1").innerHTML = months[date.getMonth()];
 
     document.querySelectorAll("p").innerHTML = new Date().toDateString();
-    
     useEffect(() => {
         const aux_array = []
         for (let i = 1; i <= lastDay; i++) {
@@ -78,18 +77,20 @@ export const Calendar = () => {
         </ListItem>
     );
     
-    const dateSelected = 0;
+    
     
     return (
         <Calendario>
             <P>Selecione a data do agendamento</P>
             <Month>
-                <img class="next" onclick="next()" src= {Next} alt="" />
+                <img onClick={() => {
+                    // alert(hora+" selecionada")
+                }} class="back"src= {Back} alt="" />
                 <Dates>
                     <h1>{months[date.getMonth()]}</h1>
                     <p>{new Date().toDateString()}</p>
                 </Dates>
-                <img class="back" src={Back} alt="" />
+                <img class="next" src={Next} alt="" />
             </Month>
             <Weekdays>
                 {listItem}
