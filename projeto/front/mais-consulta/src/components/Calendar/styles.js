@@ -12,10 +12,11 @@ export const Calendario = styled.div`
     height: 42vh;
     background-color: #fefefe;
     border-radius: 6px;
+    /* background-color: gainsboro; */
 `
 export const Month = styled.div`
     width: 100%;
-    height: 3.5vw;
+    height: 18%;
     background-color: #19A795;
     display: flex;
     justify-content: space-around;
