@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.models.dto.request;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Exame;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,20 +17,24 @@ import java.time.LocalDate;
 public class AgendamentoExameRequestDTO {
     LocalDate dtHr = LocalDate.now();
     LocalDate dtAtendimento;
-    String especialidade;
-    String descrição;
+    Especialidade especialidade;
+    String descricao;
     Integer idPaciente;
     Integer idMedico;
     Integer idUbs;
 
     public static Exame convertFromController(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
         log.info("Exame DTO {}", agendamentoExameRequestDTO);
-        return new Exame(
-                agendamentoExameRequestDTO.getDescrição(),
-                new Agendamento(
-                        agendamentoExameRequestDTO.getDtAtendimento(),
-                        agendamentoExameRequestDTO.getEspecialidade()
-                )
-        );
+
+        Exame exame = new Exame();
+        Agendamento agendamento = new Agendamento();
+
+        exame.setDescricao(agendamentoExameRequestDTO.getDescricao());
+        exame.setAgendamento(agendamento);
+
+        exame.getAgendamento().setDtAtendimento(agendamentoExameRequestDTO.getDtAtendimento());
+        exame.getAgendamento().setEspecialidade(agendamentoExameRequestDTO.getEspecialidade());
+
+        return exame;
     }
 }

@@ -2,11 +2,17 @@ package com.bandtec.mais.consulta.controller;
 
 import com.bandtec.mais.consulta.usecase.export.ExportAgendamento;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("export")
@@ -19,10 +25,25 @@ public class ExportController {
     public ResponseEntity<?> exportAgendamento(
             @PathVariable Integer idUser,
             @PathVariable Integer idAgendamento
-    ){
-        exportAgendamento.execute(idUser, idAgendamento);
+    ) {
+        Optional<Map<String, String>> oAgendamentoCsv = exportAgendamento.execute(idUser, idAgendamento);
 
-        return null;
+        if (oAgendamentoCsv.isPresent()) {
+
+            Map<String, String> agendamentoCsv = oAgendamentoCsv.get();
+
+            String arquivo = agendamentoCsv.get("informacoesAgendamento");
+            String filename = agendamentoCsv.get("nomeArquivo");
+            String extension = ".csv";
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s%s", filename, extension))
+                    .contentLength(arquivo.length())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(arquivo);
+
+        }
+        return ResponseEntity.noContent().build();
     }
 
 }

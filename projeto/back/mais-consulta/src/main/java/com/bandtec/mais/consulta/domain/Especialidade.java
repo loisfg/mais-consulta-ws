@@ -22,12 +22,17 @@ public class Especialidade {
     @Column(name = "descricao")
     private String descricao;
 
-    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName = "idEspecialidade")
-    @OneToOne(cascade = CascadeType.ALL)
-    private Ubs ubs;
+//    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName = "idEspecialidade")
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Ubs ubs;
 
-    @PrimaryKeyJoinColumn(name = "idMedico", referencedColumnName = "idEspecialidade")
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Medico medico;
+
+    @Override
+    public String toString() {
+        return "Especialidade{" +
+                "idEspecialidade=" + idEspecialidade +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
 }
 

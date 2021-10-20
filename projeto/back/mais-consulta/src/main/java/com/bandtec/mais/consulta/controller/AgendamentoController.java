@@ -43,16 +43,21 @@ public class AgendamentoController {
     }
 
     @PostMapping("/{idPaciente}/{idMedico}/{idUbs}/agendar/consulta")
-    public ResponseEntity<Consulta> createAgendamentoConsulta(
+    public ResponseEntity<?> createAgendamentoConsulta(
             @PathVariable("idPaciente")Integer idPaciente,
             @PathVariable("idMedico") Integer idMedico,
             @PathVariable("idUbs") Integer idUbs,
             @RequestBody AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO
     ) {
+
+        agendamentoConsultaRequestDTO.setIdPaciente(idPaciente);
+        agendamentoConsultaRequestDTO.setIdMedico(idMedico);
+        agendamentoConsultaRequestDTO.setIdUbs(idUbs);
+
         Optional<Consulta> oConsulta = postAgendamentoConsulta.execute(agendamentoConsultaRequestDTO);
 
         return oConsulta
-                .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.FORBIDDEN).build());
+                .map(ResponseEntity.status(HttpStatus.CREATED)::body)
+                .orElseGet(ResponseEntity.status(HttpStatus.BAD_REQUEST)::build);
     }
 }

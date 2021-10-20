@@ -1,15 +1,13 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Getter
 @Entity
 @Table(name = "paciente")

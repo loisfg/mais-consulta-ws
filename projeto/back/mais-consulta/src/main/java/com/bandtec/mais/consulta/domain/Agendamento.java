@@ -25,8 +25,9 @@ public class Agendamento {
     @Column(name = "dtAtendimento")
     private LocalDate dtAtendimento;
 
-    @Column(name = "especialidade")
-    private String especialidade;
+    @PrimaryKeyJoinColumn(name = "idEspecialidade", referencedColumnName = "idAgendamento")
+    @OneToOne(cascade = CascadeType.ALL)
+    protected Especialidade especialidade;
 
     @PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idAgendamento")
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -44,11 +45,6 @@ public class Agendamento {
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Ubs ubs;
 
-    public Agendamento(LocalDate dtAtendimento, String especialidade) {
-        this.dtAtendimento = dtAtendimento;
-        this.especialidade = especialidade;
-    }
-
     public Ubs getUbs() {
         return ubs;
     }
@@ -57,7 +53,7 @@ public class Agendamento {
         this.ubs = ubs;
     }
 
-    public void setEspecialidade(String especialidade) {
+    public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
 
@@ -81,7 +77,7 @@ public class Agendamento {
         this.paciente = paciente;
     }
 
-    public String getEspecialidade() {
+    public Especialidade getEspecialidade() {
         return especialidade;
     }
 

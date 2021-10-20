@@ -2,12 +2,14 @@ package com.bandtec.mais.consulta.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "medico")
 @Entity
 public class Medico {

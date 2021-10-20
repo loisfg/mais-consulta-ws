@@ -1,18 +1,17 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
-import com.bandtec.mais.consulta.domain.Agendamento;
-import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.gateway.database.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.database.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.usecase.export.ExportAgendamento;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Formatter;
-import java.util.FormatterClosedException;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ExportAgendamentoImpl implements ExportAgendamento {
@@ -24,58 +23,51 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public ByteArrayInputStream execute(Integer idUser, Integer idAgendamento) {
+    public Optional<Map<String, String>> execute(Integer idUser, Integer idAgendamento) {
 
         if (usuarioRepository.existsById(idUser) && agendamentoRepository.existsById(idAgendamento)) {
-            Usuario usuario = usuarioRepository.findById(idUser).get();
 
-            Agendamento agendamento = agendamentoRepository.findByUsuarioAndIdAgendamento(usuario.getIdUsuario(), idAgendamento).get();
+            Agendamento agendamento = agendamentoRepository.findByIdAgendamento(idAgendamento).get();
 
-            String nomeArquivo = String.format("%d_%d_%s", idUser, idAgendamento, agendamento.getDataHr());
-            gravaArquivoCsv(agendamento, nomeArquivo);
+            Map<String, String> dadosArquivoAgendamento = buildDadosArquivoAgendamento(agendamento);
+
+            return Optional.of(dadosArquivoAgendamento);
         }
 
-        return null;
+        return Optional.empty();
     }
 
-    public static void gravaArquivoCsv(Agendamento agendamento, String nomeArquivo) {
+    @NotNull
+    private Map<String, String> buildDadosArquivoAgendamento(Agendamento agendamento) {
 
-        boolean deuRuim = false;
-        FileWriter arquivo = null;
-        Formatter saida = null;
-        nomeArquivo += ".csv";
+        Integer id = agendamento.getIdAgendamento();
+        String especialidade = agendamento.getEspecialidade().getDescricao();
+        LocalDate dataAtendimento = agendamento.getDtAtendimento();
 
-        try {
-            arquivo = new FileWriter(nomeArquivo, false);
-            saida = new Formatter(arquivo);
-        } catch (IOException erro) {
-            System.out.println("Erro ao abrir o arquivo");
-            System.exit(1);
-        }
+        Medico medico = agendamento.getMedico();
+        String nomeMedico = medico.getNome();
+        String especialidadeMedico = medico.getEspecialidade().getDescricao();
 
-        try {
-            saida.format("%d;%s;%s;%s\n",
-                    agendamento.getIdAgendamento(),
-                    agendamento.getDataHr(),
-                    agendamento.getPaciente(),
-                    agendamento.getMedico());
-        } catch (FormatterClosedException erro) {
-            System.out.println("Erro ao gravar no arquivo");
-            deuRuim = true;
-        } finally {
-            saida.close();
+        Paciente paciente = agendamento.getPaciente();
+        String nomePaciente = paciente.getNome();
+        String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
 
-            try {
-                arquivo.close();
-            } catch (IOException erro) {
-                System.out.println("Erro ao fechar o arquivo");
-                deuRuim = true;
-            }
-        }
-        if (deuRuim) {
-            System.exit(1);
-        }
+        String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomeMedico, especialidadeMedico, nomePaciente, numeroCarteiraSus);
 
+        return createResponseMap(id, dataAtendimento, nomePaciente, texto);
+    }
+
+    @NotNull
+    private Map<String, String> createResponseMap(Integer id, LocalDate dataAtendimento, String nomePaciente, String texto) {
+        Map<String, String> dadosArquivoAgendamento = new HashMap<>();
+        dadosArquivoAgendamento.put("informacoesAgendamento", texto);
+        dadosArquivoAgendamento.put("nomeArquivo", String.format("%s_%s_%d", nomePaciente.replace(" ", ""), dataAtendimento, id));
+        return dadosArquivoAgendamento;
+    }
+
+    @NotNull
+    private String buildTextoAgendamento(Integer id, String especialidade, LocalDate dataAtendimento, String nomeMedico, String especialidadeMedico, String nomePaciente, String numeroCarteiraSus) {
+        return String.format("%s;%s;%s;%s;%s;%s;%s\n", id, dataAtendimento, especialidade, nomeMedico, especialidadeMedico, nomePaciente, numeroCarteiraSus);
     }
 
 }

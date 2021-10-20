@@ -19,17 +19,13 @@ public class Consulta {
     @Column(name = "idConsulta", nullable = false)
     private Integer idConsulta;
 
-    @Column(name = "descricao")
-    private String descricao;
+    @PrimaryKeyJoinColumn(name = "idEspecialidade", referencedColumnName = "idConsulta")
+    @OneToOne(cascade = CascadeType.ALL)
+    protected Especialidade especialidade;
 
     @PrimaryKeyJoinColumn(name = "idAgendamento", referencedColumnName = "idConsulta")
     @OneToOne(cascade = CascadeType.ALL)
     protected Agendamento agendamento;
-
-    public Consulta(String descricao, Agendamento agendamento) {
-        this.descricao = descricao;
-        this.agendamento = agendamento;
-    }
 
     @Override
     public boolean equals(Object o) {

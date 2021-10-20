@@ -24,8 +24,4 @@ public class Exame {
     @OneToOne(cascade = CascadeType.ALL)
     protected Agendamento agendamento;
 
-    public Exame(String descricao, Agendamento agendamento) {
-        this.descricao = descricao;
-        this.agendamento = agendamento;
-    }
 }

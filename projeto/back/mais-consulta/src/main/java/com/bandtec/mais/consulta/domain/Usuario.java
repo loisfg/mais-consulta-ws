@@ -1,9 +1,14 @@
 package com.bandtec.mais.consulta.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -22,11 +27,11 @@ public class Usuario {
     @Column(name = "password")
     protected String password;
 
-    public Usuario(String cpf, String email, String password) {
-        this.cpf = cpf;
-        this.email = email;
-        this.password = password;
-    }
+//    public Usuario(String cpf, String email, String password) {
+//        this.cpf = cpf;
+//        this.email = email;
+//        this.password = password;
+//    }
 
     public String pegarSenha(){
         return password;

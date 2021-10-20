@@ -1,7 +1,8 @@
 package com.bandtec.mais.consulta.usecase.export;
 
-import java.io.ByteArrayInputStream;
+import java.util.Map;
+import java.util.Optional;
 
 public interface ExportAgendamento {
-    ByteArrayInputStream execute(Integer idUser, Integer idAgendamento);
+    Optional<Map<String, String>> execute(Integer idUser, Integer idAgendamento);
 }
