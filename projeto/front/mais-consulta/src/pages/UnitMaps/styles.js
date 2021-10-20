@@ -32,8 +32,8 @@ export const BoxLeft = styled.div`
     background-size: cover ;
 `
 export const BoxRight = styled.div`
-    height: 100%;
-    width: 58%;
+    height: 90%;
+    width: 55%;
     display:flex;
     flex-direction: column;
     justify-content: flex-end;
