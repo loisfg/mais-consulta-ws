@@ -11,7 +11,7 @@ export const Schedules = () => {
             <Content>
                 <BoxLeft>
                     <Message textOne="Novo agendamento de consulta" textTwo="" />
-                    {/* <Specialty nameSpecialty="Dermatologia" /> */}
+                    <Specialty nameSpecialty="Dermatologia" />
                     <BoxAux>
                         <List text="Escolha a unidade desejada" />
                     </BoxAux>

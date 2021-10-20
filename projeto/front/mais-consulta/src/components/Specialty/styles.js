@@ -4,12 +4,12 @@ import { TextField } from "@material-ui/core";
 export const P = styled.p`
     color:#515151;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-size: 16px;
     margin:0;
 `
 export const Especialidade = styled(TextField)`
-    height: 3rem !important;
+    height: 2.5rem !important;
     width: 35rem !important;
     font-size: 16rem !important;
     text-align: initial;
