@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Horario = styled.div`
     height:20vh;
     width:58vh;
+    /* background-color: rebeccapurple; */
 
     p {
         color:#515151;
@@ -12,8 +13,10 @@ export const Horario = styled.div`
     }
 `
 export const List= styled.div`
-    height:90%;
+    margin-top:8px;
+    height:80%;
     width:100%;
+    /* background-color: firebrick; */
 `
 export const ItemListHour = styled.div`
     height: 4vh;
@@ -24,7 +27,7 @@ export const ItemListHour = styled.div`
     margin-right:8px;
     margin-top: 5px;
         background-color: ${({isActive}) => isActive ? '#19A795' : '#fff'};
-    font-size: 16px;
+    font-size: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
