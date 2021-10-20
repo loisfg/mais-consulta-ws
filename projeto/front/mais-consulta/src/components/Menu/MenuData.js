@@ -1,5 +1,6 @@
 import React from 'react';
-import Home from '../../assets/home-selected.png';
+import HomeSelected from '../../assets/home-selected.png';
+import Home from '../../assets/homesvg.svg';
 import User from '../../assets/user.png';
 import History from '../../assets/historico.png';
 import Unidades from '../../assets/unidades.png';

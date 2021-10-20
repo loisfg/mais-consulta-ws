@@ -18,7 +18,7 @@ export const Menu = () => {
         {MenuData.map((item,index) =>
           <Tab key={index}>
             <Redirect to={item.path} isActive={location.pathname === item.path}> 
-              <img src={item.icon} alt="" />
+              <img fill="blue" src={item.icon} isActive={location.pathname === item.path} alt="" />
               <Text isActive={location.pathname === item.path}>
                 {item.title}
               </Text>
