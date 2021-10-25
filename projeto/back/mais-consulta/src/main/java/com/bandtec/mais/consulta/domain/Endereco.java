@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Entity
@@ -44,4 +44,68 @@ public class Endereco {
     @OneToOne(mappedBy = "endereco")
     protected Paciente paciente;
 
+    protected Endereco() {}
+
+    public Endereco(String cep, String cidade, String estado, String bairro, String logradouro, String numero, String complemento) {
+        this.cep = cep;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.bairro = bairro;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+    }
+
+    public static EnderecoEntityBuilder builder() {
+        return new EnderecoEntityBuilder();
+    }
+
+    public static class EnderecoEntityBuilder {
+        private String cep;
+        private String cidade;
+        private String estado;
+        private String bairro;
+        private String logradouro;
+        private String numero;
+        private String complemento;
+
+        public EnderecoEntityBuilder setCep(final String cep) {
+            this.cep = cep;
+            return this;
+        }
+
+        public EnderecoEntityBuilder setCidade(final String cidade) {
+            this.cidade = cidade;
+            return this;
+        }
+
+        public EnderecoEntityBuilder setEstado(final String estado) {
+            this.estado = estado;
+            return this;
+        }
+
+        public EnderecoEntityBuilder setBairro(final String bairro) {
+            this.bairro = bairro;
+            return this;
+        }
+
+        public EnderecoEntityBuilder setLogradouro(final String logradouro) {
+            this.logradouro = logradouro;
+            return this;
+        }
+
+        public EnderecoEntityBuilder setNumero(final String numero) {
+            this.numero = numero;
+            return this;
+        }
+
+        public EnderecoEntityBuilder setComplemento(final String complemento) {
+            this.complemento = complemento;
+            return this;
+        }
+
+        public Endereco build() {
+            return new Endereco(cep,cidade,estado,bairro,logradouro,numero,cidade);
+        }
+    }
 }

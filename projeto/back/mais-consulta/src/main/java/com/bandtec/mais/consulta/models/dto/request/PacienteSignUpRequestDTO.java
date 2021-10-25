@@ -13,16 +13,13 @@ public class PacienteSignUpRequestDTO {
     private String cpf;
     private String email;
     protected String password;
-    private String telefone;
     private Paciente paciente;
 
     public static Usuario convertFromController(PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
-        Usuario usuario = new Usuario();
-
-        usuario.setEmail(pacienteSignUpRequestDTO.getEmail());
-        usuario.setCpf(pacienteSignUpRequestDTO.getCpf());
-        usuario.setPassword(pacienteSignUpRequestDTO.getPassword());
-
-        return usuario;
+        return new Usuario(
+                pacienteSignUpRequestDTO.getCpf(),
+                pacienteSignUpRequestDTO.getEmail(),
+                pacienteSignUpRequestDTO.getPassword()
+        );
     }
 }

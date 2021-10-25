@@ -1,8 +1,8 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
 import com.bandtec.mais.consulta.domain.*;
-import com.bandtec.mais.consulta.gateway.database.repository.AgendamentoRepository;
-import com.bandtec.mais.consulta.gateway.database.repository.UsuarioRepository;
+import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
+import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.usecase.export.ExportAgendamento;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;

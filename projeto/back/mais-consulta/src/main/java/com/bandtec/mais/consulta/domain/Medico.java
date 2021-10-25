@@ -29,6 +29,12 @@ public class Medico {
     @OneToOne(cascade = CascadeType.ALL)
     protected Especialidade especialidade;
 
+    public Medico(String nome, Usuario usuario, Especialidade especialidade) {
+        this.nome = nome;
+        this.usuario = usuario;
+        this.especialidade = especialidade;
+    }
+
     public Especialidade getEspecialidade() {
         return especialidade;
     }

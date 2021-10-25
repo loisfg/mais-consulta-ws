@@ -29,9 +29,11 @@ public class AgendamentoConsultaRequestDTO {
 
         Agendamento agendamento = new Agendamento();
 
+        consulta.setDescricao(agendamentoConsultaRequestDTO.getDescricao());
         consulta.setEspecialidade(agendamentoConsultaRequestDTO.getEspecialidade());
         consulta.setAgendamento(agendamento);
 
+        consulta.getAgendamento().setDataHr(LocalDate.now());
         consulta.getAgendamento().setDtAtendimento(agendamentoConsultaRequestDTO.getDtAtendimento());
         consulta.getAgendamento().setEspecialidade(agendamentoConsultaRequestDTO.getEspecialidade());
 

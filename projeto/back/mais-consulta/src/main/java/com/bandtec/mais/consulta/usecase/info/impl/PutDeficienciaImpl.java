@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
 import com.bandtec.mais.consulta.domain.Deficiencia;
-import com.bandtec.mais.consulta.gateway.database.repository.DeficienciaRepository;
+import com.bandtec.mais.consulta.gateway.repository.DeficienciaRepository;
 import com.bandtec.mais.consulta.usecase.info.PutDeficiencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

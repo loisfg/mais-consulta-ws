@@ -1,14 +1,13 @@
 package com.bandtec.mais.consulta.usecase.schedule.impl;
 
 import com.bandtec.mais.consulta.domain.*;
-import com.bandtec.mais.consulta.gateway.database.repository.*;
+import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -54,7 +53,7 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
         }
 
 
-        log.error("ERROR to FIND MEDICO or PACIENTE {}", log.isErrorEnabled());
+        log.error("ERROR FIND MEDICO or PACIENTE {}", log.isErrorEnabled());
         return Optional.empty();
     }
 }

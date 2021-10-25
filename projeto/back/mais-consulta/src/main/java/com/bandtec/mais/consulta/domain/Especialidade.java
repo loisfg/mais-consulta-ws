@@ -22,11 +22,6 @@ public class Especialidade {
     @Column(name = "descricao")
     private String descricao;
 
-//    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName = "idEspecialidade")
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Ubs ubs;
-
-
     @Override
     public String toString() {
         return "Especialidade{" +

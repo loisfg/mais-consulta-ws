@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.usecase.ubs.impl;
 
 import com.bandtec.mais.consulta.domain.Ubs;
-import com.bandtec.mais.consulta.gateway.database.repository.UbsRepository;
+import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
 import com.bandtec.mais.consulta.models.dto.request.UbsPostRequestDTO;
 import com.bandtec.mais.consulta.usecase.ubs.PostUbs;
 import org.springframework.beans.factory.annotation.Autowired;

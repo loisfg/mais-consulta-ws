@@ -19,6 +19,9 @@ public class Consulta {
     @Column(name = "idConsulta", nullable = false)
     private Integer idConsulta;
 
+    @Column(name = "descricao", nullable = false)
+    private String descricao;
+
     @PrimaryKeyJoinColumn(name = "idEspecialidade", referencedColumnName = "idConsulta")
     @OneToOne(cascade = CascadeType.ALL)
     protected Especialidade especialidade;

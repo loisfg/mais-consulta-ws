@@ -1,14 +1,10 @@
 package com.bandtec.mais.consulta.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -25,13 +21,45 @@ public class Usuario {
     private String email;
 
     @Column(name = "password")
-    protected String password;
+    private String password;
 
-//    public Usuario(String cpf, String email, String password) {
-//        this.cpf = cpf;
-//        this.email = email;
-//        this.password = password;
-//    }
+    protected Usuario() {}
+
+    public Usuario(String cpf, String email, String password) {
+        this.cpf = cpf;
+        this.email = email;
+        this.password = password;
+    }
+
+    public static UsuarioEntityBuilder builder(){
+        return new UsuarioEntityBuilder();
+    }
+
+    public static class UsuarioEntityBuilder {
+        private String cpf;
+        private String email;
+        protected String password;
+
+        public UsuarioEntityBuilder setCpf(final String cpf) {
+            this.cpf = cpf;
+            return this;
+        }
+
+        public UsuarioEntityBuilder setEmail(final String email) {
+            this.email = email;
+            return this;
+        }
+
+        public UsuarioEntityBuilder setPassword(final String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Usuario build() {
+            return new Usuario(cpf, email, password);
+        }
+
+    }
 
     public String pegarSenha(){
         return password;
