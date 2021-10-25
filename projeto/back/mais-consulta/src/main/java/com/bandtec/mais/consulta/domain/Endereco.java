@@ -40,10 +40,6 @@ public class Endereco {
     @Column(name = "complemento")
     private String complemento;
 
-    @Getter(AccessLevel.PROTECTED)
-    @OneToOne(mappedBy = "endereco")
-    protected Paciente paciente;
-
     protected Endereco() {}
 
     public Endereco(String cep, String cidade, String estado, String bairro, String logradouro, String numero, String complemento) {
@@ -107,5 +103,19 @@ public class Endereco {
         public Endereco build() {
             return new Endereco(cep,cidade,estado,bairro,logradouro,numero,cidade);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "idEndereco=" + idEndereco +
+                ", cep='" + cep + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", estado='" + estado + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", numero='" + numero + '\'' +
+                ", complemento='" + complemento + '\'' +
+                '}';
     }
 }
