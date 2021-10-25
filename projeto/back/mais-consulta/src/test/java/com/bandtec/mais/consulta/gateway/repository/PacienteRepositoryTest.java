@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -21,8 +21,11 @@ class PacienteRepositoryTest {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     @Test
-    void insertAndReceivePacienteCreatedWithBuilder() {
+    void insertAndReceivePacienteCreatedWithBuilder() throws Exception {
         // Paciente
         final var nome = "Luis";
         final var telefone = "";
@@ -73,12 +76,16 @@ class PacienteRepositoryTest {
 
         pacienteRepository.save(paciente);
 
-        Paciente pacienteResult = pacienteRepository.findByNome("Luis");
+        Optional<Paciente> optionalPaciente = pacienteRepository.findById(paciente.getIdPaciente());
 
-        System.out.println(pacienteResult.toString());
+        if (optionalPaciente.isPresent()) {
+            System.out.printf("Nome do paciente %s \n", optionalPaciente.get().getNome());
+            System.out.printf("Cidade do paciente %s \n", optionalPaciente.get().getEndereco().getCidade());
+            System.out.printf("Usuário do paciente %s \n", optionalPaciente.get().getUsuario().getCpf());
+        }
 
-        assertThat("Paciente criado com todas info", pacienteRepository.existsByNome(nome));
-//        assertThat("Paciente criado com ligação em endereço", false); // falta ligação de paciente x endereço
-        assertThat("Paciente criado com um usuário", usuarioRepository.existsByCpf(cpf));
+        assertThat("Paciente criado com todas info", pacienteRepository.existsById(paciente.getIdPaciente()));
+        assertThat("Paciente criado com ligação em endereço", enderecoRepository.existsById(endereco.getIdEndereco()));
+        assertThat("Paciente criado com um usuário", usuarioRepository.existsByCpf(paciente.getUsuario().getCpf()));
     }
 }

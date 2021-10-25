@@ -22,8 +22,11 @@ public class Paciente {
 
     @Column(name = "dt_nascimento")
     private LocalDate dtNascimento;
+
     private String telefone;
+
     private String sexo;
+
     @Column(name = "numero_carteira_sus")
     private String numeroCarteiraSus;
 
@@ -31,11 +34,9 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
-    @PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idPaciente")
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
 
-//    , fetch = FetchType.LAZY, optional = false // para adicionar fk com o usuário
     protected Paciente() {}
 
     private Paciente(String nome, LocalDate dtNascimento, String telefone, String sexo, String numeroCarteiraSus, Endereco endereco, Usuario usuario) {
