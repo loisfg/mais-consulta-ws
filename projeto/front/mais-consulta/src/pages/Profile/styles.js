@@ -9,16 +9,14 @@ export const Container = styled.section`
   justify-content: center;
   align-items: flex-start;
   .leftSide{
-    height: 90%;
     width: 53rem;
     display: flex;
     flex-direction: column; 
     border-style: none;
     background: red;
     align-items: flex-start;
-    margin: 3rem 0 0 4rem;
     label{
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: bold;
       color: white;
     }

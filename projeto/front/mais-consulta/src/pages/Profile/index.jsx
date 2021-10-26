@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextSubtext } from '../../components';
+import { TextSubtext, DataBox } from '../../components';
 import { Container, CustomAvatar, PatientGroup } from './styles'
 
 export const Profile = ({userName, }) => {
@@ -9,11 +9,9 @@ export const Profile = ({userName, }) => {
           <CustomAvatar sx={{ bgcolor: 'deepskyblue' }}/>
           <TextSubtext textOne='Thais Calazans'></TextSubtext>
         </PatientGroup>
-        <iframe className="leftSide">
-          <label> Dados cadastrais </label>
-          <div>
-          </div>
-        </iframe>
+        <label> Dados cadastrais </label>
+        <DataBox>
+        </DataBox>
     </Container>
   );
 }

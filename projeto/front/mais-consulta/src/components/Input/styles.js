@@ -5,7 +5,7 @@ const small = '30%';
 const medium = '45%';
 const big = '100%';
 
-export const CustomTextField = styled(TextField)`
+export const CustomInput = styled(TextField)`
   width: ${({size}) => size === 'small'? small : 
           size === 'medium' ? medium : big
   };

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import InputMask from 'react-input-mask'
 
 export const CustomForm = styled.form`
   height: 20rem;
@@ -20,4 +21,12 @@ export const Div = styled.div`
   > span {
     font-size: 1.2rem;
   }
+`
+
+export const CustomInputMask = styled(InputMask)`
+border: none;
+width: 350px;
+border-bottom: 1px solid;
+/* border-inline-color: black; */
+opacity: 0.87;
 `

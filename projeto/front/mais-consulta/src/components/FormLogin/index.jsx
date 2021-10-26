@@ -1,14 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { useHistory } from "react-router-dom"
-import { CustomForm, Div } from './styles';
+import { CustomForm, Div, CustomInputMask } from './styles';
 import { Button, Input, Checkbox } from '../'
 import api from "../../services/api"
 import { login } from '../../services/auth';
 
 export const FormLogin = () => {
-
   const history = useHistory()
-
   const [cpf, setCpf] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
@@ -44,22 +42,30 @@ export const FormLogin = () => {
     }, [cpf, password, history])
 
   return (
-
     <>
       <CustomForm onSubmit={handleLogin}>
        
-        <Input
+        {/* <Input
           label='CPF'
-          type="cpf"
           id="cpf"
+          type='cpf'
+          required
+          // value= '999.999.999-99'
           size= 'big'
-          onChange={e => setCpf(e.target.value)}
-        />
+          onChange={e => setCpf(e.target.value)}> */}
+          <CustomInputMask 
+          mask='999.999.999-99'
+          value={cpf}
+          onChange={(event) => setCpf(event.target.value)}
+          >
+          </CustomInputMask>
+        {/* </Input> */}
         <Input
-          label='Senha'
+          label="Senha"
           type="password"
+          required
           id="password"
-          size= 'big'
+          size= "big"
           onChange={e => setPassword(e.target.value)}
         />
          {error && <p>{error}</p>}

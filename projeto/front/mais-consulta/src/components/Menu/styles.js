@@ -47,9 +47,8 @@ export const Tab = styled.li`
     img {
       width: 12%;
       margin-left: 2rem;
-      fill: ${({isActive}) => isActive ? '#19A795' : '#ec0000'} ;
       stroke: red;
-      }
+    }
     &:hover {
       border-left: 5px solid var(--green-standard);
     }

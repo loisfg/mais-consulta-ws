@@ -1,10 +1,11 @@
 import React from 'react';
-import { CustomTextField } from './styles';
+import { CustomInput } from './styles';
 
-export const Input = ({ size, required, label, onChange }) =>
-    <CustomTextField 
+export const Input = ({ size, label, onChange,type }) =>
+    <CustomInput 
     onChange={onChange} 
+    type={type}
     label={label} 
     variant="standard" 
-    required={required}
-    size={size} />
+    size={size}
+    />
