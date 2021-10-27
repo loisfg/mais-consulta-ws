@@ -1,13 +1,11 @@
 package com.bandtec.mais.consulta.controller;
 
-import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
-import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
+import com.bandtec.mais.consulta.usecase.auth.Logoff;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignIn;
-import com.bandtec.mais.consulta.usecase.auth.Logoff;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,15 +23,12 @@ public class AuthController {
 
     private final List<Usuario> usuariosLogados;
 
-    private final MedicoSignUp medicoSignup;
-
     private final PacienteSignup pacienteSignup;
     private final PacienteSignIn pacienteSignIn;
     private final Logoff logoff;
 
     @Autowired
     public AuthController(MedicoSignUp medicoSignup, PacienteSignup pacienteSignup, PacienteSignIn pacienteSignIn, Logoff logoff) {
-        this.medicoSignup = medicoSignup;
         this.pacienteSignup = pacienteSignup;
         this.pacienteSignIn = pacienteSignIn;
         this.logoff = logoff;
@@ -48,17 +43,6 @@ public class AuthController {
         return oUsuario
                 .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
-    }
-
-    @PostMapping("/medico/signup")
-    public ResponseEntity<Usuario> medicoSignUp(@RequestBody MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
-
-        Optional<Usuario> oUsuario = medicoSignup.execute(medicoSignUpRequestDTO);
-
-        return oUsuario
-                .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build());
-
     }
 
     @PostMapping("/signin")
