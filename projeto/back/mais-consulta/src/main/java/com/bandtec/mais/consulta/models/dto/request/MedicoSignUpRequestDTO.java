@@ -5,10 +5,12 @@ import com.bandtec.mais.consulta.domain.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Slf4j
 public class MedicoSignUpRequestDTO {
     private String cpf;
     private String email;
@@ -16,10 +18,16 @@ public class MedicoSignUpRequestDTO {
     private Medico medico;
 
     public static Usuario convertFromController(MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
-        return new Usuario(
-                medicoSignUpRequestDTO.getCpf(),
-                medicoSignUpRequestDTO.getEmail(),
-                medicoSignUpRequestDTO.getPassword()
-        );
+        var usuario = Usuario
+                .builder()
+                .setCpf(medicoSignUpRequestDTO.getCpf())
+                .setEmail(medicoSignUpRequestDTO.getEmail())
+                .setPassword(medicoSignUpRequestDTO.getPassword())
+                .build();
+
+        log.info("Convertendo request {} \n " +
+                "para Usuário Medico {}", medicoSignUpRequestDTO, usuario);
+
+        return usuario;
     }
 }

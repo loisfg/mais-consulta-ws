@@ -16,7 +16,7 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idEndereco")
+    @Column(name = "id_endereco")
     private Integer idEndereco;
 
     @Column(name = "cep")

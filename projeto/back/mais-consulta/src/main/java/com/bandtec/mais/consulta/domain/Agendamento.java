@@ -33,7 +33,7 @@ public class Agendamento {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Usuario usuario;
 
-    @PrimaryKeyJoinColumn(name = "idMedico", referencedColumnName = "idAgendamento")
+    @PrimaryKeyJoinColumn(name = "id_medico", referencedColumnName = "idAgendamento")
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Medico medico;
 

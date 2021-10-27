@@ -17,6 +17,35 @@ public class Ubs {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
 
+    private Ubs() {}
+
+    public Ubs(String nome, Endereco endereco) {
+        this.nome = nome;
+        this.endereco = endereco;
+    }
+
+    public static UbsEntityBuilder builder() {
+        return new UbsEntityBuilder();
+    }
+
+    public static class UbsEntityBuilder {
+        private String nome;
+        private Endereco endereco;
+
+        public UbsEntityBuilder setNome(String nome) {
+            this.nome = nome;
+            return this;
+        }
+
+        public UbsEntityBuilder setEndereco(Endereco endereco) {
+            this.endereco = endereco;
+            return this;
+        }
+
+        public Ubs build() {
+            return new Ubs(nome, endereco);
+        }
+    }
     public String getNome() {
         return nome;
     }

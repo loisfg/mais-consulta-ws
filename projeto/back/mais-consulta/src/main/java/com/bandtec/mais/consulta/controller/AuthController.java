@@ -47,8 +47,7 @@ public class AuthController {
 
         return oUsuario
                 .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build());
-
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
     @PostMapping("/medico/signup")

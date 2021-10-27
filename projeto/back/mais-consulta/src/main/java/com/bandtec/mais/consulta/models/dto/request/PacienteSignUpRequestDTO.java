@@ -16,10 +16,11 @@ public class PacienteSignUpRequestDTO {
     private Paciente paciente;
 
     public static Usuario convertFromController(PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
-        return new Usuario(
-                pacienteSignUpRequestDTO.getCpf(),
-                pacienteSignUpRequestDTO.getEmail(),
-                pacienteSignUpRequestDTO.getPassword()
-        );
+        return Usuario
+                .builder()
+                .setCpf(pacienteSignUpRequestDTO.getCpf())
+                .setEmail(pacienteSignUpRequestDTO.getEmail())
+                .setPassword(pacienteSignUpRequestDTO.getPassword())
+                .build();
     }
 }

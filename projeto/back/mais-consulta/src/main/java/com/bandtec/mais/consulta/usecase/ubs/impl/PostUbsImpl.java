@@ -17,9 +17,11 @@ public class PostUbsImpl implements PostUbs {
 
     @Override
     public Optional<Ubs> execute(UbsPostRequestDTO ubsPostRequestDTO) {
-        Ubs ubs = new Ubs();
-        ubs.setEndereco(ubsPostRequestDTO.getEndereco());
-        ubs.setNome(ubsPostRequestDTO.getNome());
+        if (ubsRepository.existsByNome(ubsPostRequestDTO.getNome())) {
+            return ubsRepository.findUbsByNome(ubsPostRequestDTO.getNome());
+        }
+
+        Ubs ubs = UbsPostRequestDTO.convertFromController(ubsPostRequestDTO);
         return Optional.of(ubsRepository.save(ubs));
     }
 }

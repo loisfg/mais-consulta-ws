@@ -11,7 +11,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUsuario")
+    @Column(name = "id_usuario")
     private Integer idUsuario;
 
     @Column(name = "cpf")
@@ -89,4 +89,14 @@ public class Usuario {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Usuario{");
+        sb.append("idUsuario=").append(idUsuario);
+        sb.append(", cpf='").append(cpf).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
