@@ -18,22 +18,24 @@ export const FormLogin = () => {
         setError("Preencha cpf e password para continuar!")
       } else {
         try {
-          login(123)
+          // login(123)
+
           let params = {
-            cpf: cpf,
+            cpf: cpf.replace(".", "").replace(".", "").replace("-", ""),
             password: password
           }
-          // const response = await api.post("/auth/login", params)
-          // if (response.status === 200) {
-          //   const usuarioString = JSON.stringify(response.data)
-          //   localStorage.setItem("usuario", usuarioString)
 
-          //   // const objetoEmFormatoDeString = localStorage.getItem('usuario');
-          //   // const objetoMesmo = JSON.parse(objetoEmFormatoDeString)
-          //   history.push("/home")
+          console.log(params);
 
-          // }
-          window.location.href = '/home'
+          const response = await api.post("/auth/signin", params)
+          if (response.status === 200) {
+            const usuarioString = JSON.stringify(response.data)
+            login(usuarioString);
+
+            // const objetoEmFormatoDeString = localStorage.getItem('usuario');
+            // const objetoMesmo = JSON.parse(objetoEmFormatoDeString)
+            history.push("/home")
+          }
         } catch (erro) {
           console.log(erro);
           setError("Cpf ou senha incorretos")
@@ -44,7 +46,7 @@ export const FormLogin = () => {
   return (
     <>
       <CustomForm onSubmit={handleLogin}>
-       
+
         {/* <Input
           label='CPF'
           id="cpf"
@@ -53,22 +55,24 @@ export const FormLogin = () => {
           // value= '999.999.999-99'
           size= 'big'
           onChange={e => setCpf(e.target.value)}> */}
-          <CustomInputMask 
+        <CustomInputMask
+          id="cpf"
+          required
           mask='999.999.999-99'
           value={cpf}
           onChange={(event) => setCpf(event.target.value)}
-          >
-          </CustomInputMask>
+        >
+        </CustomInputMask>
         {/* </Input> */}
         <Input
           label="Senha"
           type="password"
           required
           id="password"
-          size= "big"
+          size="big"
           onChange={e => setPassword(e.target.value)}
         />
-         {error && <p>{error}</p>}
+        {error && <p>{error}</p>}
         <Div>
           <Checkbox label='Lembrar de mim' />
           <Button type="submit" text='Entrar' />

@@ -1,5 +1,5 @@
 
-export const TOKEN_KEY = "@nada";
+export const TOKEN_KEY = "usuario";
 export const isAuth = () => localStorage.getItem(TOKEN_KEY);
 export const getToken = () => localStorage.setItem(TOKEN_KEY);
 
