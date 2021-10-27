@@ -19,7 +19,11 @@ export const RightSide = styled.div`
   opacity: 87%;
   background: url(${photo}) center no-repeat;
   background-size: cover;
-  background-color: red;
+
+  @media(max-width: 800px){
+    display: none;
+  }
+
 `;
 
 export const LeftSide = styled.div`
