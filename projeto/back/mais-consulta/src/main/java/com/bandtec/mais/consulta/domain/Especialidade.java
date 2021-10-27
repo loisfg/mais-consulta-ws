@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -24,6 +23,28 @@ public class Especialidade {
 
     @Column(name = "descricao")
     private String descricao;
+
+    private Especialidade() {};
+
+    public Especialidade(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public static EspecialidadeEntityBuilder builder(){
+        return new EspecialidadeEntityBuilder();
+    }
+
+    public static class EspecialidadeEntityBuilder {
+        private String descricao;
+
+        public EspecialidadeEntityBuilder setDescricao(final String descricao) {
+            this.descricao = descricao;
+            return this;
+        }
+        public Especialidade build(){
+            return new Especialidade(descricao);
+        }
+    }
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "especialidade")

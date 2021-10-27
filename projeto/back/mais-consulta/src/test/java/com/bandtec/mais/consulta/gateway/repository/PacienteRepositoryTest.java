@@ -14,6 +14,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest
 class PacienteRepositoryTest {
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     // Endereço
     final String cep = "06550150";
     final String cidade = "Taboão da Serra";
@@ -60,15 +70,6 @@ class PacienteRepositoryTest {
             .setEndereco(endereco)
             .setUsuario(usuario)
             .build();
-
-    @Autowired
-    private PacienteRepository pacienteRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private EnderecoRepository enderecoRepository;
 
     private static void accept(Usuario value) {
         System.out.printf("\nUsuário criado: %s\n", value);
