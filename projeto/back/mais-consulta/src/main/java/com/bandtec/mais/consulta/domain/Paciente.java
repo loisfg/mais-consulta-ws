@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -30,10 +31,12 @@ public class Paciente {
     @Column(name = "numero_carteira_sus")
     private String numeroCarteiraSus;
 
-    @PrimaryKeyJoinColumn(name = "idEndereco", referencedColumnName = "idPaciente")
+    @PrimaryKeyJoinColumn(name = "id_endereco", referencedColumnName = "id_paciente")
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
+    @JsonIgnore
+    @PrimaryKeyJoinColumn(name = "id_usuario", referencedColumnName = "id_paciente")
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
 

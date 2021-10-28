@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -104,6 +105,7 @@ public class Endereco {
             return new Endereco(cep,cidade,estado,bairro,logradouro,numero,cidade);
         }
     }
+
 
     @Override
     public String toString() {

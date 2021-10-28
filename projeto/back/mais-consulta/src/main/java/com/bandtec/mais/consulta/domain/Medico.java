@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -21,6 +22,7 @@ public class Medico {
     @Column(name = "nome")
     private String nome;
 
+    @JsonIgnore
     @PrimaryKeyJoinColumn(name = "id_usuario", referencedColumnName = "id_medico")
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
