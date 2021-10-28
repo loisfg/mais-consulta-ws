@@ -3,12 +3,15 @@ package com.bandtec.mais.consulta.gateway.repository;
 import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Usuario;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+@Transactional
 @SpringBootTest
-public class MedicoRepositoryTest {
+class MedicoRepositoryTest {
 
     @Autowired
     private MedicoRepository medicoRepository;
@@ -20,7 +23,7 @@ public class MedicoRepositoryTest {
     private EspecialidadeRepository especialidadeRepository;
 
     @Test
-    void insertAndReceiveMedicoCreatedWithBuilder() {
+   void insertAndReceiveMedicoCreatedWithBuilder() {
         // Medico
         final String nome = "Joao Fernandes";
         //usuario
@@ -44,24 +47,27 @@ public class MedicoRepositoryTest {
 
         especialidadeRepository.save(especialidade);
 
-        if (especialidadeRepository.existsByDescricao(descrição)) {
-            System.out.printf("especialidade %s existe", especialidadeRepository.existsByDescricao(descrição));
-        }
+//       especialidade if (especialidadeRepository.existsByDescricao(descrição)) {
+//            System.out.printf("especialidade existe", especialidadeRepository.existsByDescricao(descrição));
+//        }
+        System.out.println(especialidade);
+        Especialidade optionalEspecialidade = especialidadeRepository.findByDescricao(descrição);
         Medico medico = Medico
                 .builder()
                 .setUsuario(usuario)
                 .setNome(nome)
-                .setEspecialidade(especialidade)
+                .setEspecialidade(optionalEspecialidade)
                 .build();
 
         medicoRepository.save(medico);
 
-
+        if (medicoRepository.existsByNome(nome)){
+            System.out.printf("Medico existe", medicoRepository.existsByNome(nome));
+        }
 
     }
 
-    private static void accept(Medico value){
-        System.out.println("\nMedico criado");
-    }
+
+
 
 }

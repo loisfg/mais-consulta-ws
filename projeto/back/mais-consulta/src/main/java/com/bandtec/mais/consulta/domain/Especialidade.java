@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -24,6 +27,10 @@ public class Especialidade {
     @Column(name = "descricao")
     private String descricao;
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "especialidade")
+    List<Medico> medicos = new ArrayList<Medico>();
+
     private Especialidade() {};
 
     public Especialidade(String descricao) {
@@ -36,6 +43,7 @@ public class Especialidade {
 
     public static class EspecialidadeEntityBuilder {
         private String descricao;
+        private List<Medico> medicos;
 
         public EspecialidadeEntityBuilder setDescricao(final String descricao) {
             this.descricao = descricao;
@@ -44,21 +52,17 @@ public class Especialidade {
         public Especialidade build(){
             return new Especialidade(descricao);
         }
+
     }
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "especialidade")
-    Set<Medico> medicos;
 
     @Override
     public String toString() {
-        return new StringBuilder().append("Especialidade{")
-                .append("idEspecialidade=")
-                .append(idEspecialidade)
-                .append(", descricao='").
-                append(descricao)
-                .append('\'')
-                .toString();
+        return "Especialidade{" +
+                "idEspecialidade=" + idEspecialidade +
+                ", descricao='" + descricao + '\'' +
+                ", medicos=" + medicos +
+                '}';
     }
 }
 
