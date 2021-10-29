@@ -11,6 +11,7 @@ export const Profile = ({userName, }) => {
         </PatientGroup>
         <label> Dados cadastrais </label>
         <DataBox>
+          {/* <Input size="medium" label="Outlined" variant="outlined"></Input> */}
         </DataBox>:
     </Container>
   );

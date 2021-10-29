@@ -5,15 +5,15 @@ import { DivInput } from './styles'
 export const Address = () => {
   return (
     <>
-    <Input size='medium' label="CEP"/>
+    <Input size='medium' label="CEP" variant='standard'/>
     <DivInput>
-        <Input size= 'medium' label="Cidade"/>
-        <Input size='medium' label="Estado"/>
+        <Input size= 'medium' label="Cidade" variant='standard'/>
+        <Input size='medium' label="Estado" variant='standard'/>
     </DivInput>
-    <Input size= 'big' label="Logradouro"/>
+    <Input size= 'big' label="Logradouro" variant='standard' />
     <DivInput>
-        <Input size='medium' label="Número"/>
-        <Input size= 'medium' label="Complemento"/>
+        <Input size='medium' label="Número" variant='standard' />
+        <Input size= 'medium' label="Complemento" variant='standard'/>
     </DivInput>
     </>
   );

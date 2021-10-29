@@ -10,19 +10,20 @@ export const PersonalData = ({data}) => {
             required={true} 
             label="Nome completo"
             value={data.name}
+            variant='standard'
         />
         <DivInput>
-            <Input required={true} size='medium' label="CPF"/>
-            <Input required={true} size= 'medium' label="RG"/>
+            <Input required={true} size='medium' label="CPF" variant='standard'/>
+            <Input required={true} size= 'medium' label="RG" variant='standard'/>
         </DivInput>
         <DivInput>
             <Select/>
-            <Input required={true} size='medium' label="Celular"/>
+            <Input required={true} size='medium' label="Celular" variant='standard'/>
         </DivInput>
         <Input 
         size='big' 
         required={true} 
-        label="Número da carteirinha do SUS"/>
+        label="Número da carteirinha do SUS" variant='standard'/>
     </>
   )
 }

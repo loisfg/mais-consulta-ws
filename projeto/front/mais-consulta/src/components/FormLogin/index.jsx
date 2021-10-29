@@ -70,6 +70,7 @@ export const FormLogin = () => {
           required
           id="password"
           size="big"
+          variant = "standard"
           onChange={e => setPassword(e.target.value)}
         />
         {error && <p>{error}</p>}
