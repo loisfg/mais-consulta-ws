@@ -16,32 +16,32 @@ public class Agendamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idAgendamento")
+    @Column(name = "id_agendamento")
     private Integer idAgendamento;
 
-    @Column(name = "dataHr")
+    @Column(name = "data_hr")
     private LocalDate dataHr;
 
-    @Column(name = "dtAtendimento")
+    @Column(name = "dt_atendimento")
     private LocalDate dtAtendimento;
 
-    @PrimaryKeyJoinColumn(name = "idEspecialidade", referencedColumnName = "idAgendamento")
+    @PrimaryKeyJoinColumn(name = "id_especialidade", referencedColumnName = "id_agendamento")
     @OneToOne(cascade = CascadeType.ALL)
     protected Especialidade especialidade;
 
-    @PrimaryKeyJoinColumn(name = "idUsuario", referencedColumnName = "idAgendamento")
+    @PrimaryKeyJoinColumn(name = "id_usuario", referencedColumnName = "id_agendamento")
     @OneToOne(cascade = CascadeType.PERSIST)
     private Usuario usuario;
 
-    @PrimaryKeyJoinColumn(name = "id_medico", referencedColumnName = "idAgendamento")
+    @PrimaryKeyJoinColumn(name = "id_medico", referencedColumnName = "id_agendamento")
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Medico medico;
 
-    @PrimaryKeyJoinColumn(name = "idPaciente", referencedColumnName = "idAgendamento")
+    @PrimaryKeyJoinColumn(name = "id_paciente", referencedColumnName = "id_agendamento")
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Paciente paciente;
 
-    @PrimaryKeyJoinColumn(name = "idUbs", referencedColumnName =  "idAgendamento")
+    @PrimaryKeyJoinColumn(name = "id_ubs", referencedColumnName =  "id_agendamento")
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Ubs ubs;
 
