@@ -42,3 +42,4 @@ export const CustomAvatar = styled(Avatar)`
   width: 15rem !important;
   height: 15rem !important;
 `
+

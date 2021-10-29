@@ -8,4 +8,7 @@ export const Input = ({ size, label, onChange,type }) =>
     label={label} 
     variant="standard" 
     size={size}
+
     />
+
+    

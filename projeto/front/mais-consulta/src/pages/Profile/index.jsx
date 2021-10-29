@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextSubtext, DataBox } from '../../components';
-import { Container, CustomAvatar, PatientGroup } from './styles'
+import { Container, CustomAvatar, PatientGroup,  } from './styles'
 
 export const Profile = ({userName, }) => {
   return (
@@ -11,7 +11,7 @@ export const Profile = ({userName, }) => {
         </PatientGroup>
         <label> Dados cadastrais </label>
         <DataBox>
-        </DataBox>
+        </DataBox>:
     </Container>
   );
 }
