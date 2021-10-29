@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Box, Panel, LeftSide, RightSide } from './styles';
-import { } from '../../components'
+import {Input } from '../../components'
 
 
 export const DataBox = () => {
@@ -9,7 +9,9 @@ export const DataBox = () => {
       <Box>
         <Panel>
         <LeftSide>
-       
+          <Input>
+          
+          </Input>
           
         </LeftSide>
         <RightSide>
