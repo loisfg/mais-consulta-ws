@@ -22,7 +22,7 @@ public class  Consulta {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @PrimaryKeyJoinColumn(name = "idEspecialidade", referencedColumnName = "idConsulta")
+    @PrimaryKeyJoinColumn(name = "id_especialidade", referencedColumnName = "idConsulta")
     @OneToOne(cascade = CascadeType.ALL)
     protected Especialidade especialidade;
 

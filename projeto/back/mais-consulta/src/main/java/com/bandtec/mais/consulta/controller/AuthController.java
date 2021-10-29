@@ -1,12 +1,9 @@
 package com.bandtec.mais.consulta.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
 import com.bandtec.mais.consulta.usecase.auth.Logoff;
-import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
-import com.bandtec.mais.consulta.usecase.auth.PacienteSignIn;
-import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
+import com.bandtec.mais.consulta.usecase.auth.UsuarioSignIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,32 +20,22 @@ public class AuthController {
 
     private final List<Usuario> usuariosLogados;
 
-    private final PacienteSignup pacienteSignup;
-    private final PacienteSignIn pacienteSignIn;
+    private final UsuarioSignIn usuarioSignIn;
     private final Logoff logoff;
 
     @Autowired
-    public AuthController(MedicoSignUp medicoSignup, PacienteSignup pacienteSignup, PacienteSignIn pacienteSignIn, Logoff logoff) {
-        this.pacienteSignup = pacienteSignup;
-        this.pacienteSignIn = pacienteSignIn;
+    public AuthController(UsuarioSignIn usuarioSignIn, Logoff logoff) {
+        this.usuarioSignIn = usuarioSignIn;
         this.logoff = logoff;
         usuariosLogados = new ArrayList<>();
     }
 
-    @PostMapping("/paciente/signup")
-    public ResponseEntity<Usuario> pacienteSignUp(@RequestBody PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
 
-        Optional<Usuario> oUsuario = pacienteSignup.execute(pacienteSignUpRequestDTO);
-
-        return oUsuario
-                .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
-    }
 
     @PostMapping("/signin")
     public ResponseEntity<Usuario> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
 
-        Optional<Usuario> oUsuario = pacienteSignIn.execute(usuarioSignInRequestDTO, usuariosLogados);
+        Optional<Usuario> oUsuario = usuarioSignIn.execute(usuarioSignInRequestDTO, usuariosLogados);
 
         return oUsuario
                 .map(ResponseEntity::ok)
