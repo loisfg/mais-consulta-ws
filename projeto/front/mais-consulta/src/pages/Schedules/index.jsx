@@ -2,6 +2,8 @@ import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux } from "./styles";
 import { UserProfilePic, Message, Specialty, List, Calendar, Hours, Button } from "../../components"
 
+
+
 export const Schedules = () => {
     return (
         <Page>
@@ -19,7 +21,7 @@ export const Schedules = () => {
                 <BoxRight>
                     <Calendar />
                     <Hours />
-                    <Button type="submit" text="Agendar atendimento" /> 
+                    <Button type="submit" text="Agendar atendimento"  /> 
                 </BoxRight>
             </Content>
        </Page>
