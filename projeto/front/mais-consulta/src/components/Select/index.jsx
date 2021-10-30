@@ -9,14 +9,14 @@ export const Select = () => {
   };
   return (
     <CustomFormControl variant="standard" sx={{ m: 1 }}>
-      <CustomSelectLabel id = 'select-label'>Sexo</CustomSelectLabel>
-      <CustomSelect variant='standard' 
-                    size='medium' 
-                    id= 'select'
-                    labelId = 'select-label'
-                    label="Sexo">
-          <MenuItem value={"feminino"}>Feminino</MenuItem>
-          <MenuItem value={"masculino"}>Masculino</MenuItem>
+      <CustomSelectLabel id='select-label'>Sexo</CustomSelectLabel>
+      <CustomSelect variant='standard'
+        size='medium'
+        id='select'
+        labelId='select-label'
+        label="Sexo">
+        <MenuItem value={"feminino"}>Feminino</MenuItem>
+        <MenuItem value={"masculino"}>Masculino</MenuItem>
       </CustomSelect>
     </CustomFormControl>
   );

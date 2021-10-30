@@ -51,9 +51,9 @@ export const Initial = () => {
           <img src={Logo} alt="Logo +Consulta" />
         </DivLogo>
 
-        <CustomTabs 
-        value={value} 
-        onChange={handleChange} 
+        <CustomTabs
+          value={value}
+          onChange={handleChange}
         >
           <CustomTab label="Login" {...a11yProps(0)} />
           <CustomTab label="Cadastro" {...a11yProps(1)} />
@@ -62,9 +62,9 @@ export const Initial = () => {
         <TabPanel value={value} index={0}>
           <FormLogin />
         </TabPanel>
-        
+
         <TabPanel value={value} index={1}>
-          <SignUp />
+          <SignUp setValue={setValue} />
         </TabPanel>
       </LeftSide>
       <RightSide />

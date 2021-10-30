@@ -1,71 +1,108 @@
-import React, { useState } from "react";
-import { Container, InputFamily, CustomStack } from "./styles";
+import React, { useState, useCallback } from "react";
+import { CustomForm, InputFamily, CustomStack } from "./styles";
 import { Stepper, IconButton } from '../'
 import { PersonalData } from "./PersonalData";
 import { Address } from "./Address";
 import { AccessData } from './AccessData';
 import ArrowRight from '../../assets/arrow_right.svg';
 import Check from '../../assets/check.svg';
-import swal from 'sweetalert';
+import api from "../../services/api"
+import swal from "sweetalert";
 
-export const SignUp = () => {
-  const dataForm = {
-    personalData: {
-      name: '',
-      cpf: '',
-      rg: '',
-      sex: '',
-      cellphone: '',
-      susCard: ''
-    },
-    address: {
-      cep: '',
-      city: '',
-      state: '',
-      street: '',
-      number: '',
-      complement: '',
-    },
-    accessData: {
-      email: '',
-      password: '',
-      confirmPassword: ''
+export const SignUp = ({ setValue }) => {
+
+  const [formData, setFormData] = useState({
+    cpf: '',
+    email: '',
+    password: '',
+    telefone: '',
+    paciente: {
+      nome: '',
+      numeroCarteiraSus: '',
+      sexo: '',
+      dtNascimento: '',
+      endereco: {
+        cep: '',
+        cidade: '',
+        complemento: '',
+        estado: '',
+        logradouro: '',
+        numero: ''
+      }
     }
-  }
-  const [form, setForm ] = useState(dataForm);
+  })
+
   const [activeStep, setActiveStep] = useState(0)
-  function handleStepCompleted(event) {
-    swal("Cadastro realizado com sucesso!")
-  }
+
+  const handleCadastro = useCallback(
+    async (e) => {
+      e.preventDefault()
+
+      try {
+
+        const response = await api.post("paciente/paciente/signup", formData)
+
+        if (response.status === 201) {
+          swal("Cadastro realizado com sucesso!!")
+          setValue(0)
+          setFormData({})
+        } else if (response.status === 409) {
+          swal("Usuario já cadastrado")
+          setValue(0)
+          setFormData({})
+        }
+
+      } catch (erro) {
+        console.log(erro);
+        setValue(0)
+        setFormData({})
+      }
+
+    }, [formData, setValue])
+
   function handleNextStep(event) {
     event.preventDefault()
-    setActiveStep(activeStep+1)
-    console.log(form.personalData)
+    setActiveStep(activeStep + 1)
+    console.log(formData);
   }
   function handleBackStep(event) {
     event.preventDefault()
-    setActiveStep(activeStep-1)
+    setActiveStep(activeStep - 1)
+    console.log(formData);
   }
+
   return (
-    <Container>
-      <Stepper steps={["Dados pessoais", "Endereço", "Dados de acesso"]} 
-               activeStep= {activeStep}/>
+    <CustomForm>
+      <Stepper
+        steps={["Dados pessoais", "Endereço", "Dados de acesso"]}
+        activeStep={activeStep}
+      />
       <InputFamily>
-      {
-        activeStep === 0 && <PersonalData data={form.personalData}/>
-      }
-      {
-        activeStep === 1 && <Address/>
-      }
-      {
-        activeStep === 2 && <AccessData/>
-      }
+        {
+          activeStep === 0 && <PersonalData
+            formData={formData}
+            setFormData={setFormData}
+          />
+        }
+        {
+          activeStep === 1 && <Address
+            formData={formData}
+            setFormData={setFormData}
+          />
+        }
+        {
+          activeStep === 2 && <AccessData
+            formData={formData}
+            setFormData={setFormData}
+          />
+        }
       </InputFamily>
-      <CustomStack isFirst = {activeStep === 0}>
-        {activeStep >= 1 && <IconButton onClick={handleBackStep}/>}
-        {activeStep >= 0 && activeStep < 2 ? <IconButton onClick={handleNextStep} Arrow= {ArrowRight} /> : 
-        <IconButton onSubmit={handleStepCompleted} Arrow= {Check}/> }
+      <CustomStack isFirst={activeStep === 0}>
+        {activeStep >= 1 && <IconButton onClick={handleBackStep} />}
+        {activeStep >= 0 && activeStep < 2 ? <IconButton
+          onClick={handleNextStep} Arrow={ArrowRight} /> :
+          <IconButton onClick={handleCadastro} Arrow={Check} />}
       </CustomStack>
-    </Container>
+    </CustomForm>
   );
 };

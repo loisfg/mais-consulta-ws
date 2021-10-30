@@ -18,8 +18,6 @@ export const FormLogin = () => {
         setError("Preencha cpf e password para continuar!")
       } else {
         try {
-          // login(123)
-
           let params = {
             cpf: cpf.replace(".", "").replace(".", "").replace("-", ""),
             password: password
@@ -31,9 +29,6 @@ export const FormLogin = () => {
           if (response.status === 200) {
             const usuarioString = JSON.stringify(response.data)
             login(usuarioString);
-
-            // const objetoEmFormatoDeString = localStorage.getItem('usuario');
-            // const objetoMesmo = JSON.parse(objetoEmFormatoDeString)
             history.push("/home")
           }
         } catch (erro) {
@@ -46,15 +41,6 @@ export const FormLogin = () => {
   return (
     <>
       <CustomForm onSubmit={handleLogin}>
-
-        {/* <Input
-          label='CPF'
-          id="cpf"
-          type='cpf'
-          required
-          // value= '999.999.999-99'
-          size= 'big'
-          onChange={e => setCpf(e.target.value)}> */}
         <CustomInputMask
           id="cpf"
           required
@@ -63,7 +49,6 @@ export const FormLogin = () => {
           onChange={(event) => setCpf(event.target.value)}
         >
         </CustomInputMask>
-        {/* </Input> */}
         <Input
           label="Senha"
           type="password"

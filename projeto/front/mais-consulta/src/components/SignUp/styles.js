@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.form`
+export const CustomForm = styled.div`
   height: 70vh;
   width: 35vw;
   display: flex;
@@ -21,6 +21,6 @@ export const InputFamily = styled.form`
 export const CustomStack = styled.div`
     display: flex;
     width: 100%;
-    justify-content: ${({isFirst}) => isFirst ? 'flex-end' : 'space-between'};
+    justify-content: ${({ isFirst }) => isFirst ? 'flex-end' : 'space-between'};
     padding: 0 18px 0 18px;
 `
