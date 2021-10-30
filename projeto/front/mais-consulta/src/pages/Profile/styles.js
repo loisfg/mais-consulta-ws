@@ -43,3 +43,10 @@ export const CustomAvatar = styled(Avatar)`
   height: 15rem !important;
 `
 
+export const H2 = styled.div`
+color: black;
+opacity: 70%;
+font-size: 16px;
+font-weight: 600;
+font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`
