@@ -6,6 +6,7 @@ import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
+import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,8 @@ public class PacienteSignupImpl implements PacienteSignup {
         if (usuarioRepository.existsByCpf(usuario.getCpf())) {
             return Optional.empty();
         } else {
+            paciente.setNome(StrFormat.toTitledCase(paciente.getNome()));
+
             paciente.setUsuario(usuario);
             pacienteRepository.save(paciente);
             return Optional.of(usuarioRepository.save(usuario));
