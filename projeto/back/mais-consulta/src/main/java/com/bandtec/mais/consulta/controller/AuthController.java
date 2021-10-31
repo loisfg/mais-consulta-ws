@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
+import com.bandtec.mais.consulta.models.dto.response.UsuarioSignInResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.Logoff;
 import com.bandtec.mais.consulta.usecase.auth.UsuarioSignIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,11 @@ public class AuthController {
         this.logoff = logoff;
         usuariosLogados = new ArrayList<>();
     }
-
-
-
+    
     @PostMapping("/signin")
-    public ResponseEntity<Usuario> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
+    public ResponseEntity<UsuarioSignInResponseDTO> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
 
-        Optional<Usuario> oUsuario = usuarioSignIn.execute(usuarioSignInRequestDTO, usuariosLogados);
+        Optional<UsuarioSignInResponseDTO> oUsuario = usuarioSignIn.execute(usuarioSignInRequestDTO, usuariosLogados);
 
         return oUsuario
                 .map(ResponseEntity::ok)
