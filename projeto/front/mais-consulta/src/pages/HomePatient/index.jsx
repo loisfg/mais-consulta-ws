@@ -13,7 +13,7 @@ export const HomePatient = () => {
     <Page>
       <AuxDiv>
         <DivUsuario>
-          <UserProfilePic nome={"Tha Calazans"} subtexto=" Paciente" />
+          <UserProfilePic nome={usuario.paciente.nome} subtexto="Paciente" />
         </DivUsuario>
         <Content>
           <WelcomeMessage />
