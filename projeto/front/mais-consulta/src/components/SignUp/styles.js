@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CustomForm = styled.div`
+export const CustomForm = styled.form`
   height: 70vh;
   width: 35vw;
   display: flex;

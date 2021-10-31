@@ -1,7 +1,7 @@
 import React from 'react';
 import { CustomInput } from './styles';
 
-export const Input = ({ size, label, onChange, type, value, endAdornment }) =>
+export const Input = ({ size, label, onChange, type, value, defaultValue, helperText, placeholder, maxlength, required }) =>
     <CustomInput
         onChange={onChange}
         type={type}
@@ -9,6 +9,9 @@ export const Input = ({ size, label, onChange, type, value, endAdornment }) =>
         variant="standard"
         size={size}
         value={value}
-        endAdornment={endAdornment}
+        defaultValue={defaultValue}
+        helperText={helperText}
+        placeholder={placeholder}
+        required={required}
     />
 

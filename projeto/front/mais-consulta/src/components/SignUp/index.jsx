@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { CustomForm, InputFamily, CustomStack } from "./styles";
 import { Stepper, IconButton } from '../'
 import { PersonalData } from "./PersonalData";
@@ -50,11 +50,15 @@ export const SignUp = ({ setValue }) => {
           swal("Usuario já cadastrado")
           setValue(0)
           setFormData({})
+        } else {
+          swal("Cadastro realizado sem sucesso :C")
+          setValue(1)
         }
 
       } catch (erro) {
         console.log(erro);
         setValue(0)
+        swal("Cadastro realizado sem sucesso :C")
         setFormData({})
       }
 
@@ -72,37 +76,43 @@ export const SignUp = ({ setValue }) => {
   }
 
   return (
-    <CustomForm>
-      <Stepper
-        steps={["Dados pessoais", "Endereço", "Dados de acesso"]}
-        activeStep={activeStep}
-      />
-      <InputFamily>
-        {
-          activeStep === 0 && <PersonalData
-            formData={formData}
-            setFormData={setFormData}
-          />
-        }
-        {
-          activeStep === 1 && <Address
-            formData={formData}
-            setFormData={setFormData}
-          />
-        }
-        {
-          activeStep === 2 && <AccessData
-            formData={formData}
-            setFormData={setFormData}
-          />
-        }
-      </InputFamily>
-      <CustomStack isFirst={activeStep === 0}>
-        {activeStep >= 1 && <IconButton onClick={handleBackStep} />}
-        {activeStep >= 0 && activeStep < 2 ? <IconButton
-          onClick={handleNextStep} Arrow={ArrowRight} /> :
-          <IconButton onClick={handleCadastro} Arrow={Check} />}
-      </CustomStack>
-    </CustomForm>
+    <>
+      <CustomForm onSubmit={handleCadastro}>
+        <Stepper
+          steps={["Dados pessoais", "Endereço", "Dados de acesso"]}
+          activeStep={activeStep}
+        />
+        <InputFamily>
+          {
+            activeStep === 0 && <PersonalData
+              required={true}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          }
+          {
+            activeStep === 1 && <Address
+              required={true}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          }
+          {
+            activeStep === 2 && <AccessData
+              required={true}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          }
+        </InputFamily>
+        <CustomStack isFirst={activeStep === 0}>
+          {activeStep >= 1 && <IconButton onClick={handleBackStep} />}
+          {activeStep >= 0 && activeStep < 2 ? <IconButton
+            onClick={handleNextStep} Arrow={ArrowRight} /> :
+            // <IconButton onClick={handleCadastro} Arrow={Check} />}
+            <IconButton Arrow={Check} />}
+        </CustomStack>
+      </CustomForm>
+    </>
   );
 };
