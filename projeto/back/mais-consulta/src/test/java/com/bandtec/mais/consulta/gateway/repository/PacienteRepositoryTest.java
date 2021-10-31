@@ -1,14 +1,18 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
+import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.domain.Endereco;
 import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.utils.StrFormat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -18,29 +22,23 @@ class PacienteRepositoryTest {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private EnderecoRepository enderecoRepository;
-
     // Endereço
     final String cep = "06550150";
-    final String cidade = "Taboão da Serra";
-    final String estado = "SP";
-    final String bairro = "Jardim Iracema";
+    final String cidade = StrFormat.toTitledCase("Taboão da Serra");
+    final String estado = "SP".toUpperCase();
+    final String bairro = StrFormat.toTitledCase("Jardim Iracema");
     final String logradouro = "";
     final String numero = "313";
     final String complemento = "";
     Endereco endereco = Endereco
             .builder()
-            .setCep(cep)
-            .setCidade(cidade)
-            .setEstado(estado)
-            .setBairro(bairro)
-            .setLogradouro(logradouro)
-            .setNumero(numero)
-            .setComplemento(complemento)
+            .cep(cep)
+            .cidade(cidade)
+            .estado(estado)
+            .bairro(bairro)
+            .logradouro(logradouro)
+            .numero(numero)
+            .complemento(complemento)
             .build();
 
     //Usuario
@@ -49,9 +47,20 @@ class PacienteRepositoryTest {
     final String password = "123";
     Usuario usuario = Usuario
             .builder()
-            .setCpf(cpf)
-            .setEmail(email)
-            .setPassword(password)
+            .cpf(cpf)
+            .email(email)
+            .password(password)
+            .build();
+
+    //Alergia
+    Alergia alergia1 = Alergia
+            .builder()
+            .nome("formiga")
+            .build();
+
+    Alergia alergia2 = Alergia
+            .builder()
+            .nome("poeira")
             .build();
 
     // Paciente
@@ -62,22 +71,18 @@ class PacienteRepositoryTest {
     final String numeroCarteiraSus = "0930219312";
     Paciente paciente = Paciente
             .builder()
-            .setName(nome)
-            .setDtNascimento(dtNascimento)
-            .setTelefone(telefone)
-            .setSexo(sexo)
-            .setNumeroCarteiraSus(numeroCarteiraSus)
-            .setEndereco(endereco)
-            .setUsuario(usuario)
+            .nome(nome)
+            .dtNascimento(dtNascimento)
+            .telefone(telefone)
+            .sexo(sexo)
+            .numeroCarteiraSus(numeroCarteiraSus)
+            .endereco(endereco)
+            .alergias(Set.of())
+            .doencas(Set.of())
+            .remedios(Set.of())
+            .deficiencias(Set.of())
+            .usuario(usuario)
             .build();
-
-    private static void accept(Usuario value) {
-        System.out.printf("\nUsuário criado: %s\n", value);
-    }
-
-    private static void accept(Endereco value) {
-        System.out.printf("\nEndereço criado com sucesso! %s\n", value);
-    }
 
     private static void accept(Paciente value) {
         System.out.printf("\nPaciente logado: %s\n", value);
@@ -95,32 +100,41 @@ class PacienteRepositoryTest {
 
     @Test
     void loginUser() {
-        usuarioRepository.save(usuario);
+        pacienteRepository.save(paciente);
+        Optional<Paciente> pacientes = pacienteRepository.findByUsuarioCpfAndUsuarioPassword(cpf, password);
 
-        Optional<Usuario> oUsuario = usuarioRepository.findByCpfAndPassword(cpf, password);
-
-        oUsuario.ifPresent(PacienteRepositoryTest::accept);
-        assertThat("Paciente criado com um usuário", usuarioRepository.existsByCpf(paciente.getUsuario().getCpf()));
+        pacientes.ifPresent(PacienteRepositoryTest::accept);
+        assertThat("Paciente criado com um usuário", pacienteRepository.existsByUsuarioCpf(paciente.getUsuario().getCpf()));
     }
 
     @Test
     void adressUser() {
-        enderecoRepository.save(endereco);
+        List<Paciente> pacientes = pacienteRepository.findByEnderecoBairro(paciente.getEndereco().getBairro());
 
-        Optional<Endereco> oEndereco = enderecoRepository.findById(paciente.getEndereco().getIdEndereco());
-
-        oEndereco.ifPresent(PacienteRepositoryTest::accept);
-        assertThat("Paciente criado com ligação em endereço", enderecoRepository.existsById(endereco.getIdEndereco()));
+        pacientes.stream().findFirst().ifPresent(PacienteRepositoryTest::accept);
+        assertThat("Paciente criado com ligação em endereço", pacienteRepository.existsByEnderecoCidade(endereco.getCidade()));
     }
 
     @Test
     void allPatientUser() {
         pacienteRepository.save(paciente);
 
-        Iterable<Paciente> list = pacienteRepository.findAll();
+        List<Paciente> list = pacienteRepository.findAll();
 
-        for (Paciente paciente : list) {
-            System.out.println(paciente);
-        }
+        System.out.println("Todos pacientes: " + list);
+    }
+
+    @Test
+    void allPatientContaing() {
+        List<Paciente> list = pacienteRepository.findByNomeContaining("Luis");
+
+        System.out.println("Pacientes com nome Luis" + list);
+    }
+
+    @Test
+    void allPatientBairro() {
+        List<Paciente> list = pacienteRepository.findByEnderecoBairro(bairro);
+
+        System.out.println("pacientes no bairro" + list);
     }
 }

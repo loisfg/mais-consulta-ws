@@ -1,22 +1,18 @@
 package com.bandtec.mais.consulta.usecase.schedule;
 
+import com.bandtec.mais.consulta.utils.StrFormat;
+
 public enum AgendamentoEnum {
-    GERAL("Clinico Geral", 0),
-    OUTROS("", 1);
+    GERAL(StrFormat.toTitledCase("Clinico Geral")),
+    OUTROS("");
 
     private final String description;
-    private final Integer value;
 
-    AgendamentoEnum(String description, Integer value){
+    AgendamentoEnum(String description){
         this.description = description;
-        this.value = value;
     }
 
     public String getDescription(){
         return description;
-    }
-
-    public Integer getValue() {
-        return value;
     }
 }

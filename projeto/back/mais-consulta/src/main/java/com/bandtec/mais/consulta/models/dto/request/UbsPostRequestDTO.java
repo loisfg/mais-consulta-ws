@@ -19,8 +19,8 @@ public class UbsPostRequestDTO {
         log.debug("CRIANDO UBS {}", ubsPostRequestDTO);
         return Ubs
                 .builder()
-                .setNome(ubsPostRequestDTO.getNome())
-                .setEndereco(ubsPostRequestDTO.getEndereco())
+                .nome(ubsPostRequestDTO.getNome())
+                .endereco(ubsPostRequestDTO.getEndereco())
                 .build();
     }
 }

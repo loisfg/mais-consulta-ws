@@ -1,12 +1,21 @@
 package com.bandtec.mais.consulta.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Builder
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario", indexes = {
+        @Index(name = "idx_usuario_cpf", columnList = "cpf"),
+        @Index(name = "idx_usuario_password", columnList = "password")
+})
 public class Usuario {
 
     @Id
@@ -14,89 +23,11 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Integer idUsuario;
 
-    @Column(name = "cpf")
+    @Column(nullable = false)
     private String cpf;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(nullable = false)
     private String password;
-
-    protected Usuario() {}
-
-    public Usuario(String cpf, String email, String password) {
-        this.cpf = cpf;
-        this.email = email;
-        this.password = password;
-    }
-
-    public static UsuarioEntityBuilder builder(){
-        return new UsuarioEntityBuilder();
-    }
-
-    public static class UsuarioEntityBuilder {
-        private String cpf;
-        private String email;
-        protected String password;
-
-        public UsuarioEntityBuilder setCpf(final String cpf) {
-            this.cpf = cpf;
-            return this;
-        }
-
-        public UsuarioEntityBuilder setEmail(final String email) {
-            this.email = email;
-            return this;
-        }
-
-        public UsuarioEntityBuilder setPassword(final String password) {
-            this.password = password;
-            return this;
-        }
-
-        public Usuario build() {
-            return new Usuario(cpf, email, password);
-        }
-
-    }
-
-    public String pegarSenha(){
-        return password;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Usuario{");
-        sb.append("idUsuario=").append(idUsuario);
-        sb.append(", cpf='").append(cpf).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
 }

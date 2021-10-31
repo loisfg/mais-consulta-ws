@@ -2,6 +2,8 @@ package com.bandtec.mais.consulta.usecase.info;
 
 import com.bandtec.mais.consulta.domain.Alergia;
 
+import java.util.Set;
+
 public interface PostAlergia {
-    Alergia execute(Alergia alergia);
+    Set<Alergia> execute(Set<Alergia> alergia, Integer id);
 }

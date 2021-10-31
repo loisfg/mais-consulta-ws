@@ -1,9 +1,22 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
+import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.domain.Paciente;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-public interface PacienteRepository extends CrudRepository<Paciente, Integer> {
+public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
+    List<Paciente> findByNomeContaining(String nome);
+
+    List<Paciente> findByEnderecoBairro(String bairro);
+
+    Optional<Paciente> findByUsuarioCpfAndUsuarioPassword(String cpf, String password);
+
+    boolean existsByUsuarioCpf(String cpf);
+
+    boolean existsByEnderecoCidade(String cidade);
+
 }

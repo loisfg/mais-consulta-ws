@@ -1,21 +1,24 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@Table(name = "alergia")
+@AllArgsConstructor
+@Data
+@Builder
 @Entity
+@Table(name = "alergia")
 public class Alergia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
+    private Paciente paciente;
 }

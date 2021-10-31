@@ -1,17 +1,17 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "agendamento")
+@AllArgsConstructor
+@Data
+@Builder
 @Entity
+@Table(name = "agendamento")
 public class Agendamento {
 
     @Id
@@ -20,13 +20,19 @@ public class Agendamento {
     private Integer idAgendamento;
 
     @Column(name = "data_hr")
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDate dataHr;
 
-    @Column(name = "dt_atendimento")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "dt_atendimento", nullable = false)
     private LocalDate dtAtendimento;
 
+    @Column(name= "hr_atendimento", nullable = false)
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalDate hrAtendimento;
+
     @PrimaryKeyJoinColumn(name = "id_especialidade", referencedColumnName = "id_agendamento")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     protected Especialidade especialidade;
 
     @PrimaryKeyJoinColumn(name = "id_usuario", referencedColumnName = "id_agendamento")
@@ -44,69 +50,6 @@ public class Agendamento {
     @PrimaryKeyJoinColumn(name = "id_ubs", referencedColumnName =  "id_agendamento")
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Ubs ubs;
-
-    public Ubs getUbs() {
-        return ubs;
-    }
-
-    public void setUbs(Ubs ubs) {
-        this.ubs = ubs;
-    }
-
-    public void setEspecialidade(Especialidade especialidade) {
-        this.especialidade = especialidade;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public Especialidade getEspecialidade() {
-        return especialidade;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public Integer getIdAgendamento() {
-        return idAgendamento;
-    }
-
-    public void setIdAgendamento(Integer idAgendamento) {
-        this.idAgendamento = idAgendamento;
-    }
-
-    public LocalDate getDataHr() {
-        return dataHr;
-    }
-
-    public void setDataHr(LocalDate dataHr) {
-        this.dataHr = dataHr;
-    }
-
-    public LocalDate getDtAtendimento() {
-        return dtAtendimento;
-    }
-
-    public void setDtAtendimento(LocalDate dtAtendimento) {
-        this.dtAtendimento = dtAtendimento;
-    }
-
 }
+
+

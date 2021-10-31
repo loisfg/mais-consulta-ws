@@ -23,7 +23,7 @@ public class PacienteController {
     }
 
 
-    @PostMapping("/paciente/signup")
+    @PostMapping("/signup")
     public ResponseEntity<Usuario> pacienteSignUp(@RequestBody PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
 
         Optional<Usuario> oUsuario = pacienteSignup.execute(pacienteSignUpRequestDTO);

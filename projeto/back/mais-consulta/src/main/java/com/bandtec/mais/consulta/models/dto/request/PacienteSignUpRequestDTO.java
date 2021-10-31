@@ -18,9 +18,9 @@ public class PacienteSignUpRequestDTO {
     public static Usuario convertFromController(PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
         return Usuario
                 .builder()
-                .setCpf(pacienteSignUpRequestDTO.getCpf())
-                .setEmail(pacienteSignUpRequestDTO.getEmail())
-                .setPassword(pacienteSignUpRequestDTO.getPassword())
+                .cpf(pacienteSignUpRequestDTO.getCpf())
+                .email(pacienteSignUpRequestDTO.getEmail())
+                .password(pacienteSignUpRequestDTO.getPassword())
                 .build();
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -51,12 +52,13 @@ public class InfoController {
     }
 
     //-----------POST/GET/PUT----- ALERGIA -----------POST/GET/PUT-----
-    @PostMapping("/alergia")
-    public ResponseEntity<Alergia> createAlergia(@RequestBody Alergia alergia) {
-        return ResponseEntity.status(201).body(postAlergia.execute(alergia));
+    @PostMapping("/alergia/{idUser}")
+    public ResponseEntity<Set<Alergia>> createAlergia(@PathVariable Integer idUser,
+                                                      @RequestBody Set<Alergia> alergia) {
+        return ResponseEntity.status(201).body(postAlergia.execute(alergia, idUser));
     }
 
-    @GetMapping("/{idUser}/alergia")
+    @GetMapping("/alergia/{idUser}")
     public ResponseEntity<ListaObj<Alergia>> getAlergias(@PathVariable Integer idUser) {
         ListaObj<Alergia> alergiaList = getAlergia.execute(idUser);
         if (alergiaList.estaVazia()) {
@@ -73,9 +75,10 @@ public class InfoController {
     }
 
     //-----------POST/GET/PUT----- REMEDIO-----------POST/GET/PUT-----
-    @PostMapping("/remedio")
-    public ResponseEntity<Remedio> postRemedio(@RequestBody Remedio remedio) {
-        return ResponseEntity.status(201).body(postRemedio.execute(remedio));
+    @PostMapping("/remedio/{idUser}")
+    public ResponseEntity<Set<Remedio>> postRemedio(@PathVariable Integer idUser,
+                                                    @RequestBody Set<Remedio> remedio) {
+        return ResponseEntity.status(201).body(postRemedio.execute(remedio,idUser));
     }
 
     @GetMapping("/{idUser}/remedio")
@@ -95,9 +98,10 @@ public class InfoController {
     }
 
     //-----------POST/GET/PUT----- DEFICIENCIA -----------POST/GET/PUT-----
-    @PostMapping("/deficiencia")
-    public ResponseEntity<Deficiencia> postDeficiencia(@RequestBody Deficiencia deficiencia) {
-        return ResponseEntity.status(201).body(postDeficiencia.execute(deficiencia));
+    @PostMapping("/deficiencia/{idUser}")
+    public ResponseEntity<Set<Deficiencia>> postDeficiencia(@PathVariable Integer idUser,
+                                                            @RequestBody Set<Deficiencia> deficiencia) {
+        return ResponseEntity.status(201).body(postDeficiencia.execute(deficiencia,idUser));
     }
 
     @GetMapping("/{idUser}/deficiencia")
@@ -118,9 +122,10 @@ public class InfoController {
     }
 
     //-----------POST/GET/PUT----- DOENCA -----------POST/GET/PUT-----
-    @PostMapping("/doenca")
-    public ResponseEntity<Doenca> postDoenca(@RequestBody Doenca doenca) {
-        return ResponseEntity.status(201).body(postDoenca.execute(doenca));
+    @PostMapping("/doenca/{idUser}")
+    public ResponseEntity<Set<Doenca>> postDoenca(@PathVariable Integer idUser,
+                                                  @RequestBody Set<Doenca> doenca) {
+        return ResponseEntity.status(201).body(postDoenca.execute(doenca, idUser));
     }
 
     @GetMapping("/{idUser}/doenca")

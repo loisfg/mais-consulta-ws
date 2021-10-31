@@ -8,5 +8,4 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AlergiaRepository extends JpaRepository<Alergia, Integer> {
-
 }

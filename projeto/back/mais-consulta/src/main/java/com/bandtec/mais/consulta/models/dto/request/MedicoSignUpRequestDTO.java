@@ -20,9 +20,9 @@ public class MedicoSignUpRequestDTO {
     public static Usuario convertFromController(MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
         var usuario = Usuario
                 .builder()
-                .setCpf(medicoSignUpRequestDTO.getCpf())
-                .setEmail(medicoSignUpRequestDTO.getEmail())
-                .setPassword(medicoSignUpRequestDTO.getPassword())
+                .cpf(medicoSignUpRequestDTO.getCpf())
+                .email(medicoSignUpRequestDTO.getEmail())
+                .password(medicoSignUpRequestDTO.getPassword())
                 .build();
 
         log.info("Convertendo request {} \n " +

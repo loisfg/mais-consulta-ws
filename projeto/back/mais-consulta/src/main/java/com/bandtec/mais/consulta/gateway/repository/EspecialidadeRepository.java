@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface EspecialidadeRepository extends CrudRepository<Especialidade, Integer> {
+public interface EspecialidadeRepository extends JpaRepository<Especialidade, Integer> {
     boolean existsByDescricao(String descricao);
 
     Especialidade findByDescricao(String descricao);
