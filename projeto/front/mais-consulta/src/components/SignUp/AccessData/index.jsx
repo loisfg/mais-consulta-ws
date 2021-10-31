@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '../../'
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Check from '../../../assets/check.svg';
+import { Stepper, IconButton } from '../../'
 
 
-export const AccessData = ({ formData, setFormData }) => {
+export const AccessData = ({ formData, setFormData, required }) => {
 
     const [values, setValues] = React.useState({
         amount: "",
@@ -16,60 +14,47 @@ export const AccessData = ({ formData, setFormData }) => {
         showPassword: false
     });
 
-    const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword
-        });
-    };
+    const [passwd1, setPasswd1] = useState();
+    const [passwd2, setPasswd2] = useState();
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    const validatePassword = () => {
+        if (passwd1 === passwd2) {
+            setFormData({ ...formData, password: passwd1 })
+            console.log("senhas correspondem");
+        } else {
+            console.log("senhas nao correspondem");
+        }
+    }
 
     return (
         <>
             <Input
+                required={required}
                 size='big'
-                label='Email'
-                onChange={e => setFormData({ ...formData, email: e.target.value })}
+                label="CPF"
+                onChange={e => setFormData({ ...formData, cpf: e.target.value.replace(".", "").replace(".", "").replace("-", "") })}
+                defaultValue={formData.cpf}
+                helperText="000.000.000-00"
             />
-
             <Input
                 id="standard-adornment-password"
                 label='Senha'
+                required={required}
                 type={values.showPassword ? "text" : "password"}
-                // value={values.password}
-                onChange={e => setFormData({ ...formData, password: e.target.value })}
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                        >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                }
+                onChange={e => setPasswd1(e.target.value)}
+                defaultValue={formData.password}
             />
-
             <Input
                 id="standard-adornment-password"
                 label='Confirmar senha'
+                required={required}
                 type={values.showPassword ? "text" : "password"}
-                // value={values.password}
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                        >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                }
+                onChange={e => {
+                    // setPasswd2(e.target.value)
+                    // validatePassword()
+                    setFormData({ ...formData, password: e.target.value })
+                }}
+                defaultValue={formData.password}
             />
         </>
     );

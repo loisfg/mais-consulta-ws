@@ -9,16 +9,22 @@ import { logout } from '../../services/auth'
 export const Menu = () => {
   const location = useLocation()
 
-  return(
+  return (
     <Container>
       <SpaceLogo>
-        <img src={Logo} alt="Logo +Consulta"/>
+        <img src={Logo} alt="Logo +Consulta" />
       </SpaceLogo>
       <ListOfTabs>
-        {MenuData.map((item,index) =>
+        {MenuData.map((item, index) =>
           <Tab key={index}>
-            <Redirect to={item.path} isActive={location.pathname === item.path}> 
-              <img fill="blue" src={item.icon} isActive={location.pathname === item.path} alt="" />
+            <Redirect
+              to={item.path}
+              isActive={location.pathname === item.path}>
+              <img
+                fill="blue"
+                src={item.icon}
+                isActive={location.pathname === item.path}
+                alt="" />
               <Text isActive={location.pathname === item.path}>
                 {item.title}
               </Text>
@@ -28,7 +34,7 @@ export const Menu = () => {
         <Tab key={'sair'}>
           <a href={'/'} onClick={logout}>
             <img src={Logoff} alt="" />
-            <Text isActive = {false}>
+            <Text isActive={false}>
               Sair
             </Text>
           </a>

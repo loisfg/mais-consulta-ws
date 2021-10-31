@@ -41,21 +41,31 @@ export const FormLogin = () => {
   return (
     <>
       <CustomForm onSubmit={handleLogin}>
-        <CustomInputMask
+        {/* <CustomInputMask
           id="cpf"
           required
           mask='999.999.999-99'
           value={cpf}
           onChange={(event) => setCpf(event.target.value)}
         >
-        </CustomInputMask>
+        </CustomInputMask> */}
+        <Input
+          label="CPF"
+          type="text"
+          required
+          id="text"
+          size="big"
+          variant="standard"
+          onChange={e => setCpf(e.target.value)}
+          placeholder="000.000.000-00"
+        />
         <Input
           label="Senha"
           type="password"
           required
           id="password"
           size="big"
-          variant = "standard"
+          variant="standard"
           onChange={e => setPassword(e.target.value)}
         />
         {error && <p>{error}</p>}
