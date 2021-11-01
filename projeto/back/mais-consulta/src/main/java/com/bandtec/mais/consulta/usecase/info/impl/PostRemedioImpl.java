@@ -8,7 +8,9 @@ import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PostRemedioImpl implements PostRemedio {
@@ -26,22 +28,38 @@ public class PostRemedioImpl implements PostRemedio {
                 return Set.of();
             }
 
-            remedio.stream()
+            // Separando objetos em branco
+            Set<Remedio> remedios = remedio
+                    .stream()
+                    .filter(doencaName -> !Objects.equals(doencaName.getNome(), ""))
+                    .collect(Collectors.toSet());
+
+
+            remedios.forEach(it -> {
+                // Evitando dados null no banco
+                if (it.getControlado() == null) {
+                    it.setControlado(false);
+                }
+
+                // Alterando formatação de nome
+                it.setNome(StrFormat.toTitledCase(it.getNome()));
+            });
+
+            // Atribuindo paciente ao hash
+            remedios.stream()
                     .distinct()
                     .iterator()
                     .forEachRemaining(
-                            alergias -> alergias.setPaciente(
+                            it -> it.setPaciente(
                                     pacienteRepository.findById(id).get()
                             )
                     );
 
-            remedio.forEach(
-                    alergiaName -> alergiaName.setNome(StrFormat.toTitledCase(alergiaName.getNome()))
-            );
+            remedioRepository.saveAll(remedios);
 
-            remedioRepository.saveAll(remedio);
+            return remedios;
         }
 
-        return remedio;
+        return Set.of();
     }
 }

@@ -4,18 +4,20 @@ public class StrFormat {
 
     public static String toTitledCase(String str){
         // CLASSE PARA ALTERAR A PRIMEIRA LETRA DA PALAVRA PARA MAISCULO
-        if (str != null || str != "") {
+        try {
             String[] words = str.split("\\s");
             StringBuilder sb = new StringBuilder();
-
-            for(int i = 0; i < words.length; i++){
-                sb.append(words[i].substring(0, 1).toUpperCase() + words[i].substring(1).toLowerCase());
+            for (String word : words) {
+                sb.append(word.substring(0, 1).toUpperCase())
+                        .append(word.substring(1).toLowerCase());
                 sb.append(" ");
             }
 
             return sb.toString();
+        } catch (Exception e) {
+            System.out.println("ERRO AO REESCREVER MENSAGEM: " + e.getMessage());
+            return "";
         }
 
-        return "";
     }
 }

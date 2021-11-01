@@ -55,7 +55,11 @@ public class InfoController {
     @PostMapping("/alergia/{idUser}")
     public ResponseEntity<Set<Alergia>> createAlergia(@PathVariable Integer idUser,
                                                       @RequestBody Set<Alergia> alergia) {
-        return ResponseEntity.status(201).body(postAlergia.execute(alergia, idUser));
+        Set<Alergia> result = postAlergia.execute(alergia, idUser);
+        if(result.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(201).body(result);
     }
 
     @GetMapping("/alergia/{idUser}")
@@ -78,7 +82,12 @@ public class InfoController {
     @PostMapping("/remedio/{idUser}")
     public ResponseEntity<Set<Remedio>> postRemedio(@PathVariable Integer idUser,
                                                     @RequestBody Set<Remedio> remedio) {
-        return ResponseEntity.status(201).body(postRemedio.execute(remedio,idUser));
+        Set<Remedio> result = postRemedio.execute(remedio,idUser);
+        if(result.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(201).body(result);
     }
 
     @GetMapping("/{idUser}/remedio")
@@ -101,7 +110,12 @@ public class InfoController {
     @PostMapping("/deficiencia/{idUser}")
     public ResponseEntity<Set<Deficiencia>> postDeficiencia(@PathVariable Integer idUser,
                                                             @RequestBody Set<Deficiencia> deficiencia) {
-        return ResponseEntity.status(201).body(postDeficiencia.execute(deficiencia,idUser));
+        Set<Deficiencia> result = postDeficiencia.execute(deficiencia,idUser);
+        if(result.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(201).body(result);
     }
 
     @GetMapping("/{idUser}/deficiencia")
@@ -125,7 +139,12 @@ public class InfoController {
     @PostMapping("/doenca/{idUser}")
     public ResponseEntity<Set<Doenca>> postDoenca(@PathVariable Integer idUser,
                                                   @RequestBody Set<Doenca> doenca) {
-        return ResponseEntity.status(201).body(postDoenca.execute(doenca, idUser));
+        Set<Doenca> result = postDoenca.execute(doenca, idUser);
+        if(result.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(201).body(result);
     }
 
     @GetMapping("/{idUser}/doenca")
