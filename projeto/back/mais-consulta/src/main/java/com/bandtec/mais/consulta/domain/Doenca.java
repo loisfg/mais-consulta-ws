@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Doenca {
     private Boolean hereditaria = false;
     private Boolean cronico = false;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     private Paciente paciente;

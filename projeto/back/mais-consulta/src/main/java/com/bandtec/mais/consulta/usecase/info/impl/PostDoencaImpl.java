@@ -8,7 +8,9 @@ import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PostDoencaImpl implements PostDoenca {
@@ -22,25 +24,42 @@ public class PostDoencaImpl implements PostDoenca {
     @Override
     public Set<Doenca> execute(Set<Doenca> doenca, Integer id) {
         if (pacienteRepository.existsById(id)) {
+            // Validando hash vazio
             if (doenca.isEmpty()) {
                 return Set.of();
             }
 
-            doenca.stream()
+            // Separando objetos em branco
+            Set<Doenca> doencas = doenca
+                    .stream()
+                    .filter(doencaName -> !Objects.equals(doencaName.getNome(), ""))
+                    .collect(Collectors.toSet());
+
+            doencas.forEach(it -> {
+                // Evitando dados null no banco
+                if (it.getCronico() == null) it.setCronico(false);
+                if (it.getHereditaria() == null) it.setHereditaria(false);
+
+                // Alterando formatação de nome
+                it.setNome(StrFormat.toTitledCase(it.getNome()));
+            });
+
+
+            // Atribuindo paciente ao hash
+            doencas.stream()
                     .distinct()
                     .iterator()
                     .forEachRemaining(
-                            alergias -> alergias.setPaciente(
+                            pacienteDoencas -> pacienteDoencas.setPaciente(
                                     pacienteRepository.findById(id).get()
                             )
                     );
 
-            doenca.forEach(
-                    doencaName -> doencaName.setNome(StrFormat.toTitledCase(doencaName.getNome()))
-            );
+            doencaRepository.saveAll(doencas);
 
-            doencaRepository.saveAll(doenca);
+            return doencas;
         }
-        return doenca;
+
+        return Set.of();
     }
 }

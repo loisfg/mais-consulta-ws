@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
 import com.bandtec.mais.consulta.domain.Alergia;
+import com.bandtec.mais.consulta.domain.Doenca;
 import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
@@ -9,7 +10,9 @@ import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PostAlergiaImpl implements PostAlergia {
@@ -30,26 +33,39 @@ public class PostAlergiaImpl implements PostAlergia {
                     alergias -> alergias.equals(alergia)
             );
 
+            // Validando hash vazio
             if (alergia.isEmpty()) {
                 return Set.of();
             }
 
-            alergia.stream()
+            // Separando objetos em branco
+            Set<Alergia> alergias = alergia
+                    .stream()
+                    .filter(alergiaName -> !Objects.equals(alergiaName.getNome(), ""))
+                    .collect(Collectors.toSet());
+
+            // Atribuindo paciente ao hash
+            alergias.stream()
                     .distinct()
                     .iterator()
                     .forEachRemaining(
-                            alergias -> alergias.setPaciente(
+                            pacienteAlergias -> pacienteAlergias.setPaciente(
                                     pacienteRepository.findById(id).get()
                             )
                     );
 
-            alergia.forEach(
-                    alergiaName -> alergiaName.setNome(StrFormat.toTitledCase(alergiaName.getNome()))
+            // Alterando formatação de nome
+            alergias.forEach(
+                    alergiaName -> alergiaName.setNome(
+                            StrFormat.toTitledCase(alergiaName.getNome())
+                    )
             );
 
-            alergiaRepository.saveAll(alergia);
+            alergiaRepository.saveAll(alergias);
+
+            return alergias;
         }
 
-        return alergia;
+        return Set.of();
     }
 }
