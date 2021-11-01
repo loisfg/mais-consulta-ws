@@ -32,7 +32,7 @@ public class PostDoencaImpl implements PostDoenca {
             // Separando objetos em branco
             Set<Doenca> doencas = doenca
                     .stream()
-                    .filter(doencaName -> !Objects.equals(doencaName.getNome(), ""))
+                    .filter(it -> !Objects.equals(it.getNome(), ""))
                     .collect(Collectors.toSet());
 
             doencas.forEach(it -> {
@@ -51,7 +51,7 @@ public class PostDoencaImpl implements PostDoenca {
                     .iterator()
                     .forEachRemaining(
                             pacienteDoencas -> pacienteDoencas.setPaciente(
-                                    pacienteRepository.findById(id).get()
+                                    pacienteRepository.getById(id)
                             )
                     );
 

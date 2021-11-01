@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CalendarService {
     private final static Logger log = LoggerFactory.getLogger(CalendarService.class);
@@ -119,4 +116,10 @@ public class CalendarService {
         dtDate.setTime(formato.parse(date.toString()));
         return dtDate;
     }
+
+    private Date getIntToDate(Integer date) throws ParseException {
+        SimpleDateFormat formatYYYYMMDD = new SimpleDateFormat("yyyyMMdd");
+        return formatYYYYMMDD.parse(date.toString());
+    }
+
 }

@@ -42,7 +42,7 @@ public class PostDeficienciaImpl implements PostDeficiencia {
                     .iterator()
                     .forEachRemaining(
                             it -> it.setPaciente(
-                                    pacienteRepository.findById(id).get()
+                                    pacienteRepository.getById(id)
                             )
                     );
 

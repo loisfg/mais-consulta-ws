@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,7 +34,7 @@ public class AgendamentoConsultaRequestDTO {
         consulta.setEspecialidade(agendamentoConsultaRequestDTO.getEspecialidade());
         consulta.setAgendamento(agendamento);
 
-        consulta.getAgendamento().setDataHr(LocalDate.now());
+        consulta.getAgendamento().setDhInsert(LocalDateTime.now());
         consulta.getAgendamento().setDtAtendimento(agendamentoConsultaRequestDTO.getDtAtendimento());
         consulta.getAgendamento().setEspecialidade(agendamentoConsultaRequestDTO.getEspecialidade());
 

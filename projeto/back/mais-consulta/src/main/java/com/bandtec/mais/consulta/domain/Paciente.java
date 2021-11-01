@@ -67,21 +67,24 @@ public class Paciente {
     @Transient
     @JsonIgnore
     @OneToMany(
-            mappedBy = "paciente"
+            mappedBy = "paciente",
+            cascade = CascadeType.ALL
     )
     private Set<Doenca> doencas = new HashSet<>();
 
     @Transient
     @JsonIgnore
     @OneToMany(
-            mappedBy = "paciente"
+            mappedBy = "paciente",
+            cascade = CascadeType.ALL
     )
     private Set<Remedio> remedios = new HashSet<>();
 
     @Transient
     @JsonIgnore
     @OneToMany(
-            mappedBy = "paciente"
+            mappedBy = "paciente",
+            cascade = CascadeType.ALL
     )
     private Set<Deficiencia> deficiencias = new HashSet<>();
 }

@@ -9,14 +9,16 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Slf4j
 public class AgendamentoExameRequestDTO {
-    LocalDate dtHr = LocalDate.now();
     LocalDate dtAtendimento;
+    LocalTime hrAtendimento;
     Especialidade especialidade;
     String descricao;
     Integer idPaciente;
@@ -24,17 +26,16 @@ public class AgendamentoExameRequestDTO {
     Integer idUbs;
 
     public static Exame convertFromController(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
-        log.info("Exame DTO {}", agendamentoExameRequestDTO);
+        Agendamento agendamento = Agendamento
+                .builder()
+                .hrAtendimento(agendamentoExameRequestDTO.hrAtendimento)
+                .dhInsert(LocalDateTime.now())
+                .dtAtendimento(agendamentoExameRequestDTO.dtAtendimento)
+                .build();
 
-        Exame exame = new Exame();
-        Agendamento agendamento = new Agendamento();
-
-        exame.setDescricao(agendamentoExameRequestDTO.getDescricao());
-        exame.setAgendamento(agendamento);
-
-        exame.getAgendamento().setDtAtendimento(agendamentoExameRequestDTO.getDtAtendimento());
-        exame.getAgendamento().setEspecialidade(agendamentoExameRequestDTO.getEspecialidade());
-
-        return exame;
+        return Exame.builder()
+                .descricao(agendamentoExameRequestDTO.descricao)
+                .agendamento(agendamento)
+                .build();
     }
 }

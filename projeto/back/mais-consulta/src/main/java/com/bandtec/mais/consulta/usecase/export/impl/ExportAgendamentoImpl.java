@@ -1,6 +1,8 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
-import com.bandtec.mais.consulta.domain.*;
+import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Medico;
+import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.usecase.export.ExportAgendamento;

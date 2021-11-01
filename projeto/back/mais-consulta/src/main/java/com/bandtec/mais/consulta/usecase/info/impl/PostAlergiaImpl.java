@@ -1,8 +1,6 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
 import com.bandtec.mais.consulta.domain.Alergia;
-import com.bandtec.mais.consulta.domain.Doenca;
-import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.usecase.info.PostAlergia;
@@ -26,12 +24,7 @@ public class PostAlergiaImpl implements PostAlergia {
     @Override
     public Set<Alergia> execute(Set<Alergia> alergia, Integer id) {
         if (pacienteRepository.existsById(id)) {
-            Paciente paciente = pacienteRepository.getById(id);
-
             //TODO fazer parte de filtragem para não repetir alergias na board
-            paciente.getAlergias().stream().filter(
-                    alergias -> alergias.equals(alergia)
-            );
 
             // Validando hash vazio
             if (alergia.isEmpty()) {
@@ -41,7 +34,7 @@ public class PostAlergiaImpl implements PostAlergia {
             // Separando objetos em branco
             Set<Alergia> alergias = alergia
                     .stream()
-                    .filter(alergiaName -> !Objects.equals(alergiaName.getNome(), ""))
+                    .filter(it -> !Objects.equals(it.getNome(), ""))
                     .collect(Collectors.toSet());
 
             // Atribuindo paciente ao hash
@@ -49,15 +42,15 @@ public class PostAlergiaImpl implements PostAlergia {
                     .distinct()
                     .iterator()
                     .forEachRemaining(
-                            pacienteAlergias -> pacienteAlergias.setPaciente(
-                                    pacienteRepository.findById(id).get()
+                            it -> it.setPaciente(
+                                    pacienteRepository.getById(id)
                             )
                     );
 
             // Alterando formatação de nome
             alergias.forEach(
-                    alergiaName -> alergiaName.setNome(
-                            StrFormat.toTitledCase(alergiaName.getNome())
+                    it -> it.setNome(
+                            StrFormat.toTitledCase(it.getNome())
                     )
             );
 

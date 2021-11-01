@@ -31,7 +31,7 @@ public class PostRemedioImpl implements PostRemedio {
             // Separando objetos em branco
             Set<Remedio> remedios = remedio
                     .stream()
-                    .filter(doencaName -> !Objects.equals(doencaName.getNome(), ""))
+                    .filter(it -> !Objects.equals(it.getNome(), ""))
                     .collect(Collectors.toSet());
 
 
@@ -51,7 +51,7 @@ public class PostRemedioImpl implements PostRemedio {
                     .iterator()
                     .forEachRemaining(
                             it -> it.setPaciente(
-                                    pacienteRepository.findById(id).get()
+                                    pacienteRepository.getById(id)
                             )
                     );
 

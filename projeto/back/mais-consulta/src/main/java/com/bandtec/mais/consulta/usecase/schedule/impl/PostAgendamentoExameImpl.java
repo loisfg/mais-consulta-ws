@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.usecase.schedule.impl;
 
-import com.bandtec.mais.consulta.domain.*;
+import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -31,29 +33,36 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     @Override
     public Optional<Exame> execute(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
         Exame exame = AgendamentoExameRequestDTO.convertFromController(agendamentoExameRequestDTO);
-        log.info("CONVERTING DTO to EXAME {} {}", agendamentoExameRequestDTO, exame);
 
-        if (pacienteRepository.existsById(agendamentoExameRequestDTO.getIdPaciente()) &&
-                medicoRepository.existsById(agendamentoExameRequestDTO.getIdMedico())) {
+        // Concatenando data do agendamento
+        LocalDateTime dataAgendada = exame.getAgendamento().getDtAtendimento()
+                .atTime(exame.getAgendamento().getHrAtendimento());
 
-            Paciente paciente = pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get();
-            Medico medico = medicoRepository.findById(agendamentoExameRequestDTO.getIdMedico()).get();
-            Ubs ubs = ubsRepository.findById(agendamentoExameRequestDTO.getIdUbs()).get();
+        // Se a data do agendamento for menor que o dia atual não marcar agendamento
+        if (exame.getAgendamento().getDhInsert().isBefore(dataAgendada)) {
 
-            Agendamento agendamento = exame.getAgendamento();
-            agendamento.setPaciente(paciente);
-            agendamento.setMedico(medico);
-            agendamento.setUbs(ubs);
+            // Validando se há paciente/medico disponiveis
+            if (pacienteRepository.existsById(agendamentoExameRequestDTO.getIdPaciente()) &&
+                    medicoRepository.existsById(agendamentoExameRequestDTO.getIdMedico())
+            ) {
 
-            exameRepository.save(exame);
-            agendamentoRepository.save(agendamento);
+                Agendamento agendamento = exame.getAgendamento();
+                agendamento.setPaciente(
+                        pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get()
+                );
+                agendamento.setMedico(
+                        medicoRepository.findById(agendamentoExameRequestDTO.getIdMedico()).get()
+                );
+                agendamento.setUbs(
+                        ubsRepository.findById(agendamentoExameRequestDTO.getIdUbs()).get()
+                );
 
-            log.info("NEW EXAME CREATED {}", exame);
-            return Optional.of(exame);
+                exameRepository.save(exame);
+
+                return Optional.of(exame);
+            }
         }
 
-
-        log.error("ERROR FIND MEDICO or PACIENTE {}", log.isErrorEnabled());
         return Optional.empty();
     }
 }
