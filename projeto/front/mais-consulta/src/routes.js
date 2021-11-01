@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { isAuth } from './services/auth';
 import { Calendar, Wrapper } from "../src/components"
-import { HomePatient, Initial, Profile, Scheduling, Schedules, UnitMaps } from "../src/pages"
+import { HomePatient, Initial, Profile, Scheduling, Schedules, UnitMaps } from "./pages/Patient"
+import { Home } from './pages/Doctor'
 
 const PrivateRoute = ({component: Component, ...rest}) => (
   <Route 
@@ -33,7 +34,9 @@ const Routes =  () => {
             <PrivateRoute path="/perfil" component={Profile} />
             <PrivateRoute path="/agendamento" component={Schedules} />
             <PrivateRoute path="/mapa-de-unidades" component={UnitMaps} />
-            
+
+            {/*  TODO: Privatizar rotas do medico */}
+            <Route path='/home-doctor' component={Home} />
             <Route path="*" render = { props => 
                 isAuth() ? (
                   <Redirect to={ {pathname: '/home', state: { from: props.location} }} />

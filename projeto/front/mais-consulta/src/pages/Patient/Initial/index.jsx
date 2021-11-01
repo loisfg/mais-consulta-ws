@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RightSide, LeftSide, Page, DivLogo, CustomTabs, CustomTab, CustomBox, CustomTypography } from "./styles"
-import { FormLogin, SignUp } from '../../components'
-import Logo from '../../assets/logo.svg';
+import { FormLogin, SignUp } from '../../../components'
+import Logo from '../../../assets/logo.svg';
 import PropTypes from 'prop-types';
 
 export const Initial = () => {

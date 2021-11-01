@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import photo from "../../assets/initialPhoto.jpg";
+import photo from "../../../assets/initialPhoto.jpg";
 import { ToggleButton, ToggleButtonGroup, Tabs, Tab, Box, Typography } from "@material-ui/core";
 
 export const Page = styled.section`

@@ -1,6 +1,6 @@
 import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux } from "./styles";
-import { UserProfilePic, Message, Specialty, List, Calendar, Hours, Button } from "../../components"
+import { UserProfilePic, Message, Specialty, List, Calendar, Hours, Button } from "../../../components"
 
 export const Schedules = () => {
     return (

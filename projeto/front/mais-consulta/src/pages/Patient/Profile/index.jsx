@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextSubtext, DataBox } from '../../components';
+import { TextSubtext, DataBox } from '../../../components';
 import { Container, CustomAvatar, PatientGroup, H2  } from './styles'
 
 export const Profile = ({userName, }) => {

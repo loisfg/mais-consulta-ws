@@ -1,6 +1,6 @@
 import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight } from "./styles";
-import { UserProfilePic, Message, List, Maps } from "../../components"
+import { UserProfilePic, Message, List, Maps } from "../../../components"
 
 export const UnitMaps = () => {
     return (
