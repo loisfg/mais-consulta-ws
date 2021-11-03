@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
 import com.bandtec.mais.consulta.domain.Alergia;
+import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.usecase.info.PostAlergia;
@@ -32,14 +33,9 @@ public class PostAlergiaImpl implements PostAlergia {
             }
 
             // Separando objetos em branco
-            Set<Alergia> alergias = alergia
-                    .stream()
-                    .filter(it -> !Objects.equals(it.getNome(), ""))
-                    .collect(Collectors.toSet());
-
-            // Atribuindo paciente ao hash
-            alergias.stream()
+            alergia.stream()
                     .distinct()
+                    .filter(it -> it.getNome() != "")
                     .iterator()
                     .forEachRemaining(
                             it -> it.setPaciente(
@@ -47,16 +43,10 @@ public class PostAlergiaImpl implements PostAlergia {
                             )
                     );
 
-            // Alterando formatação de nome
-            alergias.forEach(
-                    it -> it.setNome(
-                            StrFormat.toTitledCase(it.getNome())
-                    )
-            );
 
-            alergiaRepository.saveAll(alergias);
+            alergiaRepository.saveAll(alergia);
 
-            return alergias;
+            return alergia;
         }
 
         return Set.of();

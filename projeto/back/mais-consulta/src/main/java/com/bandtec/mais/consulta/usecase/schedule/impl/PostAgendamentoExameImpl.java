@@ -16,9 +16,6 @@ import java.util.Optional;
 @Slf4j
 public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     @Autowired
-    private AgendamentoRepository agendamentoRepository;
-
-    @Autowired
     private PacienteRepository pacienteRepository;
 
     @Autowired
@@ -45,7 +42,6 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
             if (pacienteRepository.existsById(agendamentoExameRequestDTO.getIdPaciente()) &&
                     medicoRepository.existsById(agendamentoExameRequestDTO.getIdMedico())
             ) {
-
                 Agendamento agendamento = exame.getAgendamento();
                 agendamento.setPaciente(
                         pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get()

@@ -1,13 +1,16 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
+import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Set;
 
 public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     boolean existsByNome(String nome);
 
     List<Medico> findByNome(String nome);
+
+    Set<Medico> findAllByEspecialidade(Especialidade especialidade);
 }

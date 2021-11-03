@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,8 +20,12 @@ public class Medico {
     @Column(name = "id_medico")
     private Integer idMedico;
 
-    @Column(name = "nome")
     private String nome;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "ubs_id")
+    private Ubs ubs;
 
     @JsonIgnore
     @PrimaryKeyJoinColumn(

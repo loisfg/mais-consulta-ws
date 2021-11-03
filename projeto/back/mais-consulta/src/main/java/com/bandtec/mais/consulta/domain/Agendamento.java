@@ -36,9 +36,11 @@ public class Agendamento {
     @Column(name= "hr_atendimento", nullable = false)
     private LocalTime hrAtendimento;
 
-    @PrimaryKeyJoinColumn(name = "id_especialidade", referencedColumnName = "id_agendamento")
-    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "especialidade_id")
+    @OneToOne(cascade = CascadeType.PERSIST)
     protected Especialidade especialidade;
+
+    //TODO REPETIR ESPECIALIDADE PARA LIGAR AS FK's ABAIXO!!
 
     @PrimaryKeyJoinColumn(name = "id_medico", referencedColumnName = "id_agendamento")
     @OneToOne(cascade = CascadeType.ALL)

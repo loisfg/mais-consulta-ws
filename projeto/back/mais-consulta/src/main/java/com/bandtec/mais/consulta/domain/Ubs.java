@@ -17,14 +17,14 @@ public class Ubs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ubs")
     private Integer idUbs;
 
-    @Column(name = "nome")
     private String nome;
 
     @PrimaryKeyJoinColumn(
-            name = "idEndereco",
-            referencedColumnName = "idUbs"
+            name = "id_endereco",
+            referencedColumnName = "id_ubs"
     )
     @OneToOne(
             cascade = CascadeType.PERSIST

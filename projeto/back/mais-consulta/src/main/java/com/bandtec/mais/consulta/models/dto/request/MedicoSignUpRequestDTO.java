@@ -16,6 +16,7 @@ public class MedicoSignUpRequestDTO {
     private String email;
     protected String password;
     private Medico medico;
+    private Integer idUbs;
 
     public static Usuario convertFromController(MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
         var usuario = Usuario
