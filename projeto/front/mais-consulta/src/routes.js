@@ -16,26 +16,28 @@ import {
 } from "./pages/Patient";
 import { Home } from "./pages/Doctor";
 
-const PrivateRoute = ({ component: Component, username, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      isAuth() ? (
-        <Wrapper>
-          <Component username={username} {...props} />
-        </Wrapper>
-      ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-      )
-    }
-  />
-);
-const Routes = () => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   const usuarioFormatoDeString = localStorage.getItem("usuario");
   const usuario = JSON.parse(usuarioFormatoDeString);
 
   const username = usuario.paciente.nome;
 
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuth() ? (
+          <Wrapper>
+            <Component username={username} {...props} />
+          </Wrapper>
+        ) : (
+          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        )
+      }
+    />
+  );
+};
+const Routes = () => {
   return (
     <Router>
       <Switch>
@@ -52,31 +54,11 @@ const Routes = () => {
             )
           }
         />
-        <PrivateRoute
-          path="/home"
-          component={HomePatient}
-          username={username}
-        />
-        <PrivateRoute
-          path="/calendar"
-          component={Calendar}
-          username={username}
-        />
-        <PrivateRoute 
-          path="/perfil" 
-          component={Profile} 
-          username={username} 
-        />
-        <PrivateRoute
-          path="/agendamento"
-          component={Schedules}
-          username={username}
-        />
-        <PrivateRoute
-          path="/mapa-de-unidades"
-          component={UnitMaps}
-          username={username}
-        />
+        <PrivateRoute path="/home" component={HomePatient} />
+        <PrivateRoute path="/calendar" component={Calendar} />
+        <PrivateRoute path="/perfil" component={Profile} />
+        <PrivateRoute path="/agendamento" component={Schedules} />
+        <PrivateRoute path="/mapa-de-unidades" component={UnitMaps} />
 
         {/*  TODO: Privatizar rotas do medico */}
         <Route path="/home-doctor" component={Home} />
