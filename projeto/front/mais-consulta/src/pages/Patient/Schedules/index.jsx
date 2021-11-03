@@ -10,13 +10,13 @@ import {
   Button,
 } from "../../../components";
 
-export const Schedules = ({ username }) => {
+export const Schedules = ({ usuario }) => {
 
 //   usuario.paciente.nome
   return (
     <Page>
       <DivUsuario>
-        <UserProfilePic nome={username} subtexto=" Paciente" />
+        <UserProfilePic nome={usuario.paciente.nome} subtexto=" Paciente" />
       </DivUsuario>
       <Content>
         <BoxLeft>

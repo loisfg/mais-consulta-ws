@@ -2,11 +2,11 @@ import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight } from "./styles";
 import { UserProfilePic, Message, List, Maps } from "../../../components";
 
-export const UnitMaps = ({ username }) => {
+export const UnitMaps = ({ usuario }) => {
   return (
     <Page>
       <DivUsuario>
-        <UserProfilePic nome={username} subtexto=" Paciente" />
+        <UserProfilePic nome={usuario.paciente.nome} subtexto=" Paciente" />
       </DivUsuario>
       <Content>
         <BoxLeft>

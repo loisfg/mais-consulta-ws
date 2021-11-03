@@ -7,12 +7,12 @@ import {
   NextWeek,
 } from "../../../components";
 
-export const HomePatient = ({ username }) => {
+export const HomePatient = ({ usuario }) => {
   return (
     <Page>
       <AuxDiv>
         <DivUsuario>
-          <UserProfilePic nome={username} subtexto="Paciente" />
+          <UserProfilePic nome={usuario.paciente.nome} subtexto="Paciente" />
         </DivUsuario>
         <Content>
           <WelcomeMessage />

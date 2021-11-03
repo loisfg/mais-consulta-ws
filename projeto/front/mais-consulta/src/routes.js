@@ -20,15 +20,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const usuarioFormatoDeString = localStorage.getItem("usuario");
   const usuario = JSON.parse(usuarioFormatoDeString);
 
-  const username = usuario.paciente.nome;
-
   return (
     <Route
       {...rest}
       render={(props) =>
         isAuth() ? (
           <Wrapper>
-            <Component username={username} {...props} />
+            <Component usuario={usuario} {...props} />
           </Wrapper>
         ) : (
           <Redirect to={{ pathname: "/", state: { from: props.location } }} />
