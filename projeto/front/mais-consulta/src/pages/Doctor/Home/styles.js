@@ -4,6 +4,7 @@ export const Container = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
+  font-family: 'Rawline';
   .container_profile_pic{
       display: flex;
       align-items: flex-end;
@@ -21,7 +22,6 @@ export const Container = styled.div`
       padding: 10rem 0rem 0 10rem;
       display: flex;
       flex-direction: column;
-      font-family: 'Rawline';
       h1{
         color: var(--grey);
         font-size: 3rem;
@@ -34,16 +34,17 @@ export const Container = styled.div`
       }
     }
     .hours_line{
-      height: 70%;
-      width: 30%;
+      height: 65%;
+      width: 65vw;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      justify-content: flex-start;
       margin: 3rem 0 0 0;
       .line{
-        height: 71vh;
+        height: 65vh;
         width: 0.2rem;
         display: flex;
-        align-items: center;
+        /* align-items: center; */
         border-radius: 1rem;
         background-color: #E9E5E5;
       }
@@ -53,11 +54,18 @@ export const Container = styled.div`
         flex-direction: column;
         justify-content: space-between;
         padding: 0 2rem 0 5rem;
-        label{
+        > label{
           color: var(--medium-grey);
           font-weight: 600;
-          font-family: 'Rawline';
         }
+      }
+      .patient-group{
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 0 1rem 0;
+        font-size: 1.7rem;
+        padding: 0 0 0 2rem;
+        font-weight: 600;
       }
     }
   }

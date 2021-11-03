@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles';
-import { UserProfilePic, MenuDoctor } from '../../../components'
+import { UserProfilePic, MenuDoctor, Patient } from '../../../components'
 import { Container } from './styles'
+import { PatientData } from './PatientData'
 
 export const Home = () => (
     <Container>
@@ -11,7 +12,6 @@ export const Home = () => (
                 <h1>Boa noite Dr House!</h1>
                 <h3>01 Nov 01:31</h3>
             </div>
-            <label>Próximo paciente</label>
             <div className='hours_line'>
                 <div className='hours'>
                     <label>09:30h</label>
@@ -22,6 +22,18 @@ export const Home = () => (
                     <label>14:30h</label>
                 </div>
                 <div className='line'></div>
+                <div className='patient-group'>
+                    <label>Próximo paciente</label>
+                    <Patient isNext={true} name={PatientData[0].name} age={PatientData[0].age}/>
+                    <label>Pacientes do dia</label>
+                    {
+                        PatientData.map((patient, index) =>{
+                            if(index > 0){
+                                return <Patient isNext={false} name={patient.name} age={patient.age}></Patient>
+                            }
+                        })
+                    }
+                </div>
             </div>
         </div>
         <div className='container_profile_pic'>
