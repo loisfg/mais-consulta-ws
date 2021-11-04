@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import { isAuth } from './services/auth';
 import { Calendar, Wrapper } from "../src/components"
 import { HomePatient, Initial, Profile, Scheduling, Schedules, UnitMaps } from "./pages/Patient"
-import { Home } from './pages/Doctor'
+import { Home, Appointment } from './pages/Doctor'
 
 const PrivateRoute = ({component: Component, ...rest}) => (
   <Route 
@@ -37,6 +37,7 @@ const Routes =  () => {
 
             {/*  TODO: Privatizar rotas do medico */}
             <Route path='/home-doctor' component={Home} />
+            <Route path='/appointment' component={Appointment} />
             <Route path="*" render = { props => 
                 isAuth() ? (
                   <Redirect to={ {pathname: '/home', state: { from: props.location} }} />

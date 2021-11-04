@@ -13,6 +13,7 @@ export const Container = styled.div`
   border-radius: 5px;
   font-family: 'Rawline';
   font-weight: 500;
+  cursor: pointer;
   color: ${({isNext}) => isNext? 'var(--white-standard)' : 'var(--light-blue)'};
   .name_age{
       display: flex;
