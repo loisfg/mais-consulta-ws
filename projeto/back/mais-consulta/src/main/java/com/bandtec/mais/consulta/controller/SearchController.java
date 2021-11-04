@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Set;
 
-
 @CrossOrigin("*")
 @RestController
 @RequestMapping("search")
@@ -34,7 +33,7 @@ public class SearchController {
         );
     }
 
-    @GetMapping
+    @GetMapping("/ubs")
     public ResponseEntity<List<Ubs>> getUbs() {
         return searchUbs.execute().isEmpty() ? ResponseEntity.status(204).build() : ResponseEntity.status(200).body(searchUbs.execute());
     }
