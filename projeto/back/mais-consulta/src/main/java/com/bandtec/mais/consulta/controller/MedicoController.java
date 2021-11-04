@@ -2,13 +2,18 @@ package com.bandtec.mais.consulta.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
+import com.bandtec.mais.consulta.models.dto.response.MedicoSignInResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.MedicoDelete;
+import com.bandtec.mais.consulta.usecase.auth.MedicoSignIn;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -16,13 +21,30 @@ import java.util.Optional;
 @RequestMapping("medico")
 public class MedicoController {
 
-    private final MedicoSignUp medicoSignup;
-    private final MedicoDelete medicoDelete;
+    private final List<Usuario> usuariosLogados;
 
     @Autowired
-    public MedicoController(MedicoSignUp medicoSignup, MedicoDelete medicoDelete) {
-        this.medicoSignup = medicoSignup;
-        this.medicoDelete = medicoDelete;
+    public MedicoController() {
+        usuariosLogados = new ArrayList<>();
+    }
+
+    @Autowired
+    private MedicoSignUp medicoSignup;
+
+    @Autowired
+    private MedicoDelete medicoDelete;
+
+    @Autowired
+    private MedicoSignIn medicoSignIn;
+
+    @PostMapping("/signin")
+    public ResponseEntity<MedicoSignInResponseDTO> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
+
+        Optional<MedicoSignInResponseDTO> oUsuario = medicoSignIn.execute(usuarioSignInRequestDTO, usuariosLogados);
+
+        return oUsuario
+                .map(ResponseEntity::ok)
+                .orElseGet(ResponseEntity.status(HttpStatus.UNAUTHORIZED)::build);
     }
 
     @PostMapping("/signup")

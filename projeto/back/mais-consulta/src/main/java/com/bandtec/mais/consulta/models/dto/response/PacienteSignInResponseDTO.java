@@ -4,7 +4,7 @@ import com.bandtec.mais.consulta.domain.Paciente;
 import lombok.Data;
 
 @Data
-public class UsuarioSignInResponseDTO {
+public class PacienteSignInResponseDTO {
 
     private String cpf;
     private String email;

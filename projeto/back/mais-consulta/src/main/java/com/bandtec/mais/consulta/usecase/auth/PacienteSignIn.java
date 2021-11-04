@@ -7,6 +7,6 @@ import com.bandtec.mais.consulta.models.dto.response.PacienteSignInResponseDTO;
 import java.util.List;
 import java.util.Optional;
 
-public interface UsuarioSignIn {
+public interface PacienteSignIn {
     Optional<PacienteSignInResponseDTO> execute(UsuarioSignInRequestDTO usuarioSignInRequestDTO, List<Usuario> usuariosLogados);
 }
