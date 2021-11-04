@@ -32,15 +32,21 @@ export const FormLogin = () => {
           let response = {};
 
           if (isMedico === false) {
-            response = await api.post("/auth/signin", params);
-          } else if (isMedico === true) {
-            response = await api.post("//signin", params);
-          }
+            response = await api.post("/paciente/signin", params);
 
-          if (response.status === 200) {
-            const usuarioString = JSON.stringify(response.data);
-            login(usuarioString);
-            history.push("/home");
+            if (response.status === 200) {
+              const usuarioString = JSON.stringify(response.data);
+              login(usuarioString);
+              history.push("/home");
+            }
+          } else if (isMedico === true) {
+            response = await api.post("/medico/signin", params);
+
+            if (response.status === 200) {
+              const usuarioString = JSON.stringify(response.data);
+              login(usuarioString);
+              history.push("/home-doctor");
+            }
           }
         } catch (erro) {
           console.log(erro);
