@@ -56,7 +56,7 @@ export const H3 = styled.div`
 export const H2 = styled.div`
     color: #515151;
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 700;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 `

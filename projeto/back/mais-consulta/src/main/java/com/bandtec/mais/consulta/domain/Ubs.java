@@ -22,12 +22,11 @@ public class Ubs {
 
     private String nome;
 
-    @PrimaryKeyJoinColumn(
-            name = "id_endereco",
-            referencedColumnName = "id_ubs"
-    )
-    @OneToOne(
-            cascade = CascadeType.PERSIST
-    )
+//    @JoinColumn
+//    @ManyToMany()
+//    Medico medico;
+
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 }

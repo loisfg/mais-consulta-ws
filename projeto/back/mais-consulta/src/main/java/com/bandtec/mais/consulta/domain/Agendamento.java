@@ -36,21 +36,19 @@ public class Agendamento {
     @Column(name= "hr_atendimento", nullable = false)
     private LocalTime hrAtendimento;
 
-    @JoinColumn(name = "especialidade_id")
+    @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Especialidade especialidade;
 
-    //TODO REPETIR ESPECIALIDADE PARA LIGAR AS FK's ABAIXO!!
-
-    @PrimaryKeyJoinColumn(name = "id_medico", referencedColumnName = "id_agendamento")
+    @JoinColumn(name = "medico_id", referencedColumnName = "id_medico", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Medico medico;
 
-    @PrimaryKeyJoinColumn(name = "id_paciente", referencedColumnName = "id_agendamento")
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Paciente paciente;
 
-    @PrimaryKeyJoinColumn(name = "id_ubs", referencedColumnName =  "id_agendamento")
+    @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Ubs ubs;
 }

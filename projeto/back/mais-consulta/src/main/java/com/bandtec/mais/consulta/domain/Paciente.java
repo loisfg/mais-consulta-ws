@@ -37,54 +37,32 @@ public class Paciente {
     @Column(name = "numero_carteira_sus")
     private String numeroCarteiraSus;
 
-    @PrimaryKeyJoinColumn(
-            name = "id_endereco",
-            referencedColumnName = "id_paciente"
-    )
-    @OneToOne(
-            cascade = CascadeType.ALL
-    )
+    @OneToOne
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
     @JsonIgnore
-    @PrimaryKeyJoinColumn(
-            name = "id_usuario",
-            referencedColumnName = "id_paciente"
-    )
-    @OneToOne(
-            cascade = CascadeType.ALL
-    )
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
 
     @Transient
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "paciente",
-            cascade = CascadeType.ALL
-    )
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private Set<Alergia> alergias = new HashSet<>();
 
     @Transient
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "paciente",
-            cascade = CascadeType.ALL
-    )
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private Set<Doenca> doencas = new HashSet<>();
 
     @Transient
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "paciente",
-            cascade = CascadeType.ALL
-    )
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private Set<Remedio> remedios = new HashSet<>();
 
     @Transient
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "paciente",
-            cascade = CascadeType.ALL
-    )
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private Set<Deficiencia> deficiencias = new HashSet<>();
 }

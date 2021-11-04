@@ -26,18 +26,17 @@ public class AgendamentoExameRequestDTO {
     Integer idUbs;
 
     public static Exame convertFromController(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
-        Especialidade especialidade = agendamentoExameRequestDTO.especialidade;
-
         Agendamento agendamento = Agendamento
                 .builder()
                 .hrAtendimento(agendamentoExameRequestDTO.hrAtendimento)
                 .dhInsert(LocalDateTime.now())
                 .dtAtendimento(agendamentoExameRequestDTO.dtAtendimento)
-                .especialidade(especialidade)
+                .especialidade(agendamentoExameRequestDTO.especialidade)
                 .build();
 
 
-        return Exame.builder()
+        return Exame
+                .builder()
                 .descricao(agendamentoExameRequestDTO.descricao)
                 .agendamento(agendamento)
                 .build();

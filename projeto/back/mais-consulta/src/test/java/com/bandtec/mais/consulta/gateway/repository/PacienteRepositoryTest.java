@@ -76,7 +76,7 @@ class PacienteRepositoryTest {
             .telefone(telefone)
             .sexo(sexo)
             .numeroCarteiraSus(numeroCarteiraSus)
-            .endereco(endereco)
+//            .endereco(endereco)
             .alergias(Set.of())
             .doencas(Set.of())
             .remedios(Set.of())

@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.usecase.auth.impl;
 
 import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.gateway.repository.EnderecoRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
@@ -21,6 +22,9 @@ public class PacienteSignupImpl implements PacienteSignup {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     @Override
     public Optional<Usuario> execute(PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
         Paciente paciente = pacienteSignUpRequestDTO.getPaciente();
@@ -32,6 +36,7 @@ public class PacienteSignupImpl implements PacienteSignup {
             paciente.setNome(StrFormat.toTitledCase(paciente.getNome()));
 
             paciente.setUsuario(usuario);
+            enderecoRepository.save(paciente.getEndereco());
             pacienteRepository.save(paciente);
             return Optional.of(usuarioRepository.save(usuario));
         }

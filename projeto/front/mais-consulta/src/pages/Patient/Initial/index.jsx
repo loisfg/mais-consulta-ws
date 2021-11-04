@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import { RightSide, LeftSide, Page, DivLogo, CustomTabs, CustomTab, CustomBox, CustomTypography } from "./styles"
-import { FormLogin, SignUp } from '../../../components'
-import Logo from '../../../assets/logo.svg';
-import PropTypes from 'prop-types';
+import {
+  RightSide,
+  LeftSide,
+  Page,
+  DivLogo,
+  CustomTabs,
+  CustomTab,
+  CustomBox,
+  CustomTypography,
+} from "./styles";
+import { FormLogin, SignUp } from "../../../components";
+import Logo from "../../../assets/logo.svg";
+import PropTypes from "prop-types";
 
 export const Initial = () => {
   function TabPanel(props) {
@@ -25,12 +34,12 @@ export const Initial = () => {
     );
   }
 
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(0);
 
   function a11yProps(index) {
     return {
       id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
     };
   }
 
@@ -51,10 +60,7 @@ export const Initial = () => {
           <img src={Logo} alt="Logo +Consulta" />
         </DivLogo>
 
-        <CustomTabs
-          value={value}
-          onChange={handleChange}
-        >
+        <CustomTabs value={value} onChange={handleChange}>
           <CustomTab label="Login" {...a11yProps(0)} />
           <CustomTab label="Cadastro" {...a11yProps(1)} />
         </CustomTabs>
@@ -71,4 +77,3 @@ export const Initial = () => {
     </Page>
   );
 };
-

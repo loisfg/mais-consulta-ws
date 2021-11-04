@@ -17,6 +17,7 @@ public class MedicoSignUpRequestDTO {
     protected String password;
     private Medico medico;
     private Integer idUbs;
+    private String role = "MEDICO";
 
     public static Usuario convertFromController(MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
         var usuario = Usuario
@@ -24,6 +25,7 @@ public class MedicoSignUpRequestDTO {
                 .cpf(medicoSignUpRequestDTO.getCpf())
                 .email(medicoSignUpRequestDTO.getEmail())
                 .password(medicoSignUpRequestDTO.getPassword())
+                .role(medicoSignUpRequestDTO.getRole())
                 .build();
 
         log.info("Convertendo request {} \n " +
