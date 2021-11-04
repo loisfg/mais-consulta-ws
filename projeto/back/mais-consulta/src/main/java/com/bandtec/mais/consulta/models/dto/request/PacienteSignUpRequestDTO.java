@@ -14,6 +14,7 @@ public class PacienteSignUpRequestDTO {
     private String email;
     protected String password;
     private Paciente paciente;
+    private String role = "PACIENTE";
 
     public static Usuario convertFromController(PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
         return Usuario
@@ -21,6 +22,7 @@ public class PacienteSignUpRequestDTO {
                 .cpf(pacienteSignUpRequestDTO.getCpf())
                 .email(pacienteSignUpRequestDTO.getEmail())
                 .password(pacienteSignUpRequestDTO.getPassword())
+                .role(pacienteSignUpRequestDTO.getRole())
                 .build();
     }
 }

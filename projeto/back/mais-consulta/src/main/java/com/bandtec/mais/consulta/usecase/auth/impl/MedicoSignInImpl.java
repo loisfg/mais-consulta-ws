@@ -7,6 +7,7 @@ import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.MedicoSignInResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignIn;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class MedicoSignInImpl implements MedicoSignIn {
 
     @Autowired
@@ -27,6 +29,12 @@ public class MedicoSignInImpl implements MedicoSignIn {
         if (usuarioRepository.existsByCpf(usuarioSignInRequestDTO.getCpf())) {
             Usuario usuario = usuarioRepository
                     .findByCpfAndPassword(usuarioSignInRequestDTO.getCpf(), usuarioSignInRequestDTO.getPassword()).get();
+
+            if (usuario.getRole().equals("PACIENTE")){
+                log.info("USUARIO É UM PACIENTE");
+                return Optional.empty();
+            }
+
             usuariosLogados.add(usuario);
 
             MedicoSignInResponseDTO medicoSignInResponseDTO = new MedicoSignInResponseDTO();
