@@ -16,7 +16,7 @@ import {
 } from "./pages/Patient";
 import { Home } from "./pages/Doctor";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoutePaciente = ({ component: Component, ...rest }) => {
   const usuarioFormatoDeString = localStorage.getItem("usuario");
   const usuario = JSON.parse(usuarioFormatoDeString);
 
@@ -35,6 +35,25 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
+
+const PrivateRouteMedico = ({ component: Component, ...rest }) => {
+  const usuarioFormatoDeString = localStorage.getItem("usuario");
+  const usuario = JSON.parse(usuarioFormatoDeString);
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuth() ? (
+          <Component usuario={usuario} {...props} />
+        ) : (
+          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        )
+      }
+    />
+  );
+};
+
 const Routes = () => {
   return (
     <Router>
@@ -52,14 +71,16 @@ const Routes = () => {
             )
           }
         />
-        <PrivateRoute path="/home" component={HomePatient} />
-        <PrivateRoute path="/calendar" component={Calendar} />
-        <PrivateRoute path="/perfil" component={Profile} />
-        <PrivateRoute path="/agendamento" component={Schedules} />
-        <PrivateRoute path="/mapa-de-unidades" component={UnitMaps} />
+        <PrivateRoutePaciente path="/home" component={HomePatient} />
+        <PrivateRoutePaciente path="/calendar" component={Calendar} />
+        <PrivateRoutePaciente path="/perfil" component={Profile} />
+        <PrivateRoutePaciente path="/agendamento" component={Schedules} />
+        <PrivateRoutePaciente path="/mapa-de-unidades" component={UnitMaps} />
 
         {/*  TODO: Privatizar rotas do medico */}
-        <Route path="/home-doctor" component={Home} />
+
+        <PrivateRouteMedico path="/home-doctor" component={Home} />
+
         <Route
           path="*"
           render={(props) =>
