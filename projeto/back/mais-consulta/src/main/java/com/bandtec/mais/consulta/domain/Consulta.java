@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -21,11 +22,8 @@ public class  Consulta {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @PrimaryKeyJoinColumn(name = "id_especialidade", referencedColumnName = "id_consulta")
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Especialidade especialidade;
-
-    @PrimaryKeyJoinColumn(name = "id_agendamento", referencedColumnName = "id_consulta")
+    @JsonIgnore
+    @JoinColumn(name = "agendamento_id", referencedColumnName = "id_agendamento", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Agendamento agendamento;
 }

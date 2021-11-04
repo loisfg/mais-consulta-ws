@@ -18,7 +18,7 @@ public class Exame {
 
     private String descricao;
 
-    @PrimaryKeyJoinColumn(name = "id_agendamento", referencedColumnName = "id_exame")
+    @JoinColumn(name = "agendamento_id", referencedColumnName = "id_agendamento", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Agendamento agendamento;
 }

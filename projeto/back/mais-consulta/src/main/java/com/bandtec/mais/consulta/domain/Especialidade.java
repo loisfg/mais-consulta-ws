@@ -22,17 +22,15 @@ public class Especialidade {
     @Column(name = "id_especialidade", nullable = false)
     private Integer idEspecialidade;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(nullable = false)
     private String descricao;
 
     @Transient
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "especialidade",
-            cascade = CascadeType.PERSIST
-    )
+    @OneToMany(mappedBy = "especialidade", cascade = CascadeType.PERSIST)
     private Set<Medico> medicos = new HashSet<>();
 
+    @JsonIgnore
     @OneToOne(mappedBy = "especialidade", cascade = CascadeType.ALL, orphanRemoval = true)
     private Agendamento agendamento;
 }

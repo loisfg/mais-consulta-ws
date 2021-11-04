@@ -23,26 +23,16 @@ public class Medico {
     private String nome;
 
     @JsonIgnore
+    @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
     @ManyToOne
-    @JoinColumn(name = "ubs_id")
     private Ubs ubs;
 
     @JsonIgnore
-    @PrimaryKeyJoinColumn(
-            name = "id_usuario",
-            referencedColumnName = "id_medico"
-    )
-    @OneToOne(
-            cascade = CascadeType.ALL
-    )
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
 
-    @ManyToOne(
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "especialidade_id",
-            referencedColumnName = "id_especialidade"
-    )
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)
     private Especialidade especialidade;
 }

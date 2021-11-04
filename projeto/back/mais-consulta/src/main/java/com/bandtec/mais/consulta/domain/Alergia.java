@@ -19,6 +19,6 @@ public class Alergia {
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", nullable = false)
     private Paciente paciente;
 }

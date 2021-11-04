@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,4 +28,13 @@ public class Endereco {
     private String logradouro;
     private String numero;
     private String complemento;
+
+    //TODO retirar JsonIgnore e adicionar DTO's para retorno dos métodos!
+    @JsonIgnore
+    @OneToOne(mappedBy = "endereco")
+    private Paciente paciente;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "endereco")
+    private Ubs ubs;
 }

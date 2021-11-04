@@ -41,11 +41,11 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
             Agendamento agendamento = consulta.getAgendamento();
             agendamento.setPaciente(paciente);
             agendamento.setMedico(medico);
+            agendamento.setEspecialidade(medico.getEspecialidade());
             agendamento.setUbs(ubs);
 
             consultaRepository.save(consulta);
             agendamentoRepository.save(agendamento);
-
 
             return Optional.of(consulta);
         }

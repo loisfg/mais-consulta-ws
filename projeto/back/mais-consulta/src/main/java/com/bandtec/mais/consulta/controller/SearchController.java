@@ -22,12 +22,9 @@ public class SearchController {
     // Busca por especialidade
     @GetMapping("/{especialidade}")
     public ResponseEntity<Set<Medico>> getMedicosEspecialidade(@PathVariable String especialidade) {
-        if(searchEspecialidade.execute(especialidade).isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-
-        return ResponseEntity.status(200).body(
-                (searchEspecialidade.execute(especialidade))
+        return searchEspecialidade.execute(especialidade).isEmpty() ?
+                ResponseEntity.status(204).build() : ResponseEntity.status(200).body(
+                        (searchEspecialidade.execute(especialidade))
         );
     }
 }
