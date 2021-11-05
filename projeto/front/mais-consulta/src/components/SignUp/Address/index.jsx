@@ -123,9 +123,12 @@ export const Address = ({ formData, setFormData, required }) => {
         label="Logradouro"
         required={required}
         onChange={e => setFormData({
-          ...formData, paciente: {
-            ...formData.paciente, endereco: {
-              ...formData.paciente.endereco, logradouro: e.target.value
+          ...formData,
+          paciente: {
+            ...formData.paciente,
+            endereco: {
+              ...formData.paciente.endereco,
+              logradouro: e.target.value
             }
           }
         })

@@ -10,7 +10,7 @@ export const PersonalData = ({ formData, setFormData, required }) => {
         size='big'
         required={required}
         label="Nome completo"
-        onChange={e => setFormData({ ...formData, paciente: { ...formData.paciente, nome: e.target.value, ...formData.endereco } })}
+        onChange={e => setFormData({ ...formData, paciente: { ...formData.paciente, nome: e.target.value } })}
         defaultValue={formData.paciente.nome}
       />
 
@@ -18,7 +18,7 @@ export const PersonalData = ({ formData, setFormData, required }) => {
         <Input
           size='big'
           label='Email'
-          onChange={e => setFormData({ ...formData, email: e.target.value, ...formData.paciente })}
+          onChange={e => setFormData({ ...formData, email: e.target.value })}
           defaultValue={formData.email}
         />
       </DivInput>
@@ -33,7 +33,7 @@ export const PersonalData = ({ formData, setFormData, required }) => {
           required={required}
           size='medium'
           label="Telefone"
-          onChange={e => setFormData({ ...formData, telefone: e.target.value, ...formData.paciente })}
+          onChange={e => setFormData({ ...formData, telefone: e.target.value })}
           defaultValue={formData.telefone}
           helperText="(DDD) 00000-0000"
         />
@@ -43,7 +43,7 @@ export const PersonalData = ({ formData, setFormData, required }) => {
         size='big'
         required={required}
         label="Número da carteirinha do SUS"
-        onChange={e => setFormData({ ...formData, paciente: { ...formData.paciente, numeroCarteiraSus: e.target.value, ...formData.endereco } })}
+        onChange={e => setFormData({ ...formData, paciente: { ...formData.paciente, numeroCarteiraSus: e.target.value } })}
         defaultValue={formData.paciente.numeroCarteiraSus}
       />
     </>
