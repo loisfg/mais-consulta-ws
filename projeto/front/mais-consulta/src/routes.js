@@ -80,7 +80,7 @@ const Routes = () => {
         {/*  TODO: Privatizar rotas do medico */}
 
         {/* <PrivateRouteMedico path="/home-doctor" component={Home} /> */}
-        <Router path="/home-doctor" component={Home} />
+        <Route path="/home-doctor" component={Home} />
         <Route path='/appointment' component={Appointment} />
 
         <Route

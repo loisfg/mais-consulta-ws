@@ -27,4 +27,5 @@ export * from './Maps';
 export * from './DataBox';
 export * from './InputData';
 export * from './MenuDoctor';
-export * from './Patient'
+export * from './Patient';
+export * from './Header';

@@ -27,8 +27,8 @@ return (
                     <div className='line'></div>
                     <div className='patient-group'>
                         <label>Próximo paciente</label>
-                        <Link to={location.pathname === '/appointment'}>
-                            <Patient isNext={true} name={PatientData[0].name} age={PatientData[0].age} onClick=''/>
+                        <Link to={'/appointment'}>
+                            <Patient isNext={true} name={PatientData[0].name} age={PatientData[0].age}/>
                         </Link>
                         <label>Pacientes do dia</label>
                         {
