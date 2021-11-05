@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Input } from '../../';
 import { DivInput } from './styles'
 import { SelectState } from '../../'
+import { useDebounce } from '../../../../src/hooks/Debounce'
 
 export const Address = ({ formData, setFormData, required }) => {
+
+  const [bairro, setBairro] = useState(formData.paciente.endereco.bairro);
+  const [cidade, setCidade] = useState(formData.paciente.endereco.cidade);
+  const [logradouro, setLogradouro] = useState(formData.paciente.endereco.logradouro);
+  const [estado, setEstado] = useState();
 
   const [dataResponse, setDataResponse] = useState({})
 
@@ -21,7 +27,14 @@ export const Address = ({ formData, setFormData, required }) => {
     }
   }
 
+  const debouncedBuscarCep = useDebounce(dataResponse, 500)
+
   useEffect(() => {
+
+    setBairro(dataResponse.bairro);
+    setCidade(dataResponse.localidade);
+    setLogradouro(dataResponse.logradouro);
+    setEstado(dataResponse.uf);
 
     setFormData({
       ...formData,
@@ -39,13 +52,16 @@ export const Address = ({ formData, setFormData, required }) => {
 
   }, [dataResponse])
 
+  const handleBuscarCep = useCallback(() => {
+    buscarCep(formData.paciente.endereco.cep)
+  }, [buscarCep])
+
   return (
     <>
       <Input
         size='medium'
         label="CEP"
         required={required}
-        maxlength={8}
         onChange={e => {
           setFormData({
             ...formData,
@@ -57,7 +73,7 @@ export const Address = ({ formData, setFormData, required }) => {
               }
             }
           })
-          buscarCep(formData.paciente.endereco.cep)
+          handleBuscarCep()
         }}
         defaultValue={formData.paciente.endereco.cep}
         helperText="00000-000"
@@ -77,12 +93,13 @@ export const Address = ({ formData, setFormData, required }) => {
           }
         })
         }
-        defaultValue={formData.paciente.endereco.bairro}
+        defaultValue={bairro}
+        value={bairro}
       />
       <DivInput>
         <Input
           size='medium'
-          label="Cidade"
+          label={"Cidade"}
           required={required}
           onChange={e => setFormData({
             ...formData,
@@ -95,7 +112,9 @@ export const Address = ({ formData, setFormData, required }) => {
             }
           })
           }
-          defaultValue={formData.paciente.endereco.cidade} />
+          defaultValue={cidade}
+          value={cidade}
+        />
 
         <SelectState
           formData={formData}
@@ -117,7 +136,8 @@ export const Address = ({ formData, setFormData, required }) => {
           }
         })
         }
-        defaultValue={formData.paciente.endereco.logradouro}
+        defaultValue={logradouro}
+        value={logradouro}
       />
       <DivInput>
         <Input
@@ -135,7 +155,8 @@ export const Address = ({ formData, setFormData, required }) => {
             }
           })
           }
-          defaultValue={formData.paciente.endereco.numero} />
+          defaultValue={formData.paciente.endereco.numero}
+        />
         <Input
           size='medium'
           label="Complemento"
