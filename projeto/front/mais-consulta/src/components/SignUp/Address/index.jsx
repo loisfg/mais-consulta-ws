@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Input } from '../../';
 import { DivInput } from './styles'
 import { SelectState } from '../../'
-import { useDebounce } from '../../../../src/hooks/Debounce'
 import api from "../../../services/api";
 
 export const Address = ({ formData, setFormData, required }) => {
