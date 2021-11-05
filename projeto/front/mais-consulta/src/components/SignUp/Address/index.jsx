@@ -3,6 +3,7 @@ import { Input } from '../../';
 import { DivInput } from './styles'
 import { SelectState } from '../../'
 import { useDebounce } from '../../../../src/hooks/Debounce'
+import api from "../../../services/api";
 
 export const Address = ({ formData, setFormData, required }) => {
 
@@ -13,21 +14,21 @@ export const Address = ({ formData, setFormData, required }) => {
 
   const [dataResponse, setDataResponse] = useState({})
 
-  const buscarCep = (formDataCep) => {
-    if (formData.paciente.endereco.cep.length < 8) {
-      return;
-    } else {
-      fetch(`http://viacep.com.br/ws/${formDataCep}/json/`, { mode: 'cors' })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setDataResponse(data)
-        })
-        .catch(err => console.log(err));
+  async function buscarCep() {
+    if (formData.paciente.endereco.cep !== '') {
+      try {
+        await api("viacep").get(`/ws/${formData.paciente.endereco.cep}/json/`)
+          .then(response => {
+            if (response.data.erro) {
+            } else {
+              setDataResponse(response.data)
+            }
+          })
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
-
-  const debouncedBuscarCep = useDebounce(dataResponse, 500)
 
   useEffect(() => {
 
@@ -52,10 +53,6 @@ export const Address = ({ formData, setFormData, required }) => {
 
   }, [dataResponse])
 
-  const handleBuscarCep = useCallback(() => {
-    buscarCep(formData.paciente.endereco.cep)
-  }, [buscarCep])
-
   return (
     <>
       <Input
@@ -73,14 +70,14 @@ export const Address = ({ formData, setFormData, required }) => {
               }
             }
           })
-          handleBuscarCep()
         }}
+        onBlur={_ => buscarCep()}
         defaultValue={formData.paciente.endereco.cep}
         helperText="00000-000"
       />
       <Input
         size='big'
-        label="Bairro"
+        label={"Bairro"}
         required={required}
         onChange={e => setFormData({
           ...formData,

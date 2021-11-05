@@ -8,7 +8,7 @@ export const List = ({ text }) => {
 
     useEffect(() => {
         async function searchListUbs() {
-            const resp = await api.get("/search/ubs")
+            const resp = await api("maisconsulta").get("/search/ubs")
             setListUbs(resp.data)
             console.log("log", resp.data);
         }
@@ -23,7 +23,7 @@ export const List = ({ text }) => {
                     listUbs.map((listUbs) => (
                         <ListItem>
                             <H3>{listUbs.nome}</H3>
-                            <H2>{listUbs.endereco.logradouro + listUbs.endereco.rua +", "+ listUbs.endereco.numero}</H2>
+                            <H2>{listUbs.endereco.logradouro + listUbs.endereco.rua + ", " + listUbs.endereco.numero}</H2>
                             <H1>tel: {listUbs.telefone}</H1>
                         </ListItem>
                     ))}

@@ -38,7 +38,7 @@ export const SignUp = ({ setValue }) => {
       e.preventDefault();
 
       try {
-        const response = await api.post("paciente/signup", formData);
+        const response = await api("maisconsulta").post("paciente/signup", formData);
 
         if (response.status === 201) {
           swal("Cadastro realizado com sucesso!!");

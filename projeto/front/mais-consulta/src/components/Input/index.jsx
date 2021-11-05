@@ -1,8 +1,9 @@
 import React from 'react';
 import { CustomInput } from './styles';
 
-export const Input = ({ size, label, onChange, type, value, defaultValue, helperText, placeholder, maxlength, required }) =>
+export const Input = ({ onBlur, size, label, onChange, type, value, defaultValue, helperText, placeholder, maxlength, required }) =>
     <CustomInput
+        onBlur={onBlur}
         onChange={onChange}
         type={type}
         label={label}
