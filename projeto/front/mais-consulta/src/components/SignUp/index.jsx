@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { CustomForm, InputFamily, CustomStack } from "./styles";
 import { Stepper, IconButton } from "../";
 import { PersonalData } from "./PersonalData";
@@ -10,6 +10,7 @@ import api from "../../services/api";
 import swal from "sweetalert";
 
 export const SignUp = ({ setValue }) => {
+
   const [formData, setFormData] = useState({
     cpf: "",
     email: "",

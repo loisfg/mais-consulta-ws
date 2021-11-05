@@ -32,7 +32,7 @@ export const AccessData = ({ formData, setFormData, required }) => {
                 required={required}
                 size='big'
                 label="CPF"
-                onChange={e => setFormData({ ...formData, cpf: e.target.value.replace(".", "").replace(".", "").replace("-", "") })}
+                onChange={e => setFormData({ ...formData, cpf: e.target.value.replace(".", "").replace(".", "").replace("-", ""), ...formData.paciente })}
                 defaultValue={formData.cpf}
                 helperText="000.000.000-00"
             />
@@ -52,7 +52,7 @@ export const AccessData = ({ formData, setFormData, required }) => {
                 onChange={e => {
                     // setPasswd2(e.target.value)
                     // validatePassword()
-                    setFormData({ ...formData, password: e.target.value })
+                    setFormData({ ...formData, password: e.target.value, ...formData.paciente })
                 }}
                 defaultValue={formData.password}
             />
