@@ -54,12 +54,12 @@ public class InfoController {
     //-----------POST/GET/PUT----- ALERGIA -----------POST/GET/PUT-----
     @PostMapping("/alergia/{idUser}")
     public ResponseEntity<Set<Alergia>> createAlergia(@PathVariable Integer idUser,
-                                                      @RequestBody Set<Alergia> alergia) {
-        Set<Alergia> result = postAlergia.execute(alergia, idUser);
-        if(result.isEmpty()) {
-            return ResponseEntity.status(204).build();
+                                                      @RequestBody Iterable<Integer> alergia) {
+        if (postAlergia.execute(alergia, idUser).isPresent()) {
+            return ResponseEntity.status(201).build();
         }
-        return ResponseEntity.status(201).body(result);
+
+        return ResponseEntity.status(204).build();
     }
 
     @GetMapping("/alergia/{idUser}")

@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +27,8 @@ public class Paciente {
     @Column(name = "id_paciente")
     private Integer idPaciente;
 
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String nome;
 
     @Column(name = "dt_nascimento")
@@ -49,11 +53,6 @@ public class Paciente {
     @Transient
     @JsonIgnore
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
-    private Set<Alergia> alergias = new HashSet<>();
-
-    @Transient
-    @JsonIgnore
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private Set<Doenca> doencas = new HashSet<>();
 
     @Transient
@@ -65,4 +64,7 @@ public class Paciente {
     @JsonIgnore
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private Set<Deficiencia> deficiencias = new HashSet<>();
+
+    @OneToMany(mappedBy = "paciente")
+    private Set<PacienteHasAlergia> pacienteAlergias;
 }

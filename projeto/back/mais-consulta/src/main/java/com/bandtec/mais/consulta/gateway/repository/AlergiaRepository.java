@@ -8,5 +8,4 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface AlergiaRepository extends JpaRepository<Alergia, Integer> {
-    Set<Alergia> findAllByPaciente(Paciente paciente);
 }

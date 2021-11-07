@@ -16,3 +16,5 @@ INSERT INTO endereco (id_endereco, bairro, cep, cidade, complemento, estado, log
 
 INSERT INTO ubs (id_ubs, endereco_id, nome)
     VALUES (null, (SELECT id_endereco FROM endereco WHERE bairro = 'Palmares' and numero = '999' LIMIT 1), 'Ubs Palmares');
+
+INSERT INTO alergia VALUES (null, 'pulga'),(null, 'piolho'),(null, 'formiga')

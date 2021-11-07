@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,7 +19,6 @@ public class Alergia {
     private String nome;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", nullable = false)
-    private Paciente paciente;
+    @OneToMany(mappedBy = "alergia")
+    private Set<PacienteHasAlergia> pacienteAlergias;
 }

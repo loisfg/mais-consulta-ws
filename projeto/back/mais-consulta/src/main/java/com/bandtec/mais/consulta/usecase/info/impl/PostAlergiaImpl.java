@@ -1,17 +1,15 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Alergia;
-import com.bandtec.mais.consulta.domain.Paciente;
+import com.bandtec.mais.consulta.domain.PacienteHasAlergia;
+import com.bandtec.mais.consulta.domain.PacienteHasAlergiaKey;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
+import com.bandtec.mais.consulta.gateway.repository.PacienteHasAlergiaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.usecase.info.PostAlergia;
-import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class PostAlergiaImpl implements PostAlergia {
@@ -22,33 +20,30 @@ public class PostAlergiaImpl implements PostAlergia {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    PacienteHasAlergiaRepository pacienteHasAlergiaRepository;
+
     @Override
-    public Set<Alergia> execute(Set<Alergia> alergia, Integer id) {
-        if (pacienteRepository.existsById(id)) {
-            //TODO fazer parte de filtragem para não repetir alergias na board
+    public Optional<PacienteHasAlergia> execute(Iterable<Integer> iterableIds, Integer pacienteId) {
+        if (pacienteRepository.existsById(pacienteId)) {
+            for (Integer alergiaId : iterableIds) {
+                PacienteHasAlergiaKey fk = PacienteHasAlergiaKey
+                        .builder()
+                        .alergia_id(alergiaId)
+                        .paciente_id(pacienteId)
+                        .build();
 
-            // Validando hash vazio
-            if (alergia.isEmpty()) {
-                return Set.of();
+                PacienteHasAlergia pacienteHasAlergia = PacienteHasAlergia
+                        .builder()
+                        .id(fk)
+                        .build();
+
+                pacienteHasAlergiaRepository.save(pacienteHasAlergia);
+
+                return Optional.of(pacienteHasAlergia);
             }
-
-            // Separando objetos em branco
-            alergia.stream()
-                    .distinct()
-                    .filter(it -> it.getNome() != "")
-                    .iterator()
-                    .forEachRemaining(
-                            it -> it.setPaciente(
-                                    pacienteRepository.getById(id)
-                            )
-                    );
-
-
-            alergiaRepository.saveAll(alergia);
-
-            return alergia;
         }
 
-        return Set.of();
+        return Optional.empty();
     }
 }

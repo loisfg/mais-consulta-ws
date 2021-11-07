@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -30,6 +31,7 @@ public class AgendamentoController {
 
     @PostMapping("/{idPaciente}/{idMedico}/{idUbs}/agendar/exame")
     public ResponseEntity<Exame> createAgendamentoExame(
+            @Valid
             @PathVariable("idPaciente")Integer idPaciente,
             @PathVariable("idMedico") Integer idMedico,
             @PathVariable("idUbs") Integer idUbs,

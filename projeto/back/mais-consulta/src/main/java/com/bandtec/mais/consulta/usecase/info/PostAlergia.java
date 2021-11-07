@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.info;
 
-import com.bandtec.mais.consulta.domain.Alergia;
+import com.bandtec.mais.consulta.domain.PacienteHasAlergia;
 
-import java.util.Set;
+import java.util.Optional;
 
 public interface PostAlergia {
-    Set<Alergia> execute(Set<Alergia> alergia, Integer id);
+    Optional<PacienteHasAlergia> execute(Iterable<Integer> alergiaId, Integer pacienteId);
 }

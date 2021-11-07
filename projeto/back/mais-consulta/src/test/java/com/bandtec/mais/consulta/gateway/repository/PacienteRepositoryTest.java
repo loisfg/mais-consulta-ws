@@ -4,6 +4,7 @@ import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.domain.Endereco;
 import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.models.enums.EstadosEnum;
 import com.bandtec.mais.consulta.utils.StrFormat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ class PacienteRepositoryTest {
             .builder()
             .cep(cep)
             .cidade(cidade)
-            .estado(estado)
+            .estado(EstadosEnum.SAO_PAULO.sigla())
             .bairro(bairro)
             .logradouro(logradouro)
             .numero(numero)
@@ -76,8 +77,6 @@ class PacienteRepositoryTest {
             .telefone(telefone)
             .sexo(sexo)
             .numeroCarteiraSus(numeroCarteiraSus)
-//            .endereco(endereco)
-            .alergias(Set.of())
             .doencas(Set.of())
             .remedios(Set.of())
             .deficiencias(Set.of())
