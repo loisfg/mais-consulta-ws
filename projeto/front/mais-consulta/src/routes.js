@@ -13,6 +13,7 @@ import {
   Profile,
   Schedules,
   UnitMaps,
+  SchedulingHistory
 } from "./pages/Patient";
 import { Home, Appointment } from "./pages/Doctor";
 
@@ -76,7 +77,7 @@ const Routes = () => {
         <PrivateRoutePaciente path="/perfil" component={Profile} />
         <PrivateRoutePaciente path="/agendamento" component={Schedules} />
         <PrivateRoutePaciente path="/mapa-de-unidades" component={UnitMaps} />
-
+        <PrivateRoutePaciente path="/historico-agendamentos" component={SchedulingHistory} />
         {/*  TODO: Privatizar rotas do medico */}
 
         {/* <PrivateRouteMedico path="/home-doctor" component={Home} /> */}
