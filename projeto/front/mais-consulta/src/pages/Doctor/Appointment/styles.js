@@ -5,30 +5,30 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   font-family: 'Rawline';
-  .left_side{
+  .left-side{
     height: 100%;
     display: flex;
-    width: 40%;
+    width: 60rem;
     padding: 0 0 0 23rem;
-    .container_profile_pic{
+    .container-profile-pic{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 50%;
+        height: 40rem;
         width: 100%;
         img{
             height: 10rem;
             width: 10rem;
             margin: 0 0 1rem 0;
         }
-        .btn_patient{
+        .btn-patient{
             height: 3.5rem;
             width: 10rem;
             background-color: var(--light-blue);
             border: none;
             border-radius: 0.4rem;
-            margin: 0.5rem 0 0 0;
+            margin: 1.5rem 0 0 0;
             font-size: 1rem;
             color: var(--white-standard);
             font-family: 'Rawline';
@@ -41,10 +41,25 @@ export const Container = styled.div`
         background-color: var(--light-blue);
     }
   }
-  .right_side{
-      height: 100%;
-      width: 70%;
+  .right-side{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .form-section{
+      margin: 1.5rem 0;
       display: flex;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
     }
+    .row{
+      display: flex;
+      width: 100%;
+      .field-group{
+        width: 50%;
+        display: flex;
+      }
+    }
+  }
 `;
