@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -28,6 +29,7 @@ public class Agendamento {
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dhInsert;
 
+    @Future
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "dt_atendimento", nullable = false)
     private LocalDate dtAtendimento;

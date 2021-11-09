@@ -27,6 +27,9 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
     @Autowired
     private ConsultaRepository consultaRepository;
 
+    @Autowired
+    private EspecialidadeRepository especialidadeRepository;
+
     @Override
     public Optional<Consulta> execute(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO) {
         Consulta consulta = AgendamentoConsultaRequestDTO.convertFromController(agendamentoConsultaRequestDTO);
@@ -34,15 +37,11 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         if (pacienteRepository.existsById(agendamentoConsultaRequestDTO.getIdPaciente()) &&
                 medicoRepository.existsById(agendamentoConsultaRequestDTO.getIdMedico())) {
 
-            Paciente paciente = pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get();
-            Medico medico = medicoRepository.findById(agendamentoConsultaRequestDTO.getIdMedico()).get();
-            Ubs ubs = ubsRepository.findById(agendamentoConsultaRequestDTO.getIdUbs()).get();
-
             Agendamento agendamento = consulta.getAgendamento();
-            agendamento.setPaciente(paciente);
-            agendamento.setMedico(medico);
-            agendamento.setEspecialidade(medico.getEspecialidade());
-            agendamento.setUbs(ubs);
+            agendamento.setPaciente(pacienteRepository.getById(agendamentoConsultaRequestDTO.getIdPaciente()));
+            agendamento.setMedico(medicoRepository.getById(agendamentoConsultaRequestDTO.getIdMedico()));
+            agendamento.setEspecialidade(especialidadeRepository.getById(agendamentoConsultaRequestDTO.getIdEspecialidade()));
+            agendamento.setUbs(ubsRepository.getById(agendamentoConsultaRequestDTO.getIdUbs()));
 
             consultaRepository.save(consulta);
             agendamentoRepository.save(agendamento);

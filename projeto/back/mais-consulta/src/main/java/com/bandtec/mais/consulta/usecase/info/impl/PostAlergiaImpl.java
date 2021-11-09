@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
+import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.domain.PacienteHasAlergia;
 import com.bandtec.mais.consulta.domain.PacienteHasAlergiaKey;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
@@ -9,7 +10,7 @@ import com.bandtec.mais.consulta.usecase.info.PostAlergia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class PostAlergiaImpl implements PostAlergia {
@@ -24,13 +25,14 @@ public class PostAlergiaImpl implements PostAlergia {
     PacienteHasAlergiaRepository pacienteHasAlergiaRepository;
 
     @Override
-    public Optional<PacienteHasAlergia> execute(Iterable<Integer> iterableIds, Integer pacienteId) {
-        if (pacienteRepository.existsById(pacienteId)) {
-            for (Integer alergiaId : iterableIds) {
+    public List<Alergia> execute(Iterable<Integer> alergias, Integer idPaciente) {
+        List<Alergia> newAlergias = List.of();
+        if (pacienteRepository.existsById(idPaciente)) {
+            for (Integer alergiaId : alergias) {
                 PacienteHasAlergiaKey fk = PacienteHasAlergiaKey
                         .builder()
-                        .alergia_id(alergiaId)
-                        .paciente_id(pacienteId)
+                        .alergiaId(alergiaId)
+                        .pacienteId(idPaciente)
                         .build();
 
                 PacienteHasAlergia pacienteHasAlergia = PacienteHasAlergia
@@ -38,12 +40,13 @@ public class PostAlergiaImpl implements PostAlergia {
                         .id(fk)
                         .build();
 
+                newAlergias = alergiaRepository.findAllById(alergias);
+
                 pacienteHasAlergiaRepository.save(pacienteHasAlergia);
 
-                return Optional.of(pacienteHasAlergia);
             }
         }
 
-        return Optional.empty();
+        return newAlergias;
     }
 }

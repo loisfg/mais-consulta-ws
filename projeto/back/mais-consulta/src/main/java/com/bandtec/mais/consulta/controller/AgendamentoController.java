@@ -29,12 +29,12 @@ public class AgendamentoController {
         this.postAgendamentoExame = postAgendamentoExame;
     }
 
-    @PostMapping("/{idPaciente}/{idMedico}/{idUbs}/agendar/exame")
+    @PostMapping("/{idPaciente}/{idUbs}/{idEspecialidade}/agendar/exame")
     public ResponseEntity<Exame> createAgendamentoExame(
             @Valid
             @PathVariable("idPaciente")Integer idPaciente,
-            @PathVariable("idMedico") Integer idMedico,
             @PathVariable("idUbs") Integer idUbs,
+            @PathVariable("idEspecialidade") Integer idEspecialidade,
             @RequestBody AgendamentoExameRequestDTO agendamentoExameRequestDTO
     ) {
         Optional<Exame> oExame = postAgendamentoExame.execute(agendamentoExameRequestDTO);
@@ -44,17 +44,17 @@ public class AgendamentoController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 
-    @PostMapping("/{idPaciente}/{idMedico}/{idUbs}/agendar/consulta")
+    @PostMapping("/{idPaciente}/{idUbs}/{idEspecialidade}/agendar/consulta")
     public ResponseEntity<?> createAgendamentoConsulta(
             @PathVariable("idPaciente")Integer idPaciente,
-            @PathVariable("idMedico") Integer idMedico,
             @PathVariable("idUbs") Integer idUbs,
+            @PathVariable("idEspecialidade") Integer idEspecialidade,
             @RequestBody AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO
     ) {
 
         agendamentoConsultaRequestDTO.setIdPaciente(idPaciente);
-        agendamentoConsultaRequestDTO.setIdMedico(idMedico);
         agendamentoConsultaRequestDTO.setIdUbs(idUbs);
+        agendamentoConsultaRequestDTO.setIdEspecialidade(idEspecialidade);
 
         Optional<Consulta> oConsulta = postAgendamentoConsulta.execute(agendamentoConsultaRequestDTO);
 

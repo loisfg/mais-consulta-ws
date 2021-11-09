@@ -18,7 +18,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Builder
-@ToString(exclude = "usuario")
 @Table(name = "paciente")
 public class Paciente {
 
@@ -50,21 +49,19 @@ public class Paciente {
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
 
-    @Transient
-    @JsonIgnore
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
-    private Set<Doenca> doencas = new HashSet<>();
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
+    @ToString.Exclude
+    private Set<PacienteHasDoencas> doencas;
 
-    @Transient
-    @JsonIgnore
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
-    private Set<Remedio> remedios = new HashSet<>();
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
+    @ToString.Exclude
+    private Set<PacienteHasRemedios> remedios;
 
-    @Transient
-    @JsonIgnore
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
-    private Set<Deficiencia> deficiencias = new HashSet<>();
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
+    @ToString.Exclude
+    private Set<PacienteHasDeficiencia> pacienteDeficiencias;
 
-    @OneToMany(mappedBy = "paciente")
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
+    @ToString.Exclude
     private Set<PacienteHasAlergia> pacienteAlergias;
 }

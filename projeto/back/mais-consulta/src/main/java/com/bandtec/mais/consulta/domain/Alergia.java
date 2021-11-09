@@ -15,7 +15,9 @@ import java.util.Set;
 public class Alergia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_alergia")
     private Integer id;
+
     private String nome;
 
     @JsonIgnore

@@ -20,7 +20,7 @@ public class Doenca {
     private Boolean cronico = false;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     private Paciente paciente;
 }

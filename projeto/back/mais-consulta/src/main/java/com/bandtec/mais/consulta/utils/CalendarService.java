@@ -117,7 +117,7 @@ public class CalendarService {
         return dtDate;
     }
 
-    private Date getIntToDate(Integer date) throws ParseException {
+    public Date getIntToDate(Integer date) throws ParseException {
         SimpleDateFormat formatYYYYMMDD = new SimpleDateFormat("yyyyMMdd");
         return formatYYYYMMDD.parse(date.toString());
     }

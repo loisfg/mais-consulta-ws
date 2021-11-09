@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -19,7 +18,7 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     private PacienteRepository pacienteRepository;
 
     @Autowired
-    private MedicoRepository medicoRepository;
+    private EspecialidadeRepository especialidadeRepository;
 
     @Autowired
     private UbsRepository ubsRepository;
@@ -27,38 +26,35 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     @Autowired
     private ExameRepository exameRepository;
 
+    @Autowired
+    private AgendamentoRepository agendamentoRepository;
+
     @Override
     public Optional<Exame> execute(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
         Exame exame = AgendamentoExameRequestDTO.convertFromController(agendamentoExameRequestDTO);
 
-        // Concatenando data do agendamento
-        LocalDateTime dataAgendada = exame.getAgendamento().getDtAtendimento()
-                .atTime(exame.getAgendamento().getHrAtendimento());
-
         // Se a data do agendamento for menor que o dia atual não marcar agendamento
-        if (exame.getAgendamento().getDhInsert().isBefore(dataAgendada)) {
 
-            // Validando se há paciente/medico disponiveis
-            if (pacienteRepository.existsById(agendamentoExameRequestDTO.getIdPaciente()) &&
-                    medicoRepository.existsById(agendamentoExameRequestDTO.getIdMedico())
-            ) {
-                Agendamento agendamento = exame.getAgendamento();
-                agendamento.setPaciente(
-                        pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get()
-                );
-                agendamento.setMedico(
-                        medicoRepository.findById(agendamentoExameRequestDTO.getIdMedico()).get()
-                );
-                agendamento.setUbs(
-                        ubsRepository.findById(agendamentoExameRequestDTO.getIdUbs()).get()
-                );
+        // Validando se há paciente/medico disponiveis
+        if (pacienteRepository.existsById(agendamentoExameRequestDTO.getIdPaciente())) {
+            Agendamento agendamento = exame.getAgendamento();
+            agendamento.setPaciente(
+                    pacienteRepository.getById(agendamentoExameRequestDTO.getIdPaciente())
+            );
+            // precisamos buscar apenas UBS perto do cidadão, sugiro criar uma tabela nova apenas com as localizações
+            // próximas ao usuário
+            agendamento.setUbs(
+                    ubsRepository.getById(agendamentoExameRequestDTO.getIdUbs())
+            );
+            agendamento.setEspecialidade(
+                    especialidadeRepository.getById(agendamentoExameRequestDTO.getIdEspecialidade())
+            );
 
-                exameRepository.save(exame);
+            agendamentoRepository.save(agendamento);
+            exameRepository.save(exame);
 
-                return Optional.of(exame);
-            }
         }
 
-        return Optional.empty();
+        return Optional.of(exame);
     }
 }

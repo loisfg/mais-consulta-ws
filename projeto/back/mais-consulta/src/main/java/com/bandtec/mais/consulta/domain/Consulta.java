@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.intellij.lang.annotations.RegExp;
 
 import javax.persistence.*;
 import java.util.Objects;
