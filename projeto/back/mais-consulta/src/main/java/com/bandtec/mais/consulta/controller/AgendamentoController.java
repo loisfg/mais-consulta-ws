@@ -31,12 +31,16 @@ public class AgendamentoController {
 
     @PostMapping("/{idPaciente}/{idUbs}/{idEspecialidade}/agendar/exame")
     public ResponseEntity<Exame> createAgendamentoExame(
-            @Valid
             @PathVariable("idPaciente")Integer idPaciente,
             @PathVariable("idUbs") Integer idUbs,
             @PathVariable("idEspecialidade") Integer idEspecialidade,
             @RequestBody AgendamentoExameRequestDTO agendamentoExameRequestDTO
     ) {
+
+        agendamentoExameRequestDTO.setIdPaciente(idPaciente);
+        agendamentoExameRequestDTO.setIdUbs(idUbs);
+        agendamentoExameRequestDTO.setIdEspecialidade(idEspecialidade);
+
         Optional<Exame> oExame = postAgendamentoExame.execute(agendamentoExameRequestDTO);
 
         return oExame

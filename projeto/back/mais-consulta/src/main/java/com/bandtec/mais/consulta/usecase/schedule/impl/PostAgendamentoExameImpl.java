@@ -33,8 +33,6 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     public Optional<Exame> execute(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
         Exame exame = AgendamentoExameRequestDTO.convertFromController(agendamentoExameRequestDTO);
 
-        // Se a data do agendamento for menor que o dia atual não marcar agendamento
-
         // Validando se há paciente/medico disponiveis
         if (pacienteRepository.existsById(agendamentoExameRequestDTO.getIdPaciente())) {
             Agendamento agendamento = exame.getAgendamento();

@@ -42,10 +42,6 @@ public class Agendamento {
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Especialidade especialidade;
 
-    @JoinColumn(name = "medico_id", referencedColumnName = "id_medico", nullable = false)
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Medico medico;
-
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Paciente paciente;
