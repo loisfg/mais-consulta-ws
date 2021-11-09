@@ -35,4 +35,5 @@ public class Medico {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)
     private Especialidade especialidade;
+
 }

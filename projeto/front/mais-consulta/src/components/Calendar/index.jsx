@@ -101,7 +101,7 @@ export const Calendar = () => {
                 )}
                 {days.map(day=>
                     <ListDays weight='bold' isToDay={isToDays==day} onClick={() => { 
-                        alert(day+"selecionado")
+                        alert(day)
                     }} >{day}</ListDays>
                 )}
                 {nextDays.map(day=>

@@ -6,7 +6,7 @@ export const Hours = () => {
 
     const listHours = hours.map((hora) =>
         <ItemListHour onClick={() => {
-            // alert(hora+" selecionada")
+            alert(hora)
         }}>{hora}</ItemListHour>
     );
 
