@@ -3,7 +3,9 @@ import { Container } from './styles';
 import { MenuDoctor, TextSubtext, Header } from '../../../components';
 import UserPhoto from '../../../assets/next-user.svg';
 import { FormSection } from './FormSection';
-import  SmallInput from './FormSection/SmallInput'
+import SmallInput from './FormSection/SmallInput';
+import { AutoCompleteInput } from './FormSection/AutoCompleteInput';
+import { Checkbox } from '@material-ui/core';
 
 export const Appointment = ({name, date}) => {
   const data = {
@@ -38,7 +40,7 @@ export const Appointment = ({name, date}) => {
         susNumber= {data.susNumber}
         />
         <FormSection sectionTitle='Último atendimento'>
-          <div className='form-section'>
+          <div className='form-section-last-appointment'>
             <TextSubtext className='text-tab' textOne='Data' textTwo={data.date}/>
             <TextSubtext className='text-tab' textOne='Local' textTwo={data.ubs}/>
             <TextSubtext className='text-tab' textOne='Medico atendente' textTwo={data.doctor}/>
@@ -49,17 +51,26 @@ export const Appointment = ({name, date}) => {
             <div className="row">
               <div className="field-group">
                 <SmallInput title='Peso' measure='kg'/>
-                <SmallInput title='Peso' measure='kg'/>
+                <SmallInput title='Altura' measure='cm'/>
+              </div>
+              <div className="field-group">
+                <AutoCompleteInput/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="field-group">
+                <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 25 }}}/>
+                <label>Fumante?</label>
+                <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 25 }}}/>
+                <label>Virgem?</label>
+              </div>
+              <div className="field-group">
+                <AutoCompleteInput/>
               </div>
             </div>
           </div>
         </FormSection>
         <FormSection sectionTitle='Diagnóstico'>
-          <div className='form-section'>
-            <TextSubtext className='text-tab' textOne='Data' textTwo={data.date}/>
-            <TextSubtext className='text-tab' textOne='Local' textTwo={data.ubs}/>
-            <TextSubtext className='text-tab' textOne='Medico atendente' textTwo={data.doctor}/>
-          </div>
         </FormSection>
       </div>
     </Container>

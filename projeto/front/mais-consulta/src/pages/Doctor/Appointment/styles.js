@@ -23,16 +23,16 @@ export const Container = styled.div`
             margin: 0 0 1rem 0;
         }
         .btn-patient{
-            height: 3.5rem;
-            width: 10rem;
-            background-color: var(--light-blue);
-            border: none;
-            border-radius: 0.4rem;
-            margin: 1.5rem 0 0 0;
-            font-size: 1rem;
-            color: var(--white-standard);
-            font-family: 'Rawline';
-            font-weight: 500;
+          height: 3.5rem;
+          width: 10rem;
+          background-color: var(--light-blue);
+          border: none;
+          border-radius: 0.4rem;
+          margin: 1.5rem 0 0 0;
+          font-size: 1rem;
+          color: var(--white-standard);
+          font-family: 'Rawline';
+          font-weight: 500;
         }
     }
     .line{
@@ -50,6 +50,13 @@ export const Container = styled.div`
     .form-section{
       margin: 1.5rem 0;
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .form-section-last-appointment{
+      margin: 1.5rem 0;
+      display: flex;
       align-items: center;
       justify-content: space-between;
     }
@@ -59,6 +66,10 @@ export const Container = styled.div`
       .field-group{
         width: 50%;
         display: flex;
+        align-items: center;
+        label{
+          font-size: 1.4rem;
+        }
       }
     }
   }

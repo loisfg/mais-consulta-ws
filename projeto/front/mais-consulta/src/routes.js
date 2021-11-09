@@ -13,9 +13,10 @@ import {
   Profile,
   Schedules,
   UnitMaps,
-  SchedulingHistory
+  SchedulingHistory,
 } from "./pages/Patient";
 import { Home, Appointment } from "./pages/Doctor";
+import {Test} from './pages/Test'
 
 const PrivateRoutePaciente = ({ component: Component, ...rest }) => {
   const usuarioFormatoDeString = localStorage.getItem("usuario");
@@ -83,6 +84,7 @@ const Routes = () => {
         {/* <PrivateRouteMedico path="/home-doctor" component={Home} /> */}
         <Route path="/home-doctor" component={Home} />
         <Route path='/appointment' component={Appointment} />
+        <Route path='/test' component={Test}/>
 
         <Route
           path="*"
