@@ -1,20 +1,33 @@
 import React from 'react';
-import { Container, DivUsuario, Mensage} from './styles';
-import { UserProfilePic} from '../../../components'
+import { Page } from "./styles";
+import { DivUsuario, DivComboBox, LeftSide, RightSide, Container } from './styles';
+import { UserProfilePic, WelcomeMessageTwo, SchedulingTwo } from '../../../components'
 
-// import { Container } from './styles';
+
 
 export const SchedulingHistory = ({ usuario }) => {
   return (
-    <Container>
+    <Page>
         <DivUsuario>
              <UserProfilePic nome={usuario.paciente.nome} subtexto="Paciente" />
         </DivUsuario>
-           <Mensage>
-                Histórico de agendamentos
-           </Mensage>
-    </Container>
-    
+        <WelcomeMessageTwo/>
+        <DivComboBox>
+        <LeftSide>
+
+        </LeftSide>
+        
+        <RightSide>
+
+        </RightSide>
+
+        </DivComboBox>
+          <Container>
+          <SchedulingTwo/>
+          </Container>
+      
+
+    </Page>
   );
 }
 

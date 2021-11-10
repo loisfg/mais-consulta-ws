@@ -29,3 +29,5 @@ export * from './InputData';
 export * from './MenuDoctor';
 export * from './Patient';
 export * from './Header';
+export * from './WelcomeMessageTwo';
+export * from './SchedulingTwo';
