@@ -31,3 +31,6 @@ export * from './Patient';
 export * from './Header';
 export * from './WelcomeMessageTwo';
 export * from './SchedulingTwo';
+export * from './AutoCompleteInput';
+export * from './ButtonTwo';
+export * from './LinesScheduling';
