@@ -6,7 +6,9 @@ import com.bandtec.mais.consulta.usecase.calendar.GetCalendarLastDay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 @CrossOrigin("*")
@@ -26,7 +28,7 @@ public class CalendarController {
     }
 
     @GetMapping("/dias-corridos")
-    public Integer diasCorridos(@RequestBody CalendarRequestDTO calendarRequestDTO) {
+    public List<String> diasCorridos(@RequestBody CalendarRequestDTO calendarRequestDTO) {
         return getCalendarDiasCorridos.execute(calendarRequestDTO);
     }
 }

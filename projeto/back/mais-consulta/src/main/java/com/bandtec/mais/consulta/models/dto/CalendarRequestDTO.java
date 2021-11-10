@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class CalendarRequestDTO {
-    Integer dtInit;
-    Integer dtEnd;
-    String format;
+    String dtInit;
+    String dtEnd;
 }

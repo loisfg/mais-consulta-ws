@@ -1,8 +1,10 @@
 package com.bandtec.mais.consulta.utils;
 
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -122,4 +124,22 @@ public class CalendarService {
         return formatYYYYMMDD.parse(date.toString());
     }
 
+    @SneakyThrows
+    public List<String> arrayDate(String dtIni, String dtEnd) {
+        List<String> list = new ArrayList<>();
+        DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
+        Date dt1 = df.parse (dtIni);
+        Date dt2 = df.parse (dtEnd);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime (dt1);
+        for (Date dt = dt1; dt.compareTo (dt2) <= 0; ) {
+            cal.add (Calendar.DATE, +1);
+            dt = cal.getTime();
+
+            list.add(df.format(dt));
+        }
+
+
+        return list;
+    }
 }

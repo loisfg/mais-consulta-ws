@@ -46,17 +46,18 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
         String especialidade = agendamento.getEspecialidade().getDescricao();
         LocalDate dataAtendimento = agendamento.getDtAtendimento();
 
-        Medico medico = agendamento.getMedico();
-        String nomeMedico = medico.getNome();
-        String especialidadeMedico = medico.getEspecialidade().getDescricao();
-
-        Paciente paciente = agendamento.getPaciente();
-        String nomePaciente = paciente.getNome();
-        String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
-
-        String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomeMedico, especialidadeMedico, nomePaciente, numeroCarteiraSus);
-
-        return createResponseMap(id, dataAtendimento, nomePaciente, texto);
+////        Medico medico = agendamento.getMedico();
+////        String nomeMedico = medico.getNome();
+////        String especialidadeMedico = medico.getEspecialidade().getDescricao();
+////
+////        Paciente paciente = agendamento.getPaciente();
+////        String nomePaciente = paciente.getNome();
+////        String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
+////
+////        String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomeMedico, especialidadeMedico, nomePaciente, numeroCarteiraSus);
+//
+//        return createResponseMap(id, dataAtendimento, nomePaciente, texto);
+        return Map.of();
     }
 
     @NotNull
