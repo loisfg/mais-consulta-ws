@@ -20,10 +20,9 @@ public class  Consulta {
     @Column(name = "id_consulta")
     private Integer idConsulta;
 
-    @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @JsonIgnore
+
     @JoinColumn(name = "agendamento_id", referencedColumnName = "id_agendamento", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Agendamento agendamento;

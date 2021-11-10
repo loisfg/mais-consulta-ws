@@ -46,6 +46,7 @@ public class Agendamento {
     @OneToOne
     private Paciente paciente;
 
+
     @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
     @OneToOne
     private Ubs ubs;

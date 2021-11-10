@@ -27,7 +27,7 @@ public class Especialidade {
 
     @Transient
     @JsonIgnore
-    @OneToMany(mappedBy = "especialidade", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "especialidade", cascade = CascadeType.ALL)
     private Set<Medico> medicos = new HashSet<>();
 
     @JsonIgnore

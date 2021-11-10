@@ -23,7 +23,6 @@ public class AgendamentoConsultaRequestDTO {
     String descricao;
     Integer idEspecialidade;
     Integer idPaciente;
-    Integer idMedico;
     Integer idUbs;
 
     public static Consulta convertFromController(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO) {
