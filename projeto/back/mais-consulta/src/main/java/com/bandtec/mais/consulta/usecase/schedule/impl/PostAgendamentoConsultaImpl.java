@@ -39,7 +39,6 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
             Agendamento agendamento = consulta.getAgendamento();
             agendamento.setPaciente(pacienteRepository.getById(agendamentoConsultaRequestDTO.getIdPaciente()));
-            agendamento.setMedico(medicoRepository.getById(agendamentoConsultaRequestDTO.getIdMedico()));
             agendamento.setEspecialidade(especialidadeRepository.getById(agendamentoConsultaRequestDTO.getIdEspecialidade()));
             agendamento.setUbs(ubsRepository.getById(agendamentoConsultaRequestDTO.getIdUbs()));
 

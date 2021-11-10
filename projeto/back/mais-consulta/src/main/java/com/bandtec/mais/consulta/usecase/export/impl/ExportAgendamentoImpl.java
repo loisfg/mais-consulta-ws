@@ -46,18 +46,13 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
         String especialidade = agendamento.getEspecialidade().getDescricao();
         LocalDate dataAtendimento = agendamento.getDtAtendimento();
 
-////        Medico medico = agendamento.getMedico();
-////        String nomeMedico = medico.getNome();
-////        String especialidadeMedico = medico.getEspecialidade().getDescricao();
-////
-////        Paciente paciente = agendamento.getPaciente();
-////        String nomePaciente = paciente.getNome();
-////        String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
-////
-////        String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomeMedico, especialidadeMedico, nomePaciente, numeroCarteiraSus);
-//
-//        return createResponseMap(id, dataAtendimento, nomePaciente, texto);
-        return Map.of();
+        Paciente paciente = agendamento.getPaciente();
+        String nomePaciente = paciente.getNome();
+        String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
+
+        String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomePaciente, numeroCarteiraSus);
+
+        return createResponseMap(id, dataAtendimento, nomePaciente, texto);
     }
 
     @NotNull
@@ -69,8 +64,8 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
     }
 
     @NotNull
-    private String buildTextoAgendamento(Integer id, String especialidade, LocalDate dataAtendimento, String nomeMedico, String especialidadeMedico, String nomePaciente, String numeroCarteiraSus) {
-        return String.format("%s;%s;%s;%s;%s;%s;%s\n", id, dataAtendimento, especialidade, nomeMedico, especialidadeMedico, nomePaciente, numeroCarteiraSus);
+    private String buildTextoAgendamento(Integer id, String especialidade, LocalDate dataAtendimento, String nomePaciente, String numeroCarteiraSus) {
+        return String.format("%s;%s;%s;%s;%s\n", id, dataAtendimento, especialidade, nomePaciente, numeroCarteiraSus);
     }
 
 }
