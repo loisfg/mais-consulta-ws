@@ -29,5 +29,9 @@ public class Especialidade {
     @JsonIgnore
     @OneToMany(mappedBy = "especialidade", cascade = CascadeType.PERSIST)
     private Set<Medico> medicos = new HashSet<>();
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "especialidade", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Agendamento agendamento;
 }
 
