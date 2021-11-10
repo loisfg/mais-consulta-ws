@@ -22,6 +22,8 @@ public class Ubs {
 
     private String nome;
 
+    private String telefone;
+
 //    @JoinColumn
 //    @ManyToMany()
 //    Medico medico;

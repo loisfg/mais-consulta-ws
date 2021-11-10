@@ -30,6 +30,7 @@ public class Endereco {
     @Size(max = 2, min =2)
     private String estado;
     private String bairro;
+    private String rua;
     private String logradouro;
     private String numero;
     private String complemento;
