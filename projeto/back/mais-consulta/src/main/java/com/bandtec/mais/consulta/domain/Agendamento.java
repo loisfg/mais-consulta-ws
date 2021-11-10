@@ -39,16 +39,17 @@ public class Agendamento {
     private LocalTime hrAtendimento;
 
     @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)
-    @OneToOne(cascade = CascadeType.PERSIST)
-    protected Especialidade especialidade;
+    @OneToOne
+    private Especialidade especialidade;
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", nullable = false)
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Paciente paciente;
+    @OneToOne
+    private Paciente paciente;
+
 
     @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Ubs ubs;
+    @OneToOne
+    private Ubs ubs;
 }
 
 

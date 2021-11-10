@@ -1,8 +1,10 @@
 package com.bandtec.mais.consulta.usecase.schedule.impl;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Consulta;
 import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.gateway.repository.*;
+import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
 import lombok.extern.slf4j.Slf4j;
@@ -33,23 +35,15 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     public Optional<Exame> execute(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
         Exame exame = AgendamentoExameRequestDTO.convertFromController(agendamentoExameRequestDTO);
 
-        // Validando se há paciente/medico disponiveis
         if (pacienteRepository.existsById(agendamentoExameRequestDTO.getIdPaciente())) {
-            Agendamento agendamento = exame.getAgendamento();
-            agendamento.setPaciente(
-                    pacienteRepository.getById(agendamentoExameRequestDTO.getIdPaciente())
-            );
-            // precisamos buscar apenas UBS perto do cidadão, sugiro criar uma tabela nova apenas com as localizações
-            // próximas ao usuário
-            agendamento.setUbs(
-                    ubsRepository.getById(agendamentoExameRequestDTO.getIdUbs())
-            );
-            agendamento.setEspecialidade(
-                    especialidadeRepository.getById(agendamentoExameRequestDTO.getIdEspecialidade())
-            );
 
-            agendamentoRepository.save(agendamento);
+            Agendamento agendamento = exame.getAgendamento();
+            agendamento.setPaciente(pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get());
+            agendamento.setEspecialidade(especialidadeRepository.findById(agendamentoExameRequestDTO.getIdEspecialidade()).get());
+            agendamento.setUbs(ubsRepository.findById(agendamentoExameRequestDTO.getIdUbs()).get());
+
             exameRepository.save(exame);
+            agendamentoRepository.save(agendamento);
 
         }
 

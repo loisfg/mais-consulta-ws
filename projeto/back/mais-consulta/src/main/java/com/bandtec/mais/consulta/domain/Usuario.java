@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Usuario {
     @Email
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 

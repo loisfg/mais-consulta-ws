@@ -6,16 +6,15 @@ import com.bandtec.mais.consulta.utils.CalendarService;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.List;
+
 @Service
 public class GetCalendarDiasCorridosImpl implements GetCalendarDiasCorridos {
 
     @SneakyThrows
     @Override
-    public Integer execute(CalendarRequestDTO calendarRequestDTO) {
-        return CalendarService.getInstance().getDiasCorridos(
-                calendarRequestDTO.getDtInit(),
-                calendarRequestDTO.getDtEnd(),
-                calendarRequestDTO.getFormat()
-        );
+    public List<String> execute(CalendarRequestDTO calendarRequestDTO) {
+        return CalendarService.getInstance().arrayDate(calendarRequestDTO.getDtInit(), calendarRequestDTO.getDtEnd());
     }
 }

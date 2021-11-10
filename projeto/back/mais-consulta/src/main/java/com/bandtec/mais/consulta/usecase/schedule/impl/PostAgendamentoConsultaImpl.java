@@ -34,21 +34,17 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
     public Optional<Consulta> execute(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO) {
         Consulta consulta = AgendamentoConsultaRequestDTO.convertFromController(agendamentoConsultaRequestDTO);
 
-        if (pacienteRepository.existsById(agendamentoConsultaRequestDTO.getIdPaciente()) &&
-                medicoRepository.existsById(agendamentoConsultaRequestDTO.getIdMedico())) {
+        if (pacienteRepository.existsById(agendamentoConsultaRequestDTO.getIdPaciente())) {
 
             Agendamento agendamento = consulta.getAgendamento();
-            agendamento.setPaciente(pacienteRepository.getById(agendamentoConsultaRequestDTO.getIdPaciente()));
-            agendamento.setMedico(medicoRepository.getById(agendamentoConsultaRequestDTO.getIdMedico()));
-            agendamento.setEspecialidade(especialidadeRepository.getById(agendamentoConsultaRequestDTO.getIdEspecialidade()));
-            agendamento.setUbs(ubsRepository.getById(agendamentoConsultaRequestDTO.getIdUbs()));
+            agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
+            agendamento.setEspecialidade(especialidadeRepository.findById(agendamentoConsultaRequestDTO.getIdEspecialidade()).get());
+            agendamento.setUbs(ubsRepository.findById(agendamentoConsultaRequestDTO.getIdUbs()).get());
 
             consultaRepository.save(consulta);
             agendamentoRepository.save(agendamento);
 
-            return Optional.of(consulta);
         }
-
-        return Optional.empty();
+        return Optional.of(consulta);
     }
 }

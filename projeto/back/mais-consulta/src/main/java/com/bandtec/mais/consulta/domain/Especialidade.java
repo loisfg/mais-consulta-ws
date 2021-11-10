@@ -19,7 +19,7 @@ import java.util.Set;
 public class Especialidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_especialidade", nullable = false)
+    @Column(name = "id_especialidade")
     private Integer idEspecialidade;
 
     @Column(nullable = false)
@@ -27,7 +27,7 @@ public class Especialidade {
 
     @Transient
     @JsonIgnore
-    @OneToMany(mappedBy = "especialidade", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "especialidade", cascade = CascadeType.ALL)
     private Set<Medico> medicos = new HashSet<>();
 
     @JsonIgnore

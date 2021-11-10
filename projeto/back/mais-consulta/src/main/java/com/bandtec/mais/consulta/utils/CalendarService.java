@@ -1,8 +1,10 @@
 package com.bandtec.mais.consulta.utils;
 
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -15,6 +17,7 @@ public class CalendarService {
     private final Map<String, Map<String, Integer>> hashMonthDataUtil = new HashMap<>();
     private final ArrayList<HolidayVO> holidayList = new ArrayList<>();
     private final HashMap<Integer, Integer> holidayIndex = new HashMap<>();
+
     public static CalendarService getInstance() {
         if (instance == null) instance = new CalendarService();
         return instance;
@@ -23,6 +26,7 @@ public class CalendarService {
     private CalendarService() {
     }
 
+    private final SimpleDateFormat formatYYYYMMDD = new SimpleDateFormat("yyyyMMdd");
 
     private static class HolidayVO {
         Integer dtReference;
@@ -117,9 +121,27 @@ public class CalendarService {
         return dtDate;
     }
 
-    public Date getIntToDate(Integer date) throws ParseException {
+    @SneakyThrows
+    public Date getIntToDate(Integer date) {
         SimpleDateFormat formatYYYYMMDD = new SimpleDateFormat("yyyyMMdd");
         return formatYYYYMMDD.parse(date.toString());
     }
 
+    @SneakyThrows
+    public List<String> arrayDate(String dtIni, String dtEnd) {
+        List<String> list = new ArrayList<>();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date dt1 = df.parse(dtIni);
+        Date dt2 = df.parse(dtEnd);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt1);
+        for (Date dt = dt1; dt.compareTo(dt2) <= 0; ) {
+            cal.add(Calendar.DATE, +1);
+            dt = cal.getTime();
+
+            list.add(df.format(dt));
+        }
+
+        return list;
+    }
 }
