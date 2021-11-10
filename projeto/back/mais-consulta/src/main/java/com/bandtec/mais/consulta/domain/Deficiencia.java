@@ -14,11 +14,12 @@ import javax.persistence.*;
 public class Deficiencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_deficiencia")
     private Integer id;
     private String nome;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     private Paciente paciente;
 }

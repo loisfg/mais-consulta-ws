@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -28,6 +29,7 @@ public class Agendamento {
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dhInsert;
 
+    @Future
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "dt_atendimento", nullable = false)
     private LocalDate dtAtendimento;
@@ -39,10 +41,6 @@ public class Agendamento {
     @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)
     @OneToOne(cascade = CascadeType.PERSIST)
     protected Especialidade especialidade;
-
-    @JoinColumn(name = "medico_id", referencedColumnName = "id_medico", nullable = false)
-    @OneToOne(cascade = CascadeType.ALL)
-    protected Medico medico;
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)

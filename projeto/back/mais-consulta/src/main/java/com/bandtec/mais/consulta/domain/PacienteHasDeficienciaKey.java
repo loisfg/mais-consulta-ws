@@ -7,18 +7,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import java.io.Serializable;
+
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class PacienteHasAlergiaKey implements Serializable {
+public class PacienteHasDeficienciaKey implements Serializable{
 
     @Column(name = "paciente_id")
     Integer pacienteId;
 
-    @Column(name = "alergia_id")
-    Integer alergiaId;
+    @Column(name = "deficiencia_id")
+    Integer deficienciaId;
 }

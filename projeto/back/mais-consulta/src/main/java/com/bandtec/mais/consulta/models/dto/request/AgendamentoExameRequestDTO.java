@@ -19,10 +19,9 @@ import java.time.LocalTime;
 public class AgendamentoExameRequestDTO {
     LocalDate dtAtendimento;
     LocalTime hrAtendimento;
-    Especialidade especialidade;
     String descricao;
+    Integer idEspecialidade;
     Integer idPaciente;
-    Integer idMedico;
     Integer idUbs;
 
     public static Exame convertFromController(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
@@ -31,7 +30,6 @@ public class AgendamentoExameRequestDTO {
                 .hrAtendimento(agendamentoExameRequestDTO.hrAtendimento)
                 .dhInsert(LocalDateTime.now())
                 .dtAtendimento(agendamentoExameRequestDTO.dtAtendimento)
-                .especialidade(agendamentoExameRequestDTO.especialidade)
                 .build();
 
 

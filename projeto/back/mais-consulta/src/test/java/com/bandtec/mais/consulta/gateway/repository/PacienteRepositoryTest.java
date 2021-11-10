@@ -77,9 +77,6 @@ class PacienteRepositoryTest {
             .telefone(telefone)
             .sexo(sexo)
             .numeroCarteiraSus(numeroCarteiraSus)
-            .doencas(Set.of())
-            .remedios(Set.of())
-            .deficiencias(Set.of())
             .usuario(usuario)
             .build();
 

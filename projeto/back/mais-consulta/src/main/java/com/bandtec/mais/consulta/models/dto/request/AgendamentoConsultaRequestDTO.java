@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.models.dto.request;
 import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.domain.Consulta;
 import com.bandtec.mais.consulta.domain.Especialidade;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class AgendamentoConsultaRequestDTO {
     LocalDate dtAtendimento;
     LocalTime hrAtendimento;
     String descricao;
+    Integer idEspecialidade;
     Integer idPaciente;
     Integer idMedico;
     Integer idUbs;

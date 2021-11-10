@@ -28,6 +28,15 @@ export const Schedules = ({ usuario }) => {
   //     requisicao("post","infos/alergia/","formiga")
   // }
 
+  const [days, setDays] = useState(0);
+
+  // Similar ao componentDidMount e componentDidUpdate:
+  useEffect(() => {
+   // alterar o valor do state depois de ser clicado	
+  // documento.title e o valor que voces estão armazendando a variavel de data  
+    document.title = `Você clicou na data: ${days}`;
+  });
+
   return (
 
     <Page>
@@ -43,9 +52,12 @@ export const Schedules = ({ usuario }) => {
           </BoxAux>
         </BoxLeft>
         <BoxRight>
-          <Calendar />
+          <Calendar
+            onClick={eventClick(e)}
+          />
           <Hours />
           <button text="Agendar atendimento" onClick={() => {
+            setDays(newDay)
             swal({
               text: "Deseja finalizar seu agendamento?",
               buttons: true,
@@ -64,6 +76,8 @@ export const Schedules = ({ usuario }) => {
                   swal("Deseja baixar o documento de confirmação do agendamento?", {
                     icon: "success",
                   });
+                 
+
                 } else {
                   swal("Agendamento cancelado", {
                     icon: "error",
@@ -78,3 +92,10 @@ export const Schedules = ({ usuario }) => {
     </Page>
   );
 }
+
+
+//onClick={(e) => { 
+//   props.setdaySelected(e)
+              
+// }
+// }

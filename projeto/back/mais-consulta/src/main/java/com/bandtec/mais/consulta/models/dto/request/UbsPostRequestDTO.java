@@ -13,14 +13,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UbsPostRequestDTO {
     private String nome;
+    private String telefone;
     private Endereco endereco;
 
     public static Ubs convertFromController(UbsPostRequestDTO ubsPostRequestDTO) {
         log.debug("CRIANDO UBS {}", ubsPostRequestDTO);
         return Ubs
                 .builder()
-                .nome(ubsPostRequestDTO.getNome())
-                .endereco(ubsPostRequestDTO.getEndereco())
+                .nome(ubsPostRequestDTO.nome)
+                .endereco(ubsPostRequestDTO.endereco)
+                .telefone(ubsPostRequestDTO.telefone)
                 .build();
     }
 }

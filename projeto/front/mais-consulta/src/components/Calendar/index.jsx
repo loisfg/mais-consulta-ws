@@ -3,7 +3,7 @@ import { P, Calendario, Month, Dates, Weekdays, ListItem, Days, ListDays } from 
 import Next from '../../assets/voltar.png';
 import Back from '../../assets/proximo.png';
 
-export const Calendar = () => {
+export const Calendar = ({props}) => {
     const [days, setDays] =useState([])
     const [backDays, setBackDays] =useState([])
     const [nextDays, setNextDays] =useState([])
@@ -63,7 +63,6 @@ export const Calendar = () => {
         setBackDays([...anteriores]);
         setDays([...aux_array]);
         setNextDays([...proximos]);
-
         
     },[])
 
@@ -78,13 +77,18 @@ export const Calendar = () => {
     );
     
     
-    
+    const [daySelected, setdaySelected] = useState();
+    useEffect(() => {
+        const teste=0;
+
+        setdaySelected([...teste]);
+    },[])
     return (
         <Calendario>
             <P>Selecione a data do agendamento</P>
             <Month>
                 <img onClick={() => {
-                    // alert(hora+" selecionada")
+                   // alert(setdaySelected(hora))
                 }} class="back"src= {Back} alt="" />
                 <Dates>
                     <h1>{months[date.getMonth()]}</h1>
