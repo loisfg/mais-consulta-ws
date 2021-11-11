@@ -1,19 +1,20 @@
 package com.bandtec.mais.consulta.domain;
 
-import com.bandtec.mais.consulta.models.enums.EstadosEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @Entity
 @Table(name = "endereco")
@@ -43,4 +44,18 @@ public class Endereco {
     @JsonIgnore
     @OneToOne(mappedBy = "endereco")
     private Ubs ubs;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Endereco endereco = (Endereco) o;
+
+        return Objects.equals(idEndereco, endereco.idEndereco);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1380307530;
+    }
 }

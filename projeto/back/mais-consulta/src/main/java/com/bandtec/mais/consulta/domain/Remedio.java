@@ -1,15 +1,19 @@
 package com.bandtec.mais.consulta.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @Table(name = "remedio")
 @Entity
@@ -21,4 +25,18 @@ public class Remedio {
     private String nome;
     @NotNull(message = "Campo de controlado não está preenchido!")
     private Boolean controlado;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Remedio remedio = (Remedio) o;
+
+        return Objects.equals(id, remedio.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1862138940;
+    }
 }

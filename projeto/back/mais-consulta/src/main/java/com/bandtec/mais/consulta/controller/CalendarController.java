@@ -1,12 +1,11 @@
 package com.bandtec.mais.consulta.controller;
 
-import com.bandtec.mais.consulta.models.dto.CalendarRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.CalendarRequestDTO;
 import com.bandtec.mais.consulta.usecase.calendar.GetCalendarDiasCorridos;
 import com.bandtec.mais.consulta.usecase.calendar.GetCalendarLastDay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

@@ -1,15 +1,17 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Table(name = "ubs")
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,4 +33,18 @@ public class Ubs {
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Ubs ubs = (Ubs) o;
+
+        return Objects.equals(idUbs, ubs.idUbs);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1227588814;
+    }
 }

@@ -1,8 +1,7 @@
 package com.bandtec.mais.consulta.usecase.calendar;
 
-import com.bandtec.mais.consulta.models.dto.CalendarRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.CalendarRequestDTO;
 
-import java.util.Calendar;
 import java.util.List;
 
 public interface GetCalendarDiasCorridos {

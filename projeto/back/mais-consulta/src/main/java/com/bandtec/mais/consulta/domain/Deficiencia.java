@@ -2,12 +2,17 @@ package com.bandtec.mais.consulta.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @Table(name = "deficiencia")
 @Entity
@@ -22,4 +27,18 @@ public class Deficiencia {
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     private Paciente paciente;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Deficiencia that = (Deficiencia) o;
+
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1252939305;
+    }
 }

@@ -1,9 +1,7 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,10 +9,14 @@ import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @Entity
 @Table(name = "agendamento")
@@ -50,6 +52,20 @@ public class Agendamento {
     @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
     @OneToOne
     private Ubs ubs;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Agendamento that = (Agendamento) o;
+
+        return Objects.equals(idAgendamento, that.idAgendamento);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1317206274;
+    }
 }
 
 

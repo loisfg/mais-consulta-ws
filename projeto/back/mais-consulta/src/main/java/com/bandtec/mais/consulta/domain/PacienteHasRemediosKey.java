@@ -1,16 +1,17 @@
 package com.bandtec.mais.consulta.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import java.io.Serializable;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,4 +23,21 @@ public class PacienteHasRemediosKey implements Serializable {
 
     @Column(name = "remedio_id")
     Integer remedioId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        PacienteHasRemediosKey that = (PacienteHasRemediosKey) o;
+
+        if (!Objects.equals(pacienteId, that.pacienteId)) return false;
+        return Objects.equals(remedioId, that.remedioId);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(pacienteId);
+        result = 31 * result + (Objects.hashCode(remedioId));
+        return result;
+    }
 }

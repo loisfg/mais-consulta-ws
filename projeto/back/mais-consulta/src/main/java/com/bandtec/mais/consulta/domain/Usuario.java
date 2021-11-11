@@ -1,18 +1,20 @@
 package com.bandtec.mais.consulta.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
 @Entity
 @Table(name = "usuario", indexes = {
@@ -39,4 +41,17 @@ public class Usuario {
 
     private String role;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Usuario usuario = (Usuario) o;
+
+        return Objects.equals(idUsuario, usuario.idUsuario);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1225039686;
+    }
 }

@@ -1,4 +1,4 @@
-package com.bandtec.mais.consulta.usecase.schedule;
+package com.bandtec.mais.consulta.models.enums;
 
 import com.bandtec.mais.consulta.utils.StrFormat;
 

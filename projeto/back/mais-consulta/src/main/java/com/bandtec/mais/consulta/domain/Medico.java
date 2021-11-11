@@ -2,15 +2,18 @@ package com.bandtec.mais.consulta.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "usuario")
 @Builder
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Table(name = "medico")
 @Entity
 public class Medico {
@@ -36,4 +39,17 @@ public class Medico {
     @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)
     private Especialidade especialidade;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Medico medico = (Medico) o;
+
+        return Objects.equals(idMedico, medico.idMedico);
+    }
+
+    @Override
+    public int hashCode() {
+        return 47971316;
+    }
 }

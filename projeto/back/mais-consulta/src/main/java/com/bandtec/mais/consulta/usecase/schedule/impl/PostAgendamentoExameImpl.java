@@ -1,11 +1,11 @@
 package com.bandtec.mais.consulta.usecase.schedule.impl;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
-import com.bandtec.mais.consulta.domain.Consulta;
 import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.gateway.repository.*;
-import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
+import com.bandtec.mais.consulta.factory.NotificationAdapter;
+import com.bandtec.mais.consulta.factory.NotificationFactory;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,12 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     @Autowired
     private AgendamentoRepository agendamentoRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
+
+    @Autowired
+    private NotificationFactory notificationFactory;
+
     @Override
     public Optional<Exame> execute(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
         Exame exame = AgendamentoExameRequestDTO.convertFromController(agendamentoExameRequestDTO);
@@ -44,6 +50,10 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
 
             exameRepository.save(exame);
             agendamentoRepository.save(agendamento);
+
+            NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter("exame");
+
+            String descricaoNotification = notificationMessageService.getNotificationMessage(agendamento);
 
         }
 

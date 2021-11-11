@@ -8,13 +8,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
@@ -64,4 +65,18 @@ public class Paciente {
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private Set<PacienteHasAlergia> pacienteAlergias;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Paciente paciente = (Paciente) o;
+
+        return Objects.equals(idPaciente, paciente.idPaciente);
+    }
+
+    @Override
+    public int hashCode() {
+        return 38015519;
+    }
 }
