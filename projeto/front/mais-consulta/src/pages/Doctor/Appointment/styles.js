@@ -47,6 +47,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: scroll;
     .form-section{
       margin: 1.5rem 0;
       display: flex;
@@ -70,6 +71,46 @@ export const Container = styled.div`
         label{
           font-size: 1.4rem;
         }
+      }
+      .select-group{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 25rem;
+        height: 7rem;
+        > div{
+          height: 50%;
+          width: 60%;
+          font-size: 1.3rem;
+          border: var(--light-blue) solid 0.1px;
+        }
+        label{
+          font-size: 1.4rem;
+          margin: 0 0 1rem 0;
+        }
+      }
+    }
+    .input-group{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      
+      width: 100%;
+      label{
+        font-size: 1.4rem;
+        margin: 0.4rem 0;
+      }
+      input{
+        border: var(--light-blue) solid 0.1rem;
+        height: 100%;
+        border-radius: 0.4rem;
+        margin: 0 0 1rem 0;
+      }
+      textarea{
+        border: var(--light-blue) solid 0.1rem;
+        border-radius: 0.5rem;
+        width: 100%;
       }
     }
   }

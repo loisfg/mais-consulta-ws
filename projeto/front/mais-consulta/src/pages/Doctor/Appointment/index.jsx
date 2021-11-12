@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from './styles';
 import { MenuDoctor, TextSubtext, Header } from '../../../components';
 import UserPhoto from '../../../assets/next-user.svg';
 import { FormSection } from './FormSection';
 import SmallInput from './FormSection/SmallInput';
 import { AutoCompleteInput } from './FormSection/AutoCompleteInput';
-import { Checkbox } from '@material-ui/core';
+import { Checkbox, Select, MenuItem } from '@material-ui/core';
 
 export const Appointment = ({name, date}) => {
+  const [bloodType, setBloodType] = React.useState([]);
+  useEffect(() =>
+    setBloodType(['A+', 'A-', 'B+','B-','AB+', 'AB-','O+', 'O']), 
+  []);
+  const handleChange = (event) => {
+    setBloodType(event.target.value);
+  };
   const data = {
     name: 'Catarina Ayla Castro',
     address: 'Quadra 912 Sul Alameda 3',
@@ -68,9 +75,32 @@ export const Appointment = ({name, date}) => {
                 <AutoCompleteInput/>
               </div>
             </div>
+            <div className="row">
+              <div className="form-section">
+                <div className='select-group'>
+                  <label>Tipo Sanguíneo</label>
+                  <Select
+                    id="demo-simple-select-standard"
+                    value={bloodType}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="">
+                      <em>Insira o tipo sanguíneo</em>
+                    </MenuItem>
+                    {bloodType.map((type) =><MenuItem value={type}>{type}</MenuItem>)}
+                  </Select>
+                </div>
+              </div>
+            </div>
           </div>
         </FormSection>
         <FormSection sectionTitle='Diagnóstico'>
+          <div className='input-group'>
+            <label>Terminologia</label>
+            <input type="text" />
+            <label>Orientações médicas</label>
+            <textarea cols="20" rows="5"></textarea>
+          </div>
         </FormSection>
       </div>
     </Container>
