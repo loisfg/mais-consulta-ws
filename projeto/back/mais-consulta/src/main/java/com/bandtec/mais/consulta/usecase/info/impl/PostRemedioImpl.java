@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.usecase.info.impl;
 
 import com.bandtec.mais.consulta.domain.PacienteHasRemedios;
 import com.bandtec.mais.consulta.domain.PacienteHasRemediosKey;
+import com.bandtec.mais.consulta.domain.Remedio;
 import com.bandtec.mais.consulta.gateway.repository.PacienteHasRemediosRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.gateway.repository.RemedioRepository;

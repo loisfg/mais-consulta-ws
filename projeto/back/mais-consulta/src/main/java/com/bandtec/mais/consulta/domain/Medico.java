@@ -13,7 +13,6 @@ import java.util.Objects;
 @Builder
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Table(name = "medico")
 @Entity
 public class Medico {

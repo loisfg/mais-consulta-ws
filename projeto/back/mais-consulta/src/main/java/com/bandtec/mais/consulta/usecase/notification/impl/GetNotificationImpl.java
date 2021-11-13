@@ -20,7 +20,7 @@ public class GetNotificationImpl implements GetNotification {
     @Override
     public PilhaObj<NotificationDTO> execute(Integer idUser) {
 
-        List<Notification> notificationList = notificationRepository.findAllByIdUsuario();
+        List<Notification> notificationList = notificationRepository.findAllByIdUsuario(idUser);
         List<NotificationDTO> notificationDTOList = new ArrayList<>();
         PilhaObj<NotificationDTO> notificationPilhaObj = new PilhaObj<>(notificationList.size());
 
