@@ -1,6 +1,6 @@
 --paciente
 INSERT INTO usuario (id_usuario, cpf, email, password, role)
-    VALUES (null, '44145999403', 'email@email.com', '123', 'PACIENTE');
+    VALUES (null, '55245903083', 'email@email.com', '123', 'PACIENTE');
 
 INSERT INTO usuario (id_usuario, cpf, email, password, role)
     VALUES (null, '36014447806', 'email@medico.com', '123', 'MEDICO');
@@ -11,7 +11,7 @@ INSERT INTO endereco (id_endereco, bairro, cep, cidade, complemento, estado, log
 INSERT INTO paciente (id_paciente, dt_nascimento, nome, numero_carteira_sus, sexo, telefone, endereco_id, usuario_id)
     VALUES (null, '1998-03-31', 'Beatrix Campos', '31231231230', 'Feminino', '(11)4920-3132',
     (SELECT id_endereco FROM endereco WHERE bairro = 'Jardim' AND numero = '319' LIMIT 1),
-    (SELECT id_usuario FROM usuario WHERE cpf = '44145999403'));
+    (SELECT id_usuario FROM usuario WHERE cpf = '55245903083'));
 
 --ubs
 INSERT INTO endereco (id_endereco, bairro, cep, cidade, complemento, estado, logradouro, numero, rua)
