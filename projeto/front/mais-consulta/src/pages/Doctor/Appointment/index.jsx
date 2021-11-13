@@ -5,52 +5,84 @@ import UserPhoto from '../../../assets/next-user.svg';
 import { FormSection } from './FormSection';
 import SmallInput from './FormSection/SmallInput';
 import { AutoCompleteInput } from './FormSection/AutoCompleteInput';
-import { Checkbox, Select, MenuItem } from '@material-ui/core';
+import PatientModal from './FormSection/PatientModal'
+import { Checkbox, Select, MenuItem, Modal } from '@material-ui/core';
 
 export const Appointment = ({name, date}) => {
   const [bloodType, setBloodType] = React.useState([]);
+  const [showModal, setShowModal] = React.useState(false);
+  const handleOpen = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
   useEffect(() =>
     setBloodType(['A+', 'A-', 'B+','B-','AB+', 'AB-','O+', 'O']), 
   []);
   const handleChange = (event) => {
     setBloodType(event.target.value);
   };
-  const data = {
-    name: 'Catarina Ayla Castro',
+  const data = [{
+    name: 'Catarina',
+    lastName: 'Ayla Castro',
+    cpf: '494.444.333-08',
+    susNumber: 5172784766154,
+    age: '52 anos',
     address: 'Quadra 912 Sul Alameda 3',
     rg: '37.620.064-9',
-    age: '52 anos',
     neighbor: 'Plano Diretor Sul',
-    susNumber: 5172784766154,
+    telephone:'(11) 2053-6573',
+    city: 'São Paulo',
+    state: 'São Paulo',
+    cellphone:'(11) 93229-4055',
+    cep: '08215-880'
+  },
+  {
     date: '03/10/2021',
     ubs: 'UBS Vila Maria',
     doctor: 'Luis Fernando Rocha'
-  }
+  }]
   return(
     <Container>
       <MenuDoctor/>
+      <Modal
+        open={showModal}
+        onClose={handleClose}
+      >
+        <PatientModal title='Dados Cadastrais' 
+        name={data[0].name}
+        cpf={data[0].cpf}
+        susNumber={data[0].susNumber}
+        cellphone={data[0].cellphone}
+        cep={data[0].cep}
+        street={data[0].address}
+        lastName={data[0].lastName}
+        rg={data[0].rg}
+        telephone={data[0].telephone}
+        city={data[0].city}
+        state={data[0].state}
+        neighbor={data[0].neighbor}
+        />
+      </Modal>
       <div className='left-side'>
         <div className='container-profile-pic'>
           <img src={UserPhoto} alt="user" />
           <TextSubtext textOne={name} textTwo='Paciente'/>
-          <button className='btn-patient'>Exibir dados do paciente </button>
+          <button onClick={() => setShowModal(true) } className='btn-patient'>Exibir dados do paciente </button>
         </div>
         <div className='line'></div>
       </div>
       <div className='right-side'>
         <Header 
-        name= {data.name}
-        address={data.address}
-        rg={data.rg}
-        age={data.age}
-        neighbor={data.neighbor}
-        susNumber= {data.susNumber}
+        name= 'Catarina Ayla Castro'
+        address={data[0].address}
+        rg={data[0].rg}
+        age={data[0].age}
+        neighbor={data[0].neighbor}
+        susNumber= {data[0].susNumber}
         />
         <FormSection sectionTitle='Último atendimento'>
           <div className='form-section-last-appointment'>
-            <TextSubtext className='text-tab' textOne='Data' textTwo={data.date}/>
-            <TextSubtext className='text-tab' textOne='Local' textTwo={data.ubs}/>
-            <TextSubtext className='text-tab' textOne='Medico atendente' textTwo={data.doctor}/>
+            <TextSubtext className='text-tab' textOne='Data' textTwo={data[1].date}/>
+            <TextSubtext className='text-tab' textOne='Local' textTwo={data[1].ubs}/>
+            <TextSubtext className='text-tab' textOne='Medico atendente' textTwo={data[1].doctor}/>
           </div>
         </FormSection>
         <FormSection sectionTitle='Prontuário'>
