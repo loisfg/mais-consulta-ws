@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import { P, Lista, ListItem, H3, H2, H1 } from "./styles";
 
-export const List = ({ text }) => {
+export const List = ({ text, props }) => {
 
     const [listUbs, setListUbs] = useState([]);
 
@@ -10,7 +10,6 @@ export const List = ({ text }) => {
         async function searchListUbs() {
             const resp = await api("maisconsulta").get("/search/ubs")
             setListUbs(resp.data)
-            console.log("log", resp.data);
         }
         searchListUbs();
     }, []);
@@ -21,10 +20,13 @@ export const List = ({ text }) => {
             <Lista>
                 {
                     listUbs.map((listUbs) => (
-                        <ListItem>
+                        <ListItem
+                            key={listUbs.id}
+                            >
                             <H3>{listUbs.nome}</H3>
                             <H2>{listUbs.endereco.logradouro + listUbs.endereco.rua + ", " + listUbs.endereco.numero}</H2>
                             <H1>tel: {listUbs.telefone}</H1>
+                        
                         </ListItem>
                     ))}
             </Lista>

@@ -2,7 +2,8 @@ import axios from "axios";
 
 const api = (url) => {
 
-    const maisConsulta = "http://localhost:8080/mais-consulta"
+    // const maisConsulta = "http://localhost:8080/mais-consulta"
+    const maisConsulta = "http://9ea7-2804-420c-102d-1900-3dfd-fba6-31db-6902.ngrok.io/mais-consulta";
     const viacep = "http://viacep.com.br"
 
     if (url === "viacep") {
@@ -12,8 +13,8 @@ const api = (url) => {
     }
 
     return axios.create({
-        // baseURL: "https://06f7-2804-420c-104e-2d00-607a-e0d2-6d3-ab03.ngrok.io/mais-consulta"
-        baseURL: url
+        baseURL: "http://9ea7-2804-420c-102d-1900-3dfd-fba6-31db-6902.ngrok.io/mais-consulta"
+        // baseURL: url
     })
 };
 
