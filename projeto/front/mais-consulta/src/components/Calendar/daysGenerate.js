@@ -47,14 +47,3 @@ export const generate = () => {
 
     return date;
 }
-/*
-    CAPTURAR: 
-        *dia mês e ano atual
-    ITENS CALENDARIO: 
-        -------------------------*Todos os dias do mês
-        -------------------------*todos os dias da semana
-        -------------------------*dias anteriores da primeira semana
-        -------------------------*dias posteriores a última semana
-
-    Dias devem ser settados no banco com dia mes e ano
-*/

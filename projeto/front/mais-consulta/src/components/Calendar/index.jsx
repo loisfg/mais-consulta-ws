@@ -13,12 +13,9 @@ export const Calendar = (props) => {
         <Calendario>
             <P>Selecione a data do agendamento</P>
             <Month>
-                <img onClick={() => {
-                    // alert(setdaySelected(hora))
-                }} class="next" src={Next} alt="" />
+                <img class="next" src={Next} alt="" />
                 <Dates>
                     <h1>{data.mounth}</h1>
-                    <p>{new Date().toDateString()}</p>
                 </Dates>
                 <img class="back" src={Back} alt="" />
             </Month>
@@ -35,7 +32,8 @@ export const Calendar = (props) => {
                 )}
                 {data.days && data.days.map(day =>
                     <ListDays weight='bold' isToDay={data.currentDay== day} onClick={() => {
-                        props.setdaySelected(new Date().getFullYear(),new Date().getMonth(), day)
+                        props.setdaySelected(`${new Date().getFullYear()}/${new Date().getMonth()}/${day}`)
+
                     }} >{day}</ListDays>
                 )}
                 {data.nextDays && data.nextDays.map(day =>

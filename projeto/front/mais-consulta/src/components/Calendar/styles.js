@@ -55,6 +55,9 @@ export const Month = styled.div`
 
 export const Dates = styled.div`
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const Weekdays = styled.div`
