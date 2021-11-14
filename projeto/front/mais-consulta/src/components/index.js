@@ -34,3 +34,4 @@ export * from './SchedulingTwo';
 export * from './AutoCompleteInput';
 export * from './ButtonTwo';
 export * from './LinesScheduling';
+export * from './SearchInput';

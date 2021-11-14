@@ -15,7 +15,7 @@ import {
   UnitMaps,
   SchedulingHistory,
 } from "./pages/Patient";
-import { Home, Appointment } from "./pages/Doctor";
+import { Home, Appointment, Patients } from "./pages/Doctor";
 import {Test} from './pages/Test'
 
 const PrivateRoutePaciente = ({ component: Component, ...rest }) => {
@@ -84,6 +84,7 @@ const Routes = () => {
         {/* <PrivateRouteMedico path="/home-doctor" component={Home} /> */}
         <Route path="/home-doctor" component={Home} />
         <Route path='/appointment' component={Appointment} />
+        <Route path='/patients' component={Patients} />
         <Route path='/test' component={Test}/>
 
         <Route

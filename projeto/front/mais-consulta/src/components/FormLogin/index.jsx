@@ -49,7 +49,6 @@ export const FormLogin = () => {
             }
           }
         } catch (erro) {
-          console.log(erro);
           setError("Cpf ou senha incorretos");
         }
       }

@@ -10,6 +10,9 @@ export const Container = styled.div`
     display: flex;
     width: 60rem;
     padding: 0 0 0 23rem;
+    .btn-patient{
+      cursor: pointer;
+    }
     .container-profile-pic{
         display: flex;
         flex-direction: column;
@@ -95,7 +98,6 @@ export const Container = styled.div`
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-between;
-      
       width: 100%;
       label{
         font-size: 1.4rem;

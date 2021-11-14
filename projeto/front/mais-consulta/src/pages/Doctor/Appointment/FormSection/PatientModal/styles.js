@@ -76,6 +76,18 @@ export const CustomBox = styled(Box)`
       height: 3.4rem;
       width: 8rem;
       margin: 0 1rem 0 0;
+      border: none;
+    }
+    #btn_save{
+      background-color: var(--light-blue);
+      border-radius: 0.4rem;
+      color: white;
+      cursor: pointer;
+    }
+    #btn_cancel{
+      border-radius: 0.4rem;
+      color: var(--grey);
+      cursor: pointer;
     }
   }
 `

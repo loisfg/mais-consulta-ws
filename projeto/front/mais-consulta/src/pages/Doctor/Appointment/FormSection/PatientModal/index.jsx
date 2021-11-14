@@ -1,7 +1,9 @@
 import React from 'react';
 import { Container, CustomBox } from './styles';
+import swal from 'sweetalert';
 export default function PatientModal({title, name, cpf, susNumber, cellphone, cep, street, lastName, rg, telephone,
                                       city, state, neighbor }) {
+    const handleAlert = (event) => swal("Dados atualizados!", "Os dados do paciente foram atualizados com sucesso.", "success");
     return (
         <Container>
             <CustomBox>
@@ -39,8 +41,8 @@ export default function PatientModal({title, name, cpf, susNumber, cellphone, ce
                     </div>
                 </div>
                 <div className='btn-group'>
-                    <button>Cancelar</button>
-                    <button>Salvar</button>
+                    <button id='btn_cancel'>Cancelar</button>
+                    <button id='btn_save' onClick={handleAlert}>Salvar</button>
                 </div>
             </CustomBox>
         </Container>

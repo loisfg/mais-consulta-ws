@@ -80,8 +80,7 @@ export const Calendar = ({props}) => {
     const [daySelected, setdaySelected] = useState();
     useEffect(() => {
         const teste=0;
-
-        setdaySelected([...teste]);
+        // setdaySelected([...teste]);
     },[])
     return (
         <Calendario>

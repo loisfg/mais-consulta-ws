@@ -65,7 +65,9 @@ export const Appointment = ({name, date}) => {
         <div className='container-profile-pic'>
           <img src={UserPhoto} alt="user" />
           <TextSubtext textOne={name} textTwo='Paciente'/>
-          <button onClick={() => setShowModal(true) } className='btn-patient'>Exibir dados do paciente </button>
+          <button onClick={() => setShowModal(true)} className='btn-patient'>
+            Exibir dados do paciente 
+          </button>
         </div>
         <div className='line'></div>
       </div>
