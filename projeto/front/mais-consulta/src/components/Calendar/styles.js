@@ -104,6 +104,7 @@ export const ListDays = styled.div`
     cursor: pointer;
     background-color: #19A795;
     border-radius: 100px;
+    color: white;
     }
 
 // import styled from "styled-components";

@@ -15,50 +15,24 @@ import swal from 'sweetalert';
 
 export const Schedules = ({ usuario }) => {
   const [listUbs, setListUbs] = useState([]);
-  const [daySelected, setdaySelected] = useState();
+  const [daySelected, setdaySelected] = useState([0]);
   const [horaSelecionada, setHoraSelecionada] = useState();
 
-  function cadastrar(e) {
+   async function cadastrar(e) {
     e.preventDefault();
-    console.log(horaSelecionada)
     console.log(daySelected)
-    // const data = {
-    //   descricao: "dermatologia",
-    //   dtAtendimento: daySelected,
-    //   hrAtendimento: {
-    //       hour: 12,
-    //       minute: 10,
-    //       nano: 0,
-    //       second: 0
-    //     },
-    //     idEspecialidade: 1,
-    //     idPaciente: usuario.paciente.id,
-    //     ubs: 1,
-    //     data: dataSelecionada,
-    //     hora: horaSelecionada  
-    // }
-    // await api("http://9ea7-2804-420c-102d-1900-3dfd-fba6-31db-6902.ngrok.io/mais-consulta")
-    // .post()
-    // console.log(listUbs+daySelected+horaSelecionada);
-    // api.post("/agendamento/1/1/2/agendar/consulta", {
-      // descricao: "string",
-      // dtAtendimento: "string",
-      // hrAtendimento: {
-      //   hour: 12,
-      //   minute: 10,
-      //   nano: 0,
-      //   second: 0
-      // },
-      // idEspecialidade: 1,
-      // idPaciente: usuario.paciente.id,
-      // ubs: 1,
-      // data: dataSelecionada,
-      // hora: horaSelecionada
-    // }).then((resposta) => {
-    //   alert("Agendou")
-    // }).catch((erro) => {
-    //   alert("Erro ao cadastrar música!")
-    // });
+    console.log(horaSelecionada)
+    const data = {
+      descricao: "Dermatologia",
+      dtAtendimento: daySelected,
+      hrAtendimento: horaSelecionada,
+      idEspecialidade : 1,
+      idPaciente: 1,
+      idUbs: 1
+    }
+    await api("http://7e02-2804-420c-102d-1900-212f-bb94-2820-461e.ngrok.io/mais-consulta")
+    .post("/agendamento/agendar/exame", data)
+
   }
 
 //   usuario.paciente.nome

@@ -32,7 +32,7 @@ export const Calendar = (props) => {
                 )}
                 {data.days && data.days.map(day =>
                     <ListDays weight='bold' isToDay={data.currentDay== day} onClick={() => {
-                        props.setdaySelected(`${new Date().getFullYear()}/${new Date().getMonth()}/${day}`)
+                        props.setdaySelected(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${day}`)
 
                     }} >{day}</ListDays>
                 )}
