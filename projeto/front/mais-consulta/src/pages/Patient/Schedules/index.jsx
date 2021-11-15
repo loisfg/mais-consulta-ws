@@ -20,15 +20,14 @@ export const Schedules = ({ usuario }) => {
 
    async function cadastrar(e) {
     e.preventDefault();
-    console.log(daySelected)
-    console.log(horaSelecionada)
+    
     const data = {
       descricao: "Dermatologia",
       dtAtendimento: daySelected,
       hrAtendimento: horaSelecionada,
       idEspecialidade : 1,
       idPaciente: 1,
-      idUbs: 1
+      idUbs: listUbs
     }
     await api("http://7e02-2804-420c-102d-1900-212f-bb94-2820-461e.ngrok.io/mais-consulta")
     .post("/agendamento/agendar/exame", data)
