@@ -10,6 +10,9 @@ export const Container = styled.div`
     display: flex;
     width: 60rem;
     padding: 0 0 0 23rem;
+    .btn-patient{
+      cursor: pointer;
+    }
     .container-profile-pic{
         display: flex;
         flex-direction: column;
@@ -43,11 +46,11 @@ export const Container = styled.div`
   }
   .right-side{
     height: 100%;
-    width: 70%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: scroll;
+    overflow-y: auto;
     .form-section{
       margin: 1.5rem 0;
       display: flex;
@@ -68,6 +71,9 @@ export const Container = styled.div`
         width: 50%;
         display: flex;
         align-items: center;
+        span{
+          padding: 3px;
+        }
         label{
           font-size: 1.4rem;
         }
@@ -76,7 +82,8 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        width: 25rem;
+        justify-content: center;
+        width: 50%;
         height: 7rem;
         > div{
           height: 50%;
@@ -95,23 +102,54 @@ export const Container = styled.div`
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-between;
-      
+      height: 100%;
       width: 100%;
       label{
         font-size: 1.4rem;
-        margin: 0.4rem 0;
+        margin: 2rem 0 0 0;
       }
-      input{
+      input[type="text"]{
         border: var(--light-blue) solid 0.1rem;
-        height: 100%;
+        height: 10%;
+        width: 100%;
         border-radius: 0.4rem;
         margin: 0 0 1rem 0;
+      }
+      #date-input{
+        margin: 0;
+        > label {
+          margin: 0;
+        }
       }
       textarea{
         border: var(--light-blue) solid 0.1rem;
         border-radius: 0.5rem;
         width: 100%;
       }
+    }
+  }
+  .btn-group{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    button{
+      height: 3.4rem;
+      width: 8rem;
+      margin: 3rem 0 1rem 1rem;
+      border: none;
+    }
+    #btn_save{
+      background-color: var(--light-blue);
+      border-radius: 0.4rem;
+      color: white;
+      cursor: pointer;
+    }
+    #btn_cancel{
+      border-radius: 0.4rem;
+      color: var(--grey);
+      cursor: pointer;
     }
   }
 `;
