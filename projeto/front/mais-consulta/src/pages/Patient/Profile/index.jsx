@@ -10,9 +10,9 @@ export const Profile = ({ usuario }) => {
         <TextSubtext textOne={usuario.paciente.nome}></TextSubtext>
         <H2> Paciente</H2>
       </PatientGroup>
-      {/* <label> Dados cadastrais </label> */}
+     
       <DataBox usuario={usuario}>
-        {/* <Input size="medium" label="Outlined" variant="outlined"></Input> */}
+       
       </DataBox>
       :
     </Container>

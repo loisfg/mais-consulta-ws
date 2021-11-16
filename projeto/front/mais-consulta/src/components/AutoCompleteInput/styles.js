@@ -5,6 +5,7 @@ export const Container = styled.div`
 
 `;
 export const CustomAutoComplete = styled(Autocomplete)`
+width: 200px;
 `;
 export const CustomTextfield = styled(TextField)`
     

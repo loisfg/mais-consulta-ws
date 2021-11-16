@@ -9,7 +9,7 @@ import {
   PanelTwo,
   H3,
 } from "./styles";
-import { Input } from "../../components";
+import { Input, AutoCompleteInput } from "../../components";
 
 export const DataBox = ({ usuario }) => {
   console.log(usuario);
@@ -194,13 +194,7 @@ export const DataBox = ({ usuario }) => {
               defaultValue={usuario.paciente.nome}
             />
             {/* <H2> Virgem</H2> */}
-            <Input
-              size="medium"
-              label="Virgem"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue={usuario.paciente.nome}
-            />
+            <AutoCompleteInput  label={"Virgem"}/>
           </LeftSide>
 
           <RightSide>
@@ -237,21 +231,9 @@ export const DataBox = ({ usuario }) => {
               defaultValue={usuario.paciente.nome}
             />
             {/* <H2> Fumante </H2> */}
-            <Input
-              size="medium"
-              label="Fumante"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue={usuario.paciente.nome}
-            />
+            <AutoCompleteInput  label={"Fumente"}/>
             {/* <H2> Tipo Sanguíne </H2> */}
-            <Input
-              size="medium"
-              label="Tipo Sanguíne"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue={usuario.paciente.nome}
-            />
+            <AutoCompleteInput  label={"Tipo Sanguíneo"} />
           </RightSide>
         </PanelTwo>
       </Box>
