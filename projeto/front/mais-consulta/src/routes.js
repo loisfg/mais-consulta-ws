@@ -6,17 +6,16 @@ import {
   Redirect,
 } from "react-router-dom";
 import { isAuth } from "./services/auth";
-import { Calendar, Wrapper } from "../src/components";
+import { Calendar, Wrapper, WrapperDoctor } from "../src/components";
 import {
   HomePatient,
   Initial,
   Profile,
   Schedules,
   UnitMaps,
-  SchedulingHistory,
+  SchedulingHistory
 } from "./pages/Patient";
 import { Home, Appointment, Patients } from "./pages/Doctor";
-import {Test} from './pages/Test'
 
 const PrivateRoutePaciente = ({ component: Component, ...rest }) => {
   const usuarioFormatoDeString = localStorage.getItem("usuario");
@@ -47,7 +46,9 @@ const PrivateRouteMedico = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) =>
         isAuth() ? (
-          <Component usuario={usuario} {...props} />
+          <WrapperDoctor>
+            <Component usuario={usuario} {...props} />
+          </WrapperDoctor>
         ) : (
           <Redirect to={{ pathname: "/", state: { from: props.location } }} />
         )
@@ -79,13 +80,10 @@ const Routes = () => {
         <PrivateRoutePaciente path="/agendamento" component={Schedules} />
         <PrivateRoutePaciente path="/mapa-de-unidades" component={UnitMaps} />
         <PrivateRoutePaciente path="/historico-agendamentos" component={SchedulingHistory} />
-        {/*  TODO: Privatizar rotas do medico */}
 
-        {/* <PrivateRouteMedico path="/home-doctor" component={Home} /> */}
         <Route path="/home-doctor" component={Home} />
         <Route path='/appointment' component={Appointment} />
         <Route path='/patients' component={Patients} />
-        <Route path='/test' component={Test}/>
 
         <Route
           path="*"

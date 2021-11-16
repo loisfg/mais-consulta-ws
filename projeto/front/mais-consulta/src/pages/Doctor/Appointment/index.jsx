@@ -4,7 +4,8 @@ import { MenuDoctor, TextSubtext, Header } from '../../../components';
 import UserPhoto from '../../../assets/next-user.svg';
 import { FormSection } from './FormSection';
 import SmallInput from './FormSection/SmallInput';
-import { AutoCompleteInput } from './FormSection/AutoCompleteInput';
+import { InputCheckable } from './FormSection/InputCheckable';
+import { DateInput } from './FormSection/DateInput'
 import PatientModal from './FormSection/PatientModal'
 import { Checkbox, Select, MenuItem, Modal } from '@material-ui/core';
 
@@ -59,6 +60,7 @@ export const Appointment = ({name, date}) => {
         city={data[0].city}
         state={data[0].state}
         neighbor={data[0].neighbor}
+        onClose={handleClose}
         />
       </Modal>
       <div className='left-side'>
@@ -95,7 +97,23 @@ export const Appointment = ({name, date}) => {
                 <SmallInput title='Altura' measure='cm'/>
               </div>
               <div className="field-group">
-                <AutoCompleteInput/>
+                <InputCheckable titleLabel='Doenças crônicas'/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="field-group">
+                <InputCheckable titleLabel="Remédios controlados"/>
+              </div>
+              <div className="field-group">
+                <InputCheckable titleLabel="Alergias"/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="field-group">
+                <InputCheckable titleLabel='DST’s'/>
+              </div>
+              <div className="field-group">
+                <InputCheckable titleLabel='Deficiências'/>
               </div>
             </div>
             <div className="row">
@@ -106,11 +124,10 @@ export const Appointment = ({name, date}) => {
                 <label>Virgem?</label>
               </div>
               <div className="field-group">
-                <AutoCompleteInput/>
+                <InputCheckable titleLabel='Doenças hereditárias'/>
               </div>
             </div>
             <div className="row">
-              <div className="form-section">
                 <div className='select-group'>
                   <label>Tipo Sanguíneo</label>
                   <Select
@@ -124,16 +141,27 @@ export const Appointment = ({name, date}) => {
                     {bloodType.map((type) =><MenuItem value={type}>{type}</MenuItem>)}
                   </Select>
                 </div>
-              </div>
+                <div className="field-group">
+                  <InputCheckable titleLabel='Atividades proibidas'/>
+                </div>
             </div>
           </div>
         </FormSection>
         <FormSection sectionTitle='Diagnóstico'>
           <div className='input-group'>
+            <label>Queixas</label>
+            <input type="text" />
             <label>Terminologia</label>
+            <input type="text" />
+            <label>Medicamentos</label>
             <input type="text" />
             <label>Orientações médicas</label>
             <textarea cols="20" rows="5"></textarea>
+            <DateInput titleLabel="Atestado"/>
+          </div>
+          <div className='btn-group'>
+            <button id='btn_cancel'>Cancelar</button>
+            <button id='btn_save'>Salvar</button>
           </div>
         </FormSection>
       </div>
