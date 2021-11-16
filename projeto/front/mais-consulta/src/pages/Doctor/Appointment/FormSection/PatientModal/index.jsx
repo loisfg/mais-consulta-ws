@@ -1,14 +1,17 @@
 import React from 'react';
 import { Container, CustomBox } from './styles';
 import swal from 'sweetalert';
-export default function PatientModal({title, name, cpf, susNumber, cellphone, cep, street, lastName, rg, telephone,
-                                      city, state, neighbor }) {
+import exit from '../../../../../assets/exit.svg'
+export default function PatientModal({title, name, cpf, susNumber, 
+    cellphone, cep, street, lastName, rg, telephone,
+    city, state, neighbor, onClose }) {
     const handleAlert = (event) => swal("Dados atualizados!", "Os dados do paciente foram atualizados com sucesso.", "success");
     return (
         <Container>
             <CustomBox>
                 <div className='title'>
                     <h1>{title}</h1>
+                    <img src={exit} onClick={onClose} alt="" />
                 </div>
                 <div className='form-group'>
                     <div className='left-side'>

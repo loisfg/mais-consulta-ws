@@ -21,9 +21,15 @@ export const CustomBox = styled(Box)`
   color: var(--grey);
   .title{
     display: flex;
-    flex-direction: column;
-    margin: 1rem 0 1rem 3rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
     font-weight: 600;
+    width: 100%;
+    img{
+      height: 3rem;
+      cursor: pointer;
+    }
   }
   .form-group{
     display: flex;
@@ -42,7 +48,8 @@ export const CustomBox = styled(Box)`
         margin: 0.5rem 0 0 3rem;
         padding: 0 0 0 0.5rem;
         height: 4rem;
-        width: 25rem;
+        width: 30rem;
+        max-width: 850px;
         border: var(--light-blue) 0.1rem solid;
         border-radius: 0.4rem;
       }
@@ -60,7 +67,8 @@ export const CustomBox = styled(Box)`
         margin: 0.5rem 0 0 3rem;
         padding: 0 0 0 0.5rem;
         height: 4rem;
-        width: 25rem;
+        width: 30rem;
+        max-width: 850px;
         border: var(--light-blue) 0.1rem solid;
         border-radius: 0.4rem;
       }
