@@ -1,6 +1,5 @@
 package com.bandtec.mais.consulta.controller;
 
-import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.domain.Consulta;
 import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
@@ -12,8 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @CrossOrigin("*")
 @RestController
@@ -29,17 +31,10 @@ public class AgendamentoController {
         this.postAgendamentoExame = postAgendamentoExame;
     }
 
-    @PostMapping("/{idPaciente}/{idUbs}/{idEspecialidade}/agendar/exame")
+    @PostMapping("/agendar/exame")
     public ResponseEntity<Exame> createAgendamentoExame(
-            @PathVariable("idPaciente")Integer idPaciente,
-            @PathVariable("idUbs") Integer idUbs,
-            @PathVariable("idEspecialidade") Integer idEspecialidade,
             @RequestBody AgendamentoExameRequestDTO agendamentoExameRequestDTO
     ) {
-
-        agendamentoExameRequestDTO.setIdPaciente(idPaciente);
-        agendamentoExameRequestDTO.setIdUbs(idUbs);
-        agendamentoExameRequestDTO.setIdEspecialidade(idEspecialidade);
 
         Optional<Exame> oExame = postAgendamentoExame.execute(agendamentoExameRequestDTO);
 
@@ -48,22 +43,30 @@ public class AgendamentoController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 
-    @PostMapping("/{idPaciente}/{idUbs}/{idEspecialidade}/agendar/consulta")
+    @PostMapping("/agendar/consulta")
     public ResponseEntity<?> createAgendamentoConsulta(
-            @PathVariable("idPaciente")Integer idPaciente,
-            @PathVariable("idUbs") Integer idUbs,
-            @PathVariable("idEspecialidade") Integer idEspecialidade,
             @RequestBody AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO
     ) {
-
-        agendamentoConsultaRequestDTO.setIdPaciente(idPaciente);
-        agendamentoConsultaRequestDTO.setIdUbs(idUbs);
-        agendamentoConsultaRequestDTO.setIdEspecialidade(idEspecialidade);
 
         Optional<Consulta> oConsulta = postAgendamentoConsulta.execute(agendamentoConsultaRequestDTO);
 
         return oConsulta
                 .map(ResponseEntity.status(HttpStatus.CREATED)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.BAD_REQUEST)::build);
+    }
+
+    @GetMapping("pegar/horas")
+    public List<LocalTime> getHours() {
+        List<LocalTime> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Random gerador = new Random();
+            int horas = gerador.nextInt(10);
+            int minutos = gerador.nextInt(60);
+            LocalTime hora = LocalTime.of(horas, minutos);
+
+            list.add(hora);
+        }
+
+        return list;
     }
 }

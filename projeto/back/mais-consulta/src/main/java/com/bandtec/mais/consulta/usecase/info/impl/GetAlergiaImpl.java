@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.usecase.info.impl;
 import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteHasAlergiaRepository;
+import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.usecase.info.GetAlergia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,15 @@ public class GetAlergiaImpl implements GetAlergia {
     @Autowired
     private AlergiaRepository alergiaRepository;
 
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
     @Override
     public List<Alergia> execute(Integer idUser) {
-        return alergiaRepository.findAlergiaByIdPacienteParams(idUser);
+        if(pacienteRepository.existsById(idUser)) {
+            return alergiaRepository.findAlergiaByIdPacienteParams(idUser);
+        }
+
+        return List.of();
     }
 }

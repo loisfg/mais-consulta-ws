@@ -7,6 +7,6 @@ import java.util.Set;
 
 public interface RemedioRepository extends JpaRepository<Remedio,Integer> {
 
-    Set<Remedio> findByNomeContainingIgnoreCase(String nome);
+    Set<Remedio> findByNomeStartingWithIgnoreCase(String nome);
 
 }

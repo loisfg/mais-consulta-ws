@@ -65,7 +65,7 @@ public class InfoController {
         return ResponseEntity.status(201).body(new HashSet<>(alergias));
     }
 
-    @GetMapping("/alergia/{idUser}")
+    @GetMapping("/alergias/{idUser}")
     public ResponseEntity<List<Alergia>> getAlergias(@PathVariable Integer idUser) {
         List<Alergia> alergiaList = getAlergia.execute(idUser);
         if (alergiaList.isEmpty()) {

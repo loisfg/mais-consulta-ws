@@ -16,6 +16,6 @@ public class GetRemediosToCompletImpl implements GetRemediosToComplet {
 
     @Override
     public Set<Remedio> execute(String nome) {
-        return remedioRepository.findByNomeContainingIgnoreCase(nome);
+        return remedioRepository.findByNomeStartingWithIgnoreCase(nome);
     }
 }

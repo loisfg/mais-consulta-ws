@@ -5,7 +5,6 @@ import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.MedicoSignInResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.MedicoDelete;
-import com.bandtec.mais.consulta.usecase.auth.MedicoSignIn;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,31 +20,11 @@ import java.util.Optional;
 @RequestMapping("medico")
 public class MedicoController {
 
-    private final List<Usuario> usuariosLogados;
-
-    @Autowired
-    public MedicoController() {
-        usuariosLogados = new ArrayList<>();
-    }
-
     @Autowired
     private MedicoSignUp medicoSignup;
 
     @Autowired
     private MedicoDelete medicoDelete;
-
-    @Autowired
-    private MedicoSignIn medicoSignIn;
-
-    @PostMapping("/signin")
-    public ResponseEntity<MedicoSignInResponseDTO> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
-
-        Optional<MedicoSignInResponseDTO> oUsuario = medicoSignIn.execute(usuarioSignInRequestDTO, usuariosLogados);
-
-        return oUsuario
-                .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.status(HttpStatus.UNAUTHORIZED)::build);
-    }
 
     @PostMapping("/signup")
     public ResponseEntity<Usuario> medicoSignUp(@RequestBody MedicoSignUpRequestDTO medicoSignUpRequestDTO) {

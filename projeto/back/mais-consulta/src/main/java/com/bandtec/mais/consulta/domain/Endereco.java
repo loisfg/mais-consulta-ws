@@ -24,7 +24,6 @@ public class Endereco {
     @Column(name = "id_endereco")
     private Integer idEndereco;
 
-    @Pattern(regexp = "\\d{5}(-\\d{3})?", message = "Digite um CEP válido")
     private String cep;
     private String cidade;
     @Size(max = 2, min =2)

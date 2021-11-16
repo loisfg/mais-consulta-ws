@@ -32,8 +32,9 @@ public class Especialidade {
     @ToString.Exclude
     private Set<Medico> medicos = new HashSet<>();
 
+    @Transient
     @JsonIgnore
-    @OneToOne(mappedBy = "especialidade", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "especialidade")
     private Agendamento agendamento;
 
     @Override

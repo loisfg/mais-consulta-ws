@@ -2,10 +2,8 @@ package com.bandtec.mais.consulta.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
-import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
-import com.bandtec.mais.consulta.models.dto.response.PacienteSignInResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
-import com.bandtec.mais.consulta.usecase.auth.PacienteSignIn;
+import com.bandtec.mais.consulta.usecase.auth.SignIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,17 +28,7 @@ public class PacienteController {
     private PacienteSignup pacienteSignup;
 
     @Autowired
-    private PacienteSignIn pacienteSignIn;
-
-    @PostMapping("/signin")
-    public ResponseEntity<PacienteSignInResponseDTO> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
-
-        Optional<PacienteSignInResponseDTO> oUsuario = pacienteSignIn.execute(usuarioSignInRequestDTO, usuariosLogados);
-
-        return oUsuario
-                .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.status(HttpStatus.UNAUTHORIZED)::build);
-    }
+    private SignIn pacienteSignIn;
 
     @PostMapping("/signup")
     public ResponseEntity<Usuario> pacienteSignUp(@RequestBody PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {

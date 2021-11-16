@@ -8,6 +8,7 @@ public class PacienteSignInResponseDTO {
 
     private String cpf;
     private String email;
+    private String role;
     private Paciente paciente;
 
 }
