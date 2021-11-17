@@ -11,51 +11,27 @@ export const FormLogin = () => {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const [isRemember, setIsRemember] = useState(true);
-  const [isMedico, setIsMedico] = useState(false);
 
   const handleLogin = useCallback(
     async (e) => {
       e.preventDefault();
-      if (!cpf && !password) {
-        setError("Preencha cpf e password para continuar!");
-      } else {
-        try {
-          let params = {
-            cpf: cpf.replace(".", "").replace(".", "").replace("-", ""),
-            password: password,
-          };
-
-          console.log(params);
-
-          let response = {};
-
-          if (isMedico === false) {
-            response = await api("maisconsulta").post("/paciente/signin", params);
-
-            if (response.status === 200) {
-              const usuarioString = JSON.stringify(response.data);
-              login(usuarioString);
-              history.push("/home");
-            }
-          } else if (isMedico === true) {
-            response = await api("maisconsulta").post("/medico/signin", params);
-
-            if (response.status === 200) {
-              const usuarioString = JSON.stringify(response.data);
-              login(usuarioString);
-              history.push("/home-doctor");
-            }
-          }
-        } catch (erro) {
-          setError("Cpf ou senha incorretos");
+      try {
+        const body = {
+          cpf: cpf.replace(".", "").replace(".", "").replace("-", ""),
+          password: password,
+        };
+        const response = await api("maisconsulta").post('/auth/signin', body)
+        if(response.status === 200) {
+          login(response.data)
+          if(response.data.role === 'MEDICO') history.push('/home-doctor');
+          if(response.data.role === 'PACIENTE') history.push('/home')
         }
       }
-    },
-    [cpf, password, history, isMedico]
-  );
-
+      catch (erro) {
+        setError("CPF ou senha incorretos");
+      }
+    }, [history, cpf, password]);
   return (
     <>
       <CustomForm onSubmit={handleLogin}>
@@ -78,20 +54,13 @@ export const FormLogin = () => {
           variant="standard"
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p>{error}</p>}
+        {error && <p>{error}</p>} 
         <Div>
           <Checkbox
             label="Lembrar de mim"
             checked={isRemember}
             onClick={(_) => {
               setIsRemember(!isRemember);
-            }}
-          />
-          <Checkbox
-            label="Sou médico"
-            checked={isMedico}
-            onClick={(_) => {
-              setIsMedico(!isMedico);
             }}
           />
           <Button type="submit" text="Entrar" />

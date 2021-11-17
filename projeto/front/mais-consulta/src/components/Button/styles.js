@@ -1,15 +1,12 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
-  width: auto;
   padding: 1rem 1.4rem;
-  font-size: 16px;
+  font-size: 1.3rem;
   border-style: none;
   border-radius: 0.5rem;
   color: white;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: #19A795;
+  background-color: var(--green-standard);
   cursor: pointer;
-  height: 50px;
-  margin-top: 18px;
 `;

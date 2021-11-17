@@ -8,11 +8,12 @@ import {
 } from "../../../components";
 
 export const HomePatient = ({ usuario }) => {
+  const username = localStorage.getItem("nome")
   return (
     <Page>
       <AuxDiv>
         <DivUsuario>
-          <UserProfilePic nome="{usuario.paciente.nome}" subtexto="Paciente" />
+          <UserProfilePic nome={username} subtexto="Paciente" />
         </DivUsuario>
         <Content>
           <WelcomeMessage />

@@ -8,6 +8,11 @@ export const CustomForm = styled.form`
   align-items: center;
   justify-content: center;
   font-size: 3rem;
+  p{
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: red;
+  }
 `;
 
 export const Div = styled.div`
@@ -16,17 +21,14 @@ export const Div = styled.div`
   justify-content: space-between;
   height: 8vh;
   width: 28vw;
-  padding: 20px 0 0px 0;
-  margin-top: 30px;
   > span {
     font-size: 1.2rem;
   }
 `
 
 export const CustomInputMask = styled(InputMask)`
-border: none;
-width: 350px;
-border-bottom: 1px solid;
-/* border-inline-color: black; */
-opacity: 0.87;
+  border: none;
+  width: 350px;
+  border-bottom: 1px solid;
+  opacity: 0.87;
 `
