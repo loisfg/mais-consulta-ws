@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles';
-import { UserProfilePic, MenuDoctor, Patient } from '../../../components'
+import { UserProfilePic, Patient } from '../../../components'
 import { Container } from './styles'
 import { PatientData } from './PatientData'
 import { Link, useLocation } from 'react-router-dom';
@@ -9,7 +9,6 @@ export const Home = () => {
 const location = useLocation()
 return (
         <Container>
-            <MenuDoctor/>
             <div className='right_side'>
                 <div className='textfield'>
                     <h1>Boa noite Dr House!</h1>

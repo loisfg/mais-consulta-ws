@@ -5,12 +5,12 @@ import History from '../../assets/historico.png';
 export default [
     {
         title: 'Home',
-        path: '/home',
+        path: '/home-doctor',
         icon: Home
     },
     {
         title: 'Pacientes',
-        path: '/historico-pacientes',
+        path: '/patients',
         icon: History
     },
 ]

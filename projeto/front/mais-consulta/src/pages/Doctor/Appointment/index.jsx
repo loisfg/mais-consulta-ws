@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Container } from './styles';
-import { MenuDoctor, TextSubtext, Header } from '../../../components';
+import { TextSubtext, Header } from '../../../components';
 import UserPhoto from '../../../assets/next-user.svg';
 import { FormSection } from './FormSection';
 import SmallInput from './FormSection/SmallInput';
@@ -42,7 +42,6 @@ export const Appointment = ({name, date}) => {
   }]
   return(
     <Container>
-      <MenuDoctor/>
       <Modal
         open={showModal}
         onClose={handleClose}

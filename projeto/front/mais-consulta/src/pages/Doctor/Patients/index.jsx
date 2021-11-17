@@ -1,12 +1,11 @@
 import React from 'react';
 import { Container } from './styles';
-import { MenuDoctor, UserProfilePic, SearchInput } from '../../../components'
+import { UserProfilePic, SearchInput } from '../../../components'
 import PatientData from './PatientData'
 import { data } from './data.js'
 export const Patients = () => {
     return (
         <Container>
-            <MenuDoctor/>
             <div className='container_profile_pic'>
                 <UserProfilePic nome= "Gregory House" subtexto='Médico'/>
             </div>

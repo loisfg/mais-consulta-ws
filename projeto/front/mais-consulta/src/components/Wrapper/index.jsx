@@ -1,12 +1,13 @@
 import React from 'react';
-
 import { Container } from './styles';
 import { Menu } from '../'
+import { MenuDoctor } from '../MenuDoctor';
 
-export const Wrapper = ({children}) => {
+export const Wrapper = ({children, role}) => {
     return (
         <Container>
-            <Menu/>
+            {role === 'MEDICO' && <MenuDoctor/>}
+            {role === 'PACIENTE' && <Menu/>}
             <section>
                 {children}
             </section>

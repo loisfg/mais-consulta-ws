@@ -9,7 +9,6 @@ export const Container = styled.div`
     height: 100%;
     display: flex;
     width: 60rem;
-    padding: 0 0 0 23rem;
     .btn-patient{
       cursor: pointer;
     }

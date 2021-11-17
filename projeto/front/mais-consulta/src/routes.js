@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { isAuth } from "./services/auth";
-import { Calendar, Wrapper, WrapperDoctor } from "../src/components";
+import { Calendar, Wrapper } from "../src/components";
 import {
   HomePatient,
   Initial,
@@ -17,38 +17,16 @@ import {
 } from "./pages/Patient";
 import { Home, Appointment, Patients } from "./pages/Doctor";
 
-const PrivateRoutePaciente = ({ component: Component, ...rest }) => {
-  const usuarioFormatoDeString = localStorage.getItem("usuario");
-  const usuario = JSON.parse(usuarioFormatoDeString);
-
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const role = localStorage.getItem("role");
   return (
     <Route
       {...rest}
       render={(props) =>
         isAuth() ? (
-          <Wrapper>
-            <Component usuario={usuario} {...props} />
+          <Wrapper role={role}>
+            <Component {...props} />
           </Wrapper>
-        ) : (
-          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-        )
-      }
-    />
-  );
-};
-
-const PrivateRouteMedico = ({ component: Component, ...rest }) => {
-  const usuarioFormatoDeString = localStorage.getItem("usuario");
-  const usuario = JSON.parse(usuarioFormatoDeString);
-
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuth() ? (
-          <WrapperDoctor>
-            <Component usuario={usuario} {...props} />
-          </WrapperDoctor>
         ) : (
           <Redirect to={{ pathname: "/", state: { from: props.location } }} />
         )
@@ -74,29 +52,31 @@ const Routes = () => {
             )
           }
         />
-        <PrivateRoutePaciente path="/home" component={HomePatient} />
-        <PrivateRoutePaciente path="/calendar" component={Calendar} />
-        <PrivateRoutePaciente path="/perfil" component={Profile} />
-        <PrivateRoutePaciente path="/agendamento" component={Schedules} />
-        <PrivateRoutePaciente path="/mapa-de-unidades" component={UnitMaps} />
-        <PrivateRoutePaciente path="/historico-agendamentos" component={SchedulingHistory} />
+        <PrivateRoute path="/home" component={HomePatient} />
+        <PrivateRoute path="/calendar" component={Calendar} />
+        <PrivateRoute path="/perfil" component={Profile} />
+        <PrivateRoute path="/agendamento" component={Schedules} />
+        <PrivateRoute path="/mapa-de-unidades" component={UnitMaps} />
+        <PrivateRoute path="/historico-agendamentos" component={SchedulingHistory} />
 
-        <Route path="/home-doctor" component={Home} />
-        <Route path='/appointment' component={Appointment} />
-        <Route path='/patients' component={Patients} />
-
+        <PrivateRoute path="/home-doctor" component={Home} />
+        <PrivateRoute path='/appointment' component={Appointment} />
+        <PrivateRoute path='/patients' component={Patients} />
         <Route
           path="*"
-          render={(props) =>
-            isAuth() ? (
-              <Redirect
-                to={{ pathname: "/home", state: { from: props.location } }}
-              />
-            ) : (
-              <Redirect
-                to={{ pathname: "/", state: { from: props.location } }}
-              />
-            )
+          render={(props) =>{
+              const role = localStorage.getItem("role");
+              const pathname = role === 'MEDICO'? '/home-doctor' : '/home';
+              return isAuth() ? (
+                <Redirect
+                  to={{ pathname, state: { from: props.location } }}
+                />
+              ) : (
+                <Redirect
+                  to={{ pathname: "/", state: { from: props.location } }}
+                />
+              )
+            }
           }
         />
       </Switch>

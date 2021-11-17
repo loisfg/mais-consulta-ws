@@ -17,7 +17,6 @@ export const Container = styled.div`
     .form_group{
         height: 25%;
         width: 100%;
-        padding: 0 0 0 23rem;
         display: flex;
         flex-direction: column;
         .textfield{
@@ -35,8 +34,7 @@ export const Container = styled.div`
     }
     .patient_group{
         display: flex;
-        padding: 0 0 0 23rem;
-        width: 100vw;
+        width: 100%;
         justify-content: space-between;
         overflow-y: auto;
         flex-wrap: wrap;

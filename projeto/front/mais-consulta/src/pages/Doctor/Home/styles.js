@@ -16,7 +16,6 @@ export const Container = styled.div`
   .right_side{
     height: 100%;
     width: 100vw;
-    padding: 0 0 0 23rem;
     .textfield{
       width: 65%;
       padding: 10rem 0rem 0 10rem;

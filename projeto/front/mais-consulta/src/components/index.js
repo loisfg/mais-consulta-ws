@@ -34,5 +34,4 @@ export * from './AutoCompleteInput';
 export * from './ButtonTwo';
 export * from './LinesScheduling';
 export * from './SearchInput';
-export * from './WrapperDoctor';
 export * from './Checkbox';
