@@ -1,12 +1,12 @@
 import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight } from "./styles";
 import { UserProfilePic, Message, List, Maps } from "../../../components";
-
-export const UnitMaps = ({ usuario }) => {
+const username = localStorage.getItem("nome")
+export const UnitMaps = () => {
   return (
     <Page>
       <DivUsuario>
-        <UserProfilePic nome={usuario.paciente.nome} subtexto=" Paciente" />
+        <UserProfilePic nome={username} subtexto=" Paciente" />
       </DivUsuario>
       <Content>
         <BoxLeft>
