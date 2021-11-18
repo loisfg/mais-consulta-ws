@@ -58,6 +58,7 @@ export const Tab = styled.li`
 export const Redirect = styled(Link)`
   border-left: ${({ isActive }) =>
     isActive ? "5px solid var(--green-standard)" : "none"};
+    padding-left: 8px;
 `;
 
 export const Text = styled.span`

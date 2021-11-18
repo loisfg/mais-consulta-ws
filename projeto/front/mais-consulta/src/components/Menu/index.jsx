@@ -36,7 +36,6 @@ export const Menu = () => {
                 size="3rem"
                 icon={item.icon}
                 isActive={location.pathname === item.path}
-                marginLeft="2px"
               />
               <Text isActive={location.pathname === item.path}>
                 {item.title}
