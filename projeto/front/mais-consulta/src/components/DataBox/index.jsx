@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Box,
@@ -13,12 +13,12 @@ import { Input, AutoCompleteInput } from "../../components";
 
 export const DataBox = () => {
   const username = localStorage.getItem("nome")
-  const top100Films = [
-    { title: 'Sim' },
-    {
-      title: 'Não',
-    }, 
-  ]
+
+  const [textos, setTextos] = useState([
+    {title: 'Sim'},
+    {title: 'nao'},
+
+  ]);
   return (
     <Container>
       <Box>
@@ -192,7 +192,7 @@ export const DataBox = () => {
               placeholder="Adicionar informação"
               defaultValue="Não possuo nenhuma doença hereditária"
             />
-          <AutoCompleteInput  label={"Fumente"} opcoes={{title: "olaaa"}}/>
+          <AutoCompleteInput  label={"Fumente"} opcoes={textos}/>
             <AutoCompleteInput  label={"Tipo Sanguíneo"} opcoes={{title: "oi"}}/>
           </RightSide>
         </PanelTwo>

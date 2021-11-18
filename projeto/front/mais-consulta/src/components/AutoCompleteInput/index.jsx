@@ -8,8 +8,8 @@ export function AutoCompleteInput(props) {
         <CustomAutoComplete
              multiple
              id="input-autocomplete"
-             options={[{title: "Sim"}, {title: "Não"}]}
-             getOptionLabel={(option) => option.title}
+             options={props.opcoes}
+            getOptionLabel={(option) => option.title}
              renderInput={(params) => (
                <CustomTextfield {...params} label={props.label} />
              )}
