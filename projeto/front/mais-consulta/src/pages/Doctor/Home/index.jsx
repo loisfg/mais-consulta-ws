@@ -5,8 +5,11 @@ import { Container } from './styles'
 import { PatientData } from './PatientData'
 import { Link, useLocation } from 'react-router-dom';
 
+const username = localStorage.getItem("nome");
+const typeOfUser = localStorage.getItem("role");
+
 export const Home = () => {
-const location = useLocation()
+const location = useLocation();
 return (
         <Container>
             <div className='right_side'>

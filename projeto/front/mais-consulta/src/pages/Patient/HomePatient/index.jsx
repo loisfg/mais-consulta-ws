@@ -8,12 +8,13 @@ import {
 } from "../../../components";
 
 export const HomePatient = ({ usuario }) => {
-  const username = localStorage.getItem("nome")
+  const username = localStorage.getItem("nome");
+  const typeOfUser = localStorage.getItem("role");
   return (
     <Page>
       <AuxDiv>
         <DivUsuario>
-          <UserProfilePic nome={username} subtexto="Paciente" />
+          <UserProfilePic nome={username} subtexto={String(typeOfUser.toLocaleLowerCase())} />
         </DivUsuario>
         <Content>
           <WelcomeMessage />

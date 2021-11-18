@@ -29,6 +29,7 @@ export const FormLogin = () => {
         }
       }
       catch (erro) {
+        console.log(erro)
         setError("CPF ou senha incorretos");
       }
     }, [history, cpf, password]);
