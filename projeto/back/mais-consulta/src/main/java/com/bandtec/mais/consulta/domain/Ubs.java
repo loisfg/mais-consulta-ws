@@ -25,10 +25,6 @@ public class Ubs {
 
     private String telefone;
 
-//    @JoinColumn
-//    @ManyToMany()
-//    Medico medico;
-
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;

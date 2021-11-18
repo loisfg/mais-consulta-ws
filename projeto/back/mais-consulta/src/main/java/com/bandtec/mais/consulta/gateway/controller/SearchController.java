@@ -1,4 +1,4 @@
-package com.bandtec.mais.consulta.controller;
+package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Ubs;
