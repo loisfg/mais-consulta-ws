@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
 import { UserProfilePic, SearchInput } from '../../../components'
 import PatientData from './PatientData'
-import { data } from './data.js'
+import { data as oldData } from './data.js'
+import api from "../../../services/api";
 export const Patients = () => {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                // const response = await api('maisconsulta').get('/medico/historico');
+                // setData(response.data);
+                setData(oldData);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getData();
+    }, [])
     return (
         <Container>
             <div className='container_profile_pic'>
@@ -17,7 +31,7 @@ export const Patients = () => {
             </div>
             <div className='patient_group'>
                 {
-                    data.map((patient, index) =>{
+                    data.map((patient) =>{
                         return( 
                                 <PatientData name={patient.name} 
                                              age={patient.age} 

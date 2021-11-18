@@ -20,7 +20,6 @@ export const MenuDoctor = () => {
               to={item.path}
               isActive={location.pathname === item.path}>
               <img
-                fill="blue"
                 src={item.icon}
                 isActive={location.pathname === item.path}
                 alt="" />

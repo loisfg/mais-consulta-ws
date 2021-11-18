@@ -7,14 +7,13 @@ import { Link, useLocation } from 'react-router-dom';
 
 const username = localStorage.getItem("nome");
 const typeOfUser = localStorage.getItem("role");
-
 export const Home = () => {
 const location = useLocation();
 return (
         <Container>
             <div className='right_side'>
                 <div className='textfield'>
-                    <h1>Boa noite Dr House!</h1>
+                    <h1>Boa noite Dr {username}!</h1>
                     <h3>01 Nov 01:31</h3>
                 </div>
                 <div className='hours_line'>
@@ -44,7 +43,7 @@ return (
                 </div>
             </div>
             <div className='container_profile_pic'>
-                <UserProfilePic nome= "Gregory House" subtexto='Médico'/>
+                <UserProfilePic nome= {username} subtexto={typeOfUser}/>
             </div>
         </Container>
     )

@@ -6,8 +6,8 @@ import { MenuDoctor } from '../MenuDoctor';
 export const Wrapper = ({children, role}) => {
     return (
         <Container>
-            {role === 'MEDICO' && <MenuDoctor/>}
-            {role === 'PACIENTE' && <Menu/>}
+            {role === 'Medico' && <MenuDoctor/>}
+            {role === 'Paciente' && <Menu/>}
             <section>
                 {children}
             </section>

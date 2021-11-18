@@ -10,10 +10,7 @@ export const InputData = ({ size, label, onChange, type }) => {
     label={label} 
     variant="Outlined" 
     size={size}
-
     />
-
-
   );
 }
 

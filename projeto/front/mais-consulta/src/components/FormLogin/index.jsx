@@ -23,13 +23,14 @@ export const FormLogin = () => {
         };
         const response = await api("maisconsulta").post('/auth/signin', body)
         if(response.status === 200) {
+          console.log(response.data);
           login(response.data)
-          if(response.data.role === 'MEDICO') history.push('/home-doctor');
-          if(response.data.role === 'PACIENTE') history.push('/home')
+          if(response.data.role === 'Medico') history.push('/home-doctor');
+          if(response.data.role === 'Paciente') history.push('/home')
         }
       }
       catch (erro) {
-        console.log(erro)
+        console.log("Esse é o erro do login" + erro)
         setError("CPF ou senha incorretos");
       }
     }, [history, cpf, password]);
