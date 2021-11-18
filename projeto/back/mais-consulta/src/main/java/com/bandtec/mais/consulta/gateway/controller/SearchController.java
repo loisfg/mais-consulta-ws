@@ -5,6 +5,7 @@ import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.usecase.search.SearchEspecialidade;
 import com.bandtec.mais.consulta.usecase.search.SearchUbs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,6 @@ public class SearchController {
         this.searchUbs = searchUbs;
     }
 
-    // Busca por especialidade
     @GetMapping("/{especialidade}")
     public ResponseEntity<Set<Medico>> getMedicosEspecialidade(@PathVariable String especialidade) {
         return searchEspecialidade.execute(especialidade).isEmpty() ?
@@ -35,6 +35,8 @@ public class SearchController {
 
     @GetMapping("/ubs")
     public ResponseEntity<List<Ubs>> getUbs() {
-        return searchUbs.execute().isEmpty() ? ResponseEntity.status(204).build() : ResponseEntity.status(200).body(searchUbs.execute());
+        List<Ubs> ubs = searchUbs.execute();
+        return ubs.isEmpty() ?
+                ResponseEntity.status(204).build() : ResponseEntity.status(200).body(ubs);
     }
 }
