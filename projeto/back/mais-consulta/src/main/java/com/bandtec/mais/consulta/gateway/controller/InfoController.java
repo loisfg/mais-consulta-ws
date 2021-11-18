@@ -100,7 +100,7 @@ public class InfoController {
     }
 
     @GetMapping("/remedios/auto/{nome}")
-    public Set<Remedio> getRemedios(@PathVariable  String nome) {
+    public Set<Remedio> getRemediosToAuto(@PathVariable String nome) {
         return getRemediosToComplet.execute(nome);
     }
 

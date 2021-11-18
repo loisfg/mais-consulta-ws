@@ -57,15 +57,13 @@ public class AgendamentoController {
     }
 
     @GetMapping("/buscar/exames/{idUser}")
-    public ResponseEntity<?> getExames(@PathVariable Integer idUser) {
+    public ResponseEntity<?> getExamesByIdUser(@PathVariable Integer idUser) {
 
-        Optional<List<AgendamentoExameResponse>> exame = getAgendamentoExame.execute(idUser);
+        Optional<List<AgendamentoExameResponse>> oListExames = getAgendamentoExame.execute(idUser);
 
-        if (exame.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(exame);
+        return oListExames
+                .map(ResponseEntity.status(HttpStatus.OK)::body)
+                .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
     @GetMapping("pegar/horas")
