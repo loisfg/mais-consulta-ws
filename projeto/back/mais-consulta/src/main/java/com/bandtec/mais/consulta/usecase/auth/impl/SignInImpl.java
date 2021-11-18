@@ -1,5 +1,7 @@
 package com.bandtec.mais.consulta.usecase.auth.impl;
 
+import com.bandtec.mais.consulta.domain.Medico;
+import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
@@ -36,29 +38,31 @@ public class SignInImpl implements SignIn {
 
             usuariosLogados.add(usuario);
 
-            if (usuario.getRole().equals("MEDICO")) {
+            if (usuario.getRole().equals("Medico")) {
                 log.info("USUARIO É UM MEDICO");
+                Medico medico = medicoRepository.findByUsuario(usuario).get();
 
-                MedicoSignInResponseDTO medicoSignInResponseDTO = new MedicoSignInResponseDTO();
-
-                medicoSignInResponseDTO.setCpf(usuario.getCpf());
-                medicoSignInResponseDTO.setRole(usuario.getRole());
-                medicoSignInResponseDTO.setEmail(usuario.getEmail());
-
-                medicoSignInResponseDTO.setMedico(medicoRepository.findByUsuario(usuario).get());
+                MedicoSignInResponseDTO medicoSignInResponseDTO = MedicoSignInResponseDTO
+                        .builder()
+                        .id(medico.getIdMedico())
+                        .nome(medico.getNome())
+                        .role(usuario.getRole())
+                        .build();
 
                 return Optional.of(medicoSignInResponseDTO);
             }
             else {
                 log.info("USUARIO É UM PACIENTE");
+                Paciente paciente = pacienteRepository.findByUsuario(usuario).get();
 
-                PacienteSignInResponseDTO pacienteSignInResponseDTO = new PacienteSignInResponseDTO();
+                PacienteSignInResponseDTO pacienteSignInResponseDTO = PacienteSignInResponseDTO
+                        .builder()
+                        .id(paciente.getIdPaciente())
+                        .nome(paciente.getNome())
+                        .role(usuario.getRole())
+                        .build();
 
-                pacienteSignInResponseDTO.setCpf(usuario.getCpf());
                 pacienteSignInResponseDTO.setRole(usuario.getRole());
-                pacienteSignInResponseDTO.setEmail(usuario.getEmail());
-
-                pacienteSignInResponseDTO.setPaciente(pacienteRepository.findByUsuario(usuario).get());
 
                 return Optional.of(pacienteSignInResponseDTO);
             }

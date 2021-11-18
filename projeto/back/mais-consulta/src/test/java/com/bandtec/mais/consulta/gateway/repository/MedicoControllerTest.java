@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
-import com.bandtec.mais.consulta.controller.MedicoController;
+import com.bandtec.mais.consulta.gateway.controller.MedicoController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

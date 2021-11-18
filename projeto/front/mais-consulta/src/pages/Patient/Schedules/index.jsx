@@ -34,11 +34,11 @@ export const Schedules = ({ usuario }) => {
     .post("/agendamento/agendar/exame", data)
 
   }
-
+  const typeOfUser = localStorage.getItem("role");
   return (
     <Page>
       <DivUsuario>
-        <UserProfilePic nome={username} subtexto=" Paciente" />
+        <UserProfilePic nome={username} subtexto= {String(typeOfUser.toLocaleLowerCase())}/>
       </DivUsuario>
       <Content>
         <BoxLeft>

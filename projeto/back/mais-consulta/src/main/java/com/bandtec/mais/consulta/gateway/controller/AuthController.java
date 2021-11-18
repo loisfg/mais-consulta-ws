@@ -1,8 +1,7 @@
-package com.bandtec.mais.consulta.controller;
+package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
-import com.bandtec.mais.consulta.models.dto.response.PacienteSignInResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.Logoff;
 import com.bandtec.mais.consulta.usecase.auth.SignIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class AuthController {
 
         return oUsuario
                 .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.status(HttpStatus.UNAUTHORIZED)::build);
+                    .orElseGet(ResponseEntity.status(HttpStatus.NOT_FOUND)::build);
     }
 
 }

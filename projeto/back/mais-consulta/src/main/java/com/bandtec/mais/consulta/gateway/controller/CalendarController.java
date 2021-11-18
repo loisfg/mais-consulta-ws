@@ -1,4 +1,4 @@
-package com.bandtec.mais.consulta.controller;
+package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.models.dto.request.CalendarRequestDTO;
 import com.bandtec.mais.consulta.usecase.calendar.GetCalendarDiasCorridos;

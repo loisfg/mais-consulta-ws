@@ -2,12 +2,10 @@ package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Medico;
-import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 

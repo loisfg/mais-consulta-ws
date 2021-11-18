@@ -21,7 +21,7 @@ public class SwaggerUiConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.bandtec.mais.consulta.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.bandtec.mais.consulta.gateway.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(buildApiInfo());
