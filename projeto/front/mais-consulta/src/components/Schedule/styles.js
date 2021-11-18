@@ -13,7 +13,7 @@ height: 100%;
 width: 10%;
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: space-around;
 border-radius: 6px;
 background-color: #C0E2DE;
 `

@@ -11,7 +11,7 @@ export const SchedulingHistory = ({ usuario }) => {
         </DivUsuario>
         <WelcomeMessageTwo/>
         <DivComboBox>
-        <LeftSide>
+        <LeftSide>\
          <Agrupamento>
          <H3> Perído </H3>
         <AutoCompleteInput  label={"Dias da semana"}/>

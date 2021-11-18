@@ -9,4 +9,7 @@ export const StyledButton = styled.button`
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--green-standard);
   cursor: pointer;
+  width: 150px;
+  height: 50px;
+  margin-top: 16px;
 `;
