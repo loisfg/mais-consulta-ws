@@ -42,6 +42,9 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
         Exame exame = AgendamentoExameRequestDTO.convertFromController(agendamentoExameRequestDTO);
 
         if (pacienteRepository.existsById(agendamentoExameRequestDTO.getIdPaciente())) {
+            //select medico.Id_medico from medico inner join ubs ON ubs.ID_UBS = medico.UBS_ID
+            //JOIN especialidade on especialidade.ID_ESPECIALIDADE = medico.ESPECIALIDADE_ID
+            //where UBS.ID_UBS = 1
 
             Agendamento agendamento = exame.getAgendamento();
             agendamento.setPaciente(pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get());

@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Consulta;
 import com.bandtec.mais.consulta.domain.Exame;
+import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.interfaces.AgendamentoExameResponse;
@@ -23,14 +24,26 @@ public class AgendamentoController {
 
     private final PostAgendamentoConsulta postAgendamentoConsulta;
     private final PostAgendamentoExame postAgendamentoExame;
+    private final MedicoRepository medicoRepository;
     private final GetAgendamentoExame getAgendamentoExame;
 
+
     @Autowired
-    public AgendamentoController(PostAgendamentoConsulta postAgendamentoConsulta, PostAgendamentoExame postAgendamentoExame, GetAgendamentoExame getAgendamentoExame) {
+    public AgendamentoController(PostAgendamentoConsulta postAgendamentoConsulta, PostAgendamentoExame postAgendamentoExame, MedicoRepository medicoRepository,GetAgendamentoExame getAgendamentoExame) {
         this.postAgendamentoConsulta = postAgendamentoConsulta;
         this.postAgendamentoExame = postAgendamentoExame;
+        this.medicoRepository = medicoRepository;
         this.getAgendamentoExame = getAgendamentoExame;
+
     }
+
+
+    @GetMapping("/testeMedico")
+    public Optional<List<Integer>> recebermedico(){
+        return medicoRepository.findIdsMedicosByIdEspecialidade(1);
+    }
+
+
 
     @PostMapping("/agendar/exame")
     public ResponseEntity<Exame> createAgendamentoExame(

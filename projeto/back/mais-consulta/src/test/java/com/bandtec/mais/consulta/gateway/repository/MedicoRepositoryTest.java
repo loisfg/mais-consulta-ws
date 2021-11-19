@@ -51,6 +51,6 @@ class MedicoRepositoryTest {
         if (medicoRepository.existsByNome(nome)){
             System.out.println("Medico existe" + medicoRepository.findByNome(nome));
         }
-
+        System.out.println("Medico repository teste "+ medicoRepository.findIdsMedicosByIdEspecialidade(1));
     }
 }
