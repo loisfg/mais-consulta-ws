@@ -3,6 +3,8 @@ package com.bandtec.mais.consulta.usecase.schedule.impl;
 import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.gateway.repository.*;
+import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
+import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoExame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.factory.NotificationAdapter;
 import com.bandtec.mais.consulta.factory.NotificationFactory;
@@ -35,6 +37,9 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     @Autowired
     private CreateNotification createNotification;
 
+    @Autowired
+    private FilaAgendamentoExame filaAgendamentoExame;
+
     @Override
     public Optional<Exame> execute(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
         Exame exame = AgendamentoExameRequestDTO.convertFromController(agendamentoExameRequestDTO);
@@ -43,6 +48,13 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
             //select medico.Id_medico from medico inner join ubs ON ubs.ID_UBS = medico.UBS_ID
             //JOIN especialidade on especialidade.ID_ESPECIALIDADE = medico.ESPECIALIDADE_ID
             //where UBS.ID_UBS = 1
+
+            Optional<Agendamento> oAgendamento = agendamentoRepository.findByHrAtendimento(agendamentoExameRequestDTO.getHrAtendimento());
+
+            if (oAgendamento.isPresent()){
+                filaAgendamentoExame.setFilaAgendamentoExame(agendamentoExameRequestDTO);
+                return Optional.of(exame);
+            }
 
             Agendamento agendamento = exame.getAgendamento();
             agendamento.setPaciente(pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get());
