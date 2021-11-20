@@ -17,7 +17,6 @@ export const Schedules = ({ usuario }) => {
   const [listUbs, setListUbs] = useState([]);
   const [daySelected, setdaySelected] = useState([0]);
   const [horaSelecionada, setHoraSelecionada] = useState();
-  const username = localStorage.getItem("nome")
 
    async function cadastrar(e) {
     e.preventDefault();
@@ -38,7 +37,7 @@ export const Schedules = ({ usuario }) => {
   return (
     <Page>
       <DivUsuario>
-        <UserProfilePic nome={username} subtexto= {String(typeOfUser.toLocaleLowerCase())}/>
+        <UserProfilePic />
       </DivUsuario>
       <Content>
         <BoxLeft>

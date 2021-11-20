@@ -7,14 +7,12 @@ import {
   NextWeek,
 } from "../../../components";
 
-export const HomePatient = ({ usuario }) => {
-  const username = localStorage.getItem("nome");
-  const typeOfUser = localStorage.getItem("role");
+export const HomePatient = () => {
   return (
     <Page>
       <AuxDiv>
         <DivUsuario>
-          <UserProfilePic nome={username} subtexto={String(typeOfUser.toLocaleLowerCase())} />
+          <UserProfilePic/>
         </DivUsuario>
         <Content>
           <WelcomeMessage />

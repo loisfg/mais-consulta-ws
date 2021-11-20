@@ -6,11 +6,10 @@ export const CustomAvatar = styled(Avatar)`
 `
 
 export const Container = styled.div`
-    height: 100%;
+
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 100%;
 `
 export const H3 = styled.h3`
     color: #366273;

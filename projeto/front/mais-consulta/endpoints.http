@@ -1,0 +1,32 @@
+@url = http://localhost:8080/mais-consulta 
+
+### Home (Medico)
+GET {{url}}/medico/{doctorId}/agendamentos HTTP/1.1
+# Retorno esperado
+# [
+    # {
+        #     name: string,
+        #     age: number,
+        #     scheduleTime: time
+    # }
+# ]
+
+### Pacientes (Medico)
+GET {{url}}/medico/historico HTTP/1.1
+# Retorno esperado
+# [
+    # {
+        # name: string,
+        # age: number,
+        # lastAppointment: string
+    # }
+# ]
+###
+
+POST {{url}}/auth/signin HTTP/1.1
+content-type: application/json
+
+{
+    "cpf": "36014447806",
+    "password": "123"
+}

@@ -2,12 +2,11 @@ import React from 'react';
 import { Page } from "./styles";
 import { DivUsuario, DivComboBox, LeftSide, RightSide, Container, H3, Agrupamento } from './styles';
 import { UserProfilePic, WelcomeMessageTwo, SchedulingTwo, AutoCompleteInput, Button, ButtonTwo } from '../../../components'
-const username = localStorage.getItem("nome")
 export const SchedulingHistory = ({ usuario }) => {
   return (
     <Page>
         <DivUsuario>
-             <UserProfilePic nome={username} subtexto="Paciente" />
+             <UserProfilePic/>
         </DivUsuario>
         <WelcomeMessageTwo/>
         <DivComboBox>

@@ -21,7 +21,7 @@ export const Patients = () => {
     return (
         <Container>
             <div className='container_profile_pic'>
-                <UserProfilePic nome= "Gregory House" subtexto='Médico'/>
+                <UserProfilePic/>
             </div>
             <div className='form_group'>
                 <div className='textfield'>
