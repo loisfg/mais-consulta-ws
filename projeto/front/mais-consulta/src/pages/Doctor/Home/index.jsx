@@ -28,40 +28,33 @@ export const Home = () => {
     
 return (
         <Container>
-            <div className='right_side'>
-                <UserProfilePic/>
-                <div className='textfield'>
-                    <h1>Boa noite Dr {username}!</h1>
-                    <h3>{moment}</h3>
-                </div>
-                {
-                    data.length ? ( 
-                    <div className='hours_line'>
-                    <div className='line'></div>
-                    <div className='patient-group'>
-                        <label>Próximo paciente</label>
-                        <Link to={'/appointment'}>
-                            <Patient isNext={true} name={data[0].name} age={data[0].age}/>
-                        </Link>
-                        <label>Pacientes do dia</label>
-                        {
-                            data.map((patient, index) => {
-                                if(index > 0){
-                                    return(
-                                        <div>
-                                            <label>{patient.scheduleTime}</label>
-                                            <Patient isNext={false} name={patient.name} age={patient.age}/>
-                                        </div>
-                                    ) 
-                                }
-                            })
-                        }
-                    </div>
-                </div>) : (<label>Você não possui agendamentos no momento :)</label>)
-                }
-               
+            <UserProfilePic/>
+            <div className='textfield'>
+                <h1>Boa noite Dr {username}!</h1>
+                <h3>{moment}</h3>
             </div>
-            
+            {
+                data.length ? ( 
+                <div className='hours_line'>
+                <div className='line'></div>
+                <div className='patient-group'>
+                    <label>Próximo paciente</label>
+                    <Link to={`/appointment/${data[0].id}`}>
+                        <Patient isNext={true} name={data[0].name} age={data[0].age}/>
+                    </Link>
+                    <label>Pacientes do dia</label>
+                    {
+                        data.map((patient, index) => {
+                            if(index > 0){
+                                return(
+                                    <Patient isNext={false} name={patient.name} age={patient.age}/>
+                                ) 
+                            }
+                        })
+                    }
+                </div>
+            </div>) : (<label>Você não possui agendamentos no momento :)</label>)
+            }
         </Container>
     )
 };
