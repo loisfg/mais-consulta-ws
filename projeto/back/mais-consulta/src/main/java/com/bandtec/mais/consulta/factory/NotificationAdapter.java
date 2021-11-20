@@ -4,5 +4,5 @@ import com.bandtec.mais.consulta.domain.Agendamento;
 
 public interface NotificationAdapter {
     String getType();
-    String getNotificationMessage(Agendamento agendamento);
+    String buildNotificationMessage(Agendamento agendamento);
 }

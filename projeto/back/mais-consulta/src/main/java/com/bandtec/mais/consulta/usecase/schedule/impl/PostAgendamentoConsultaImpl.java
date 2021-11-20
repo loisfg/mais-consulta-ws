@@ -5,6 +5,7 @@ import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.factory.NotificationAdapter;
 import com.bandtec.mais.consulta.factory.NotificationFactory;
+import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,10 +34,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
     private EspecialidadeRepository especialidadeRepository;
 
     @Autowired
-    private NotificationRepository notificationRepository;
-
-    @Autowired
-    private NotificationFactory notificationFactory;
+    private CreateNotification createNotification;
 
     @Override
     public Optional<Consulta> execute(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO) {
@@ -52,9 +50,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
             consultaRepository.save(consulta);
             agendamentoRepository.save(agendamento);
 
-            NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter("consulta");
-
-            String descricaoNotification = notificationMessageService.getNotificationMessage(agendamento);
+            createNotification.execute(agendamento, "consulta");
 
         }
         return Optional.of(consulta);

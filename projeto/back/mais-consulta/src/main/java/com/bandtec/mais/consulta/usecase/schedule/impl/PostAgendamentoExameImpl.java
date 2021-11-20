@@ -6,6 +6,7 @@ import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.factory.NotificationAdapter;
 import com.bandtec.mais.consulta.factory.NotificationFactory;
+import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,7 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     private AgendamentoRepository agendamentoRepository;
 
     @Autowired
-    private NotificationRepository notificationRepository;
-
-    @Autowired
-    private NotificationFactory notificationFactory;
+    private CreateNotification createNotification;
 
     @Override
     public Optional<Exame> execute(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
@@ -54,9 +52,7 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
             exameRepository.save(exame);
             agendamentoRepository.save(agendamento);
 
-            NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter("exame");
-
-            String descricaoNotification = notificationMessageService.getNotificationMessage(agendamento);
+            createNotification.execute(agendamento, "exame");
 
         }
 

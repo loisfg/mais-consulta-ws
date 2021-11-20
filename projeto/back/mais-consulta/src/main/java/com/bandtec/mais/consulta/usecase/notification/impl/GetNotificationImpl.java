@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GetNotificationImpl implements GetNotification {
@@ -18,16 +19,21 @@ public class GetNotificationImpl implements GetNotification {
     private NotificationRepository notificationRepository;
 
     @Override
-    public PilhaObj<NotificationDTO> execute(Integer idUser) {
+    public Optional<PilhaObj<NotificationDTO>> execute(Integer idUser) {
 
         List<Notification> notificationList = notificationRepository.findAllByIdUsuario(idUser);
+
+        if (notificationList.size() == 0){
+            return Optional.empty();
+        }
+
         List<NotificationDTO> notificationDTOList = new ArrayList<>();
         PilhaObj<NotificationDTO> notificationPilhaObj = new PilhaObj<>(notificationList.size());
 
         buildListNotificationsDTO(notificationList, notificationDTOList);
         buildPilhaNotificationDTO(notificationList, notificationDTOList, notificationPilhaObj);
 
-        return notificationPilhaObj;
+        return Optional.of(notificationPilhaObj);
     }
 
     private void buildListNotificationsDTO(List<Notification> notificationList, List<NotificationDTO> notificationDTOList) {

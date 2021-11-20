@@ -12,7 +12,12 @@ public class ConsultaNotificationAdapterImpl implements NotificationAdapter {
     }
 
     @Override
-    public String getNotificationMessage(Agendamento agendamento) {
-        return null;
+    public String buildNotificationMessage(Agendamento agendamento) {
+
+        StringBuilder notificationMessage = new StringBuilder();
+
+        notificationMessage.append("");
+
+        return notificationMessage.toString();
     }
 }
