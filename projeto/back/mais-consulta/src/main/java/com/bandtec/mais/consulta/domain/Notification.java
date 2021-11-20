@@ -7,9 +7,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Setter
 @ToString
@@ -37,6 +34,30 @@ public class Notification {
 
     public LocalDateTime getInsertDt() {
         return insertDt;
+    }
+
+    public Integer getIdNotification() {
+        return idNotification;
+    }
+
+    public void setIdNotification(Integer idNotification) {
+        this.idNotification = idNotification;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setInsertDt(LocalDateTime insertDt) {
+        this.insertDt = insertDt;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

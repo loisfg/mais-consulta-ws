@@ -17,7 +17,7 @@ public class NotificationController {
 
     @GetMapping("/{idUser}")
     public ResponseEntity<PilhaObj<NotificationDTO>> getNotifications(@PathVariable Integer idUser) {
-        return ResponseEntity.ok().body(getNotification.execute(idUser));
+        return ResponseEntity.of(getNotification.execute(idUser));
     }
 
 }
