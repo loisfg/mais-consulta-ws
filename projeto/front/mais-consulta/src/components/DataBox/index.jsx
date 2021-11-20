@@ -9,7 +9,7 @@ import {
   PanelTwo,
   H3,
 } from "./styles";
-import { Input, AutoCompleteInput } from "../../components";
+import { Input } from "../../components";
 
 export const DataBox = () => {
   const username = localStorage.getItem("nome")
@@ -26,42 +26,42 @@ export const DataBox = () => {
         <Panel>
           <LeftSide>
             <Input
-              size="samll"
+              size="big"
               label="Nome"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue={username}
             />
             <Input
-              size="samll"
+              size="big"
               label="CPF"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="48309861826"
             />
             <Input
-              size="samll"
+              size="big"
               label="Número de carteira do SUS"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="34314341"
             />
             <Input
-              size="samll"
+              size="big"
               label="Celular"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="(11) 93229-4055"
             />
             <Input
-              size="samll"
+              size="big"
               label="CEP"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="08215-880"
             />
             <Input
-              size="samll"
+              size="big"
               label="Logradouro"
               variant="outlined"
               placeholder="Adicionar informação"
@@ -71,42 +71,42 @@ export const DataBox = () => {
 
           <RightSide>
             <Input
-              size="samll"
+              size="big"
               label="RG"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="37.560.836-9"
             />
             <Input
-              size="samll"
+              size="big"
               label="Telefone Residencial"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="(11) 2053-6573"
             />
             <Input
-              size="samll"
+              size="big"
               label="Cidade"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="São Paulo"
             />
             <Input
-              size="samll"
+              size="big"
               label="Estado"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="São Paulo"
             />
             <Input
-              size="samll"
+              size="big"
               label="Número"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="80"
             />
             <Input
-              size="samll"
+              size="big"
               label="Bairro"
               variant="outlined"
               placeholder="Adicionar informação"
@@ -119,81 +119,80 @@ export const DataBox = () => {
         <PanelTwo>
           <LeftSide>
             <Input
-              size="samll"
+              size="big"
               label="Peso"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="60kg"
             />
             <Input
-              size="samll"
+              size="big"
               label="Altura"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="160cm"
             />
             <Input
-              size="samll"
+              size="big"
               label="Remédios controlados"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="Gardenal"
             />
             <Input
-              size="samll"
+              size="big"
               label="Alergias"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="Pelo de animal"
             />
             <Input
-              size="samll"
+              size="big"
               label="DST'S"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="AIDS"
             />
             <Input
-              size="samll"
+              size="big"
               label="Atividades Proibidas"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="Não possuo nenhuma atividade proibida"
             />
-            <AutoCompleteInput  label={"Virgem"}/>
+            
           </LeftSide>
 
           <RightSide>
             <Input
-              size="samll"
+              size="big"
               label="IMC"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="11"
             />
             <Input
-              size="medium"
+              size="big"
               label="Doenças cronicas"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="Asma"
             />
             <Input
-              size="samll"
+              size="big"
               label="Deficiências"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="Não possuo nenhuma deficiência"
             />
             <Input
-              size="samll"
+              size="big"
               label="Doenças hereditarias"
               variant="outlined"
               placeholder="Adicionar informação"
               defaultValue="Não possuo nenhuma doença hereditária"
             />
-          <AutoCompleteInput  label={"Fumente"} opcoes={textos}/>
-            <AutoCompleteInput  label={"Tipo Sanguíneo"} opcoes={{title: "oi"}}/>
+          
           </RightSide>
         </PanelTwo>
       </Box>
