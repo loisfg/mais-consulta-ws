@@ -5,6 +5,7 @@ import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
+import com.bandtec.mais.consulta.models.dto.response.AgendamentoExameResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.interfaces.AgendamentoExameResponse;
 import com.bandtec.mais.consulta.usecase.schedule.GetAgendamentoExame;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
@@ -72,7 +73,7 @@ public class AgendamentoController {
     @GetMapping("/buscar/exames/{idUser}")
     public ResponseEntity<?> getExamesByIdUser(@PathVariable Integer idUser) {
 
-        Optional<List<AgendamentoExameResponse>> oListExames = getAgendamentoExame.execute(idUser);
+        Optional<List<AgendamentoExameResponseDTO>> oListExames = getAgendamentoExame.execute(idUser);
 
         return oListExames
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
