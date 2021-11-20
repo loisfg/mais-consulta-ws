@@ -14,8 +14,8 @@ public class FilaObj<T> {
         this.fila = (T[]) new Object[capacidade];
     }
 
-    private boolean isEmpty() {
-        return fila.length == 0;
+    public boolean isEmpty() {
+        return tamanho == 0;
     }
 
     private boolean isFull() {

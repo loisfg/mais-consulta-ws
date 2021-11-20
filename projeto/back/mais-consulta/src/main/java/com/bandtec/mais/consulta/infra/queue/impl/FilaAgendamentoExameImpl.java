@@ -20,6 +20,9 @@ public class FilaAgendamentoExameImpl implements FilaAgendamentoExame {
     @Override
     public void setFilaAgendamentoExame(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
         this.filaAgendamentoExame.insert(agendamentoExameRequestDTO);
+
+
+
     }
 
 }

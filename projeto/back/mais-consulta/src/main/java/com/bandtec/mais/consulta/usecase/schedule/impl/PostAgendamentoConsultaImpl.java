@@ -58,7 +58,6 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
             agendamento.setUbs(ubsRepository.findById(agendamentoConsultaRequestDTO.getIdUbs()).get());
             agendamento.setEspecialidade(especialidadeRepository.getById(agendamentoConsultaRequestDTO.getIdEspecialidade()));
 
-
             consultaRepository.save(consulta);
             agendamentoRepository.save(agendamento);
 
