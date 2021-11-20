@@ -11,6 +11,7 @@ import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.NonUniqueResultException;
 import java.util.Optional;
 
 @Service
@@ -46,24 +47,40 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
         if (pacienteRepository.existsById(agendamentoConsultaRequestDTO.getIdPaciente())) {
 
-            Optional<Agendamento> oAgendamento = agendamentoRepository.findByHrAtendimento(agendamentoConsultaRequestDTO.getHrAtendimento());
+            try{
+                Optional<Agendamento> oAgendamento = agendamentoRepository.findByDtAtendimentoAndHrAtendimento(agendamentoConsultaRequestDTO.getDtAtendimento(), agendamentoConsultaRequestDTO.getHrAtendimento());
+                if (oAgendamento.isPresent()) {
 
-            if (oAgendamento.isPresent()) {
-                filaAgendamentoConsulta.setFilaAgendamentoConsulta(agendamentoConsultaRequestDTO);
-                return Optional.of(consulta);
+                    Agendamento agendamento = oAgendamento.get();
+
+                    if (agendamento.getStatus().equals("CANCELADO")) {
+                        efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
+                    } else {
+                        agendamentoConsultaRequestDTO.setStatus("AGUARDANDO");
+                        filaAgendamentoConsulta.setFilaAgendamentoConsulta(agendamentoConsultaRequestDTO);
+                        return Optional.of(consulta);
+                    }
+                }
+
+            }catch (NonUniqueResultException nonUniqueResultException){
+                System.out.println("Tratar esse erro");
             }
 
-            Agendamento agendamento = consulta.getAgendamento();
-            agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
-            agendamento.setUbs(ubsRepository.findById(agendamentoConsultaRequestDTO.getIdUbs()).get());
-            agendamento.setEspecialidade(especialidadeRepository.getById(agendamentoConsultaRequestDTO.getIdEspecialidade()));
-
-            consultaRepository.save(consulta);
-            agendamentoRepository.save(agendamento);
-
-            createNotification.execute(agendamento, "consulta");
+            efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
 
         }
         return Optional.of(consulta);
+    }
+
+    private void efetuarAgendamentoConsulta(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO, Consulta consulta) {
+        Agendamento agendamento = consulta.getAgendamento();
+        agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
+        agendamento.setUbs(ubsRepository.findById(agendamentoConsultaRequestDTO.getIdUbs()).get());
+        agendamento.setEspecialidade(especialidadeRepository.getById(agendamentoConsultaRequestDTO.getIdEspecialidade()));
+
+        consultaRepository.save(consulta);
+        agendamentoRepository.save(agendamento);
+
+        createNotification.execute(agendamento, "consulta");
     }
 }

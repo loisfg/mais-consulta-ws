@@ -27,11 +27,11 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Integer idUsuario;
 
-    @CPF
+//    @CPF
     @Column(nullable = false)
     private String cpf;
 
-    @Email
+//    @Email
     private String email;
 
     @JsonIgnore

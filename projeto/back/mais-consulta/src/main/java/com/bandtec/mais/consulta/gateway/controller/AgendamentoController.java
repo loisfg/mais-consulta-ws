@@ -6,6 +6,7 @@ import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.interfaces.AgendamentoExameResponse;
+import com.bandtec.mais.consulta.usecase.schedule.CancelAgendamento;
 import com.bandtec.mais.consulta.usecase.schedule.GetAgendamentoExame;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
@@ -22,28 +23,31 @@ import java.util.*;
 @RequestMapping("agendamento")
 public class AgendamentoController {
 
-    private final PostAgendamentoConsulta postAgendamentoConsulta;
-    private final PostAgendamentoExame postAgendamentoExame;
-    private final MedicoRepository medicoRepository;
-    private final GetAgendamentoExame getAgendamentoExame;
-
+    @Autowired
+    private PostAgendamentoConsulta postAgendamentoConsulta;
 
     @Autowired
-    public AgendamentoController(PostAgendamentoConsulta postAgendamentoConsulta, PostAgendamentoExame postAgendamentoExame, MedicoRepository medicoRepository,GetAgendamentoExame getAgendamentoExame) {
-        this.postAgendamentoConsulta = postAgendamentoConsulta;
-        this.postAgendamentoExame = postAgendamentoExame;
-        this.medicoRepository = medicoRepository;
-        this.getAgendamentoExame = getAgendamentoExame;
+    private PostAgendamentoExame postAgendamentoExame;
 
-    }
+    @Autowired
+    private MedicoRepository medicoRepository;
 
+    @Autowired
+    private GetAgendamentoExame getAgendamentoExame;
+
+    @Autowired
+    private CancelAgendamento cancelAgendamento;
 
     @GetMapping("/testeMedico")
-    public Optional<List<Integer>> recebermedico(){
+    public Optional<List<Integer>> recebermedico() {
         return medicoRepository.findIdsMedicosByIdEspecialidade(1);
     }
 
-
+    @PatchMapping("/cancelar/{idAgendamento}/{idPaciente}")
+    public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento,
+                                           @PathVariable Integer idPaciente) {
+        return ResponseEntity.ok(cancelAgendamento.execute(idPaciente, idAgendamento));
+    }
 
     @PostMapping("/agendar/exame")
     public ResponseEntity<Exame> createAgendamentoExame(

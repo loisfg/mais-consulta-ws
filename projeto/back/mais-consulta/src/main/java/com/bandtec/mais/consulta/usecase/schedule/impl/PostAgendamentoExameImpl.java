@@ -11,9 +11,12 @@ import com.bandtec.mais.consulta.factory.NotificationFactory;
 import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.NonUniqueResultException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -49,25 +52,40 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
             //JOIN especialidade on especialidade.ID_ESPECIALIDADE = medico.ESPECIALIDADE_ID
             //where UBS.ID_UBS = 1
 
-            Optional<Agendamento> oAgendamento = agendamentoRepository.findByHrAtendimento(agendamentoExameRequestDTO.getHrAtendimento());
+            try{
+                Optional<Agendamento> oAgendamento = agendamentoRepository.findByDtAtendimentoAndHrAtendimento(agendamentoExameRequestDTO.getDtAtendimento(), agendamentoExameRequestDTO.getHrAtendimento());
+                if (oAgendamento.isPresent()) {
 
-            if (oAgendamento.isPresent()){
-                filaAgendamentoExame.setFilaAgendamentoExame(agendamentoExameRequestDTO);
-                return Optional.of(exame);
+                    Agendamento agendamento = oAgendamento.get();
+
+                    if (agendamento.getStatus().equals("CANCELADO")) {
+                        efetuarAgendamentoExame(agendamentoExameRequestDTO, exame);
+                    } else {
+                        agendamentoExameRequestDTO.setStatus("AGUARDANDO");
+                        filaAgendamentoExame.setFilaAgendamentoExame(agendamentoExameRequestDTO);
+                        return Optional.of(exame);
+                    }
+                }
+
+            }catch (NonUniqueResultException nonUniqueResultException){
+                System.out.println("Tratar esse erro");
             }
 
-            Agendamento agendamento = exame.getAgendamento();
-            agendamento.setPaciente(pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get());
-            agendamento.setEspecialidade(especialidadeRepository.findById(agendamentoExameRequestDTO.getIdEspecialidade()).get());
-            agendamento.setUbs(ubsRepository.findById(agendamentoExameRequestDTO.getIdUbs()).get());
-
-            exameRepository.save(exame);
-            agendamentoRepository.save(agendamento);
-
-            createNotification.execute(agendamento, "exame");
-
+            efetuarAgendamentoExame(agendamentoExameRequestDTO, exame);
         }
 
         return Optional.of(exame);
+    }
+
+    private void efetuarAgendamentoExame(AgendamentoExameRequestDTO agendamentoExameRequestDTO, Exame exame) {
+        Agendamento agendamento = exame.getAgendamento();
+        agendamento.setStatus("ATIVO");
+        agendamento.setPaciente(pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get());
+        agendamento.setEspecialidade(especialidadeRepository.findById(agendamentoExameRequestDTO.getIdEspecialidade()).get());
+        agendamento.setUbs(ubsRepository.findById(agendamentoExameRequestDTO.getIdUbs()).get());
+
+        exameRepository.save(exame);
+        agendamentoRepository.save(agendamento);
+        createNotification.execute(agendamento, "exame");
     }
 }

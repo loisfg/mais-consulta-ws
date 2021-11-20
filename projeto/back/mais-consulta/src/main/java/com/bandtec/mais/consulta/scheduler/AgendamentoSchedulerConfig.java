@@ -1,10 +1,13 @@
 package com.bandtec.mais.consulta.scheduler;
 
+import com.bandtec.mais.consulta.gateway.controller.AgendamentoController;
 import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
 import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoExame;
 import com.bandtec.mais.consulta.models.FilaObj;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
+import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
+import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -22,15 +25,20 @@ public class AgendamentoSchedulerConfig {
     @Autowired
     private FilaAgendamentoConsulta filaAgendamentoConsulta;
 
+    @Autowired
+    private PostAgendamentoConsulta postAgendamentoConsulta;
+
+    @Autowired
+    private PostAgendamentoExame postAgendamentoExame;
 
     @Scheduled(fixedRate = 5000)
     public void tratarAgendamentoConsulta() {
         FilaObj<AgendamentoConsultaRequestDTO> fila = filaAgendamentoConsulta.getFilaAgendamentoConsulta();
 
         if (fila.isEmpty()) {
-            System.out.println("Nenhuma requisição para tratar");
+            System.out.println("Nenhuma requisição de consulta para tratar");
         } else {
-            System.out.println("entrou aqui : agendamento consulta");
+            postAgendamentoConsulta.execute(fila.poll());
         }
     }
 
@@ -40,9 +48,9 @@ public class AgendamentoSchedulerConfig {
         FilaObj<AgendamentoExameRequestDTO> fila = filaAgendamentoExame.getFilaAgendamentoExame();
 
         if (fila.isEmpty()) {
-            System.out.println("Nenhuma requisição para tratar");
+            System.out.println("Nenhuma requisição de exame para tratar");
         } else {
-            fila.exibe();
+            postAgendamentoExame.execute(fila.poll());
         }
     }
 

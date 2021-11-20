@@ -39,6 +39,10 @@ public class Agendamento {
     @Column(name= "hr_atendimento", nullable = false)
     private LocalTime hrAtendimento;
 
+    // TODO criar enum com os tipos: REALIZADO, CANCELADO, ATIVO
+    @Column(name="status")
+    private String status;
+
     @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)
     @OneToOne
     private Especialidade especialidade;
