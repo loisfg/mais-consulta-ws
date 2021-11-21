@@ -58,6 +58,10 @@ export const Dates = styled.div`
     display:flex;
     align-items: center;
     justify-content: center;
+
+    h1{
+        font-size: 18px;
+    }
 `
 
 export const Weekdays = styled.div`
@@ -96,7 +100,7 @@ export const ListDays = styled.div`
     align-items: center;
     cursor: pointer;
     color: ${({isToDay}) => isToDay ? "#fff" : "#515151"};
-    border-radius: 100px;
+    border-radius: 3px;
     background-color: ${({isToDay}) => isToDay ? "#19A795" : "#fff"};
     opacity: ${({weight}) => weight === 'light' ? 0.5 : 1};
 

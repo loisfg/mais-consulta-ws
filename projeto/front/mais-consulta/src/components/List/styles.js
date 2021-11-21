@@ -41,12 +41,33 @@ export const ListItem = styled.div`
     height: 16vh;
     border-bottom: 2px solid #19A795;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;
     margin: 0px 0px 0px 0px;
     cursor: pointer;
+    /* background-color:${({isActive}) => isActive  ? "#19A795" : "#fff"}; */
+   
 `
+export const IconItem = styled.div`
+  width: 20%;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
+export const ListItemConteudo = styled.div`
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    cursor: pointer;
+`
+
 export const H3 = styled.div`
     color: #19A795;
     font-size: 18px;

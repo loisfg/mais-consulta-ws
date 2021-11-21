@@ -18,6 +18,9 @@ export const Schedules = ({ usuario }) => {
   const [daySelected, setdaySelected] = useState([0]);
   const [horaSelecionada, setHoraSelecionada] = useState();
 
+ 
+    const userId = localStorage.getItem("id"); 
+ 
    async function cadastrar(e) {
     e.preventDefault();
     
@@ -26,10 +29,10 @@ export const Schedules = ({ usuario }) => {
       dtAtendimento: daySelected,
       hrAtendimento: horaSelecionada,
       idEspecialidade : 1,
-      idPaciente: 1,
+      idPaciente: userId,
       idUbs: listUbs
     }
-    await api("http://7e02-2804-420c-102d-1900-212f-bb94-2820-461e.ngrok.io/mais-consulta")
+    await api("http://551f-189-78-204-97.ngrok.io/mais-consulta")
     .post("/agendamento/agendar/exame", data)
 
   }
@@ -50,36 +53,36 @@ export const Schedules = ({ usuario }) => {
         <BoxRight>
           <Calendar setdaySelected={setdaySelected}/>
           <Hours setHoraSelecionada={setHoraSelecionada} />
-          <button text="Agendar atendimento" onClick={cadastrar}
-          //   swal({
-          //     text: "Deseja finalizar seu agendamento?",
-          //     buttons: true,
-          //     closeOnClickOutside: false,
-          //     buttons: {
-          //       cancel: 'Cancelar',
-          //       confirm: {
-          //         text: 'Confirmar',
-          //         className: 'confirmar',
-          //         onClick: {cadastrar}
-          //       },
+          <button text="Agendar atendimento" onClick={()=>{
+            swal({
+              text: "Deseja finalizar seu agendamento?",
+              buttons: true,
+              closeOnClickOutside: false,
+              buttons: {
+                cancel: 'Cancelar',
+                confirm: {
+                  text: 'Confirmar',
+                  className: 'confirmar',
+                  onClick: {cadastrar}
+                },
 
-          //     },
-          //   })
-          //     .then((agendar) => {
-          //       if (agendar) {
-          //         swal("Deseja baixar o documento de confirmação do agendamento?", {
-          //           icon: "success",
-          //         });
+              },
+            })
+              .then((agendar) => {
+                if (agendar) {
+                  swal("Deseja baixar o documento de confirmação do agendamento?", {
+                    icon: "success",
+                  });
                  
 
-          //       } else {
-          //         swal("Agendamento cancelado", {
-          //           icon: "error",
-          //         });
+                } else {
+                  swal("Agendamento cancelado", {
+                    icon: "error",
+                  });
 
-          //       }
-          //     });
-          // }}
+                }
+              });
+          }}
           >clica</button>
           {/* <Button type="submit" text="Agendar atendimento" /> */}
         </BoxRight>

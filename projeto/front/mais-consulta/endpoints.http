@@ -1,7 +1,12 @@
-@url = http://localhost:8080/mais-consulta 
+@url = http://46b8-2804-431-c7e8-97e4-200e-45ec-b8b2-41e9.ngrok.io/mais-consulta 
 
 ### Home (Medico)
 GET {{url}}/medico/{doctorId}/agendamentos HTTP/1.1
+
+
+### Home (Medico)
+GET {{url}}/agendamento/pegar/horas HTTP/1.1
+
 # Retorno esperado
 # [
     # {

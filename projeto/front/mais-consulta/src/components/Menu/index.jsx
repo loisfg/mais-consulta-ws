@@ -35,7 +35,6 @@ export const Menu = () => {
                 color={location.pathname === item.path ? "#19A795" : "#515151"}
                 size="3rem"
                 icon={item.icon}
-                isActive={location.pathname === item.path}
               />
               <Text isActive={location.pathname === item.path}>
                 {item.title}
