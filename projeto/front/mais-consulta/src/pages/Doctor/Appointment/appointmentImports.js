@@ -8,3 +8,4 @@ export { bloodType as bloodData } from './bloodType';
 export { Checkbox, Modal } from '@material-ui/core';
 export { SmallInput } from './FormSection/SmallInput';
 export { PatientModal } from './FormSection/PatientModal';
+export { data as mockData } from './mockData'

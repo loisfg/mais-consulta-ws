@@ -1,21 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { useLocation } from 'react-router-dom'
 import Select from "react-select";
 import UserPhoto from '../../../assets/next-user.svg';
-import {  Checkbox, Modal, Container, TextSubtext, Header, FormSection, InputCheckable, DateInput, defaultValues, bloodData, SmallInput, PatientModal} from './appointmentImports';
+import api from '../../../services/api';
+import {  Checkbox, Modal, Container, TextSubtext, Header, FormSection, InputCheckable, DateInput, defaultValues, bloodData, SmallInput, PatientModal, mockData} from './appointmentImports';
 
-export const Appointment = ({name, date}) => {
+export const Appointment = ({name}) => {
   const [bloodType, setBloodType] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const {control, handleSubmit} = useForm(defaultValues);
+  const {control, reset, handleSubmit} = useForm();
+  const [ data, setData ] = useState({})
+  const location = useLocation();
 
-  useEffect(() => setBloodType(bloodData), []);
-
+  useEffect(() => {
+    setBloodType(bloodData)
+     const getPatientData = async () => {
+      const pathnameArray = location.pathname.split('/');
+      const idPaciente = pathnameArray[pathnameArray.length-1];
+      
+      try {
+        // const response = await api('maisconsulta').get(`/paciente/${idPaciente}`);
+        // setData(response.data);
+        setData(mockData);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getPatientData()
+  }, []);
+  useEffect(() => {
+    if(data) reset(data)
+  }, [data])
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
   const onSubmit = data => console.log(data)
   return(
-    <Container onSubmit={handleSubmit(onSubmit)}>
+    data && 
+      (<Container onSubmit={handleSubmit(onSubmit)}>
       <Modal open={showModal} onClose={handleClose}>
         <PatientModal Controller={Controller} control={control} onClose={handleClose} />
       </Modal>
@@ -111,6 +133,6 @@ export const Appointment = ({name, date}) => {
           </div>
         </FormSection>
       </div>
-    </Container>
+    </Container>)
   ) ;
 }

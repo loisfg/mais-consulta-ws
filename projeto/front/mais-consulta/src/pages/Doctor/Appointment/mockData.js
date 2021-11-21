@@ -1,7 +1,7 @@
 export const data = {
     dadosPessoais: {
         idPaciente: 1,
-        nome: '',
+        nome: 'Alissa Edwards',
         idade: 0,
         endereco: 'Quadra 912 Sul Alameda 3',
         bairro: 'Plano Diretor Sul',
@@ -15,7 +15,7 @@ export const data = {
         cep: '08215-880'
     },
     prontuario: {
-      peso: 0,
+      peso: 55,
       altura: 0,
       doencasCronicas: ['Asma', 'Diabetes'],
       remediosControlados: ['Gardenal', 'Diazepan'],
