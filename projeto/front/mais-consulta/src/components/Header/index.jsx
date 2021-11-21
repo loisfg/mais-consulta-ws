@@ -2,28 +2,29 @@ import React from 'react';
 import { Container } from './styles';
 import PropTypes from 'prop-types';
 
-export const Header = ({name, address, rg, age, neighbor, susNumber}) => {
+export const Header = ({data}) => {
   return (
       <Container>
           <div>
-            <p>{name}</p>
-            <label>{address}</label>
-            <label>{rg}</label>
+            <p>{data.dadosPessoais?.nome}</p>
+            <label>{data.dadosPessoais?.endereco}</label>
+            <label>{data.dadosPessoais?.rg}</label>
           </div>
           <div>
-            <label>{age}</label>
-            <label>{neighbor}</label>
-            <label>{susNumber}</label>
+            <label>{data.dadosPessoais?.idade + ' anos'}</label>
+            <label>{data.dadosPessoais?.bairro}</label>
+            <label>{data.dadosPessoais?.numeroSus}</label>
           </div>
       </Container>
   );
 }
 Header.propTypes = {
-    children: PropTypes.node,
-    name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    rg: PropTypes.string.isRequired,
-    age: PropTypes.string.isRequired,
-    neighbor: PropTypes.string.isRequired,
-    susNumber: PropTypes.number.isRequired
+    data: {
+      nome: PropTypes.string.isRequired,
+      endereco: PropTypes.string.isRequired,
+      rg: PropTypes.string.isRequired,
+      idade: PropTypes.string.isRequired,
+      bairro: PropTypes.string.isRequired,
+      numeroSus: PropTypes.number.isRequired
+    }
 };

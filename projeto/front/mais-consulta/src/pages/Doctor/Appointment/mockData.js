@@ -2,7 +2,7 @@ export const data = {
     dadosPessoais: {
         idPaciente: 1,
         nome: 'Alissa Edwards',
-        idade: 0,
+        idade: 20,
         endereco: 'Quadra 912 Sul Alameda 3',
         bairro: 'Plano Diretor Sul',
         rg: '37.620.064-9',

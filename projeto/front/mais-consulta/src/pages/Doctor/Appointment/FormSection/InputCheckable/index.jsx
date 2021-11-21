@@ -8,7 +8,7 @@ export const InputCheckable = ({titleLabel, ...rest}) => {
 return (
       <Container>
       <div className='title-group'>
-        <input onChange={handleEnableTextfield} type="checkbox"/>
+        <input checked={rest.value?.length} onChange={handleEnableTextfield} type="checkbox"/>
         <label>{titleLabel}</label>
       </div>
       <input {...rest} className='styled-input' disabled={isChecked} type="text" />

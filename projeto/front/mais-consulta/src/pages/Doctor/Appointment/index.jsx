@@ -61,7 +61,7 @@ export const Appointment = ({name}) => {
         <div className='line'></div>
       </div>
       <div className='right-side'>
-        <Header name= 'Catarina Ayla Castro'/>
+        <Header data={patientData}/>
         <FormSection sectionTitle='Último atendimento'>
           <div className='form-section-last-appointment'>
             <TextSubtext className='text-tab' textOne='Data' />
