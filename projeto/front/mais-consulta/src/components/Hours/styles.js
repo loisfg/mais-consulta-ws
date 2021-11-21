@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import {Hours} from "./index"
 export const Horario = styled.div`
     height:20vh;
     width:58vh;
@@ -26,8 +26,8 @@ export const ItemListHour = styled.div`
     border-radius: 3px;
     margin-right:8px;
     margin-top: 5px;
-        background-color: ${({isActive}) => isActive ? '#19A795' : '#fff'};
     font-size: 14px;
+    background-color:${({isActive}) => isActive  ? "#19A795" : "#fff"};
     display: flex;
     justify-content: center;
     align-items: center;
