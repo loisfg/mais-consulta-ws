@@ -2,11 +2,6 @@
 
 ### Home (Medico)
 GET {{url}}/medico/{doctorId}/agendamentos HTTP/1.1
-
-
-### Home (Medico)
-GET {{url}}/agendamento/pegar/horas HTTP/1.1
-
 # Retorno esperado
 # [
     # {
@@ -16,6 +11,93 @@ GET {{url}}/agendamento/pegar/horas HTTP/1.1
         # scheduleTime: time
     # }
 # ]
+### Atendimento (Medico)
+GET {{url}}/paciente/{idPaciente} HTTP/1.1
+# Retorno esperado
+# Dados utilizados para preenchimento automatico dos dados do paciente
+# {
+#     dadosPessoais: {
+#         idPaciente: 1,
+#         nome: 'Alissa Edwards',
+#         idade: 0,
+#         endereco: 'Quadra 912 Sul Alameda 3',
+#         bairro: 'Plano Diretor Sul',
+#         rg: '37.620.064-9',
+#         numeroSus: 5172784766154,
+#         cpf: '494.444.333-08',
+#         telefone:'(11) 2053-6573',
+#         cidade: 'São Paulo',
+#         estado: 'São Paulo',
+#         celular:'(11) 93229-4055',
+#         cep: '08215-880'
+#     },
+#     prontuario: {
+#       peso: 55,
+#       altura: 0,
+#       doencasCronicas: ['Asma', 'Diabetes'],
+#       remediosControlados: ['Gardenal', 'Diazepan'],
+#       alergias: ['Melancia'],
+#       dsts: [],
+#       deficiencia: [],
+#       isFumante: false,
+#       isVirgem: false,
+#       doencasHereditarias: [],
+#       tipoSanguineo: {
+#           value: 0,
+#           label: 'Selecione seu tipo sanguineo'
+#       },
+#       atividadesProibidas: []
+#     }
+# }
+
+### Atendimento (Medico)
+POST {{url}}/medico/{idMedico}/atendimento HTTP/1.1
+content-type: application/json
+# Dados enviados do formulario de atendimento
+{ 
+    "dadosPessoais": {
+        "idPaciente": 0,
+        "nome": '',
+        "idade": 0,
+        "endereco": '',
+        "bairro": '',
+        "rg": '',
+        "numeroSus": 0,
+        "cpf": '',
+        "telefone":'',
+        "cidade": '',
+        "estado": '',
+        "celular":'',
+        "cep": ''
+    },
+    "prontuario": {
+      "peso": 0,
+      "altura": 0,
+      "doencasCronicas": [''],
+      "remediosControlados": [''],
+      "alergias": [''],
+      "dsts": [],
+      "deficiencia": [],
+      "isFumante": false,
+      "isVirgem": false,
+      "doencasHereditarias": [],
+      "tipoSanguineo": {
+          "value": 0,
+          "label": 'Selecione seu tipo sanguineo'
+      },
+      "atividadesProibidas": []
+    },
+    "diagnostico": {
+      "queixa": '',
+      "terminologia": '',
+      "medicamentos": '',
+      "orientacoesMedicas": '',
+      "atestado": ''
+    }
+}
+
+### Home (Medico)
+GET {{url}}/agendamento/pegar/horas HTTP/1.1
 
 ### Pacientes (Medico)
 GET {{url}}/medico/historico HTTP/1.1
