@@ -4,7 +4,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 import Select from "react-select";
 import UserPhoto from '../../../assets/next-user.svg';
 import api from '../../../services/api';
-import {  Checkbox, Modal, Container, TextSubtext, Header, FormSection, InputCheckable, DateInput, defaultValues, bloodData, SmallInput, PatientModal, mockData} from './appointmentImports';
+import {  Checkbox, Modal, Container, TextSubtext, Header, FormSection, InputCheckable, DateInput, bloodData, SmallInput, PatientModal, mockData} from './appointmentImports';
 import swal from 'sweetalert';
 
 export const Appointment = ({name}) => {

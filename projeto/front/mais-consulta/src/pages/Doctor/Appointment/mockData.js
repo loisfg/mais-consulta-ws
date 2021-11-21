@@ -30,5 +30,5 @@ export const data = {
           label: 'Selecione seu tipo sanguineo'
       },
       atividadesProibidas: []
-    },
+    }
 }
