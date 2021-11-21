@@ -11,8 +11,8 @@ export const CustomBox = styled(Box)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
-  height: 90%;
+  width: 100rem;
+  padding: 0 0 2rem 0;
   border: 0.2rem solid var(--light-blue);
   background-color: #fefefe;
   border-radius: 0.3rem;

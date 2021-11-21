@@ -2,45 +2,42 @@ import React from 'react';
 import { Container, CustomBox } from './styles';
 import swal from 'sweetalert';
 import exit from '../../../../../assets/exit.svg'
-export default function PatientModal({title, name, cpf, susNumber, 
-    cellphone, cep, street, lastName, rg, telephone,
-    city, state, neighbor, onClose }) {
+
+export const PatientModal = ({Controller, control, onClose }) => {
     const handleAlert = (event) => swal("Dados atualizados!", "Os dados do paciente foram atualizados com sucesso.", "success");
     return (
         <Container>
             <CustomBox>
                 <div className='title'>
-                    <h1>{title}</h1>
+                    <h1>Dados Cadastrais</h1>
                     <img src={exit} onClick={onClose} alt="" />
                 </div>
                 <div className='form-group'>
                     <div className='left-side'>
                         <label>Nome</label> 
-                        <input type="text" value={name} />
-                        <label>CPF</label> 
-                        <input type="text" value={cpf} />
+                        <Controller name='dadosPessoais.nome' control={control} render={({field}) => <input {...field} type="text"/>}/>
+                        <label>CPF</label>
+                        <Controller name='dadosPessoais.cpf' control={control} render={({field}) => <input {...field} type="text"/>}/>
                         <label>Número de carteira do SUS</label> 
-                        <input type="text" value={susNumber} />
+                        <Controller name='dadosPessoais.numeroSus' control={control} render={({field}) => <input {...field} type="text"/>}/>
                         <label>Celular</label> 
-                        <input type="text" value={cellphone} />
-                        <label>CEP</label> 
-                        <input type="text" value={cep} />
-                        <label>Logradouro</label> 
-                        <input type="text" value={street} />
+                        <Controller name='dadosPessoais.celular' control={control} render={({field}) => <input {...field} type="text"/>}/>
+                        <label>CEP</label>
+                        <Controller name='dadosPessoais.cep' control={control} render={({field}) => <input {...field} type="text"/>}/>
+                        <label>Endereço</label>
+                        <Controller name='dadosPessoais.endereco' control={control} render={({field}) => <input {...field} type="text"/>}/>
                     </div>
                     <div className='right-side'>
-                        <label>Sobrenome</label> 
-                        <input type="text" value={lastName} />
                         <label>RG</label> 
-                        <input type="text" value={rg} />
+                        <Controller name='dadosPessoais.rg' control={control} render={({field}) => <input {...field} type="text"/>}/>
                         <label>Telefone residencial</label> 
-                        <input type="text" value={telephone} />
+                        <Controller name='dadosPessoais.telefone' control={control} render={({field}) => <input {...field} type="text"/>}/>
                         <label>Cidade</label> 
-                        <input type="text" value={city} />
+                        <Controller name='dadosPessoais.cidade' control={control} render={({field}) => <input {...field} type="text"/>}/>
                         <label>Estado</label> 
-                        <input type="text" value={state} />
+                        <Controller name='dadosPessoais.estado' control={control} render={({field}) => <input {...field} type="text"/>}/>
                         <label>Bairro</label> 
-                        <input type="text" value={neighbor} />
+                        <Controller name='dadosPessoais.bairro' control={control} render={({field}) => <input {...field} type="text"/>}/>
                     </div>
                 </div>
                 <div className='btn-group'>

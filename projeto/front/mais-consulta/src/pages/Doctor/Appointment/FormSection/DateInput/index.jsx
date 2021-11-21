@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { Container } from './styles';
+import { Container, Field } from './styles';
+import InputAdornment from '@mui/material/InputAdornment';
 
-export const DateInput = ({titleLabel}) => {
+export const DateInput = ({titleLabel, ...rest}) => {
     const [isChecked, setIsChecked] = useState(true);
     const handleEnableTextfield = (e) => setIsChecked(e.target.checked === true ? false : true );
     return (
@@ -10,16 +11,12 @@ export const DateInput = ({titleLabel}) => {
                 <input onChange={handleEnableTextfield} type="checkbox"/>
                 <p>{titleLabel}</p>
             </div>
-            <div className='ipt-group'>
-                <div>
-                    <label>Data inicial</label>
-                    <input className='styled-input' disabled={isChecked} type="date" />
-                </div>
-                <div>
-                    <label>Data final</label>
-                    <input className='styled-input' disabled={isChecked} type="date" />
-                </div>
-            </div>
+            <Field
+                id="filled-adornment-weight"
+                endAdornment={<InputAdornment position="end">dias</InputAdornment>}
+                aria-describedby="filled-weight-helper-text"
+                {...rest}
+            />
         </Container>
     );
 }

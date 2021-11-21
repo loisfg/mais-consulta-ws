@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.form `
   height: 100vh;
   width: 100%;
   display: flex;
@@ -76,6 +76,14 @@ export const Container = styled.div`
         label{
           font-size: 1.4rem;
         }
+        .field{
+          display: flex;
+          flex-direction: column;
+          font-family: var(--rawline);
+          font-weight: 500;
+          font-size: 1.7rem;
+          margin: 0 3rem 0 0;
+        }
       }
       .select-group{
         display: flex;
@@ -88,7 +96,6 @@ export const Container = styled.div`
           height: 50%;
           width: 60%;
           font-size: 1.3rem;
-          border: var(--light-blue) solid 0.1px;
         }
         label{
           font-size: 1.4rem;
