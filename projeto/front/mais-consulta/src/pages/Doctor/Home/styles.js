@@ -44,6 +44,17 @@ export const Container = styled.div`
       flex-direction: column;
       font-size: 1.7rem;
       font-weight: 600;
+      .schedule_group{
+        display: flex;
+        align-items: center;
+        > label {
+          padding-right: 2rem;
+          color: var(--medium-grey);
+        }
+        a {
+          text-decoration: none;
+        }
+      }
     }
   }
 `;

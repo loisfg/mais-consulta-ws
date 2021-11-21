@@ -39,15 +39,22 @@ return (
                 <div className='line'></div>
                 <div className='patient-group'>
                     <label>Próximo paciente</label>
+                    
+                    <div className='schedule_group'>
+                    <label>{data[0].scheduleTime}</label>
                     <Link to={`/appointment/${data[0].id}`}>
                         <Patient isNext={true} name={data[0].name} age={data[0].age}/>
                     </Link>
+                    </div>
                     <label>Pacientes do dia</label>
                     {
                         data.map((patient, index) => {
-                            if(index > 0){
+                            if(index > 0) {
                                 return(
-                                    <Patient isNext={false} name={patient.name} age={patient.age}/>
+                                    <div className='schedule_group'>
+                                        <label>{patient.scheduleTime}</label>
+                                        <Patient isNext={false} name={patient.name} age={patient.age}/>
+                                    </div>
                                 ) 
                             }
                         })
