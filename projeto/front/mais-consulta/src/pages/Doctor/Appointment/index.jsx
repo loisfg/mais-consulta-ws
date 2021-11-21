@@ -1,43 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import Select from "react-select";
 import UserPhoto from '../../../assets/next-user.svg';
 import api from '../../../services/api';
 import {  Checkbox, Modal, Container, TextSubtext, Header, FormSection, InputCheckable, DateInput, defaultValues, bloodData, SmallInput, PatientModal, mockData} from './appointmentImports';
+import swal from 'sweetalert';
 
 export const Appointment = ({name}) => {
   const [bloodType, setBloodType] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const {control, reset, handleSubmit} = useForm();
-  const [ data, setData ] = useState({})
+  const [ patientData, setPatientData ] = useState({})
   const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
     setBloodType(bloodData)
      const getPatientData = async () => {
       const pathnameArray = location.pathname.split('/');
       const idPaciente = pathnameArray[pathnameArray.length-1];
-      
       try {
         // const response = await api('maisconsulta').get(`/paciente/${idPaciente}`);
         // setData(response.data);
-        setData(mockData);
+        setPatientData(mockData);
       } catch (error) {
         console.log(error)
       }
     }
     getPatientData()
   }, []);
+
   useEffect(() => {
-    if(data) reset(data)
-  }, [data])
+    if(patientData) reset(patientData)
+  }, [patientData])
   const handleOpen = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
-  const onSubmit = data => console.log(data)
+  const onSubmit = async (data) => {
+    const idMedico = localStorage.getItem('id');
+    try {
+      // await api('maisconsulta').post(`/medico/${idMedico}/atendimento`, data)
+      swal('Atendimento realizado','Atendimento realizado com sucesso', "success").then(() => history.push('/home-doctor'))
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return(
-    data && 
-      (<Container onSubmit={handleSubmit(onSubmit)}>
+    <Container onSubmit={handleSubmit(onSubmit)}>
       <Modal open={showModal} onClose={handleClose}>
         <PatientModal Controller={Controller} control={control} onClose={handleClose} />
       </Modal>
@@ -133,6 +142,6 @@ export const Appointment = ({name}) => {
           </div>
         </FormSection>
       </div>
-    </Container>)
+    </Container>
   ) ;
 }
