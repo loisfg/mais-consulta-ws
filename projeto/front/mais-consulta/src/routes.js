@@ -66,7 +66,8 @@ const Routes = () => {
           path="*"
           render={(props) =>{
               const role = localStorage.getItem("role");
-              const pathname = role === 'MEDICO'? '/home-doctor' : '/home';
+              const pathname = role === 'Medico'? '/home-doctor' : 
+                               role === 'Paciente'? '/home' : '/';
               return isAuth() ? (
                 <Redirect
                   to={{ pathname, state: { from: props.location } }}
