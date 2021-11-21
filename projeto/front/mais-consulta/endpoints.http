@@ -5,14 +5,16 @@ GET {{url}}/medico/{doctorId}/agendamentos HTTP/1.1
 # Retorno esperado
 # [
     # {
-        #     name: string,
-        #     age: number,
-        #     scheduleTime: time
+        # id: number, (esse e o id do paciente)
+        # name: string,
+        # age: number,
+        # scheduleTime: time
     # }
 # ]
 
 ### Pacientes (Medico)
 GET {{url}}/medico/historico HTTP/1.1
+# Tela que condiz com o historico de pacientes atendidos por esse medico
 # Retorno esperado
 # [
     # {
