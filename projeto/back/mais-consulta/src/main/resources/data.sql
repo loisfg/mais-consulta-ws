@@ -31,3 +31,5 @@ INSERT INTO medico (id_medico, nome, especialidade_id, ubs_id, usuario_id)
    (SELECT id_especialidade FROM especialidade WHERE descricao = 'Clinico'),
    (SELECT id_ubs FROM ubs WHERE nome = 'Ubs Palmares'),
    (SELECT id_usuario FROM usuario WHERE cpf = '36014447806'));
+
+INSERT INTO hora VALUES (1, '09:00'), (2, '09:30'), (3, '10:00'), (4, '10:30'), (5, '11:00'), (6, '11:30'), (7, '12:00'), (8, '13:30'), (9, '14:00'), (10, '15:00'), (11, '16:00'), (12, '16:30');

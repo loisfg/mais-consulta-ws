@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Medico;
+import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.domain.Usuario;
 import org.hibernate.annotations.Parameter;
 import org.junit.runners.Parameterized;
@@ -30,4 +31,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     Set<Medico> findAllByEspecialidade(Especialidade especialidade);
 
     Optional<Medico> findByUsuario(Usuario usuario);
+
+    @Query("select m from Medico m where m.ubs.idUbs = ?1")
+    Set<Medico> findMedicosByUbsId(Integer idUbs);
 }

@@ -3,8 +3,11 @@ package com.bandtec.mais.consulta.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -23,6 +26,9 @@ public class Medico {
     private Integer idMedico;
 
     private String nome;
+
+    @DateTimeFormat
+    private LocalDate dtHrAtendimento;
 
     @JsonIgnore
     @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)

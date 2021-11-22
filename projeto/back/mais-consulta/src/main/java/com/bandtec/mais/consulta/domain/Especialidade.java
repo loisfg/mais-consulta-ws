@@ -29,7 +29,6 @@ public class Especialidade {
     @Transient
     @JsonIgnore
     @OneToMany(mappedBy = "especialidade", cascade = CascadeType.ALL)
-    @ToString.Exclude
     private Set<Medico> medicos = new HashSet<>();
 
     @Transient

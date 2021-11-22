@@ -10,8 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Integer> {
+
     Optional<Agendamento> findByIdAgendamento(Integer idAgendamento);
+
     Optional<Agendamento> findByIdAgendamentoAndPaciente_IdPaciente(Integer idAgendamento, Integer idPaciente);
+
     Optional<Agendamento> findByHrAtendimento(LocalTime hrAtendimento);
+
     Optional<Agendamento> findByDtAtendimentoAndHrAtendimento(LocalDate dtAtendimento, LocalTime hrAtendimento);
 }

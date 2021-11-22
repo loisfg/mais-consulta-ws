@@ -1,15 +1,9 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Especialidade;
-import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.utils.StrFormat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-import java.util.Locale;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class EspecialidadeRepositoryTest {
 
