@@ -42,10 +42,7 @@ public class AgendamentoController {
     @Autowired
     private CancelAgendamento cancelAgendamento;
 
-    @GetMapping("/testeMedico")
-    public Optional<List<Integer>> recebermedico() {
-        return medicoRepository.findIdsMedicosByIdEspecialidade(1);
-    }
+
 
     @PatchMapping("/cancelar/{idAgendamento}/{idPaciente}")
     public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento,

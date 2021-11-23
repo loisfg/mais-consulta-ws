@@ -1,8 +1,6 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
-import com.bandtec.mais.consulta.domain.Especialidade;
-import com.bandtec.mais.consulta.domain.Medico;
-import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.utils.StrFormat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +30,33 @@ class MedicoRepositoryTest {
 
         // especialidade
         final String descricao = StrFormat.toTitledCase("oftalmologia");
+        Endereco endereco = Endereco.builder()
+                .cep("aaa")
+                .cidade("dcsdas")
+                .estado("sp")
+                .bairro("xxx")
+                .rua("werty")
+                .logradouro("daw")
+                .numero("333")
+                .complemento("dfsd")
+                .build();
 
         Especialidade especialidade = Especialidade
                 .builder()
                 .descricao(descricao)
                 .build();
 
+        Ubs ubs = Ubs.builder()
+                .nome("wert")
+                .telefone("2345678")
+                .endereco(endereco)
+                .build();
         // Medico
         final String nome = StrFormat.toTitledCase("Joao Fernandes");
         Medico medico = Medico.builder()
-                .usuario(usuario)
                 .nome(nome)
+                .ubs(ubs)
+                .usuario(usuario)
                 .especialidade(especialidade)
                 .build();
 
@@ -51,6 +65,6 @@ class MedicoRepositoryTest {
         if (medicoRepository.existsByNome(nome)){
             System.out.println("Medico existe" + medicoRepository.findByNome(nome));
         }
-        System.out.println("Medico repository teste "+ medicoRepository.findIdsMedicosByIdEspecialidade(1));
+        System.out.println("Medico repository teste "+ medicoRepository.findIdsMedicosByIdEspecialidade(1,1));
     }
 }

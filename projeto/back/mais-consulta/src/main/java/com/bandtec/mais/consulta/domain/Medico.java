@@ -27,8 +27,6 @@ public class Medico {
 
     private String nome;
 
-    @DateTimeFormat
-    private LocalDate dtHrAtendimento;
 
     @JsonIgnore
     @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
