@@ -66,8 +66,9 @@ export const Container = styled.form `
     .row{
       display: flex;
       width: 100%;
+      justify-content: space-between;
       .field-group{
-        width: 50%;
+        width: 47%;
         display: flex;
         align-items: center;
         span{
@@ -108,18 +109,17 @@ export const Container = styled.form `
       flex-direction: column;
       align-items: flex-start;
       justify-content: space-between;
-      height: 100%;
+      height: 70%;
       width: 100%;
       label{
         font-size: 1.4rem;
-        margin: 2rem 0 0 0;
+        margin: 1rem 0;
       }
       input[type="text"]{
         border: var(--light-blue) solid 0.1rem;
-        height: 10%;
+        height: 15%;
         width: 100%;
         border-radius: 0.4rem;
-        margin: 0 0 1rem 0;
       }
       #date-input{
         margin: 0;

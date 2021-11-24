@@ -41,7 +41,7 @@ export const PatientModal = ({Controller, control, onClose }) => {
                     </div>
                 </div>
                 <div className='btn-group'>
-                    <button id='btn_cancel'>Cancelar</button>
+                    <button id='btn_cancel'type={"button"} onClick={onClose}>Cancelar</button>
                     <button id='btn_save' onClick={handleAlert}>Salvar</button>
                 </div>
             </CustomBox>

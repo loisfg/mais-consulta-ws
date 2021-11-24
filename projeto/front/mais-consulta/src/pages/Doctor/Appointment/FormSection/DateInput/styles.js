@@ -10,6 +10,7 @@ export const Container = styled.div`
         align-items: center;
         > p {
             font-size: 1.4rem;
+            margin: 0 1rem;
         }
     }
 `;

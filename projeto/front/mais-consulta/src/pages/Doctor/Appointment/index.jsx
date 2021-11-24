@@ -54,7 +54,7 @@ export const Appointment = ({name}) => {
         <div className='container-profile-pic'>
           <img src={UserPhoto} alt="user" />
           <TextSubtext textOne={name} textTwo='Paciente'/>
-          <button onClick={handleOpen} className='btn-patient'>
+          <button type={"button"} onClick={handleOpen} className='btn-patient'>
             Exibir dados do paciente 
           </button>
         </div>
@@ -137,7 +137,7 @@ export const Appointment = ({name}) => {
           </div>
           <Controller name='diagnostico.atestado' control={control} render={({field}) => <DateInput {...field} titleLabel="Atestado"/>}/>
           <div className='btn-group'>
-            <button id='btn_cancel'>Cancelar</button>
+            <button id='btn_cancel' type={"button"}>Cancelar</button>
             <button id='btn_save' type='submit'>Salvar</button>
           </div>
         </FormSection>
