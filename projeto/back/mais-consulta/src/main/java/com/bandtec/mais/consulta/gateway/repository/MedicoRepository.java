@@ -14,8 +14,8 @@ import java.util.Set;
 public interface MedicoRepository extends JpaRepository<Medico, Integer> {
 
     @Query(value = "SELECT m.idMedico FROM Medico m WHERE m.especialidade.idEspecialidade = :idEspecialidade AND m.ubs.idUbs=:idUbs")
-    Optional<List<Integer>> findIdsMedicosByIdEspecialidade(@Param("idEspecialidade")Integer idEspecialidade,
-                                                            @Param("idUbs")Integer idUbs);
+    Optional<List<Integer>> findIdsMedicosByIdEspecialidadeAndUbs(@Param("idEspecialidade")Integer idEspecialidade,
+                                                                  @Param("idUbs")Integer idUbs);
 
     boolean existsByNome(String nome);
 
