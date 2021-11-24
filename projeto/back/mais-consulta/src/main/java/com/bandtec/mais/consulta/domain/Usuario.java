@@ -30,7 +30,6 @@ public class Usuario {
 //    @CPF
     @Column(nullable = false)
     private String cpf;
-
 //    @Email
     private String email;
 
