@@ -4,6 +4,7 @@ import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
 import com.bandtec.mais.consulta.usecase.auth.MedicoDelete;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
+import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ public class MedicoController {
 
     @Autowired
     private MedicoDelete medicoDelete;
+
+//    @Autowired
+//    private ;
 
     @PostMapping("/signup")
     public ResponseEntity<Usuario> medicoSignUp(@RequestBody MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
@@ -40,4 +44,23 @@ public class MedicoController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+
+//    @GetMapping("/{idMedico}/agendamentos")
+//    public ResponseEntity<?> getAgendamentosByMedico(@PathVariable Integer idMedico) {
+//
+//    }
+
 }
+
+/*
+GET {{url}}/medico/{doctorId}/agendamentos HTTP/1.1
+# Retorno esperado
+# [
+    # {
+        # id: number, (esse e o id do paciente)
+        # name: string,
+        # age: number,
+        # scheduleTime: time
+    # }
+# ]
+ */

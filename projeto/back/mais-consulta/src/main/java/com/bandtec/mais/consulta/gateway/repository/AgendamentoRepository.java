@@ -21,8 +21,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
     Optional<Agendamento> findByDtAtendimentoAndHrAtendimento(@Param("dt_atendimento") LocalDate dtAtendimento,
                                                               @Param("hr_atendimento") LocalTime hrAtendimento);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO(a.dtAtendimento, a.hrAtendimento, a.medico.idMedico) FROM Agendamento a WHERE a.medico.ubs.idUbs = :idUbs AND a.medico.especialidade.idEspecialidade = :idEspecialidade")
-    List<HoursResponseDTO> findHrAndDtAtendimentoByIdUbs(@Param("idUbs") Integer idUbs,
-                                                         @Param("idEspecialidade") Integer idEspecialidade);
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO(a.dtAtendimento, a.hrAtendimento, a.medico.idMedico) FROM Agendamento a WHERE a.medico.ubs.idUbs = :idUbs")
+    List<HoursResponseDTO> findHrAndDtAtendimentoByIdUbs(@Param("idUbs") Integer idUbs);
 
 }

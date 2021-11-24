@@ -100,7 +100,7 @@ public class AgendamentoController {
     }
 
     @GetMapping("buscar/horarios/livres")
-    public List<?> getAvaibleTime(@RequestBody GetHorariosLivres getHorariosLivres) {
+    public List<LocalTime> getAvaibleTime(@RequestBody GetHorariosLivres getHorariosLivres) {
         return postHoursUbs.execute(getHorariosLivres);
     }
 
