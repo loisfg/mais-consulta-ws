@@ -3,20 +3,15 @@ package com.bandtec.mais.consulta.usecase.schedule.impl;
 import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.gateway.repository.*;
-import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
 import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoExame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
-import com.bandtec.mais.consulta.factory.NotificationAdapter;
-import com.bandtec.mais.consulta.factory.NotificationFactory;
 import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NonUniqueResultException;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,7 +24,7 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
     private EspecialidadeRepository especialidadeRepository;
 
     @Autowired
-    private UbsRepository ubsRepository;
+    private MedicoRepository medicoRepository;
 
     @Autowired
     private ExameRepository exameRepository;
@@ -78,7 +73,7 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
         agendamento.setStatus("ATIVO");
         agendamento.setPaciente(pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get());
         agendamento.setEspecialidade(especialidadeRepository.findById(agendamentoExameRequestDTO.getIdEspecialidade()).get());
-        agendamento.setUbs(ubsRepository.findById(agendamentoExameRequestDTO.getIdUbs()).get());
+        agendamento.setMedico(medicoRepository.findMedicosByIdEspecialidadeAndIdUbs(agendamentoExameRequestDTO.getIdEspecialidade(), agendamentoExameRequestDTO.getIdUbs()).get());
 
         exameRepository.save(exame);
         agendamentoRepository.save(agendamento);

@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GetIdMedicoEspecialidade {
-Optional<List<Integer>>execute(Integer idEspecialidade);
+    Optional<List<Integer>> execute(Integer idEspecialidade);
 }

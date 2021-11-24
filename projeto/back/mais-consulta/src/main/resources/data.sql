@@ -9,7 +9,7 @@ INSERT INTO endereco (id_endereco, bairro, cep, cidade, complemento, estado, log
     VALUES (null, 'Jardim', '071449100', 'São Paulo', '', 'SP', '', '319', 'Loudes Lopes');
 
 INSERT INTO paciente (id_paciente, dt_nascimento, nome, numero_carteira_sus, sexo, telefone, endereco_id, usuario_id)
-    VALUES (null, '1998-03-31', 'Beatrix Campos', '31231231230', 'Feminino', '(11)4920-3132',
+    VALUES (null, '1998-03-31', 'Beatriz Campos', '31231231230', 'Feminino', '(11)4920-3132',
     (SELECT id_endereco FROM endereco WHERE bairro = 'Jardim' AND numero = '319' LIMIT 1),
     (SELECT id_usuario FROM usuario WHERE cpf = '55245903083'));
 

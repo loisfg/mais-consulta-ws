@@ -27,7 +27,6 @@ public class Medico {
 
     private String nome;
 
-
     @JsonIgnore
     @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
     @ManyToOne

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 @Transactional
 @SpringBootTest
 class MedicoRepositoryTest {
@@ -65,6 +64,6 @@ class MedicoRepositoryTest {
         if (medicoRepository.existsByNome(nome)){
             System.out.println("Medico existe" + medicoRepository.findByNome(nome));
         }
-        System.out.println("Medico repository teste "+ medicoRepository.findIdsMedicosByIdEspecialidade(1,1));
+        System.out.println("Medico repository teste "+ medicoRepository.findIdsMedicosByIdEspecialidadeAndIdUbs(1,1));
     }
 }
