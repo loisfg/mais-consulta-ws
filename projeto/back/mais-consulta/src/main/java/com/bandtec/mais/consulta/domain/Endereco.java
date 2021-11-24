@@ -26,7 +26,6 @@ public class Endereco {
 
     private String cep;
     private String cidade;
-//    @Size(max = 2, min =2)
     private String estado;
     private String bairro;
     private String rua;
