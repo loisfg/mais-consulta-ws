@@ -5,5 +5,5 @@ import com.bandtec.mais.consulta.domain.Ubs;
 import java.util.List;
 
 public interface SearchUbs {
-    List<Ubs> execute();
+    List<Ubs> execute(Integer id);
 }

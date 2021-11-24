@@ -51,10 +51,9 @@ public class Agendamento {
     @OneToOne
     private Paciente paciente;
 
-
-    @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
+    @JoinColumn(name = "medico_id", referencedColumnName = "id_medico", nullable = false)
     @OneToOne
-    private Ubs ubs;
+    private Medico medico;
 
     @Override
     public boolean equals(Object o) {

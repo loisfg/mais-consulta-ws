@@ -33,9 +33,9 @@ public class SearchController {
         );
     }
 
-    @GetMapping("/ubs")
-    public ResponseEntity<List<Ubs>> getUbs() {
-        List<Ubs> ubs = searchUbs.execute();
+    @GetMapping("/ubs/{idEspecialidade}")
+    public ResponseEntity<List<Ubs>> getUbs(@PathVariable Integer idEspecialidade) {
+        List<Ubs> ubs = searchUbs.execute(idEspecialidade);
         return ubs.isEmpty() ?
                 ResponseEntity.status(204).build() : ResponseEntity.status(200).body(ubs);
     }

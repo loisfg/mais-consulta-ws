@@ -5,9 +5,11 @@ import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.GetHorariosLivres;
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoConsultaResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoExameResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
+import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +43,9 @@ public class AgendamentoController {
 
     @Autowired
     private CancelAgendamento cancelAgendamento;
+
+    @Autowired
+    private PostHoursUbs postHoursUbs;
 
 
 
@@ -94,10 +99,10 @@ public class AgendamentoController {
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<?>> getAvaibleTime(@RequestBody) {
-//
-//    }
+    @GetMapping("buscar/horarios/livres")
+    public List<?> getAvaibleTime(@RequestBody GetHorariosLivres getHorariosLivres) {
+        return postHoursUbs.execute(getHorariosLivres);
+    }
 
     @GetMapping("pegar/horas")
     public List<LocalTime> getHours() {
@@ -114,15 +119,3 @@ public class AgendamentoController {
         return list;
     }
 }
-
-/*
-    Precisamos fazer duas tabelas auxiliares
-    uma com dias e outra com horarios
-    os dia+horario que o medico ja tem atendimento
-    sera setado dentro dele, assim esses valores
-    ficaram "desligados" no front para serem selecionados.
-
-    verifica todos os medicos de uma especialidade daquela ubs
-    e se não existir medicos disponiveis para aquele dia+hora
-    deixa a opção "desligada"  no front.
-*/

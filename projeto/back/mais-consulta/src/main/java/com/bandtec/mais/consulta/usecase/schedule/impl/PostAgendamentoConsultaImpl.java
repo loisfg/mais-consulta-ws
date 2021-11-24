@@ -17,8 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalField;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
@@ -81,7 +80,6 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
     private void efetuarAgendamentoConsulta(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO, Consulta consulta) {
         Agendamento agendamento = consulta.getAgendamento();
         agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
-        agendamento.setUbs(ubsRepository.findById(agendamentoConsultaRequestDTO.getIdUbs()).get());
         agendamento.setEspecialidade(especialidadeRepository.getById(agendamentoConsultaRequestDTO.getIdEspecialidade()));
 
         consultaRepository.save(consulta);
@@ -89,4 +87,26 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
         createNotification.execute(agendamento, "consulta");
     }
+
+    private List<Medico> medicosLivres(AgendamentoConsultaRequestDTO reqDTO) {
+        List<Medico> medicosInUbs = medicoRepository.findMedicosByUbsId(reqDTO.getIdUbs());
+        List<Medico> medicosOcupados = medicoRepository.findMedicosByAgendamento(reqDTO.getDtAtendimento(), reqDTO.getHrAtendimento());
+        List<Medico> medicosLivres = new ArrayList<>();
+
+        medicosOcupados.forEach((it) -> {
+            medicosInUbs.forEach(medico -> {
+                if (!it.equals(medico)) {
+                    medicosLivres.add(it);
+                }
+            });
+        });
+
+        return medicosLivres;
+    }
 }
+
+/*
+[x] pegar ubs por especialidade de médico - tabela Agendamento
+
+save - receber ubs para colocar um médico disponivel no agendamento
+ */

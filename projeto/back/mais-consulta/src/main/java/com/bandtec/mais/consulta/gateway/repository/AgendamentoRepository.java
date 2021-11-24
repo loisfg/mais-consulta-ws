@@ -1,8 +1,10 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
-import org.springframework.data.domain.Sort;
+import com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,7 +17,12 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 
     Optional<Agendamento> findByIdAgendamentoAndPaciente_IdPaciente(Integer idAgendamento, Integer idPaciente);
 
-    Optional<Agendamento> findByHrAtendimento(LocalTime hrAtendimento);
+    @Query("SELECT a FROM Agendamento a WHERE a.dtAtendimento = :dt_atendimento AND a.hrAtendimento = :hr_atendimento")
+    Optional<Agendamento> findByDtAtendimentoAndHrAtendimento(@Param("dt_atendimento") LocalDate dtAtendimento,
+                                                              @Param("hr_atendimento") LocalTime hrAtendimento);
 
-    Optional<Agendamento> findByDtAtendimentoAndHrAtendimento(LocalDate dtAtendimento, LocalTime hrAtendimento);
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO(a.dtAtendimento, a.hrAtendimento, a.medico.idMedico) FROM Agendamento a WHERE a.medico.ubs.idUbs = :idUbs AND a.medico.especialidade.idEspecialidade = :idEspecialidade")
+    List<HoursResponseDTO> findHrAndDtAtendimentoByIdUbs(@Param("idUbs") Integer idUbs,
+                                                         @Param("idEspecialidade") Integer idEspecialidade);
+
 }

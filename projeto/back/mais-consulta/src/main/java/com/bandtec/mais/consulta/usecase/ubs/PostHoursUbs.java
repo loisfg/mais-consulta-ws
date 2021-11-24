@@ -1,8 +1,11 @@
 package com.bandtec.mais.consulta.usecase.ubs;
 
 
-import java.time.LocalDate;
+import com.bandtec.mais.consulta.models.dto.request.GetHorariosLivres;
+
+import java.time.LocalTime;
+import java.util.List;
 
 public interface PostHoursUbs {
-    LocalDate execute(Integer idUbs);
+    List<LocalTime> execute(GetHorariosLivres getHorariosLivres);
 }
