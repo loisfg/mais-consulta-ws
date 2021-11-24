@@ -17,5 +17,6 @@ export const Container = styled.div`
         height: 3rem;
         width: 30rem;
         background-color: var(--white);
+        width: 100%;
     }
 `;

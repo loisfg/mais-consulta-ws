@@ -25,6 +25,10 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     Optional<Medico> findMedicosByIdEspecialidadeAndIdUbs(@Param("idEspecialidade") Integer idEspecialidade,
                                                           @Param("idUbs") Integer idUbs);
 
+    @Query(value = "SELECT m.idMedico FROM Medico m WHERE m.especialidade.idEspecialidade = :idEspecialidade AND m.ubs.idUbs= :idUbs")
+    Optional<List<Integer>> findIdsMedicosByIdEspecialidadeAndUbs(@Param("idEspecialidade")Integer idEspecialidade,
+                                                                  @Param("idUbs")Integer idUbs);
+
     boolean existsByNome(String nome);
 
     List<Medico> findByNome(String nome);

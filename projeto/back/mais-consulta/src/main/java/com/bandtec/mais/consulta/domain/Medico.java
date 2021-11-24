@@ -29,7 +29,7 @@ public class Medico {
 
     @JsonIgnore
     @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Ubs ubs;
 
     @JsonIgnore

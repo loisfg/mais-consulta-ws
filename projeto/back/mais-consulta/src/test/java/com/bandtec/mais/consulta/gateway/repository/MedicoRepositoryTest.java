@@ -2,10 +2,14 @@ package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.utils.StrFormat;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @SpringBootTest
@@ -60,6 +64,9 @@ class MedicoRepositoryTest {
                 .build();
 
         medicoRepository.save(medico);
+        List<Integer> listId = new ArrayList<>();
+        listId.add(1);
+        Assert.assertEquals(Optional.of(listId),medicoRepository.findIdsMedicosByIdEspecialidadeAndUbs(1,1));
 
         if (medicoRepository.existsByNome(nome)){
             System.out.println("Medico existe" + medicoRepository.findByNome(nome));
