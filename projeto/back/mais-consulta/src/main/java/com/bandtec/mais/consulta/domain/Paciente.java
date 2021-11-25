@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.bandtec.mais.consulta.models.enums.BloodTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -40,6 +41,26 @@ public class Paciente {
     @Column(name = "numero_carteira_sus")
     private String numeroCarteiraSus;
 
+    @Transient
+    @Column(name = "peso")
+    private String peso = "";
+
+    @Transient
+    @Column(name = "altura")
+    private Double altura = 0.0;
+
+    @Transient
+    @Column(name = "isVirgem")
+    private Boolean isVirgem = false;
+
+    @Transient
+    @Column(name = "isFumante")
+    private Boolean isFumante = false;
+
+    @Transient
+    @Column(name = "tipoSanguineo")
+    private BloodTypeEnum tipoSanguineo = BloodTypeEnum.DEFAULT;
+
     @OneToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
@@ -64,6 +85,10 @@ public class Paciente {
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private Set<PacienteHasAlergia> pacienteAlergias;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
     @Override
     public boolean equals(Object o) {

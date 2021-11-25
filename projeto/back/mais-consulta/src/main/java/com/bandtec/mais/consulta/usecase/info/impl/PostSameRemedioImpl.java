@@ -17,16 +17,16 @@ public class PostSameRemedioImpl implements PostSameRemedio {
     @Override
     public void execute() {
         Set<Remedio> remedios = Set.of(
-                new Remedio(1, "Abacavir", false),
-                new Remedio(2, "Abaloparatida", true),
-                new Remedio(3, "Abatacepte", false),
-                new Remedio(4, "Abciximabe", false),
-                new Remedio(5, "Acamprosato", false),
-                new Remedio(6, "Acarbose", false),
-                new Remedio(7, "Acebutolol", false),
-                new Remedio(8, "Acetazolamida", false),
-                new Remedio(9, "Acetilcisteína", false),
-                new Remedio(10, "Acetilprocainamida", false)
+//                new Remedio(1, "Abacavir", false),
+//                new Remedio(2, "Abaloparatida", true),
+//                new Remedio(3, "Abatacepte", false),
+//                new Remedio(4, "Abciximabe", false),
+//                new Remedio(5, "Acamprosato", false),
+//                new Remedio(6, "Acarbose", false),
+//                new Remedio(7, "Acebutolol", false),
+//                new Remedio(8, "Acetazolamida", false),
+//                new Remedio(9, "Acetilcisteína", false),
+//                new Remedio(10, "Acetilprocainamida", false)
 //                new Remedio(null, "Acitretina", false),
 //                new Remedio(null, "Aclidínio", false),
 //                new Remedio(null, "Aciclovir", false),

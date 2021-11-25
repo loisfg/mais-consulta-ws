@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -8,12 +9,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Builder
+//@Builder
 @Table(name = "remedio")
 @Entity
 public class Remedio {
@@ -24,6 +24,11 @@ public class Remedio {
     private String nome;
     @NotNull(message = "Campo de controlado não está preenchido!")
     private Boolean controlado;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
+    private Paciente paciente;
 
     @Override
     public boolean equals(Object o) {

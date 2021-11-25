@@ -2,6 +2,8 @@ package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
+import com.bandtec.mais.consulta.models.dto.response.PacienteInfoResponseDTO;
+import com.bandtec.mais.consulta.usecase.patient.GetPacienteInfo;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
 import com.bandtec.mais.consulta.usecase.auth.SignIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,14 @@ public class PacienteController {
 
     @Autowired
     private SignIn pacienteSignIn;
+
+    @Autowired
+    private GetPacienteInfo getPacienteInfo;
+
+    @GetMapping("{idPaciente}")
+    public ResponseEntity<PacienteInfoResponseDTO> getPacienteInfo(@PathVariable Integer idPaciente){
+        return ResponseEntity.of(getPacienteInfo.execute(idPaciente));
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<Usuario> pacienteSignUp(@RequestBody PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
