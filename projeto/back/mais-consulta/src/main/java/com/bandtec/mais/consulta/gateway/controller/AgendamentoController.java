@@ -10,6 +10,7 @@ import com.bandtec.mais.consulta.models.dto.response.AgendamentoConsultaResponse
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoExameResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,8 +47,6 @@ public class AgendamentoController {
 
     @Autowired
     private PostHoursUbs postHoursUbs;
-
-
 
     @PatchMapping("/cancelar/{idAgendamento}/{idPaciente}")
     public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento,
@@ -100,22 +99,12 @@ public class AgendamentoController {
     }
 
     @GetMapping("buscar/horarios/livres")
-    public List<LocalTime> getAvaibleTime(@RequestBody GetHorariosLivres getHorariosLivres) {
-        return postHoursUbs.execute(getHorariosLivres);
-    }
-
-    @GetMapping("pegar/horas")
-    public List<LocalTime> getHours() {
-        List<LocalTime> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Random gerador = new Random();
-            int horas = gerador.nextInt(8);
-            int minutos = gerador.nextInt(2);
-            LocalTime hora = LocalTime.of(9 + horas, (30 * minutos));
-
-            list.add(hora);
+    public ResponseEntity<List<LocalTime>> getAvaibleTime(@RequestBody GetHorariosLivres getHorariosLivres) {
+        List<LocalTime> listHoras = postHoursUbs.execute(getHorariosLivres);
+        if(listHoras.isEmpty()) {
+           return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        return list;
+        return ResponseEntity.status(HttpStatus.OK).body(listHoras);
     }
 }

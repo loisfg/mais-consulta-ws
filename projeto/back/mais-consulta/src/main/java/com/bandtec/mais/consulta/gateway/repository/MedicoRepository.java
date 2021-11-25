@@ -4,6 +4,7 @@ import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO;
 import org.apache.tomcat.jni.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,6 +29,10 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     @Query(value = "SELECT m.idMedico FROM Medico m WHERE m.especialidade.idEspecialidade = :idEspecialidade AND m.ubs.idUbs= :idUbs")
     Optional<List<Integer>> findIdsMedicosByIdEspecialidadeAndUbs(@Param("idEspecialidade")Integer idEspecialidade,
                                                                   @Param("idUbs")Integer idUbs);
+
+    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO(a.paciente.idPaciente, a.paciente.nome,  a.hrAtendimento, a.paciente.dtNascimento) FROM Agendamento a")
+    List<MedicoAgendamentoDTO> findAllAgendamentosByIdMedico(@Param("id") Integer idMedico,
+                                                                       @Param("dtAtual") LocalDate data);
 
     boolean existsByNome(String nome);
 

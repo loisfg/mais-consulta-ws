@@ -2,14 +2,16 @@ package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
+import com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO;
 import com.bandtec.mais.consulta.usecase.auth.MedicoDelete;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
-import io.swagger.models.Response;
+import com.bandtec.mais.consulta.usecase.schedule.MedicoAgendamentos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -23,8 +25,8 @@ public class MedicoController {
     @Autowired
     private MedicoDelete medicoDelete;
 
-//    @Autowired
-//    private ;
+    @Autowired
+    private MedicoAgendamentos medicoAgendamentos;
 
     @PostMapping("/signup")
     public ResponseEntity<Usuario> medicoSignUp(@RequestBody MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
@@ -45,22 +47,15 @@ public class MedicoController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-//    @GetMapping("/{idMedico}/agendamentos")
-//    public ResponseEntity<?> getAgendamentosByMedico(@PathVariable Integer idMedico) {
-//
-//    }
+    @GetMapping("/{idMedico}/agendamentos")
+    public ResponseEntity<List<MedicoAgendamentoDTO>> getAgendamentosByMedico(@PathVariable Integer idMedico) {
+        List<MedicoAgendamentoDTO> oAgendamentos = medicoAgendamentos.execute(idMedico);
+
+        if (oAgendamentos.isEmpty()) {
+            return ResponseEntity.status(204).build();
+        }
+
+        return ResponseEntity.status(200).body(oAgendamentos);
+    }
 
 }
-
-/*
-GET {{url}}/medico/{doctorId}/agendamentos HTTP/1.1
-# Retorno esperado
-# [
-    # {
-        # id: number, (esse e o id do paciente)
-        # name: string,
-        # age: number,
-        # scheduleTime: time
-    # }
-# ]
- */

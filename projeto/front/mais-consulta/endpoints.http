@@ -1,7 +1,8 @@
 @url = http://localhost:8080/mais-consulta 
 
 ### Home (Medico)
-GET {{url}}/medico/{doctorId}/agendamentos HTTP/1.1
+// DONE
+GET {{url}}/medico/1/agendamentos HTTP/1.1
 # Retorno esperado
 # [
     # {
