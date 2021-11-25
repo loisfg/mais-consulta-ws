@@ -19,14 +19,13 @@ public class MedicoAgendamentoDTO {
     public MedicoAgendamentoDTO(Integer id, String nome, LocalTime hrAtendimento, LocalDate dtNascimento) {
         this.id = id;
         this.nome = nome;
-        this.idade = calculateAge(dtNascimento, LocalDate.now());
+        this.idade = calculateAge(dtNascimento);
         this.hrAtendimento = hrAtendimento;
     }
 
-
-    public Integer calculateAge(LocalDate birthDate, LocalDate currentDate) {
-        if ((birthDate != null) && (currentDate != null)) {
-            return Period.between(birthDate, currentDate).getYears();
+    public static Integer calculateAge(LocalDate birthDate) {
+        if (birthDate != null) {
+            return Period.between(birthDate, LocalDate.now()).getYears();
         } else {
             return 0;
         }

@@ -6,21 +6,17 @@ import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.GetHorariosLivres;
-import com.bandtec.mais.consulta.models.dto.response.AgendamentoConsultaResponseDTO;
-import com.bandtec.mais.consulta.models.dto.response.AgendamentoExameResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @CrossOrigin("*")
 @RestController
@@ -81,7 +77,7 @@ public class AgendamentoController {
     @GetMapping("/buscar/exames/{idUser}")
     public ResponseEntity<?> getExamesByIdUser(@PathVariable Integer idUser) {
 
-        Optional<List<AgendamentoExameResponseDTO>> oListExames = getAgendamentoExame.execute(idUser);
+        Optional<List<AgendamentoResponseDTO>> oListExames = getAgendamentoExame.execute(idUser);
 
         return oListExames
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
@@ -91,7 +87,7 @@ public class AgendamentoController {
     @GetMapping("/buscar/consulta/{idUser}")
     public ResponseEntity<?> getConsultaByIdUser(@PathVariable Integer idUser) {
 
-        Optional<List<AgendamentoConsultaResponseDTO>> oListConsultas = getAgendamentoConsulta.execute(idUser);
+        Optional<List<AgendamentoResponseDTO>> oListConsultas = getAgendamentoConsulta.execute(idUser);
 
         return oListConsultas
                 .map(ResponseEntity.status(HttpStatus.OK)::body)

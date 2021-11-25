@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 @Getter
 @AllArgsConstructor
-public class AgendamentoConsultaResponseDTO {
+public class AgendamentoResponseDTO {
 
     String descricao;
     LocalDate dtAtendimento;

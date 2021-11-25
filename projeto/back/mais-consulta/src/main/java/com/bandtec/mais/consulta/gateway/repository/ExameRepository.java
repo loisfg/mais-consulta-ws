@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Exame;
-import com.bandtec.mais.consulta.models.dto.response.AgendamentoExameResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,6 +22,6 @@ public interface ExameRepository  extends JpaRepository<Exame, Integer> {
                                                 @Param("startDate") LocalDate dt_start,
                                                 @Param("dtEnd") LocalDate dt_end);
 
-    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.AgendamentoExameResponseDTO(e.descricao, e.agendamento.dtAtendimento, e.agendamento.hrAtendimento, e.agendamento.especialidade.descricao) FROM Exame e WHERE e.agendamento.paciente.idPaciente = :id")
-    Optional<List<AgendamentoExameResponseDTO>> findAllExamesByIdUser(@Param("id") Integer idUser);
+    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO(e.descricao, e.agendamento.dtAtendimento, e.agendamento.hrAtendimento, e.agendamento.especialidade.descricao) FROM Exame e WHERE e.agendamento.paciente.idPaciente = :id")
+    Optional<List<AgendamentoResponseDTO>> findAllExamesByIdUser(@Param("id") Integer idUser);
 }
