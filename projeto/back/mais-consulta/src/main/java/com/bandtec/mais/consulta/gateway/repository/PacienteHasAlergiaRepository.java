@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Alergia;
+import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.domain.PacienteHasAlergia;
 import com.bandtec.mais.consulta.domain.PacienteHasAlergiaKey;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,5 @@ import java.util.List;
 import java.util.Set;
 
 public interface PacienteHasAlergiaRepository extends JpaRepository<PacienteHasAlergia, PacienteHasAlergiaKey> {
+    List<Alergia> findByPaciente(Paciente paciente);
 }

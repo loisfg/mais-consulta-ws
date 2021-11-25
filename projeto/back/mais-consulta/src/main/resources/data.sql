@@ -17,7 +17,7 @@ INSERT INTO paciente (id_paciente, dt_nascimento, nome, numero_carteira_sus, sex
 INSERT INTO endereco (id_endereco, bairro, cep, cidade, complemento, estado, logradouro, numero, rua)
     VALUES (null, 'Palmares', '312312334', 'São Paulo', '', 'SP', '', '999', 'Juvenal Lopes');
 
-INSERT INTO alergia VALUES (null, 'pulga'),(null, 'piolho'),(null, 'formiga');
+--INSERT INTO alergia VALUES (null, 'pulga'),(null, 'piolho'),(null, 'formiga');
 
 INSERT INTO ubs (id_ubs, endereco_id, nome, telefone)
     VALUES (null, (SELECT id_endereco FROM endereco WHERE bairro = 'Palmares' and numero = '999' LIMIT 1), 'Ubs Palmares', '(11)4920-4040');

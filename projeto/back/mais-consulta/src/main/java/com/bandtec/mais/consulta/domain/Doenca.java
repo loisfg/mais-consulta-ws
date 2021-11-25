@@ -22,6 +22,7 @@ public class Doenca {
     private String nome;
     private Boolean hereditaria = false;
     private Boolean cronico = false;
+    private Boolean dst = false;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.REMOVE)

@@ -24,10 +24,15 @@ public class Alergia {
 
     private String nome;
 
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "alergia")
+//    @ToString.Exclude
+//    private Set<PacienteHasAlergia> pacienteAlergias;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "alergia")
-    @ToString.Exclude
-    private Set<PacienteHasAlergia> pacienteAlergias;
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
+    private Paciente paciente;
 
     @Override
     public boolean equals(Object o) {
