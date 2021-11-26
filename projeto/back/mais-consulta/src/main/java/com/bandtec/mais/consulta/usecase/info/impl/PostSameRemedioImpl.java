@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
+import com.bandtec.mais.consulta.domain.PacienteHasRemedios;
 import com.bandtec.mais.consulta.domain.Remedio;
 import com.bandtec.mais.consulta.gateway.repository.RemedioRepository;
 import com.bandtec.mais.consulta.usecase.info.PostSameRemedio;

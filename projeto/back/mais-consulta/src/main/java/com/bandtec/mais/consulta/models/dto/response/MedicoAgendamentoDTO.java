@@ -1,12 +1,10 @@
 package com.bandtec.mais.consulta.models.dto.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
-import java.util.Calendar;
 
 @Getter
 public class MedicoAgendamentoDTO {

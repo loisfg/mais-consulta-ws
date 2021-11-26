@@ -9,38 +9,36 @@ import java.util.Objects;
 import java.util.Set;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
 @Builder
-@AllArgsConstructor
-@Table(name = "remedio")
 @Entity
-public class Remedio {
+@Table(name = "atividade")
+public class Atividade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_atividade")
     private Integer id;
 
     private String nome;
 
-    private Boolean controlado;
-
     @JsonIgnore
-    @OneToMany(mappedBy = "remedio")
+    @OneToMany(mappedBy = "atividade")
     @ToString.Exclude
-    private Set<PacienteHasRemedios> pacienteHasRemedios;
+    private Set<PacienteHasAtividade> pacienteHasAtividades;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Remedio remedio = (Remedio) o;
-
-        return Objects.equals(id, remedio.id);
+        Atividade that = (Atividade) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return 1862138940;
+        return getClass().hashCode();
     }
 }

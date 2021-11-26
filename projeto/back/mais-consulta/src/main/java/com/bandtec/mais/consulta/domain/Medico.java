@@ -38,7 +38,7 @@ public class Medico {
     protected Usuario usuario;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "especialid  ade_id", referencedColumnName = "id_especialidade", nullable = false)
+    @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)
     private Especialidade especialidade;
 
     @Override

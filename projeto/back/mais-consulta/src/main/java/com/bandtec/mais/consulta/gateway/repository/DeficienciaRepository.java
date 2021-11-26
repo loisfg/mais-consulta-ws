@@ -21,5 +21,6 @@ public interface DeficienciaRepository extends JpaRepository<Deficiencia, Intege
             nativeQuery = true)
     List<Deficiencia> findDeficienciaByIdPacienteParams(@Param("id") Integer id);
 
-    List<Deficiencia> findByPaciente(Paciente paciente);
+    @Query("SELECT d.deficiencia FROM PacienteHasDeficiencia d WHERE d.paciente.idPaciente = :id")
+    List<Deficiencia> findByPacienteId(@Param("id") Integer id);
 }

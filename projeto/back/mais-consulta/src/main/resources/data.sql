@@ -2,6 +2,7 @@
 INSERT INTO usuario (id_usuario, cpf, email, password, role)
     VALUES (null, '55245903083', 'email@email.com', '123', 'Paciente');
 
+--medico
 INSERT INTO usuario (id_usuario, cpf, email, password, role)
     VALUES (null, '36014447806', 'email@medico.com', '123', 'Medico');
 
@@ -27,7 +28,7 @@ INSERT INTO especialidade (id_especialidade, descricao)
     VALUES (null, 'Clinico');
 
 INSERT INTO medico (id_medico, nome, especialidade_id, ubs_id, usuario_id)
-   VALUES(null, 'Luis Fernando Rocha',
+   VALUES (null, 'Luis Fernando Rocha',
    (SELECT id_especialidade FROM especialidade WHERE descricao = 'Clinico'),
    (SELECT id_ubs FROM ubs WHERE nome = 'Ubs Palmares'),
    (SELECT id_usuario FROM usuario WHERE cpf = '36014447806'));

@@ -22,7 +22,7 @@ public class GetAlergiaImpl implements GetAlergia {
     @Override
     public List<Alergia> execute(Integer idUser) {
         if(pacienteRepository.existsById(idUser)) {
-            return alergiaRepository.findAlergiaByIdPacienteParams(idUser);
+            return alergiaRepository.findByPacienteId(idUser);
         }
 
         return List.of();

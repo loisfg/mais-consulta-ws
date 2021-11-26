@@ -6,6 +6,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,9 +26,9 @@ public class Doenca {
     private Boolean dst = false;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
-    private Paciente paciente;
+    @OneToMany(mappedBy = "doenca")
+    @ToString.Exclude
+    private Set<PacienteHasDoencas> pacienteHasDoencas;
 
     @Override
     public boolean equals(Object o) {

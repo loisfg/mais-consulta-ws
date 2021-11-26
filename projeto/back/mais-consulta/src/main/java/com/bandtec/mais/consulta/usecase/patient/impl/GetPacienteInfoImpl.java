@@ -5,7 +5,6 @@ import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.models.dto.DadosPessoaisDTO;
 import com.bandtec.mais.consulta.models.dto.ProntuarioDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteInfoResponseDTO;
-import com.bandtec.mais.consulta.models.enums.BloodTypeEnum;
 import com.bandtec.mais.consulta.usecase.patient.GetPacienteInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +33,9 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
     @Autowired
     private AlergiaRepository alergiaRepository;
 
+    @Autowired
+    private AtividadeRepository atividadeRepository;
+
     @Override
     public Optional<PacienteInfoResponseDTO> execute(Integer idPaciente) {
 
@@ -44,10 +46,11 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
             Usuario usuario = paciente.getUsuario();
             Endereco endereco = paciente.getEndereco();
 
-            List<Doenca> doencaList = doencaRepository.findByPaciente(paciente);
-            List<Alergia> alergiaList = alergiaRepository.findByPaciente(paciente);
-            List<Deficiencia> deficienciaList = deficienciaRepository.findByPaciente(paciente);
-            List<Remedio> remedioList = remedioRepository.findByPaciente(paciente);
+            List<Doenca> doencaList = doencaRepository.findByPacienteId(idPaciente);
+            List<Alergia> alergiaList = alergiaRepository.findByPacienteId(idPaciente);
+            List<Deficiencia> deficienciaList = deficienciaRepository.findByPacienteId(idPaciente);
+            List<Remedio> remedioList = remedioRepository.findByPacienteId(idPaciente);
+            List<Atividade> atividadeList = atividadeRepository.findByPacienteId(idPaciente);
 
             List<Doenca> doencaHereditariaList = doencaList.stream().filter(Doenca::getHereditaria).collect(Collectors.toList());
             List<Doenca> doencaCronicaList = doencaList.stream().filter(Doenca::getCronico).collect(Collectors.toList());
@@ -68,20 +71,21 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
                     endereco.getCep()
             );
 
-            ProntuarioDTO prontuarioDTO = new ProntuarioDTO(
-                    paciente.getPeso(),
-                    paciente.getAltura(),
-                    doencaCronicaList,
-                    remedioControladoList,
-                    alergiaList,
-                    doencaDSTList,
-                    deficienciaList,
-                    paciente.getIsFumante(),
-                    paciente.getIsVirgem(),
-                    doencaHereditariaList,
-                    paciente.getTipoSanguineo(),
-                    List.of() // TODO atividades proibidas
-            );
+            ProntuarioDTO prontuarioDTO = ProntuarioDTO
+                    .builder()
+                    .peso(paciente.getPeso())
+                    .altura(paciente.getAltura())
+                    .doencasCronicas(doencaCronicaList)
+                    .remediosControlados(remedioControladoList)
+                    .alergias(alergiaList)
+                    .dsts(doencaDSTList)
+                    .isFumante(paciente.getIsFumante())
+                    .isVirgem(paciente.getIsVirgem())
+                    .deficiencia(deficienciaList)
+                    .doencasHereditarias(doencaHereditariaList)
+                    .atividadesProibidas(atividadeList)
+                    .tipoSanguineo(paciente.getTipoSanguineo())
+                    .build();
 
             PacienteInfoResponseDTO pacienteInfoResponseDTO = new PacienteInfoResponseDTO(
                     dadosPessoaisDTO,

@@ -17,7 +17,7 @@ public class UbsDataSchedulerImpl implements UbsDataScheduler {
     public void run() {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override public void run() {
-                //TODO fazer logica e pegar o dia de hoje e apagar o dia anterior para não lotar o banco
+                //TODO fazer logica para ler os dados da folha
             }
 
         }, 1000, 5000);

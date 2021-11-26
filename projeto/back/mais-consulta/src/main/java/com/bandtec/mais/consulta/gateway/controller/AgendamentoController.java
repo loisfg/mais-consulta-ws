@@ -30,9 +30,6 @@ public class AgendamentoController {
     private PostAgendamentoExame postAgendamentoExame;
 
     @Autowired
-    private MedicoRepository medicoRepository;
-
-    @Autowired
     private GetAgendamentoExame getAgendamentoExame;
 
     @Autowired
@@ -74,7 +71,7 @@ public class AgendamentoController {
                 .orElseGet(ResponseEntity.status(HttpStatus.BAD_REQUEST)::build);
     }
 
-    @GetMapping("/buscar/exames/{idUser}")
+    @GetMapping("/exames/{idUser}")
     public ResponseEntity<?> getExamesByIdUser(@PathVariable Integer idUser) {
 
         Optional<List<AgendamentoResponseDTO>> oListExames = getAgendamentoExame.execute(idUser);
@@ -84,7 +81,7 @@ public class AgendamentoController {
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
-    @GetMapping("/buscar/consulta/{idUser}")
+    @GetMapping("/consulta/{idUser}")
     public ResponseEntity<?> getConsultaByIdUser(@PathVariable Integer idUser) {
 
         Optional<List<AgendamentoResponseDTO>> oListConsultas = getAgendamentoConsulta.execute(idUser);
@@ -94,7 +91,7 @@ public class AgendamentoController {
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
-    @GetMapping("buscar/horarios/livres")
+    @GetMapping("/horarios/livres")
     public ResponseEntity<List<LocalTime>> getAvaibleTime(@RequestBody GetHorariosLivres getHorariosLivres) {
         List<LocalTime> listHoras = postHoursUbs.execute(getHorariosLivres);
         if(listHoras.isEmpty()) {

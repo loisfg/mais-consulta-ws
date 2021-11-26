@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface ConsultaRepository extends JpaRepository<Consulta, Integer> {
 
-    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.AgendamentoConsultaResponseDTO(c.descricao, c.agendamento.dtAtendimento, c.agendamento.hrAtendimento, c.agendamento.especialidade.descricao) FROM Consulta c WHERE c.agendamento.paciente.idPaciente = :id")
+    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO(c.descricao, c.agendamento.dtAtendimento, c.agendamento.hrAtendimento, c.agendamento.especialidade.descricao) FROM Consulta c WHERE c.agendamento.paciente.idPaciente = :id")
     Optional<List<AgendamentoResponseDTO>> findAllConsultaByIdUser(@Param("id") Integer idUser);
 
 }

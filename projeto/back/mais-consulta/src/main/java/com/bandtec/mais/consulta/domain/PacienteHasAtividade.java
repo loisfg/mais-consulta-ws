@@ -9,36 +9,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Objects;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @Setter
 @ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class PacienteHasDeficiencia {
+public class PacienteHasAtividade {
     @EmbeddedId
-    private PacienteHasDeficienciaKey id;
+    private PacienteHasAtividadeKey id;
 
     @ManyToOne
     @JoinColumn(name = "paciente_id", insertable = false, updatable = false)
     private Paciente paciente;
 
     @ManyToOne
-    @JoinColumn(name = "deficiencia_id", insertable = false, updatable = false)
-    private Deficiencia deficiencia;
+    @JoinColumn(name = "atividade_id", insertable = false, updatable = false)
+    private Atividade atividade;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        PacienteHasDeficiencia that = (PacienteHasDeficiencia) o;
-
-        return Objects.equals(id, that.id);
+        PacienteHasAtividade that = (PacienteHasAtividade) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(id);
     }
 }

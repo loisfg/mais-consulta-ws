@@ -22,11 +22,11 @@ public class PacienteHasAlergia {
 
     @ManyToOne
     @JoinColumn(name = "paciente_id", insertable = false, updatable = false)
-    Paciente paciente;
+    private Paciente paciente;
 
     @ManyToOne
     @JoinColumn(name = "alergia_id", insertable = false, updatable = false)
-    Alergia alergia;
+    private Alergia alergia;
 
     @Override
     public boolean equals(Object o) {
