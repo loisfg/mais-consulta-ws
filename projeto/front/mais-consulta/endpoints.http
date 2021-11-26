@@ -111,7 +111,24 @@ GET {{url}}/medico/historico HTTP/1.1
         # lastAppointment: string
     # }
 # ]
-###
+
+### Home (Paciente)v
+GET {{url}}/paciente/agenda HTTP/1.1
+# [
+    # {
+    #         especialidade: 'Dentista',
+    #         dataAtendimento: '25.11',
+    #         diaSemanaAtendimento: 'Quinta',
+    #         horaAtendimento:'08:00'
+    # },
+    # {
+    #         especialidade: 'Dentista',
+    #         dataAtendimento: '25.11',
+    #         diaSemanaAtendimento: 'Quinta',
+    #         horaAtendimento:'08:00'
+    # }
+# ]
+
 
 POST {{url}}/auth/signin HTTP/1.1
 content-type: application/json
