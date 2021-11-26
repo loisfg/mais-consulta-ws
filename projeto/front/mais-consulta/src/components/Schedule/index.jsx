@@ -1,31 +1,41 @@
-import React from 'react';
-import { Container, LeftSide, RightSide, Line } from './styles';
+import React, { useEffect } from 'react';
+import { Container, Line } from './styles';
 import { TextSubtext, Stickers } from '../../components';
+import api from '../../services/api';
 
-export const Schedule = ({date}) => {
+export const Schedule = ({data}) => {
+  const weekDays = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
+  const currentWeek = () => {
+    const curr = new Date;
+    const weekDays = [];
+    for (let index = 1; index <= 5; index++) 
+      weekDays.push(
+        new Date(curr.setDate(curr.getDate() - curr.getDay() +index))
+      )
+      return weekDays
+  }
+  const formatDate = day => day.getDate()+'.'+Number(day.getMonth() + 1)
+
   return (
       <Container>
-          <LeftSide>
-            <TextSubtext textOne = "Segunda" textTwo= "20.09"/>
-            <TextSubtext textOne = "Terça" textTwo= "21.09"/>
-            <TextSubtext textOne = "Quarta" textTwo= "22.09"/>
-            <TextSubtext textOne = "Quinta" textTwo= "23.09"/>
-            <TextSubtext textOne = "Sexta" textTwo= "24.09"/>
-            <TextSubtext textOne = "Sábado" textTwo= "25.09"/>
-          </LeftSide>
-          <RightSide>
+        {
+          currentWeek().map((day, index) => (
             <Line>
-              <Stickers specialty="Dentista" hour="08am">
-              </Stickers>
+              <div className='date-appointment-group'>
+                <TextSubtext textOne = {weekDays[index]} textTwo={formatDate(day)}/>
+              </div>
+              {
+                data.map((info) => 
+                  info.diaSemanaAtendimento === weekDays[index] &&
+                  <div className='appointment-group'>
+                    <Stickers specialty={info.especialidade} hour={info.horaAtendimento}/>
+                  </div> 
+                )
+              }
+              
             </Line>
-            <Line/>
-            <Line/>
-            <Line>
-              <Stickers specialty="Pediatra"  hour="08am-09am"></Stickers>
-            </Line>
-            <Line/>
-            <Line/>
-          </RightSide>
+          ))
+        }
       </Container>
   );
 }
