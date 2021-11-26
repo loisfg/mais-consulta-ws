@@ -1,41 +1,28 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  height: 65vh;
-  width: 80%;
-  border-radius: 6px;
-  border: var(--green-standard) 1.5px solid;
+  width: 100%;
+  border-radius: 0.6rem;
+  border: var(--green-standard) 0.15rem solid;
 `;
 
-export const  LeftSide = styled.div `
-height: 100%;
-width: 10%;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-border-radius: 6px;
-background-color: #C0E2DE;
-`
-
-export const  RightSide = styled.div `
-height: 100%;
-width: 90%;
-display: flex;
-flex-direction: column;
-`
-
 export const Line = styled.div`
-height: 20%;
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 0 0 0 20px;
-background-color: var(--white-standard);
-opacity: 60%;
-border-bottom: var(--green-standard) 1.5px solid;
-border-radius: 6px;
-display: flex;
-justify-content: space-around;
+  height: 6rem;
+  width: 100%;
+  display: flex;
+  background-color: var(--white-standard);
+  border-bottom: var(--green-standard) 0.1rem solid;
+  .date-appointment-group{
+    width: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--light-green);
+  }
+  .appointment-group{
+    width: 88%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `

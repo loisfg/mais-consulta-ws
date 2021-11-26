@@ -34,10 +34,10 @@ export const AuxDiv = styled.div`
 `
 
 export const Content = styled.div`
-    height: 92vh;
+    height: 100%;
+    padding: 0 4rem;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
 `

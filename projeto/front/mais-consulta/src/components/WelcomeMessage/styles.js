@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const Text = styled.div`
-    width: 60vw;
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    margin: 2rem 0;
     flex-direction: column;
     font-size: 25px;
 `

@@ -1,17 +1,14 @@
 import React from 'react';
-import { BoxSticker, RightSide, LeftSide } from './styles';
+import { BoxSticker } from './styles';
 
-export const Stickers = ({ color, specialty, hour }) => {
-     return (
+export const Stickers = ({ specialty, hour }) => 
+     (
           <BoxSticker>
-               <RightSide>
+               <div>
                     {specialty}
-               </RightSide>
-               <LeftSide>
+               </div>
+               <div>
                     {hour}
-               </LeftSide>
+               </div>
           </BoxSticker>
-
-     );
-}
-
+     )
