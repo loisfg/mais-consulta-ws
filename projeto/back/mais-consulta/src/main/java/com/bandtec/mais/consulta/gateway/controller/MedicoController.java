@@ -2,16 +2,15 @@ package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
-import com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO;
+import com.bandtec.mais.consulta.models.dto.request.PacienteInfoRequestDTO;
 import com.bandtec.mais.consulta.usecase.auth.MedicoDelete;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
-import com.bandtec.mais.consulta.usecase.schedule.MedicoAgendamentos;
+import com.bandtec.mais.consulta.usecase.doctor.PostFormularioAtendimento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin("*")
@@ -26,7 +25,14 @@ public class MedicoController {
     private MedicoDelete medicoDelete;
 
     @Autowired
-    private MedicoAgendamentos medicoAgendamentos;
+    private PostFormularioAtendimento postFormularioAtendimento;
+
+    @PostMapping("{idMedico}/{idPaciente}/atendimento")
+    public ResponseEntity<?> editarFormularioAtendimento(@PathVariable Integer idMedico,
+                                                         @PathVariable Integer idPaciente,
+                                                         @RequestBody PacienteInfoRequestDTO pacienteInfoRequestDTO) {
+        return ResponseEntity.of(postFormularioAtendimento.execute(idMedico, idPaciente, pacienteInfoRequestDTO));
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<Usuario> medicoSignUp(@RequestBody MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
@@ -46,16 +52,4 @@ public class MedicoController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
-    @GetMapping("/{idMedico}/agendamentos")
-    public ResponseEntity<List<MedicoAgendamentoDTO>> getAgendamentosByMedico(@PathVariable Integer idMedico) {
-        List<MedicoAgendamentoDTO> oAgendamentos = medicoAgendamentos.execute(idMedico);
-
-        if (oAgendamentos.isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-
-        return ResponseEntity.status(200).body(oAgendamentos);
-    }
-
 }

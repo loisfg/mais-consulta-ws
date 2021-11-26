@@ -50,4 +50,5 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
                                           @Param("hr_atendimento") LocalTime hrAtendimento) ;
 
 
+    boolean existsByIdMedico(Integer idMedico);
 }
