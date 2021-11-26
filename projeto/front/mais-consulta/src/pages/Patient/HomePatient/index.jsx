@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { Page } from "./styles";
 import { DivUsuario, AuxDiv, Content } from "./styles";
 import { UserProfilePic, Schedule, WelcomeMessage } from "../../../components";
