@@ -42,14 +42,17 @@ const Routes = () => {
         <Route
           exact
           path="/"
-          render={(props) =>
-            isAuth() ? (
+          render={(props) =>{
+            const role = localStorage.getItem("role");
+            const pathname = role === 'Medico'? '/home-doctor' : 
+                              role === 'Paciente'? '/home' : '/';
+            return isAuth() ? (
               <Redirect
-                to={{ pathname: "/home", state: { from: props.location } }}
+                to={{ pathname: pathname, state: { from: props.location } }}
               />
             ) : (
               <Initial {...props} />
-            )
+            )}
           }
         />
         <PrivateRoute path="/home" component={HomePatient} />
@@ -64,20 +67,11 @@ const Routes = () => {
         <PrivateRoute path='/patients' component={Patients} />
         <Route
           path="*"
-          render={(props) =>{
-              const role = localStorage.getItem("role");
-              const pathname = role === 'Medico'? '/home-doctor' : 
-                               role === 'Paciente'? '/home' : '/';
-              return isAuth() ? (
-                <Redirect
-                  to={{ pathname, state: { from: props.location } }}
-                />
-              ) : (
+          render={(props) =>(
                 <Redirect
                   to={{ pathname: "/", state: { from: props.location } }}
                 />
-              )
-            }
+              ) 
           }
         />
       </Switch>
