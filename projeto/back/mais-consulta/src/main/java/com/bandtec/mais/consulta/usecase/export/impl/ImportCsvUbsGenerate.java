@@ -5,6 +5,7 @@ import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.gateway.repository.EnderecoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
 import com.bandtec.mais.consulta.usecase.export.ImportCsv;
+import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class ImportCsvUbsGenerate implements ImportCsv {
             while (entrada.hasNext()) {
                 Integer id = list.size() + 1;
                 String nome = entrada.next();
-                String telefone = gerador.nextInt(8999) + "-" + gerador.nextInt(9999);
+                String telefone = "(11)" + gerador.nextInt(8999) + "-" + gerador.nextInt(9999);
                 list.add(new Ubs(id, nome, telefone, enderecoList.get(id - 1)));
             }
         } catch (NoSuchElementException erro) {
@@ -93,10 +94,10 @@ public class ImportCsvUbsGenerate implements ImportCsv {
                 Integer id = listEndereco.size() + 1;
                 String cep = gerador.nextInt(+99999) + "-" + gerador.nextInt(+999);
                 String estado = estados.get(gerador.nextInt(estados.size()));
-                String logradouro = entrada.next();
-                String bairro = entrada.next();
-                String rua = "Rua " + gerador.nextInt();
-                String cidade = "Jd" + bairro;
+                String logradouro = "";
+                String rua = StrFormat.toTitledCase(entrada.next());
+                String bairro = StrFormat.toTitledCase(entrada.next());
+                String cidade = "Jd " + StrFormat.toTitledCase(bairro);
                 String numero = String.valueOf(gerador.nextInt(+2000));
                 String complemento = "";
                 Endereco endereco = new Endereco(id, cep, cidade, estado, bairro, rua, logradouro, numero, complemento);
@@ -128,8 +129,15 @@ public class ImportCsvUbsGenerate implements ImportCsv {
     public void run() {
         List<Endereco> enderecoList = leSalvaEndereco();
         List<Ubs> listUbs = leSalvaUbsCmEndereco(enderecoList);
-
-        enderecoRepository.saveAll(enderecoList);
-        ubsRepository.saveAll(listUbs);
+//
+//        for (int i = 0; i < 40; i++) {
+//            System.out.println("Salvei mais um endereço");
+//            enderecoRepository.save(enderecoList.get(i));
+//        }
+//
+//        for (int i = 0; i < 40; i++) {
+//            System.out.println("Salvei mais uma ubs");
+//            ubsRepository.save(listUbs.get(i));
+//        }
     }
 }
