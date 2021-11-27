@@ -5,12 +5,14 @@ const username = localStorage.getItem("nome");
 const typeOfUser = localStorage.getItem("role");
 
 export const Profile = () => {
+  const username = localStorage.getItem('nome');
+  const role = localStorage.getItem('role')
   return (
     <Container>
       <PatientGroup>
         <CustomAvatar sx={{ bgcolor: "deepskyblue" }} />
         <TextSubtext textOne={username}></TextSubtext>
-        <H2> {String(typeOfUser.toLocaleLowerCase())} </H2>
+        <H2>{role}</H2>
       </PatientGroup>
       <DataBox usuario={username}/>
     </Container>

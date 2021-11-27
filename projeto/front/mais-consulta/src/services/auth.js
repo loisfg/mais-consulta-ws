@@ -10,9 +10,7 @@ export const isAuth = () => {
         role
     }
     let validateToken = JSON.stringify(data).replaceAll('', '').replaceAll(':', '|');
-    console.log(validateToken)
     let token = localStorage.getItem(TOKEN_KEY);
-    console.log(token)
     return validateToken === token 
 }
 export const getToken = () => localStorage.setItem(TOKEN_KEY);

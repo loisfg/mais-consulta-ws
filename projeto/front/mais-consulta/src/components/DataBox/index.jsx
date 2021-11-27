@@ -1,16 +1,6 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Box,
-  Panel,
-  LeftSide,
-  RightSide,
-  H2,
-  PanelTwo,
-  H3,
-} from "./styles";
-import { Input } from "../../components";
-
+import { Container } from "./styles";
+import { SmallInput } from '../../pages/Doctor/Appointment/FormSection/SmallInput'
 export const DataBox = () => {
   const username = localStorage.getItem("nome")
 
@@ -21,181 +11,83 @@ export const DataBox = () => {
   ]);
   return (
     <Container>
-      <Box>
-        <H3> Dados Cadastrais </H3>
-        <Panel>
-          <LeftSide>
-            <Input
-              size="big"
-              label="Nome"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue={username}
-            />
-            <Input
-              size="big"
-              label="CPF"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="48309861826"
-            />
-            <Input
-              size="big"
-              label="Número de carteira do SUS"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="34314341"
-            />
-            <Input
-              size="big"
-              label="Celular"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="(11) 93229-4055"
-            />
-            <Input
-              size="big"
-              label="CEP"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="08215-880"
-            />
-            <Input
-              size="big"
-              label="Logradouro"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="Rua Luau Brilhante"
-            />
-          </LeftSide>
-
-          <RightSide>
-            <Input
-              size="big"
-              label="RG"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="37.560.836-9"
-            />
-            <Input
-              size="big"
-              label="Telefone Residencial"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="(11) 2053-6573"
-            />
-            <Input
-              size="big"
-              label="Cidade"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="São Paulo"
-            />
-            <Input
-              size="big"
-              label="Estado"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="São Paulo"
-            />
-            <Input
-              size="big"
-              label="Número"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="80"
-            />
-            <Input
-              size="big"
-              label="Bairro"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="Itaquera"
-            />
-          </RightSide>
-        </Panel>
-
-        <H3> Prontuário do Médico</H3>
-        <PanelTwo>
-          <LeftSide>
-            <Input
-              size="big"
-              label="Peso"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="60kg"
-            />
-            <Input
-              size="big"
-              label="Altura"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="160cm"
-            />
-            <Input
-              size="big"
-              label="Remédios controlados"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="Gardenal"
-            />
-            <Input
-              size="big"
-              label="Alergias"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="Pelo de animal"
-            />
-            <Input
-              size="big"
-              label="DST'S"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="AIDS"
-            />
-            <Input
-              size="big"
-              label="Atividades Proibidas"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="Não possuo nenhuma atividade proibida"
-            />
+      <div className='box'>
+        <h2>Dados Cadastrais</h2>
+        <div className='panel'>
+            <div className='ipt_group'>
+              <label>Nome</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <label>CPF</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <label>Número de carteira do SUS</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <label>Celular</label>
+              <input className='ipt_data' type="tel" />
+            </div>
+            <div className='ipt_group'>
+              <label>CEP</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <label>RG</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <label>Estado</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <label>Telefone Residencial</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <label>Cidade</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <label>RG</label>
+              <input className='ipt_data' type="text" />
+            </div>
+            <div className='ipt_group'>
+              <div className='side_ipt_group'>
+                <div>
+                  <label>Logradouro</label>
+                  <input id='ipt_logradouro' type="text" />
+                </div>
+                </div>
+            </div>
+            <div className='ipt_group'>
+              <div className='side_ipt_group'>
+                <div>
+                  <label>Número</label>
+                  <input id='ipt_numero' type="text" />
+                </div>
+                <div>
+                  <label>Bairro</label>
+                  <input id='ipt_bairro' type="text" />
+                </div>
+              </div>
+            </div>
             
-          </LeftSide>
-
-          <RightSide>
-            <Input
-              size="big"
-              label="IMC"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="11"
-            />
-            <Input
-              size="big"
-              label="Doenças cronicas"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="Asma"
-            />
-            <Input
-              size="big"
-              label="Deficiências"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="Não possuo nenhuma deficiência"
-            />
-            <Input
-              size="big"
-              label="Doenças hereditarias"
-              variant="outlined"
-              placeholder="Adicionar informação"
-              defaultValue="Não possuo nenhuma doença hereditária"
-            />
-          
-          </RightSide>
-        </PanelTwo>
-      </Box>
+        </div>
+        <h2>Prontuário do Médico</h2>
+        <div className="panel">
+          <div>
+              <label>Peso</label>
+              <SmallInput measure="kg"/>
+            <div>
+              <label>Altura</label>
+              <SmallInput measure="cm"/>
+            </div>
+          </div>
+        </div>
+      </div>
     </Container>
   );
 };

@@ -28,7 +28,7 @@ export const Container = styled.section`
 
 export const PatientGroup = styled.div`
   height: 90%;
-  width: 27rem;
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: flex-start;

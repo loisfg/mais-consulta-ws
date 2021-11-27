@@ -12,7 +12,7 @@ export const SchedulingHistory = ({ usuario }) => {
         <DivComboBox>
         <LeftSide>\
          <Agrupamento>
-         <H3> Perído </H3>
+         <H3> Período </H3>
        
          </Agrupamento>
          <Agrupamento>

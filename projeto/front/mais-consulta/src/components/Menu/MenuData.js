@@ -1,6 +1,3 @@
-import React from "react";
-import Icon from "./Icon";
-
 export default [
   {
     title: "Home",
@@ -9,7 +6,7 @@ export default [
   },
   {
     title: "Historico",
-    path: "/historico",
+    path: "/historico-agendamentos",
     icon: "history",
   },
   {
