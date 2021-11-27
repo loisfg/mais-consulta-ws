@@ -14,9 +14,11 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.NonUniqueResultException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalField;
+import java.time.temporal.TemporalQuery;
 import java.util.*;
 
 @Service
@@ -48,6 +50,9 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
     @Override
     public Optional<Consulta> execute(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO) {
+        if (fds.queryFrom(agendamentoConsultaRequestDTO.getDtAtendimento())) {
+            return Optional.empty();
+        }
         Consulta consulta = AgendamentoConsultaRequestDTO.convertFromController(agendamentoConsultaRequestDTO);
 
         if (pacienteRepository.existsById(agendamentoConsultaRequestDTO.getIdPaciente())) {
@@ -87,8 +92,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         agendamento.setMedico(medico);
         agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
         agendamento.setEspecialidade(medico.getEspecialidade());
-        agendamento.setStatus("PEND");
-
+        agendamento.setStatus("ATIVO");
 
         consultaRepository.save(consulta);
         agendamentoRepository.save(agendamento);
@@ -111,4 +115,9 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
         return medicosLivres;
     }
+
+    TemporalQuery<Boolean> fds = t -> {
+        DayOfWeek dow = DayOfWeek.from(t);
+        return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
+    };
 }
