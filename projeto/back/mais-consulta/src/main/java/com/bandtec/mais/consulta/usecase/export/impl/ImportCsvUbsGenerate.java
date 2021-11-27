@@ -129,15 +129,5 @@ public class ImportCsvUbsGenerate implements ImportCsv {
     public void run() {
         List<Endereco> enderecoList = leSalvaEndereco();
         List<Ubs> listUbs = leSalvaUbsCmEndereco(enderecoList);
-//
-//        for (int i = 0; i < 40; i++) {
-//            System.out.println("Salvei mais um endereço");
-//            enderecoRepository.save(enderecoList.get(i));
-//        }
-//
-//        for (int i = 0; i < 40; i++) {
-//            System.out.println("Salvei mais uma ubs");
-//            ubsRepository.save(listUbs.get(i));
-//        }
     }
 }

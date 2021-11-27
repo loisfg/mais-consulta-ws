@@ -3,24 +3,20 @@ package com.bandtec.mais.consulta.models.dto.response;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.Period;
 
 @Getter
-public class MedicoAgendamentoDTO {
-
-    Integer idPaciente;
+public class MedicoHistoricoResponseDTO {
     Integer idAgendamento;
     String nome;
     Integer idade;
-    LocalTime hrAtendimento;
+    LocalDate ultimoAtendimento;
 
-    public MedicoAgendamentoDTO(Integer idPaciente, Integer idAgendamento, String nome, LocalTime hrAtendimento, LocalDate dtNascimento) {
-        this.idPaciente = idPaciente;
+    public MedicoHistoricoResponseDTO(Integer idAgendamento, String nome, LocalDate dataNascimento, LocalDate dtAtendimento) {
         this.idAgendamento = idAgendamento;
         this.nome = nome;
-        this.idade = calculateAge(dtNascimento);
-        this.hrAtendimento = hrAtendimento;
+        this.idade = calculateAge(dataNascimento);
+        this.ultimoAtendimento = dtAtendimento;
     }
 
     public static Integer calculateAge(LocalDate birthDate) {

@@ -5,6 +5,7 @@ import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO;
+import com.bandtec.mais.consulta.models.dto.response.MedicoHistoricoResponseDTO;
 import org.apache.tomcat.jni.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -30,8 +31,8 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     Optional<List<Integer>> findIdsMedicosByIdEspecialidadeAndUbs(@Param("idEspecialidade")Integer idEspecialidade,
                                                                   @Param("idUbs")Integer idUbs);
 
-    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO(a.paciente.idPaciente, a.paciente.nome,  a.hrAtendimento, a.paciente.dtNascimento) FROM Agendamento a")
-    List<MedicoAgendamentoDTO> findAllAgendamentosByIdMedico(@Param("id") Integer idMedico,
+    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO(a.paciente.idPaciente, a.idAgendamento, a.paciente.nome,  a.hrAtendimento, a.paciente.dtNascimento) FROM Agendamento a WHERE a.dtAtendimento = :dtAtual AND a.medico.idMedico = :id")
+    Optional<List<MedicoAgendamentoDTO>> findAllAgendamentosByIdMedico(@Param("id") Integer idMedico,
                                                                        @Param("dtAtual") LocalDate data);
 
     boolean existsByNome(String nome);
@@ -51,4 +52,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
 
 
     boolean existsByIdMedico(Integer idMedico);
+
+    @Query("SELECT DISTINCT new com.bandtec.mais.consulta.models.dto.response.MedicoHistoricoResponseDTO(a.idAgendamento, a.paciente.nome, a.paciente.dtNascimento, (SELECT MAX(a.dtAtendimento) FROM Agendamento a GROUP BY a.paciente.idPaciente)) FROM Agendamento a WHERE a.medico.idMedico = :idMedico")
+    Optional<List<MedicoHistoricoResponseDTO>> findHistoricoAgendamentos(@Param("idMedico") Integer idMedico);
 }
