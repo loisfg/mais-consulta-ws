@@ -79,8 +79,10 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
     private void efetuarAgendamentoConsulta(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO, Consulta consulta) {
         Agendamento agendamento = consulta.getAgendamento();
+        Medico medico = medicosLivres(agendamentoConsultaRequestDTO).stream().findFirst().get();
         agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
-        agendamento.setEspecialidade(especialidadeRepository.getById(agendamentoConsultaRequestDTO.getIdEspecialidade()));
+        agendamento.setMedico(medico);
+        agendamento.setEspecialidade(medico.getEspecialidade());
 
         consultaRepository.save(consulta);
         agendamentoRepository.save(agendamento);
@@ -93,10 +95,10 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         List<Medico> medicosOcupados = medicoRepository.findMedicosByAgendamento(reqDTO.getDtAtendimento(), reqDTO.getHrAtendimento());
         List<Medico> medicosLivres = new ArrayList<>();
 
-        medicosOcupados.forEach((it) -> {
+        medicosOcupados.forEach((ocuped) -> {
             medicosInUbs.forEach(medico -> {
-                if (!it.equals(medico)) {
-                    medicosLivres.add(it);
+                if (!ocuped.equals(medico)) {
+                    medicosLivres.add(medico);
                 }
             });
         });
@@ -104,9 +106,3 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         return medicosLivres;
     }
 }
-
-/*
-[x] pegar ubs por especialidade de médico - tabela Agendamento
-
-save - receber ubs para colocar um médico disponivel no agendamento
- */

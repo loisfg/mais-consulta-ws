@@ -65,18 +65,18 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
 
             PacienteHasRemediosKey pacienteHasRemediosKey = PacienteHasRemediosKey.builder()
                     .pacienteId(idPaciente)
-                    .remedioId(remedioList.get())
+                    .remedioId(1)
                     .build();
 
 
             PacienteHasRemedios.builder()
                     .id(pacienteHasRemediosKey)
-                    .remedio(remedioList.get(i))
+                    .remedio(remedioList.get(1))
                     .build();
-            paciente.setDoencas();
-            paciente.setRemedios();
-            paciente.setPacienteDeficiencias();
-            paciente.setPacienteAlergias();
+//            paciente.setDoencas();
+//            paciente.setRemedios();
+//            paciente.setPacienteDeficiencias();
+//            paciente.setPacienteAlergias();
 
 
         }
