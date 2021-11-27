@@ -78,11 +78,17 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
     }
 
     private void efetuarAgendamentoConsulta(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO, Consulta consulta) {
+        List<Medico> medicoList = medicosLivres(agendamentoConsultaRequestDTO);
         Agendamento agendamento = consulta.getAgendamento();
-        Medico medico = medicosLivres(agendamentoConsultaRequestDTO).stream().findFirst().get();
-        agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
+        if (medicoList.isEmpty()) {
+            return;
+        }
+        Medico medico = medicoList.stream().findFirst().orElseThrow();
         agendamento.setMedico(medico);
+        agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
         agendamento.setEspecialidade(medico.getEspecialidade());
+        agendamento.setStatus("PEND");
+
 
         consultaRepository.save(consulta);
         agendamentoRepository.save(agendamento);
@@ -95,8 +101,8 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         List<Medico> medicosOcupados = medicoRepository.findMedicosByAgendamento(reqDTO.getDtAtendimento(), reqDTO.getHrAtendimento());
         List<Medico> medicosLivres = new ArrayList<>();
 
-        medicosOcupados.forEach((ocuped) -> {
-            medicosInUbs.forEach(medico -> {
+        medicosInUbs.forEach((medico) -> {
+            medicosOcupados.forEach(ocuped -> {
                 if (!ocuped.equals(medico)) {
                     medicosLivres.add(medico);
                 }

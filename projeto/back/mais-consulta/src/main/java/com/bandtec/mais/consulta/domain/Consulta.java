@@ -12,7 +12,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @Builder
-@Table(name = "consulta")
+@Table(name = "Consulta", schema = "dbo", catalog = "maisconsultadb")
 @Entity
 public class  Consulta {
     @Id

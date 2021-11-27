@@ -3,10 +3,7 @@ package com.bandtec.mais.consulta.domain;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
@@ -16,6 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "PacienteHasRemedios", schema = "dbo", catalog = "maisconsultadb")
 public class PacienteHasRemedios {
     @EmbeddedId
     PacienteHasRemediosKey id;

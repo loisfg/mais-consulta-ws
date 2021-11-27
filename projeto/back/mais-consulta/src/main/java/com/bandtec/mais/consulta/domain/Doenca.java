@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Builder
-@Table(name = "doenca")
+@Table(name = "Doenca", schema = "dbo", catalog = "maisconsultadb")
 @Entity
 public class Doenca {
     @Id

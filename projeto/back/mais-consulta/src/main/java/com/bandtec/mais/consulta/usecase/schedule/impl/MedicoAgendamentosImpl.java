@@ -3,7 +3,6 @@ package com.bandtec.mais.consulta.usecase.schedule.impl;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO;
 import com.bandtec.mais.consulta.usecase.schedule.MedicoAgendamentos;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

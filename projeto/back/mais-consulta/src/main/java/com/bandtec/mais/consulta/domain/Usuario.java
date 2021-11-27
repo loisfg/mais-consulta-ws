@@ -16,21 +16,19 @@ import java.util.Objects;
 @ToString
 @Builder
 @Entity
-@Table(name = "usuario", indexes = {
+@Table(name = "Usuario", indexes = {
         @Index(name = "idx_usuario_cpf", columnList = "cpf"),
         @Index(name = "idx_usuario_password", columnList = "password")
-})
+}, schema = "dbo", catalog = "maisconsultadb")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
+    @Column(name = "idUsuario")
     private Integer idUsuario;
 
-//    @CPF
     @Column(nullable = false)
     private String cpf;
-//    @Email
     private String email;
 
     @JsonIgnore

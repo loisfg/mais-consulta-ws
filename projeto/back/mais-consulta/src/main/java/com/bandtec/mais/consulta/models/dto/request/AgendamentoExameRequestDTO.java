@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +31,6 @@ public class AgendamentoExameRequestDTO {
         Agendamento agendamento = Agendamento
                 .builder()
                 .hrAtendimento(agendamentoExameRequestDTO.hrAtendimento)
-                .dhInsert(LocalDateTime.now())
                 .dtAtendimento(agendamentoExameRequestDTO.dtAtendimento)
                 .status(agendamentoExameRequestDTO.status)
                 .build();

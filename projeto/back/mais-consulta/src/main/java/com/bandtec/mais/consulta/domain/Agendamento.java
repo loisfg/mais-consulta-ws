@@ -2,6 +2,9 @@ package com.bandtec.mais.consulta.domain;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.TimeType;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,6 +12,7 @@ import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -18,7 +22,7 @@ import java.util.Objects;
 @ToString
 @Builder
 @Entity
-@Table(name = "agendamento")
+@Table(name = "Agendamento", schema = "dbo", catalog = "maisconsultadb")
 public class Agendamento {
 
     @Id
@@ -27,8 +31,8 @@ public class Agendamento {
     private Integer idAgendamento;
 
     @Column(name = "data_hr")
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime dhInsert;
+    @Temporal(TemporalType.DATE)
+    private Date dhInsert;
 
     @Future
     @DateTimeFormat(pattern = "dd/MM/yyyy")

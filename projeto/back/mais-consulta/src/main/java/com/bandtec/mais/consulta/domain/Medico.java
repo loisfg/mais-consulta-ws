@@ -16,7 +16,7 @@ import java.util.Objects;
 @Builder
 @Getter
 @Setter
-@Table(name = "medico")
+@Table(name = "Medico", schema = "dbo", catalog = "maisconsultadb")
 @Entity
 public class Medico {
 
@@ -33,7 +33,7 @@ public class Medico {
     private Ubs ubs;
 
     @JsonIgnore
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario", nullable = false)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "idUsuario", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
 

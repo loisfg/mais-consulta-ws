@@ -1,12 +1,9 @@
 package com.bandtec.mais.consulta.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -16,7 +13,7 @@ import java.util.Objects;
 @ToString
 @Builder
 @Entity
-@Table(name = "endereco")
+@Table(name = "Endereco", schema = "dbo", catalog = "maisconsultadb")
 public class Endereco {
 
     @Id
@@ -32,15 +29,6 @@ public class Endereco {
     private String logradouro;
     private String numero;
     private String complemento;
-
-    //TODO retirar JsonIgnore e adicionar DTO's para retorno dos métodos!
-    @JsonIgnore
-    @OneToOne(mappedBy = "endereco")
-    private Paciente paciente;
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "endereco")
-    private Ubs ubs;
 
     @Override
     public boolean equals(Object o) {

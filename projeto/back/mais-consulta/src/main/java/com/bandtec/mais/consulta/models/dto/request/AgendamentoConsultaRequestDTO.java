@@ -31,7 +31,6 @@ public class AgendamentoConsultaRequestDTO {
 
         Agendamento agendamento = Agendamento
                 .builder()
-                .dhInsert(LocalDateTime.now())
                 .dtAtendimento(agendamentoConsultaRequestDTO.dtAtendimento)
                 .hrAtendimento(agendamentoConsultaRequestDTO.hrAtendimento)
                 .build();

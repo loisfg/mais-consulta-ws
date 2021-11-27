@@ -7,7 +7,6 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
@@ -17,9 +16,9 @@ import java.util.Set;
 @Setter
 @ToString
 @NoArgsConstructor
-@Entity
+@Entity(name = "Paciente")
 @Builder
-@Table(name = "paciente")
+@Table(name = "Paciente", schema = "dbo")
 public class Paciente {
 
     @Id
@@ -28,7 +27,6 @@ public class Paciente {
     private Integer idPaciente;
 
     @NotBlank
-    @Size(min = 3, max = 50)
     private String nome;
 
     @Column(name = "dt_nascimento")
@@ -42,23 +40,18 @@ public class Paciente {
     private String numeroCarteiraSus;
 
     @Transient
-    @Column(name = "peso")
     private String peso = "";
 
     @Transient
-    @Column(name = "altura")
     private Double altura = 0.0;
 
     @Transient
-    @Column(name = "isVirgem")
     private Boolean isVirgem = false;
 
     @Transient
-    @Column(name = "isFumante")
     private Boolean isFumante = false;
 
     @Transient
-    @Column(name = "tipoSanguineo")
     private BloodTypeEnum tipoSanguineo = BloodTypeEnum.DEFAULT;
 
     @OneToOne
@@ -66,7 +59,7 @@ public class Paciente {
     private Endereco endereco;
 
     @JsonIgnore
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id_usuario", nullable = false)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "idUsuario", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected Usuario usuario;
 

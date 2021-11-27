@@ -6,7 +6,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Table(name = "ubs")
+@Table(name = "Ubs", schema = "dbo", catalog = "maisconsultadb")
 @Entity
 @Getter
 @Setter
