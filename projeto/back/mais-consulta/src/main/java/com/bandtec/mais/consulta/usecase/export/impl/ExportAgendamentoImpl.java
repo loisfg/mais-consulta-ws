@@ -1,6 +1,8 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Especialidade;
+import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
@@ -53,7 +55,12 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
         String nomePaciente = paciente.getNome();
         String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
 
-        String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomePaciente, numeroCarteiraSus);
+        String status = agendamento.getStatus();
+
+        Medico medico = agendamento.getMedico();
+        String nomeMedico = medico.getNome();
+
+        String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomePaciente, numeroCarteiraSus, status, nomeMedico);
 
         return createResponseMap(id, dataAtendimento, nomePaciente, texto);
     }
@@ -67,8 +74,8 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
     }
 
     @NotNull
-    private String buildTextoAgendamento(Integer id, String especialidade, LocalDate dataAtendimento, String nomePaciente, String numeroCarteiraSus) {
-        return String.format("%s;%s;%s;%s;%s\n", id, dataAtendimento, especialidade, nomePaciente, numeroCarteiraSus);
+    private String buildTextoAgendamento(Integer id, String especialidade, LocalDate dataAtendimento, String nomePaciente, String numeroCarteiraSus, String status, String nomeMedico) {
+        return String.format("%s;%s;%s;%s;%s;%s;%s\n", id, dataAtendimento, especialidade, nomePaciente, numeroCarteiraSus, status, nomeMedico);
     }
 
 }
