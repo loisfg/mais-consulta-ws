@@ -20,18 +20,15 @@ public class ExportController {
     @Autowired
     private ExportAgendamento exportAgendamento;
 
-    @GetMapping("/{idUser}/{idAgendamento}/agendamento/info")
-    public ResponseEntity<?> exportAgendamento(
-            @PathVariable Integer idUser,
-            @PathVariable Integer idAgendamento
-    ) {
-        Optional<Map<String, String>> oAgendamentoCsv = exportAgendamento.execute(idUser, idAgendamento);
+    @GetMapping("/{idUser}/consulta/info")
+    public ResponseEntity<?> exportAgendamento(@PathVariable Integer idUser) {
+        Optional<Map<String, String>> oAgendamentoCsv = exportAgendamento.execute(idUser);
 
         if (oAgendamentoCsv.isPresent()) {
 
             Map<String, String> agendamentoCsv = oAgendamentoCsv.get();
 
-            String arquivo = agendamentoCsv.get("informacoesAgendamento");
+            String arquivo = agendamentoCsv.get("informacoesConsulta");
             String filename = agendamentoCsv.get("nomeArquivo");
             String extension = ".csv";
 

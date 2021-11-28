@@ -15,6 +15,8 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 
     Optional<Agendamento> findByIdAgendamento(Integer idAgendamento);
 
+    Optional<Agendamento> findFirstByPaciente_Usuario_IdUsuarioOrderByDtAtendimentoDesc(Integer idUsuario);
+
     Optional<Agendamento> findByIdAgendamentoAndPaciente_IdPaciente(Integer idAgendamento, Integer idPaciente);
 
     @Query("SELECT a FROM Agendamento a WHERE a.dtAtendimento = :dt_atendimento AND a.hrAtendimento = :hr_atendimento")

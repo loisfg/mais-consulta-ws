@@ -1,7 +1,6 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
-import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
@@ -25,13 +24,17 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public Optional<Map<String, String>> execute(Integer idUser, Integer idAgendamento) {
+    public Optional<Map<String, String>> execute(Integer idUser) {
 
-        if (usuarioRepository.existsById(idUser) && agendamentoRepository.existsById(idAgendamento)) {
+        if (usuarioRepository.existsById(idUser)) {
 
-            Agendamento agendamento = agendamentoRepository.findByIdAgendamento(idAgendamento).get();
+            Optional<Agendamento> oAgendamento = agendamentoRepository.findFirstByPaciente_Usuario_IdUsuarioOrderByDtAtendimentoDesc(idUser);
 
-            Map<String, String> dadosArquivoAgendamento = buildDadosArquivoAgendamento(agendamento);
+            if (oAgendamento.isEmpty()) {
+                return Optional.empty();
+            }
+
+            Map<String, String> dadosArquivoAgendamento = buildDadosArquivoAgendamento(oAgendamento.get());
 
             return Optional.of(dadosArquivoAgendamento);
         }
@@ -58,7 +61,7 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
     @NotNull
     private Map<String, String> createResponseMap(Integer id, LocalDate dataAtendimento, String nomePaciente, String texto) {
         Map<String, String> dadosArquivoAgendamento = new HashMap<>();
-        dadosArquivoAgendamento.put("informacoesAgendamento", texto);
+        dadosArquivoAgendamento.put("informacoesConsulta", texto);
         dadosArquivoAgendamento.put("nomeArquivo", String.format("%s_%s_%d", nomePaciente.replace(" ", ""), dataAtendimento, id));
         return dadosArquivoAgendamento;
     }
