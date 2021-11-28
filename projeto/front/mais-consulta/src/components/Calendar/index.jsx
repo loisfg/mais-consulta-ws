@@ -3,11 +3,23 @@ import { P, Calendario, Month, Dates, Weekdays, ListItem, Days, ListDays } from 
 import Next from '../../assets/voltar.png';
 import Back from '../../assets/proximo.png';
 import { generate } from './daysGenerate';
+import swal from 'sweetalert';
 
 export const Calendar = (props) => {
     const [data, setData] = useState({})
 
     useEffect(() => setData(generate()), [])
+
+
+    const [color, setColor] = useState([]);
+
+    const setColorSelecionado = (index) =>{
+        const auxiliar = data.days.map((data,i)=>{
+           data.selected = i==index ? true : false
+           return data
+        })
+        setColor(auxiliar);
+    }
 
     return (
         <Calendario>
@@ -28,11 +40,28 @@ export const Calendar = (props) => {
             </Weekdays>
             <Days>
                 {data.previousDays && data.previousDays.map(day =>
-                    <ListDays weight='light' style="pointer-events:none;">{day}</ListDays>
+                    <ListDays weight='light' onclick={()=> {
+                        swal("Você não pode selecionar uma data anterior!", {
+                            buttons: false,
+                            timer: 3000,
+                        });
+                    }}>{day}</ListDays>
                 )}
-                {data.days && data.days.map(day =>
+                {data.days && data.days.map((index, day) =>
                     <ListDays weight='bold' isToDay={data.currentDay== day} onClick={() => {
-                        props.setdaySelected(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${day}`)
+                        const aux = day;
+                        if(day < new Date().getDate()){
+                            swal("Você não pode selecionar uma data anterior!", {
+                                buttons: false,
+                                icon: "error",
+                                timer: 3000,
+                            });
+                        }
+                        else{
+                            props.setdaySelected(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${day}`)
+                        }
+                        // setColorSelecionado(index)
+
                     }} >{day}</ListDays>
                 )}
                 {data.nextDays && data.nextDays.map(day =>
