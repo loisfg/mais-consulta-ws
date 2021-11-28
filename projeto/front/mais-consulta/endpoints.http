@@ -52,9 +52,9 @@ GET {{url}}/paciente/{idPaciente} HTTP/1.1
 # }
 
 ### Atendimento (Medico)
+# Dados enviados do formulario de atendimento
 POST {{url}}/medico/{idMedico}/atendimento HTTP/1.1
 content-type: application/json
-# Dados enviados do formulario de atendimento
 { 
     "dadosPessoais": {
         "idPaciente": 0,
@@ -111,6 +111,10 @@ GET {{url}}/medico/historico HTTP/1.1
         # lastAppointment: string
     # }
 # ]
+
+### Mapa de unidades (Paciente)
+GET {{url}}/paciente/mapa/{idPaciente} HTTP/1.1
+
 
 ### Home (Paciente)v
 GET {{url}}/paciente/agenda HTTP/1.1

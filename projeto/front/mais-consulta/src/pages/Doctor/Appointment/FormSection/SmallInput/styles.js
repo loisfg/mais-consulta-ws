@@ -11,7 +11,7 @@ export const Container = styled.div`
 `;
 
 export const Field = styled(OutlinedInput)`
-    height: 4rem;
+    height: 3rem;
     width: 11rem;
     margin: 1rem 0rem;
     > fieldset{

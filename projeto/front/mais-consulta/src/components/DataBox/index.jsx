@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Container } from "./styles";
 import { SmallInput } from '../../pages/Doctor/Appointment/FormSection/SmallInput'
+import { InputCheckable } from '../../pages/Doctor/Appointment/FormSection/InputCheckable'
+import { Checkbox } from  '../../components'
+import Select from "react-select";
+import { bloodType } from "../../pages/Doctor/Appointment/bloodType";
 export const DataBox = () => {
   const username = localStorage.getItem("nome")
 
@@ -55,12 +59,8 @@ export const DataBox = () => {
               <input className='ipt_data' type="text" />
             </div>
             <div className='ipt_group'>
-              <div className='side_ipt_group'>
-                <div>
-                  <label>Logradouro</label>
-                  <input id='ipt_logradouro' type="text" />
-                </div>
-                </div>
+                <label>Logradouro</label>
+                <input className='ipt_data' type="text" />
             </div>
             <div className='ipt_group'>
               <div className='side_ipt_group'>
@@ -78,13 +78,48 @@ export const DataBox = () => {
         </div>
         <h2>Prontuário do Médico</h2>
         <div className="panel">
-          <div>
-              <label>Peso</label>
-              <SmallInput measure="kg"/>
-            <div>
-              <label>Altura</label>
-              <SmallInput measure="cm"/>
+          <div className="ipt_group">
+            <div className='side_ipt_group'>
+              <div>
+                <label>Peso</label>
+                <SmallInput measure="kg"/>
+              </div>
+              <div>
+                <label>Altura</label>
+                <SmallInput measure="cm"/>
+              </div>
             </div>
+          </div>
+          <div className='ipt_group'>
+            <InputCheckable titleLabel='Remédios controlados'/>
+          </div>
+          <div className='ipt_group'>
+            <InputCheckable titleLabel='Doenças crônicas'/>
+          </div>
+          <div className='ipt_group'>
+            <InputCheckable titleLabel='Alergias'/>
+          </div>
+          <div className='ipt_group'>
+            <InputCheckable titleLabel='Deficiências'/>
+          </div>
+          <div className='ipt_group'>
+            <InputCheckable titleLabel='DST’s'/>
+          </div>
+          <div className='ipt_group'>
+            <InputCheckable titleLabel='Doenças hereditárias'/>
+          </div>
+          <div className='ipt_group'>
+            <InputCheckable titleLabel='Atividades proibidas'/>
+          </div>
+          <div className='ipt_group'>
+            <div>
+              <Checkbox label='Fumante?'/>
+              <Checkbox label='Virgem?'/>
+            </div>
+          </div>
+          <div className="ipt_group">
+            <label htmlFor="bloodType">Tipo Sanguineo</label>
+            <Select styles={{'height': '130rem'}} id='bloodType' options={bloodType}/>
           </div>
         </div>
       </div>

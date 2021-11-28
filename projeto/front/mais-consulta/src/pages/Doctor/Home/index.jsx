@@ -3,6 +3,7 @@ import './styles';
 import { UserProfilePic, Patient } from '../../../components'
 import { Container } from './styles'
 import { PatientData as oldData } from './PatientData'
+import api from '../../../services/api'
 import { Link, useLocation } from 'react-router-dom';
 
 export const Home = () => {
@@ -16,9 +17,9 @@ export const Home = () => {
         setMoment(dateNow.toDateString());
         const getData = async () => {
             try {
-                // const response = await api('maisconsulta').get(`/medico/${doctorId}/agendamentos`);
-                // setData(response.data);
-                setData(oldData);
+                const response = await api('maisconsulta').get(`/medico/${doctorId}/agendamentos`);
+                setData(response.data);
+                // setData(oldData);
             } catch (error) {
                 console.error(error);
             }
@@ -60,7 +61,7 @@ return (
                         })
                     }
                 </div>
-            </div>) : (<label>Você não possui agendamentos no momento :)</label>)
+            </div>) : (<label style={{fontSize: '3rem', margin: '3rem 0rem'}}>Você não possui agendamentos no momento :)</label>)
             }
         </Container>
     )

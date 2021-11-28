@@ -10,7 +10,6 @@ export const Container = styled.section`
     margin: 0px 3rem;
     .box {
         width: 150rem;
-        overflow-y: auto;
         > h2 {
             color: var(--grey);
             margin: 1rem 0;
@@ -20,7 +19,7 @@ export const Container = styled.section`
             width: 90%;
             display: flex;
             justify-content: space-between;
-            border: 1.5px solid #19A795;
+            border: 1.5px solid var(--green-standard);
             border-radius: 5px;
             flex-flow: row wrap;
             .ipt_group{
@@ -30,14 +29,6 @@ export const Container = styled.section`
                 padding: 1rem;
                 .side_ipt_group{
                     display: flex;
-                    #ipt_logradouro{
-                        height: 3rem;
-                        width: 30rem;
-                        margin: 1.2rem 0;
-                        border-radius: 0.4rem;
-                        border-color: none;
-                        border: 0.1rem solid var(--green-standard);
-                    }
                     #ipt_numero{
                         height: 3rem;
                         width: 10rem;
@@ -54,52 +45,49 @@ export const Container = styled.section`
                         border-color: none;
                         border: 0.1rem solid var(--green-standard);
                     }
-                div{
+                > div{
                     display: flex;
                     flex-direction: column;
                     margin: 0 1rem 0 0;
                 }
             }
                 label{
-                    font-size: 1.5rem;
+                    font-size: 1.3rem;
                 }
                 .ipt_data{
                     height: 3rem;
-                    width: 23rem;
+                    width: 100%;
+                    max-width: 40rem;
                     margin: 1.2rem 0;
                     border-radius: 0.4rem;
-                    border-color: none;
                     border: 0.1rem solid var(--green-standard);
+                    outline: none;
                 }
+            }
+            .side_ipt_group{
+                display: flex;
+                > div {
+                    display: flex;
+                    flex-direction: column;
+                    margin: 1rem 1rem;
+                }
+            }
+            .ipt_checkable_group{
+                margin: 1rem 1rem;
+                flex-wrap: wrap;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                > input {
+                    background-color: var(--green-standard);
+                }
+            }
+            .checkbox_select_group{
+                display: flex;
+                margin: 1rem 1rem;
+                width: 100%;
+                justify-content: space-evenly;
             }
         }
     }
 `;
-
-
-export const H2 = styled.div`
-color: black;
-opacity: 70%;
-font-size: 12px;
-font-weight: 600;
-font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
-`
-export const PanelTwo = styled.div`
-height: 100%;
-width: 90%;
-display: flex;
-border: 1.5px solid #19A795;
-border-radius: 5px;
-
-
-`
-export const H3 = styled.div`
-color: black;
-opacity: 70%;
-font-size: 16px;
-font-weight: 600;
-font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-padding: 23px 0 0 0 ;
-
-`
