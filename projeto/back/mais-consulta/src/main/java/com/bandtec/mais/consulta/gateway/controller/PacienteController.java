@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.models.dto.request.AgendaPacienteRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteAgendamentosResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO;
@@ -56,11 +57,15 @@ public class PacienteController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
-    @GetMapping("/agenda/{idPaciente}/{dtStart}/{dtEnd}")
+    @RequestMapping(produces = "application/json", method = RequestMethod.GET, value = "data")
+    @ResponseBody
+    @GetMapping("/agenda/{idPaciente}")
     public ResponseEntity<List<PacienteAgendamentosResponseDTO>> getAgendaPaciente(@PathVariable Integer idPaciente,
-                                                                                   @PathVariable String dtStart,
-                                                                                   @PathVariable String dtEnd) {
-        Optional<List<PacienteAgendamentosResponseDTO>> oAgenda = getAgenda.execute(idPaciente, dtStart, dtEnd);
+                                                                                   @RequestHeader AgendaPacienteRequestDTO agendaPacienteRequestDTO) {
+        String dataInicio = agendaPacienteRequestDTO.getDtStart();
+        String dataFim =  agendaPacienteRequestDTO.getDtEnd();
+
+        Optional<List<PacienteAgendamentosResponseDTO>> oAgenda = getAgenda.execute(idPaciente, dataInicio,dataFim);
 
         return oAgenda
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
