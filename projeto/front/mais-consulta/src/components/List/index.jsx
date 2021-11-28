@@ -8,12 +8,11 @@ import { iconList } from "icomoon-react";
 
 export const List = ({ text, setListUbs:ubsSelecionada }) => {
 
+    const [especialidadeSelecionada, setEspecialidadeSelecionada] = useState();
     const [listUbs, setListUbs] = useState([]);
-
     useEffect(() => {
         async function searchListUbs() {
-            const resp = await api("maisconsulta").get("/search/ubs")
-            // setListUbs(resp.data)
+            const resp = await api("maisconsulta").get("/search/ubs/1")
             const aux = resp.data.map(list => ({list, selected: false}))
             setListUbs(aux)
         }
@@ -39,6 +38,7 @@ export const List = ({ text, setListUbs:ubsSelecionada }) => {
                         
                         <ListItem isActive={ubs.selected} key={ubs.idUbs}
                         onClick={(e)=>{
+
                             ubsSelecionada(ubs.list.idUbs)
                             setSelected(index)
                         }}>
