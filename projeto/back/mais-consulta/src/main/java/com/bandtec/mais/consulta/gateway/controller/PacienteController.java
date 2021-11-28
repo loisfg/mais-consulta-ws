@@ -11,6 +11,7 @@ import com.bandtec.mais.consulta.usecase.patient.GetHistorico;
 import com.bandtec.mais.consulta.usecase.patient.GetPacienteInfo;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,14 +58,11 @@ public class PacienteController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
-    @RequestMapping(produces = "application/json", method = RequestMethod.GET, value = "data")
-    @ResponseBody
     @GetMapping("/agenda/{idPaciente}")
     public ResponseEntity<List<PacienteAgendamentosResponseDTO>> getAgendaPaciente(@PathVariable Integer idPaciente,
-                                                                                   @RequestHeader AgendaPacienteRequestDTO agendaPacienteRequestDTO) {
-        String dataInicio = agendaPacienteRequestDTO.getDtStart();
-        String dataFim =  agendaPacienteRequestDTO.getDtEnd();
-
+                                                                                   @RequestHeader(value="dtStart") String dataInicio,
+                                                                                   @RequestHeader(value="dtEnd") String dataFim
+                                                                                   ) {
         Optional<List<PacienteAgendamentosResponseDTO>> oAgenda = getAgenda.execute(idPaciente, dataInicio,dataFim);
 
         return oAgenda
