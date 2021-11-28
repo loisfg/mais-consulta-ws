@@ -1,5 +1,7 @@
 import { style } from "@material-ui/system";
 import styled from "styled-components";
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
 
 export const Page = styled.div`
 height: 100vh;
@@ -28,12 +30,10 @@ font-size: 16px;
 margin-top:8px;
 `
 export const Filter = styled.div`
-height:100%auto;
+height:4vh;
 width:28%;
 display: flex;
 flex-direction: column;
-
-
 `
 
 export const LeftSide = styled.div`

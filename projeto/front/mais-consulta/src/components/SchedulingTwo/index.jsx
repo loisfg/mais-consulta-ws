@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { Container} from './styles';
 import Checkbox from '@mui/material/Checkbox';
 import Table from '@mui/material/Table';
@@ -9,19 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconDownload from '../../assets/download.svg';
+import api from "../../services/api";
 import Select from 'react-select';
 
 export const SchedulingTwo = () => {
 
-  // const [history, sethistory] = useState([]);
-
-    // useEffect(() => {
-    //     async function searchHistory() {
-    //         const resp = await api("maisconsulta").get("")
-    //         sethistory(resp.data)                                                           
-    //     }
-    //     searchHistory();
-    // }, []);
 
   function createData(data, hora,  consulta, medico, local) {
     return { data, hora,  consulta, medico, local };
@@ -29,13 +21,27 @@ export const SchedulingTwo = () => {
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
+  const idPaciente = localStorage.getItem("id"); 
+
+  const [listConsulta, setListConsulta] = useState([]);
+
+  useEffect(() => {
+      async function listaConsulta() {
+          const resp = await api("maisconsulta").get(`/paciente/historico/2`)
+          console.log("resp histórico: "+resp.data)
+          // const aux = resp.data.map(list => ({list, selected: false}))
+          setListConsulta(resp.data)
+      }
+      listaConsulta();
+  }, []);
+
+  // const setListaSelecionada = (index) =>{
+  //     const auxiliar = listConsulta.map((data,i)=>{
+  //        data.selected = i==index ? true : false
+  //        return data
+  //     })
+  //     setListConsulta(auxiliar)
+  // }
 
 
   return (
@@ -55,9 +61,9 @@ export const SchedulingTwo = () => {
           </TableHead>
           <TableBody>
 
-            {rows.map((row) => (
+            {listConsulta.map((row) => (
               <TableRow style={{fontSize:18}}
-                key={row.data}
+                // key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell align="center">
@@ -65,11 +71,11 @@ export const SchedulingTwo = () => {
                     {...label}
                     sx={{ '& .MuiSvgIcon-root': { fontSize: 24 } }} style={{color:"#19A795",}}/>
                 </TableCell>
-                <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{row.data}</TableCell>
-                <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{row.hora}</TableCell>
-                <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.consulta}</TableCell>
-                <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.medico}</TableCell>
-                <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.local}</TableCell>
+                <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{row.dtAtendimento}</TableCell>
+                <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{row.horaAtendimento}</TableCell>
+                <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.especialidade}</TableCell>
+                <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.nomeMedico}</TableCell>
+                <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.nomeUbs}</TableCell>
                 <TableCell align="center" style={{fontSize:16, color:"#515151"}}><img src={IconDownload}/></TableCell>
               </TableRow>
             ))}
