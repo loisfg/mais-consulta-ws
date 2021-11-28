@@ -6,7 +6,7 @@ export const StyledButtonTwo = styled.button`
   font-size: 13px;
   border-style: none;
   border-radius: 0.5rem;
-  color: black;
+  color: #515151;
   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   cursor: pointer;
   border: var(--green-standard) 1.5px solid;

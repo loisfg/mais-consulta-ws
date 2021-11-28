@@ -2,13 +2,9 @@ import React from 'react';
 import { Text, TextOne } from  './styles';
 
 
-export const WelcomeMessageTwo = () => {
+export const WelcomeMessageTwo = ({text}) => {
     return(
-        <Text>
-            <TextOne>
-                Histórico de agendamento 
-            </TextOne>
-        </Text>
+        <Text>{text}</Text>
     );
 }
 

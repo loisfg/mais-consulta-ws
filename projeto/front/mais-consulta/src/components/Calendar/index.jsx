@@ -28,7 +28,7 @@ export const Calendar = (props) => {
             </Weekdays>
             <Days>
                 {data.previousDays && data.previousDays.map(day =>
-                    <ListDays weight='light'>{day}</ListDays>
+                    <ListDays weight='light' style="pointer-events:none;">{day}</ListDays>
                 )}
                 {data.days && data.days.map(day =>
                     <ListDays weight='bold' isToDay={data.currentDay== day} onClick={() => {

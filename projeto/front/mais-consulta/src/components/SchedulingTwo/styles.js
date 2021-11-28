@@ -3,8 +3,8 @@ import { Checkbox } from '@material-ui/core';
 
 export const Container = styled.div`
   display: flex;
-  height: 65vh;
-  width: 80%;
+  height: 100%;
+  width: 92%;
   border-radius: 6px;
   border: var(--green-standard) 1.5px solid;
   flex-direction: column;
@@ -21,8 +21,12 @@ align-items: center;
 `
 
 export const H3 = styled.div`
-font-size: 13px;
+font-size: 14px;
+font-weight: 700;
 
+`
+export const H2 = styled.div`
+font-size: 14px;
 `
 
 export const LineTwo = styled.div`
