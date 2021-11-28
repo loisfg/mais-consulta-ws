@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Page } from "./styles";
 import api from "../../../services/api";
-import { ButtonsExport, ButtonsSelect, DivUsuario, DivComboBox, LeftSide, RightSide, Container, P, BoxButtons, Filter } from './styles';
+import { ButtonsExport, ButtonsSelect, DivUsuario, DivComboBox, LeftSide, RightSide, Container, P, BoxButtons, Filter,ButtonDownloadSelect,ButtonDownload } from './styles';
 import { UserProfilePic, WelcomeMessageTwo, SchedulingTwo, Button, ButtonTwo } from '../../../components'
 import Select from 'react-select';
 import TextField from '@mui/material/TextField';
@@ -16,20 +16,25 @@ export const SchedulingHistory = ({ usuario }) => {
   const [specialty, setSpecialty] = useState();
   const [ubsSelect, setUbsSelect] = useState();
   // const [history, setHistory] = useState([]);
-  // const userId = localStorage.getItem("id"); 
-
-
-
-
+  const idUser = localStorage.getItem("id"); 
   const [listUbs, setListUbs] = useState([]);
+  const [arq, setArquivo] = useState();
+
   useEffect(() => {
     async function searchListUbs() {
-      const resp = await api("maisconsulta").get("/search/ubs/1")
+      const resp = await api("maisconsulta").get(`/search/ubs/1`)
       const aux = resp.data.map(list => ({ list, selected: false }))
       setListUbs(aux)
     }
     searchListUbs();
   }, []);
+
+  // useEffect(() => {
+    // async function baixarArquivos() {
+    //   const resp = await api("maisconsulta").get(`/export/1/consultas/info`) 
+    //   setArquivo(resp.data)
+    // }
+  // }, []);
 
   
   const setSelected = (index) =>{
@@ -142,8 +147,15 @@ const specialties = [
             </ButtonsSelect>
 
             <ButtonsExport>
-              <ButtonTwo type="submit" text='Baixar Selecionados' />
-              <Button style={{ marginTop: 0 }} type="submit" text='Baixar Tudo' />
+              <ButtonDownloadSelect type="submit" onClick={()=>{
+                
+              }}
+              >Baixar Selecionados</ButtonDownloadSelect>
+              <ButtonDownload style={{ marginTop: 0 }} type="submit" onClick={()=>{
+                // baixarArquivos(arq);
+                console.log(arq)
+              }}
+              >Baixar Todos</ButtonDownload>
             </ButtonsExport>
           </BoxButtons>
         </LeftSide>

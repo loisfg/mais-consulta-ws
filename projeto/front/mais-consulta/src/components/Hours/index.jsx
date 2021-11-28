@@ -56,7 +56,7 @@ export const Hours = (props) => {
                         <ItemListHour isActive={data.selected} onClick={(e) => {
                             props.setHoraSelecionada(data.hour)
                             setSelected(index)
-                            
+                            console.log(data.hour)
                         }}>{format(data.hour)}</ItemListHour>
                         )
                     }

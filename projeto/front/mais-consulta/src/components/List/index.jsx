@@ -6,7 +6,7 @@ import Icon from "./Icon";
 import iconSet from "./selection.json";
 import { iconList } from "icomoon-react";
 
-export const List = ({ text, setListUbs:ubsSelecionada }) => {
+export const List = ({ text, setListUbs:SetUbsSelecionada, listUbs: ubsSelecionada }) => {
 
     const [especialidadeSelecionada, setEspecialidadeSelecionada] = useState();
     const [listUbs, setListUbs] = useState([]);
@@ -39,7 +39,8 @@ export const List = ({ text, setListUbs:ubsSelecionada }) => {
                         <ListItem isActive={ubs.selected} key={ubs.idUbs}
                         onClick={(e)=>{
 
-                            ubsSelecionada(ubs.list.idUbs)
+                            SetUbsSelecionada(ubs.list.idUbs)
+                            console.log(ubsSelecionada)
                             setSelected(index)
                         }}>
                             <ListItemConteudo>

@@ -89,3 +89,27 @@ export const H3 = styled.h3`
 font-size: 13px;
 color: #19A795;
 `
+
+export const ButtonDownloadSelect = styled.button`
+  width: 150px;
+  padding: 1rem 1.4rem;
+  font-size: 13px;
+  border-radius: 5px;
+  background-color: white;
+  color: #515151;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+  border: #19A795 1px solid;
+  height: 50px;
+`
+export const ButtonDownload = styled.button`
+  font-size: 1.3rem;
+  border-style: none;
+  border-radius: 5px;
+  color: white;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #19A795;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+`

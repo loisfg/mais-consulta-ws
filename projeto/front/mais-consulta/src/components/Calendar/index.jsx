@@ -59,6 +59,7 @@ export const Calendar = (props) => {
                         }
                         else{
                             props.setdaySelected(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${day}`)
+                            console.log(props.setdaySelected)
                         }
                         // setColorSelecionado(index)
 

@@ -37,7 +37,7 @@ export const ItemListHour = styled.div`
     cursor: pointer;
     color: white;
     background-color: #19A795;
-    border-radius: 100px;
+    border-radius: 3px;
     }
     &:active {
         background-color: #19A795;

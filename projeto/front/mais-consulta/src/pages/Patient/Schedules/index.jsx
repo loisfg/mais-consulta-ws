@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../../../services/api"
 import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux, Filter, P } from "./styles";
@@ -14,7 +14,6 @@ import swal from 'sweetalert';
 import Select from 'react-select';
 
 export const Schedules = ({ props, usuario }) => {
-
 
   const specialties = [
     {value: 'Acupuntura', label: 'Acupuntura'},
@@ -52,14 +51,22 @@ export const Schedules = ({ props, usuario }) => {
       descricao: "Dermatologia",
       dtAtendimento: daySelected,
       hrAtendimento: horaSelecionada,
-      idEspecialidade : 1,
+      idEspecialidade : 8,
       idPaciente: userId,
       idUbs: listUbs
     }
+    
     await api("mais-consulta")
     .post("/agendamento/agendar/consulta", data)
+
+    console.log("req"+data)
   }
   const typeOfUser = localStorage.getItem("role");
+
+  useEffect(() => {
+    console.log("ubs"+listUbs)
+  }, [listUbs])
+
   return (
     <Page>
       <DivUsuario>
@@ -73,7 +80,7 @@ export const Schedules = ({ props, usuario }) => {
             <Select options={specialties}/>
           </Filter>
           <BoxAux>
-            <List text="Escolha a unidade desejada" setListUbs={setListUbs}  />
+            <List text="Escolha a unidade desejada" listUbs={listUbs} setListUbs={setListUbs}  />
           </BoxAux>
         </BoxLeft>
         <BoxRight>
@@ -89,6 +96,7 @@ export const Schedules = ({ props, usuario }) => {
                 confirm: {
                   text: 'Confirmar',
                   className: 'confirmar',
+                  
                   onClick: {cadastrar}
                 },
 
