@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Horario, ItemListHour, List } from "./styles";
 import api from "../../services/api";
 
-export const Hours = (props) => {
-    
+export const Hours = ({setHoraSelecionada}) => {
     const [daySelected, setDaySelected] = useState([0]); 
     const [ubsSelected, setUbsSelected] = useState(); 
     const [listHours, setListHours] = useState(0,0,0);
-
     //2021-12-31
     var dateSelect = new Date();
     var dd = String(dateSelect.getDate()).padStart(2, '0');
@@ -18,9 +16,7 @@ export const Hours = (props) => {
     
     useEffect(() => {
         async function searchHours() {
-            
             const resp = await api("maisconsulta").get(`/agendamento/horarios/livres/${dateSelect}/1`)
-            
             const aux = resp.data.map(hour => ({hour, selected: false}))
             setListHours(aux)
         }
@@ -28,7 +24,6 @@ export const Hours = (props) => {
     }, []);
 
     const format = (hora) =>{
-        
        if(hora){
         const hourArray = hora.split(":")
         return (
@@ -54,7 +49,7 @@ export const Hours = (props) => {
                         listHours && listHours.map((data,index) =>
                         
                         <ItemListHour isActive={data.selected} onClick={(e) => {
-                            props.setHoraSelecionada(data.hour)
+                            setHoraSelecionada(data.hour)
                             setSelected(index)
                             console.log(data.hour)
                         }}>{format(data.hour)}</ItemListHour>

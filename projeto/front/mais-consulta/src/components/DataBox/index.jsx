@@ -1,18 +1,13 @@
 import React, { useState } from "react";
+import { useForm, Controller } from 'react-hook-form';
 import { Container } from "./styles";
 import { SmallInput } from '../../pages/Doctor/Appointment/FormSection/SmallInput'
 import { InputCheckable } from '../../pages/Doctor/Appointment/FormSection/InputCheckable'
 import { Checkbox } from  '../../components'
 import Select from "react-select";
 import { bloodType } from "../../pages/Doctor/Appointment/bloodType";
-export const DataBox = () => {
-  const username = localStorage.getItem("nome")
-
-  const [textos, setTextos] = useState([
-    {title: 'Sim'},
-    {title: 'nao'},
-
-  ]);
+export const DataBox = ({data}) => {
+  const {control, reset, handleSubmit} = useForm();
   return (
     <Container>
       <div className='box'>
@@ -20,7 +15,7 @@ export const DataBox = () => {
         <div className='panel'>
             <div className='ipt_group'>
               <label>Nome</label>
-              <input className='ipt_data' type="text" />
+              <Controller name='prontuario.peso' control={control} render={({field}) => <input className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
               <label>CPF</label>
@@ -91,30 +86,30 @@ export const DataBox = () => {
             </div>
           </div>
           <div className='ipt_group'>
-            <InputCheckable titleLabel='Remédios controlados'/>
+            <InputCheckable color='--green-standard' titleLabel='Remédios controlados'/>
           </div>
           <div className='ipt_group'>
-            <InputCheckable titleLabel='Doenças crônicas'/>
+            <InputCheckable color='--green-standard' titleLabel='Doenças crônicas'/>
           </div>
           <div className='ipt_group'>
-            <InputCheckable titleLabel='Alergias'/>
+            <InputCheckable color='--green-standard' titleLabel='Alergias'/>
           </div>
           <div className='ipt_group'>
-            <InputCheckable titleLabel='Deficiências'/>
+            <InputCheckable color='--green-standard' titleLabel='Deficiências'/>
           </div>
           <div className='ipt_group'>
-            <InputCheckable titleLabel='DST’s'/>
+            <InputCheckable color='--green-standard' titleLabel='DST’s'/>
           </div>
           <div className='ipt_group'>
-            <InputCheckable titleLabel='Doenças hereditárias'/>
+            <InputCheckable color='--green-standard' titleLabel='Doenças hereditárias'/>
           </div>
           <div className='ipt_group'>
-            <InputCheckable titleLabel='Atividades proibidas'/>
+            <InputCheckable color='--green-standard' titleLabel='Atividades proibidas'/>
           </div>
           <div className='ipt_group'>
             <div>
-              <Checkbox label='Fumante?'/>
-              <Checkbox label='Virgem?'/>
+              <Checkbox color='var(--green-standard)' label='Fumante?'/>
+              <Checkbox color='var(--green-standard)' label='Virgem?'/>
             </div>
           </div>
           <div className="ipt_group">

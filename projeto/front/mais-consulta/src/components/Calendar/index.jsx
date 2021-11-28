@@ -7,12 +7,8 @@ import swal from 'sweetalert';
 
 export const Calendar = (props) => {
     const [data, setData] = useState({})
-
     useEffect(() => setData(generate()), [])
-
-
     const [color, setColor] = useState([]);
-
     const setColorSelecionado = (index) =>{
         const auxiliar = data.days.map((data,i)=>{
            data.selected = i==index ? true : false
@@ -20,7 +16,6 @@ export const Calendar = (props) => {
         })
         setColor(auxiliar);
     }
-
     return (
         <Calendario>
             <P>Selecione a data do agendamento</P>
@@ -62,8 +57,7 @@ export const Calendar = (props) => {
                             console.log(props.setdaySelected)
                         }
                         // setColorSelecionado(index)
-
-                    }} >{day}</ListDays>
+                    }} ><span>{day}</span></ListDays>
                 )}
                 {data.nextDays && data.nextDays.map(day =>
                     <ListDays weight='light'>{day}</ListDays>

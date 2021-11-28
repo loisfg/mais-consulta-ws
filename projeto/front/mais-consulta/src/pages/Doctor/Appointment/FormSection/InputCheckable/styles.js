@@ -12,7 +12,7 @@ export const Container = styled.div`
         }
     }
     .styled-input{
-        border: var(--light-blue) 0.1rem solid;
+        border: var(${({color}) => color}) 0.1rem solid;
         border-radius: 0.3rem;
         height: 3rem;
         background-color: var(--white);

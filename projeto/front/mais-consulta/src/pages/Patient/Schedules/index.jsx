@@ -2,19 +2,10 @@ import React, { useState, useEffect } from "react";
 import api from "../../../services/api"
 import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux, Filter, P } from "./styles";
-import {
-  UserProfilePic,
-  Message,
-  List,
-  Calendar,
-  Hours,
-  Button,
-} from "../../../components";
+import { UserProfilePic, Message, List, Calendar, Hours } from "../../../components";
 import swal from 'sweetalert';
 import Select from 'react-select';
-
-export const Schedules = ({ props, usuario }) => {
-
+export const Schedules = ({ usuario }) => {
   const specialties = [
     {value: 'Acupuntura', label: 'Acupuntura'},
     {value: 'Alergia e Imunologia', label: 'Alergia e Imunologia'},
@@ -41,7 +32,6 @@ export const Schedules = ({ props, usuario }) => {
   const [daySelected, setdaySelected] = useState([0]);
   const [horaSelecionada, setHoraSelecionada] = useState();
   const [especialidade, setEspecialidade] = useState();
-
   const userId = localStorage.getItem("id"); 
  
    async function cadastrar(e) {

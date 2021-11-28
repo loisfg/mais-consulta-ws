@@ -2,17 +2,17 @@ import styled from 'styled-components';
 import { TextField } from "@material-ui/core";
 
 export const Container = styled.section`
-    height: 100%;
     width: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0px 3rem;
+    margin: 1rem 3rem;
     .box {
         width: 150rem;
+        margin: 3rem 0;
         > h2 {
             color: var(--grey);
-            margin: 1rem 0;
+            margin: 2rem 0;
         }
         .panel{
             height: 100%;
