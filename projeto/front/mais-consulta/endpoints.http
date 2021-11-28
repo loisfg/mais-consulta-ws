@@ -115,7 +115,6 @@ GET {{url}}/medico/historico HTTP/1.1
 ### Mapa de unidades (Paciente)
 GET {{url}}/paciente/mapa/{idPaciente} HTTP/1.1
 
-
 ### Home (Paciente)v
 GET {{url}}/paciente/agenda HTTP/1.1
 # [
@@ -140,4 +139,40 @@ content-type: application/json
 {
     "cpf": "36014447806",
     "password": "123"
+}
+### Tela de perfil (Paciente)
+PUT {{url}}/paciente/{idPaciente} HTTP/1.1
+{
+    "dadosPessoais": {
+        "idPaciente": 0,
+        "nome": '',
+        "idade": 0,
+        "endereco": '',
+        "bairro": '',
+        "rg": '',
+        "numeroSus": 0,
+        "cpf": '',
+        "telefone":'',
+        "cidade": '',
+        "estado": '',
+        "celular":'',
+        "cep": ''
+    },
+    "prontuario": {
+      "peso": 0,
+      "altura": 0,
+      "doencasCronicas": [''],
+      "remediosControlados": [''],
+      "alergias": [''],
+      "dsts": [],
+      "deficiencia": [],
+      "isFumante": false,
+      "isVirgem": false,
+      "doencasHereditarias": [],
+      "tipoSanguineo": {
+          "value": 0,
+          "label": 'Selecione seu tipo sanguineo'
+      },
+      "atividadesProibidas": []
+    }
 }
