@@ -4,11 +4,23 @@ import api from "../../services/api";
 
 export const Hours = (props) => {
     
+    const [daySelected, setDaySelected] = useState([0]); 
+    const [ubsSelected, setUbsSelected] = useState(); 
     const [listHours, setListHours] = useState(0,0,0);
+
+    //2021-12-31
+    var dateSelect = new Date();
+    var dd = String(dateSelect.getDate()).padStart(2, '0');
+    var mm = String(dateSelect.getMonth() + 1).padStart(2, '0'); 
+    var yyyy = dateSelect.getFullYear();
+    
+    dateSelect = yyyy + '-' + mm + '-' + dd;
     
     useEffect(() => {
         async function searchHours() {
-            const resp = await api("maisconsulta").get("/agendamento/pegar/horas")
+            
+            const resp = await api("maisconsulta").get(`/agendamento/horarios/livres/${dateSelect}/1`)
+            
             const aux = resp.data.map(hour => ({hour, selected: false}))
             setListHours(aux)
         }
