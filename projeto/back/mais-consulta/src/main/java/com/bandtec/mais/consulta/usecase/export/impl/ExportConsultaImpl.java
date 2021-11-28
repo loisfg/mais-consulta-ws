@@ -61,15 +61,6 @@ public class ExportConsultaImpl implements ExportConsulta {
         });
 
         return texto.toString();
-//        return createResponseMap(id, dataAtendimento, nomePaciente, texto.toString());
-    }
-
-    @NotNull
-    private Map<String, String> createResponseMap(Integer id, LocalDate dataAtendimento, String nomePaciente, String texto) {
-        Map<String, String> dadosArquivoAgendamento = new HashMap<>();
-        dadosArquivoAgendamento.put("informacoesConsulta", texto);
-        dadosArquivoAgendamento.put("nomeArquivo", String.format("%s_%s_%d", nomePaciente.replace(" ", ""), dataAtendimento, id));
-        return dadosArquivoAgendamento;
     }
 
     @NotNull
