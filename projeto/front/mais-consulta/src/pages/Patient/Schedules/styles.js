@@ -27,7 +27,7 @@ export const BoxLeft = styled.div`
     width: 45%;
     display:flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
     border-right: 2px solid #19A795;
 `
@@ -41,6 +41,34 @@ export const BoxRight = styled.div`
     width: 55%;
     display:flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+
+    button{
+    font-size: 16px;
+    border-style: none;
+    border-radius: 0.5rem;
+    color: white;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--green-standard);
+    cursor: pointer;
+    width: 130px;
+    height: 50px;
+    margin-top: 16px;
+    }
+`
+
+export const Filter = styled.div`
+height:2vh;
+margin-bottom: 48px;
+width:75%;
+display: flex;
+flex-direction: column;
+`
+export const P = styled.p`
+color: #515151;
+font-size: 18px;
+width:auto;
+font-weight: 600;
+font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
