@@ -2,10 +2,8 @@ package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Consulta;
 import com.bandtec.mais.consulta.domain.Exame;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
-import com.bandtec.mais.consulta.models.dto.request.GetHorariosLivres;
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
@@ -14,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
@@ -91,9 +90,10 @@ public class AgendamentoController {
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
-    @GetMapping("/horarios/livres")
-    public ResponseEntity<List<LocalTime>> getAvaibleTime(@RequestBody GetHorariosLivres getHorariosLivres) {
-        List<LocalTime> listHoras = postHoursUbs.execute(getHorariosLivres);
+    @GetMapping("/horarios/livres/{dia}/{idUbs}")
+    public ResponseEntity<List<LocalTime>> getAvaibleTime(@PathVariable Integer idUbs,
+                                                          @PathVariable String dia) {
+        List<LocalTime> listHoras = postHoursUbs.execute(idUbs, dia);
         if(listHoras.isEmpty()) {
            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }

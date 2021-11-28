@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.usecase.patient.impl;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.models.dto.response.PacienteAgendamentosResponseDTO;
 import com.bandtec.mais.consulta.usecase.patient.GetAgenda;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,8 @@ public class GetAgendaImpl implements GetAgenda {
     PacienteRepository pacienteRepository;
 
     @Override
-    public Optional<List<PacienteAgendamentosResponseDTO>> execute(Integer idPaciente, LocalDate dtStart, LocalDate dtEnd) {
-        return pacienteRepository.findAgendamentosToPaciente(idPaciente, dtStart, dtEnd);
+    @SneakyThrows
+    public Optional<List<PacienteAgendamentosResponseDTO>> execute(Integer idPaciente, String dtStart, String dtEnd) {
+        return pacienteRepository.findAgendamentosToPaciente(idPaciente, LocalDate.parse(dtStart), LocalDate.parse(dtEnd));
     }
 }

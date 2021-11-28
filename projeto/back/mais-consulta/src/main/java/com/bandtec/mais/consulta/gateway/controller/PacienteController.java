@@ -1,11 +1,12 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.models.dto.request.AgendaPacienteRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteAgendamentosResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteInfoResponseDTO;
 import com.bandtec.mais.consulta.usecase.patient.GetAgenda;
+import com.bandtec.mais.consulta.usecase.patient.GetHistorico;
 import com.bandtec.mais.consulta.usecase.patient.GetPacienteInfo;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class PacienteController {
     @Autowired
     private GetPacienteInfo getPacienteInfo;
 
+    @Autowired
+    private GetHistorico getHistorico;
+
     @GetMapping("{idPaciente}")
     public ResponseEntity<PacienteInfoResponseDTO> getPacienteInfo(@PathVariable Integer idPaciente){
         return ResponseEntity.of(getPacienteInfo.execute(idPaciente));
@@ -52,11 +56,23 @@ public class PacienteController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
-    @GetMapping("/agenda")
-    public ResponseEntity<List<PacienteAgendamentosResponseDTO>> getAgendaPaciente(@RequestBody AgendaPacienteRequestDTO agendaPacienteRequestDTO) {
-        Optional<List<PacienteAgendamentosResponseDTO>> oAgenda = getAgenda.execute(agendaPacienteRequestDTO.getIdPaciente(), agendaPacienteRequestDTO.getDtStart(), agendaPacienteRequestDTO.getDtEnd());
+    @GetMapping("/agenda/{idPaciente}/{dtStart}/{dtEnd}")
+    public ResponseEntity<List<PacienteAgendamentosResponseDTO>> getAgendaPaciente(@PathVariable Integer idPaciente,
+                                                                                   @PathVariable String dtStart,
+                                                                                   @PathVariable String dtEnd) {
+        Optional<List<PacienteAgendamentosResponseDTO>> oAgenda = getAgenda.execute(idPaciente, dtStart, dtEnd);
 
         return oAgenda
+                .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+    }
+
+    @GetMapping("/historico/{idPaciente}")
+    public ResponseEntity<List<PacienteHistoricoResponseDTO>> getHistoricoPaciente(@PathVariable Integer idPaciente) {
+
+        Optional<List<PacienteHistoricoResponseDTO>> oHistorico = getHistorico.execute(idPaciente);
+
+        return oHistorico
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }

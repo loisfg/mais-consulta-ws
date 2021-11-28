@@ -1,7 +1,6 @@
 package com.bandtec.mais.consulta.models.dto.request;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
-import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Exame;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
