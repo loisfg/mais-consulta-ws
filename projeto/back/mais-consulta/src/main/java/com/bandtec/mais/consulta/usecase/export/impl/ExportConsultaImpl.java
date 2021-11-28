@@ -1,24 +1,23 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
-import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
-import com.bandtec.mais.consulta.usecase.export.ExportAgendamento;
+import com.bandtec.mais.consulta.usecase.export.ExportConsulta;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class ExportAgendamentoImpl implements ExportAgendamento {
-
+public class ExportConsultaImpl implements ExportConsulta {
     @Autowired
     private AgendamentoRepository agendamentoRepository;
 
@@ -26,17 +25,17 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public Optional<Map<String, String>> execute(Integer idUser) {
+    public Optional<String> execute(Integer idUser) {
 
         if (usuarioRepository.existsById(idUser)) {
 
-            Optional<Agendamento> oAgendamento = agendamentoRepository.findFirstByPaciente_Usuario_IdUsuarioOrderByDtAtendimentoDesc(idUser);
+            List<Agendamento> agendamentoList = agendamentoRepository.findByPaciente_Usuario_IdUsuario(idUser);
 
-            if (oAgendamento.isEmpty()) {
+            if (agendamentoList.isEmpty()) {
                 return Optional.empty();
             }
 
-            Map<String, String> dadosArquivoAgendamento = buildDadosArquivoAgendamento(oAgendamento.get());
+            String dadosArquivoAgendamento = buildDadosArquivoAgendamento(agendamentoList);
 
             return Optional.of(dadosArquivoAgendamento);
         }
@@ -44,25 +43,25 @@ public class ExportAgendamentoImpl implements ExportAgendamento {
         return Optional.empty();
     }
 
-    @NotNull
-    private Map<String, String> buildDadosArquivoAgendamento(Agendamento agendamento) {
+    public String buildDadosArquivoAgendamento(List<Agendamento> agendamentoList) {
 
-        Integer id = agendamento.getIdAgendamento();
-        String especialidade = agendamento.getEspecialidade().getDescricao();
-        LocalDate dataAtendimento = agendamento.getDtAtendimento();
+        StringBuilder texto = new StringBuilder();
 
-        Paciente paciente = agendamento.getPaciente();
-        String nomePaciente = paciente.getNome();
-        String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
+        agendamentoList.forEach(agendamento -> {
+            Integer id = agendamento.getIdAgendamento();
+            String especialidade = agendamento.getEspecialidade().getDescricao();
+            LocalDate dataAtendimento = agendamento.getDtAtendimento();
+            Paciente paciente = agendamento.getPaciente();
+            String nomePaciente = paciente.getNome();
+            String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
+            String status = agendamento.getStatus();
+            Medico medico = agendamento.getMedico();
+            String nomeMedico = medico.getNome();
+            texto.append(buildTextoAgendamento(id, especialidade, dataAtendimento, nomePaciente, numeroCarteiraSus, status, nomeMedico));
+        });
 
-        String status = agendamento.getStatus();
-
-        Medico medico = agendamento.getMedico();
-        String nomeMedico = medico.getNome();
-
-        String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomePaciente, numeroCarteiraSus, status, nomeMedico);
-
-        return createResponseMap(id, dataAtendimento, nomePaciente, texto);
+        return texto.toString();
+//        return createResponseMap(id, dataAtendimento, nomePaciente, texto.toString());
     }
 
     @NotNull

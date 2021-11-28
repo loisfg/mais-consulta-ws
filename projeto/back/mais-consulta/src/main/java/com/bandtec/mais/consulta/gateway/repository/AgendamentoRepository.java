@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Integer> {
+    List<Agendamento> findByPaciente_Usuario_IdUsuario(Integer idUsuario);
 
     Optional<Agendamento> findByIdAgendamento(Integer idAgendamento);
 
