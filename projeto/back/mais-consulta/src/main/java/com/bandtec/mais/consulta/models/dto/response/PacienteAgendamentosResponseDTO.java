@@ -22,11 +22,11 @@ public class PacienteAgendamentosResponseDTO {
 
     private String getDiaSemana(LocalDate dataAtendimento) {
         switch (dataAtendimento.getDayOfWeek()) {
-            case MONDAY : return "Segunda-Feira";
-            case TUESDAY: return "Terca-Feira";
-            case WEDNESDAY: return "Quarta-Feira";
-            case THURSDAY: return "Quinta-Feira";
-            case FRIDAY: return "Sexta-Feira";
+            case MONDAY : return "Segunda";
+            case TUESDAY: return "Terça";
+            case WEDNESDAY: return "Quarta";
+            case THURSDAY: return "Quinta";
+            case FRIDAY: return "Sexta";
             case SATURDAY: return "Sabádo";
             case SUNDAY: return "Domingo";
             default: return "Dia inexistente";

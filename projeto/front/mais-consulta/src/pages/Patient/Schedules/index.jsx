@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../services/api"
-import { specialities } from "./specialitiesData";
 import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux } from "./styles";
 import { UserProfilePic, Message, List, Calendar, Hours } from "../../../components";
 import swal from 'sweetalert';
 import Select from 'react-select';
 export const Schedules = () => {
+  const [specialities, setSpecialities] = useState([]);
   const [listUbs, setListUbs] = useState([]);
   const [listHours, setListHours] = useState([]);
   const [ubs, setUbs] = useState(); 
@@ -16,7 +16,6 @@ export const Schedules = () => {
   const userId = localStorage.getItem("id"); 
  
    async function cadastrar(e) {
-    e.preventDefault();
     
     const data = {
       descricao: "",
@@ -26,9 +25,23 @@ export const Schedules = () => {
       idPaciente: userId,
       idUbs: ubs
     }
-    const response = await api("mais-consulta").post("/agendamento/agendar/consulta", data)
+    const response = await api("maisconsulta").post("/agendamento/agendar/consulta", data)
     console.log("req"+response.status)
   }
+  
+  useEffect(() => {
+    try {
+      const getSpecialities = async () => {
+        const response = await api("maisconsulta").get("/agendamento/especialidades")
+        console.log("req"+response.data)
+        const aux = response.data.map(item => ({value: item.id, label: item.descricao}))
+        setSpecialities(aux)
+      }
+      getSpecialities()
+    } catch (error) {
+      
+    }
+  }, [])
   
   const handleSpecialities = speciality => setSpeciality(speciality.value)
   
@@ -57,7 +70,7 @@ useEffect(() => {
       setListHours(aux)
   }
   searchHours();
-},[ubs])
+},[ubs, daySelected])
 
 const setSelectedHour = index => {
     const auxiliar = listHours.map((data,i)=>{
@@ -82,7 +95,7 @@ const setSelectedHour = index => {
             <Select options={specialities} onChange={(e) => handleSpecialities(e)} className='react-select-container'/>
           </div>
           <BoxAux>
-            <List text="Escolha a unidade desejada" onClick={setSelectedUbs} listUbs={listUbs} />
+            { listUbs.length ? <List text="Escolha a unidade desejada" onClick={setSelectedUbs} listUbs={listUbs} /> : null}
           </BoxAux>
         </BoxLeft>
         <BoxRight>
@@ -97,15 +110,15 @@ const setSelectedHour = index => {
                 cancel: 'Cancelar',
                 confirm: {
                   text: 'Confirmar',
-                  className: 'confirmar',
-                  
-                  onClick: {cadastrar}
+                  className: 'confirmar'
                 },
 
               },
             })
               .then((agendar) => {
+                console.log(agendar);
                 if (agendar) {
+                  cadastrar()
                   swal("Deseja baixar o documento de confirmação do agendamento?", {
                     icon: "success",
                     //CHAMAR O ENDPOINT AQUI

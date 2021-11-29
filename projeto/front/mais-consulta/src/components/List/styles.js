@@ -13,7 +13,7 @@ export const Lista = styled.div`
     display: block;
     flex-direction: column;
     justify-content: flex-start;
-    overflow-y: scroll;
+    overflow-y: auto;
     scroll-behavior: smooth;
     align-items: center;
     ::-webkit-scrollbar {
