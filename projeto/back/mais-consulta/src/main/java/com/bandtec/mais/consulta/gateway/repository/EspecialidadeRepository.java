@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Medico;
+import com.bandtec.mais.consulta.models.dto.response.EspecialidadeResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,6 +18,6 @@ public interface EspecialidadeRepository extends JpaRepository<Especialidade, In
 
     Especialidade findFirstByDescricao(String descricao);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.EspecialidadeResponseDTO(m.especialidade.descricao, m.especialidade.idEspecialidade) FROM Medico m")
-    List<Especialidade> findAllEspecialidades();
+    @Query("SELECT DISTINCT new com.bandtec.mais.consulta.models.dto.response.EspecialidadeResponseDTO(m.especialidade.descricao, m.especialidade.idEspecialidade) FROM Medico m")
+    Optional<Set<EspecialidadeResponseDTO>> findAllEspecialidades();
 }

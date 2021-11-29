@@ -112,7 +112,6 @@ GET {{url}}/medico/1/historico HTTP/1.1
     # }
 # ]
 
-<<<<<<< Updated upstream
 ### Mapa de unidades (Paciente)
 // DONE
 GET {{url}}/paciente/mapa/2 HTTP/1.1
@@ -123,10 +122,6 @@ GET {{url}}/paciente/agenda/2 HTTP/1.1
 content-type: application/json
 dtStart: 2021-12-17
 dtEnd: 2021-12-29
-=======
-### Home (Paciente)v
-GET {{url}}/paciente/agenda HTTP/1.1
->>>>>>> Stashed changes
 # [
     # {
     #         especialidade: 'Dentista',
@@ -186,3 +181,8 @@ PUT {{url}}/paciente/{idPaciente} HTTP/1.1
       "atividadesProibidas": []
     }
 }
+
+###Especialidades
+
+GET {{url}}/agendamento/especialidades HTTP/1.1
+content-type: application/json

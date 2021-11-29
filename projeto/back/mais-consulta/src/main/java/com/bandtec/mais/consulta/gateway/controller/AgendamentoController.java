@@ -1,12 +1,11 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Consulta;
-import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO;
-import com.bandtec.mais.consulta.usecase.patient.GetEspecialidadesAgenda;
+import com.bandtec.mais.consulta.models.dto.response.EspecialidadeResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -107,7 +106,7 @@ public class AgendamentoController {
     }
 
     @GetMapping("/especialidades")
-    public ResponseEntity<List<Especialidade>> getEspecialidades() {
+    public ResponseEntity<Set<EspecialidadeResponseDTO>> getEspecialidades() {
 
         return ResponseEntity.of(getEspecialidades.execute());
 
