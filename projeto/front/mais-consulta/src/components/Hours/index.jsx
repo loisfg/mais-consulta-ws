@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Horario, ItemListHour, List } from "./styles";
 import api from "../../services/api";
 
-export const Hours = ({setHoraSelecionada}) => {
-    const [daySelected, setDaySelected] = useState([0]); 
-    const [ubsSelected, setUbsSelected] = useState(); 
-    const [listHours, setListHours] = useState(0,0,0);
+export const Hours = ({onClick, listHours}) => {
     //2021-12-31
     var dateSelect = new Date();
     var dd = String(dateSelect.getDate()).padStart(2, '0');
@@ -14,14 +11,6 @@ export const Hours = ({setHoraSelecionada}) => {
     
     dateSelect = yyyy + '-' + mm + '-' + dd;
     
-    useEffect(() => {
-        async function searchHours() {
-            const resp = await api("maisconsulta").get(`/agendamento/horarios/livres/${dateSelect}/1`)
-            const aux = resp.data.map(hour => ({hour, selected: false}))
-            setListHours(aux)
-        }
-        searchHours();
-    }, []);
 
     const format = (hora) =>{
        if(hora){
@@ -32,14 +21,6 @@ export const Hours = ({setHoraSelecionada}) => {
        }
     }
 
-    const setSelected = (index) =>{
-        const auxiliar = listHours.map((data,i)=>{
-           data.selected = i==index ? true : false
-           return data
-        })
-        setListHours(auxiliar)
-    }
-
     return (
         <>
             <Horario>
@@ -47,11 +28,7 @@ export const Hours = ({setHoraSelecionada}) => {
                 <List>
                     {
                         listHours && listHours.map((data,index) =>
-                        <ItemListHour isActive={data.selected} onClick={(e) => {
-                            setHoraSelecionada(data.hour)
-                            setSelected(index)
-                            console.log(data.hour)
-                        }}>{format(data.hour)}</ItemListHour>
+                        <ItemListHour isActive={data.selected} onClick={() => onClick(index)}>{format(data.hour)}</ItemListHour>
                         )
                     }
                 </List>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../services/api"
-import { specialties } from "./specialitiesData";
+import { specialities } from "./specialitiesData";
 import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux } from "./styles";
 import { UserProfilePic, Message, List, Calendar, Hours } from "../../../components";
@@ -8,28 +8,66 @@ import swal from 'sweetalert';
 import Select from 'react-select';
 export const Schedules = () => {
   const [listUbs, setListUbs] = useState([]);
-  const [daySelected, setdaySelected] = useState([0]);
-  const [horaSelecionada, setHoraSelecionada] = useState();
-  const [especialidade, setEspecialidade] = useState();
+  const [listHours, setListHours] = useState([]);
+  const [ubs, setUbs] = useState(); 
+  const [daySelected, setDaySelected] = useState([0]);
+  const [hourSelected, setHourSelected] = useState();
+  const [ speciality, setSpeciality ] = useState();
   const userId = localStorage.getItem("id"); 
  
    async function cadastrar(e) {
     e.preventDefault();
     
     const data = {
-      descricao: "Dermatologia",
+      descricao: "",
       dtAtendimento: daySelected,
-      hrAtendimento: horaSelecionada,
-      idEspecialidade : 8,
+      hrAtendimento: hourSelected,
+      idEspecialidade : speciality,
       idPaciente: userId,
-      idUbs: listUbs
+      idUbs: ubs
     }
-    await api("mais-consulta").post("/agendamento/agendar/consulta", data)
-    console.log("req"+data)
+    const response = await api("mais-consulta").post("/agendamento/agendar/consulta", data)
+    console.log("req"+response.status)
   }
+  
+  const handleSpecialities = speciality => setSpeciality(speciality.value)
+  
   useEffect(() => {
-    console.log("ubs"+listUbs)
-  }, [listUbs])
+    async function searchListUbs() {
+      const response = await api("maisconsulta").get(`/search/ubs/${speciality}`)
+      const aux = response.data.map(list => ({list, selected: false}))
+      setListUbs(aux)
+  }
+  searchListUbs();
+  }, [speciality])
+
+  const setSelectedUbs = index => {
+    const auxiliar = listUbs.map((data, i)=> {
+       data.selected = i==index
+       return data
+    })
+    setUbs(auxiliar[index].list.idUbs)
+    setListUbs(auxiliar)
+}
+
+useEffect(() => {
+  async function searchHours() {
+      const resp = await api("maisconsulta").get(`/agendamento/horarios/livres/${daySelected}/${ubs}`)
+      const aux = resp.data.map(hour => ({hour, selected: false}))
+      setListHours(aux)
+  }
+  searchHours();
+},[ubs])
+
+const setSelectedHour = index => {
+    const auxiliar = listHours.map((data,i)=>{
+       data.selected = i==index
+       return data
+    })
+    setHourSelected(auxiliar[index].hour)
+    setListHours(auxiliar)
+}
+
 
   return (
     <Page>
@@ -41,16 +79,16 @@ export const Schedules = () => {
           <Message textOne="Novo agendamento de consulta" textTwo="" />
           <div className="filter_group">
             <p>Selecione a especialidade</p>
-            <Select options={specialties} className='react-select-container'/>
+            <Select options={specialities} onChange={(e) => handleSpecialities(e)} className='react-select-container'/>
           </div>
           <BoxAux>
-            <List text="Escolha a unidade desejada" listUbs={listUbs} setListUbs={setListUbs}  />
+            <List text="Escolha a unidade desejada" onClick={setSelectedUbs} listUbs={listUbs} />
           </BoxAux>
         </BoxLeft>
         <BoxRight>
-          <Calendar setdaySelected={setdaySelected}/>
-          <Hours setHoraSelecionada={setHoraSelecionada} />
-          <button text="Agendar atendimento" onClick={()=>{
+          { listUbs.length ? <Calendar onClick={setDaySelected}/> : null}
+          { listHours.length ? <Hours onClick={setSelectedHour} listHours={listHours} /> : null}
+          {hourSelected && <button text="Agendar atendimento" onClick={()=>{
             swal({
               text: "Deseja finalizar seu agendamento?",
               buttons: true,
@@ -80,7 +118,7 @@ export const Schedules = () => {
                 }
               });
           }}
-          >Agendar</button>
+          >Agendar</button>}
         </BoxRight>
       </Content>
     </Page>

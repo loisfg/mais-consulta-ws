@@ -6,26 +6,7 @@ import Icon from "./Icon";
 import iconSet from "./selection.json";
 import { iconList } from "icomoon-react";
 
-export const List = ({ text, setListUbs:SetUbsSelecionada, listUbs: ubsSelecionada }) => {
-
-    const [especialidadeSelecionada, setEspecialidadeSelecionada] = useState();
-    const [listUbs, setListUbs] = useState([]);
-    useEffect(() => {
-        async function searchListUbs() {
-            const resp = await api("maisconsulta").get("/search/ubs/1")
-            const aux = resp.data.map(list => ({list, selected: false}))
-            setListUbs(aux)
-        }
-        searchListUbs();
-    }, []);
-
-    const setSelected = (index) =>{
-        const auxiliar = listUbs.map((data,i)=>{
-           data.selected = i==index ? true : false
-           return data
-        })
-        setListUbs(auxiliar)
-    }
+export const List = ({ text, listUbs, onClick }) => {
 
     return (
         <>
@@ -37,12 +18,7 @@ export const List = ({ text, setListUbs:SetUbsSelecionada, listUbs: ubsSeleciona
                         return(
                         
                         <ListItem isActive={ubs.selected} key={ubs.idUbs}
-                        onClick={(e)=>{
-
-                            SetUbsSelecionada(ubs.list.idUbs)
-                            console.log(ubsSelecionada)
-                            setSelected(index)
-                        }}>
+                        onClick={() => onClick(index) }>
                             <ListItemConteudo>
                                 <H3>{ubs.list.nome}</H3>
                                 <H2>{ubs.list.endereco.logradouro + ubs.list.endereco.rua + ", " + ubs.list.endereco.numero}</H2>
