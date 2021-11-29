@@ -7,14 +7,8 @@ import {
 } from "react-router-dom";
 import { isAuth } from "./services/auth";
 import { Calendar, Wrapper } from "../src/components";
-import {
-  HomePatient,
-  Initial,
-  Profile,
-  Schedules,
-  UnitMaps,
-  SchedulingHistory
-} from "./pages/Patient";
+import { HomePatient, Initial, Profile, Schedules, UnitMaps,
+        SchedulingHistory} from "./pages/Patient";
 import { Home, Appointment, Patients } from "./pages/Doctor";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -59,7 +53,7 @@ const Routes = () => {
         <PrivateRoute path="/calendar" component={Calendar} />
         <PrivateRoute path="/perfil" component={Profile} />
         <PrivateRoute path="/agendamento" component={Schedules} />
-        <PrivateRoute path="/mapa-de-unidades" component={UnitMaps} />
+        {/* <PrivateRoute path="/mapa-de-unidades" component={UnitMaps} /> */}
         <PrivateRoute path="/historico-agendamentos" component={SchedulingHistory} />
 
         <PrivateRoute path="/home-doctor" component={Home} />

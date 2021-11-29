@@ -12,6 +12,7 @@ import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
 import com.bandtec.mais.consulta.usecase.schedule.impl.PostAgendamentoConsultaImpl;
+import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

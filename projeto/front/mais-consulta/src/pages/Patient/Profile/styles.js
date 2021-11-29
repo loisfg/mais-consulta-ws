@@ -24,23 +24,33 @@ export const Container = styled.section`
   .customIframe {
      margin: 2rem 0px 0 0rem;
   }
-`;
+  .patient_group{
+    height: 80%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 5rem 0 0 0;
+    flex-direction: column;
+    border-right: var(--green-standard) 2px solid;
+    h1{
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--grey);
+      margin: 0 0 0.8rem;
+    }
+    h2{
+      color: var(--grey);
+      font-weight: 500;
+    }
+  }
 
-export const PatientGroup = styled.div`
-  height: 90%;
-  width: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 5rem 0 0 0;
-  flex-direction: column;
-  border-right: var(--green-standard) 2px solid;
-`
+`;
 
 export const CustomAvatar = styled(Avatar)`
   margin: 0 0 20px 0;
-  width: 15rem !important;
-  height: 15rem !important;
+  width: 12rem !important;
+  height: 12rem !important;
 `
 
 export const H2 = styled.div`

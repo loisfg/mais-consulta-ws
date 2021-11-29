@@ -7,11 +7,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,6 +33,7 @@ public class AgendamentoConsultaRequestDTO {
 
         Agendamento agendamento = Agendamento
                 .builder()
+                .dhInsert(new Date())
                 .dtAtendimento(agendamentoConsultaRequestDTO.dtAtendimento)
                 .hrAtendimento(agendamentoConsultaRequestDTO.hrAtendimento)
                 .build();

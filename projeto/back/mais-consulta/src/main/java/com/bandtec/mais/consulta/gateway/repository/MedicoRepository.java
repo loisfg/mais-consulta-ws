@@ -53,6 +53,6 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
 
     boolean existsByIdMedico(Integer idMedico);
 
-    @Query("SELECT DISTINCT new com.bandtec.mais.consulta.models.dto.response.MedicoHistoricoResponseDTO(a.idAgendamento, a.paciente.nome, a.paciente.dtNascimento, (SELECT MAX(a.dtAtendimento) FROM Agendamento a GROUP BY a.paciente.idPaciente)) FROM Agendamento a WHERE a.medico.idMedico = :idMedico")
+    @Query("SELECT DISTINCT new com.bandtec.mais.consulta.models.dto.response.MedicoHistoricoResponseDTO(a.idAgendamento, a.paciente.nome, a.paciente.dtNascimento, a.dtAtendimento) FROM Agendamento a WHERE a.medico.idMedico = :idMedico")
     Optional<List<MedicoHistoricoResponseDTO>> findHistoricoAgendamentos(@Param("idMedico") Integer idMedico);
 }

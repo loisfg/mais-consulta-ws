@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import api from '../../../services/api'
-import { TextSubtext, DataBox } from "../../../components";
-import { Container, CustomAvatar, PatientGroup, H2 } from "./styles";
+import { DataBox } from "../../../components";
+import { Container, CustomAvatar } from "./styles";
 
 export const Profile = () => {
   const username = localStorage.getItem('nome');
   const role = localStorage.getItem('role');
   const [ patientData, setPatientData ] = useState({})
+  const {control, reset, handleSubmit} = useForm();
 
   useEffect(() => {
     async function getData() {
@@ -19,15 +21,24 @@ export const Profile = () => {
       }
     }
   })
+  useEffect(() => {if(patientData) reset(patientData)}, [patientData])
+  const onSubmit = async (data) => {
+    const idPaciente = localStorage.getItem('id')
+    try {
+      // await api('maisconsulta').put(`/paciente/${idPaciente}/atendimento`, data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
-    <Container>
-      <PatientGroup>
+    <Container onSubmit={handleSubmit(onSubmit)}>
+      <div className="patient_group">
         <CustomAvatar sx={{ bgcolor: "deepskyblue" }} />
-        <TextSubtext textOne={username}></TextSubtext>
-        <H2>{role}</H2>
-      </PatientGroup>
-      <DataBox usuario={username}/>
+        <h1>{username}</h1>
+        <h2>{role}</h2>
+      </div>
+      <DataBox control={control} Controller={Controller} usuario={username}/>
     </Container>
   );
 };

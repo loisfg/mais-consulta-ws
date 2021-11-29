@@ -54,7 +54,7 @@ public class InfoController {
 
     //-----------POST/GET/PUT----- ALERGIA -----------POST/GET/PUT-----
     @PostMapping("/alergia/{idUser}")
-    public ResponseEntity<Set<Alergia>> createAlergia(@PathVariable Integer idUser,
+    public ResponseEntity<List<Alergia>> postAlergia(@PathVariable Integer idUser,
                                                       @RequestBody Iterable<Integer> alergia) {
 
         List<Alergia> alergias = postAlergia.execute(alergia, idUser);
@@ -62,7 +62,7 @@ public class InfoController {
             return ResponseEntity.status(204).build();
         }
 
-        return ResponseEntity.status(201).body(new HashSet<>(alergias));
+        return ResponseEntity.status(201).body(alergias);
     }
 
     @GetMapping("/alergias/{idUser}")
@@ -83,24 +83,19 @@ public class InfoController {
 
     //-----------POST/GET/PUT----- REMEDIO-----------POST/GET/PUT-----
     @PostMapping("/remedio/{idUser}")
-    public ResponseEntity<Set<Remedio>> postRemedio(@PathVariable Integer idUser,
+    public ResponseEntity<List<Remedio>> postRemedio(@PathVariable Integer idUser,
                                                     @RequestBody Iterable<Integer> remedio) {
-        if (postRemedio.execute(remedio, idUser).isPresent()) {
-            return ResponseEntity.status(201).build();
+
+        List<Remedio> remediosList = postRemedio.execute(remedio, idUser);
+        if (!remediosList.isEmpty()) {
+            return ResponseEntity.status(201).body(remediosList);
         }
 
         return ResponseEntity.status(204).build();
     }
 
-    @PostMapping("/remedio/add")
-    public ResponseEntity postRemedios() {
-        postSameRemedio.execute();
-
-        return ResponseEntity.status(204).build();
-    }
-
     @GetMapping("/remedios/auto/{nome}")
-    public Set<Remedio> getRemediosToAuto(@PathVariable String nome) {
+    public Set<Remedio> getRemediosAuto(@PathVariable String nome) {
         return getRemediosToComplet.execute(nome);
     }
 
@@ -122,10 +117,12 @@ public class InfoController {
 
     //-----------POST/GET/PUT----- DEFICIENCIA -----------POST/GET/PUT-----
     @PostMapping("/deficiencia/{idUser}")
-    public ResponseEntity<Set<Deficiencia>> postDeficiencia(@PathVariable Integer idUser,
+    public ResponseEntity<List<Deficiencia>> postDeficiencia(@PathVariable Integer idUser,
                                                             @RequestBody Iterable<Integer> deficiencia) {
-        if (postDeficiencia.execute(deficiencia, idUser).isPresent()) {
-            return ResponseEntity.status(201).build();
+        List<Deficiencia> deficienciaList = postDeficiencia.execute(deficiencia, idUser);
+
+        if (!deficienciaList.isEmpty()) {
+            return ResponseEntity.status(201).body(deficienciaList);
         }
 
         return ResponseEntity.status(204).build();
@@ -150,10 +147,12 @@ public class InfoController {
 
     //-----------POST/GET/PUT----- DOENCA -----------POST/GET/PUT-----
     @PostMapping("/doenca/{idUser}")
-    public ResponseEntity<Set<Doenca>> postDoenca(@PathVariable Integer idUser,
+    public ResponseEntity<List<Doenca>> postDoenca(@PathVariable Integer idUser,
                                                   @RequestBody Iterable<Integer> doenca) {
-        if (postDoenca.execute(doenca, idUser).isPresent()) {
-            return ResponseEntity.status(201).build();
+        List<Doenca> doencas = postDoenca.execute(doenca, idUser);
+
+        if (!doencas.isEmpty()) {
+            return ResponseEntity.status(201).body(doencas);
         }
 
         return ResponseEntity.status(204).build();

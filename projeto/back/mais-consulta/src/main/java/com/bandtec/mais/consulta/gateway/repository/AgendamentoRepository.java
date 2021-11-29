@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Integer> {
-    List<Agendamento> findByPaciente_Usuario_IdUsuario(Integer idUsuario);
+
+    @Query("SELECT a FROM Agendamento a WHERE a.paciente.idPaciente = :id")
+    List<Agendamento> findByAgendamentoByPacienteId(@Param("id") Integer idPaciente);
 
     Optional<Agendamento> findByIdAgendamento(Integer idAgendamento);
 

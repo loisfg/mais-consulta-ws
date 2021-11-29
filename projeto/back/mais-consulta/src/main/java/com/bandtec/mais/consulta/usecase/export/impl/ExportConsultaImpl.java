@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -25,11 +23,11 @@ public class ExportConsultaImpl implements ExportConsulta {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public Optional<String> execute(Integer idUser) {
+    public Optional<String> execute(Integer idPaciente) {
 
-        if (usuarioRepository.existsById(idUser)) {
+        if (usuarioRepository.existsById(idPaciente)) {
 
-            List<Agendamento> agendamentoList = agendamentoRepository.findByPaciente_Usuario_IdUsuario(idUser);
+            List<Agendamento> agendamentoList = agendamentoRepository.findByAgendamentoByPacienteId(idPaciente);
 
             if (agendamentoList.isEmpty()) {
                 return Optional.empty();
@@ -48,7 +46,6 @@ public class ExportConsultaImpl implements ExportConsulta {
         StringBuilder texto = new StringBuilder();
 
         agendamentoList.forEach(agendamento -> {
-            Integer id = agendamento.getIdAgendamento();
             String especialidade = agendamento.getEspecialidade().getDescricao();
             LocalDate dataAtendimento = agendamento.getDtAtendimento();
             Paciente paciente = agendamento.getPaciente();
@@ -57,15 +54,15 @@ public class ExportConsultaImpl implements ExportConsulta {
             String status = agendamento.getStatus();
             Medico medico = agendamento.getMedico();
             String nomeMedico = medico.getNome();
-            texto.append(buildTextoAgendamento(id, especialidade, dataAtendimento, nomePaciente, numeroCarteiraSus, status, nomeMedico));
+            texto.append(buildTextoAgendamento(especialidade, dataAtendimento, nomePaciente, numeroCarteiraSus, status, nomeMedico));
         });
 
         return texto.toString();
     }
 
     @NotNull
-    private String buildTextoAgendamento(Integer id, String especialidade, LocalDate dataAtendimento, String nomePaciente, String numeroCarteiraSus, String status, String nomeMedico) {
-        return String.format("%s;%s;%s;%s;%s;%s;%s\n", id, dataAtendimento, especialidade, nomePaciente, numeroCarteiraSus, status, nomeMedico);
+    private String buildTextoAgendamento(String especialidade, LocalDate dataAtendimento, String nomePaciente, String numeroCarteiraSus, String status, String nomeMedico) {
+        return String.format("%s;%s;%s;%s;%s;%s\n", dataAtendimento, especialidade, nomePaciente, numeroCarteiraSus, status, nomeMedico);
     }
 
 }
