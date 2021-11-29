@@ -5,6 +5,7 @@ import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.EspecialidadeResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -39,6 +40,9 @@ public class AgendamentoController {
 
     @Autowired
     private PostHoursUbs postHoursUbs;
+
+    @Autowired
+    private GetEspecialidades getEspecialidades;
 
     @PatchMapping("/cancelar/{idAgendamento}/{idPaciente}")
     public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento,
@@ -99,5 +103,12 @@ public class AgendamentoController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(listHoras);
+    }
+
+    @GetMapping("/especialidades")
+    public ResponseEntity<Set<EspecialidadeResponseDTO>> getEspecialidades() {
+
+        return ResponseEntity.of(getEspecialidades.execute());
+
     }
 }
