@@ -12,7 +12,7 @@ import IconDownload from '../../assets/download.svg';
 import api from "../../services/api";
 import Select from 'react-select';
 
-export const SchedulingTwo = () => {
+export const SchedulingTwo = (props) => {
 
 
   function createData(data, hora,  consulta, medico, local) {
@@ -22,7 +22,7 @@ export const SchedulingTwo = () => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   const idPaciente = localStorage.getItem("id"); 
-
+  const [idAgendamento, setIdAgendamento] = useState();
   const [listConsulta, setListConsulta] = useState([]);
 
   
@@ -34,13 +34,8 @@ export const SchedulingTwo = () => {
       listaConsulta();
   }, []);
 
-  // const setListaSelecionada = (index) =>{
-  //     const auxiliar = listConsulta.map((data,i)=>{
-  //        data.selected = i==index ? true : false
-  //        return data
-  //     })
-  //     setListConsulta(auxiliar)
-  // }
+
+ 
   const format = (hora) =>{
     if(hora){
      const hourArray = hora.split(":")
@@ -58,7 +53,7 @@ export const SchedulingTwo = () => {
     data = yyyy + '/' + mm + '/' + dd;
   }
 
-
+  var auxIdAgendamento;
 
   return (
     <Container>
@@ -85,7 +80,13 @@ export const SchedulingTwo = () => {
                 <TableCell align="center">
                   <Checkbox
                     {...label}
-                    sx={{ '& .MuiSvgIcon-root': { fontSize: 24 } }} style={{color:"#19A795",}}/>
+                    sx={{ '& .MuiSvgIcon-root': { fontSize: 24 } }} style={{color:"#19A795"}}
+                    key={row.idAgendamento}
+                    onClick={() =>{
+                      setIdAgendamento(row.idAgendamento)
+                      console.log( idAgendamento)
+                    }}
+                    />
                 </TableCell>
                 <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{row.dtAtendimento}</TableCell>
                 <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{format(row.horaAtendimento)}</TableCell>

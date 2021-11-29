@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Page } from "./styles";
 import api from "../../../services/api";
-import { ButtonsExport, ButtonsSelect, DivUsuario, DivComboBox, LeftSide, RightSide, Container, P, BoxButtons, Filter, ButtonDownloadSelect, ButtonDownload } from './styles';
+import { ButtonsExport, ButtonsSelect, DivUsuario, DivComboBox, LeftSide, RightSide, Container, P, BoxButtons, Filter } from './styles';
 import { UserProfilePic, WelcomeMessageTwo, SchedulingTwo, Button, ButtonTwo } from '../../../components'
 import Select from 'react-select';
 import TextField from '@mui/material/TextField';
@@ -11,15 +11,16 @@ import DatePicker from '@mui/lab/DatePicker';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CSVLink } from 'react-csv'
 
-export const SchedulingHistory = ({ usuario }) => {
+export const SchedulingHistory = ( props, usuario ) => {
 
   const [value, setValue] = useState(null);
   const [specialty, setSpecialty] = useState();
   const [ubsSelect, setUbsSelect] = useState();
-  // const [history, setHistory] = useState([]);
+  const [idAgendamento, setIdAgendamento] = useState();
   const idUser = localStorage.getItem("id");
   const [listUbs, setListUbs] = useState([]);
   const [csv, setCsv] = useState([]);
+
 
   useEffect(() => {
     async function searchListUbs() {
@@ -33,6 +34,29 @@ export const SchedulingHistory = ({ usuario }) => {
   useEffect(async() => {
     var dados=[];
       const resp = await api("maisconsulta").get(`/export/${idUser}/consultas/info`)
+      
+      var auxData = resp.data.split('\n')
+      
+      for (var i = 0; i < auxData.length; i++) {
+        var row = [];
+        if (auxData[i].length > 1) {
+          row.push(auxData[i].split(';')[0])
+          row.push(auxData[i].split(';')[1])
+          row.push(auxData[i].split(';')[2])
+          row.push(auxData[i].split(';')[3])
+          row.push(auxData[i].split(';')[4])
+
+          dados.push(row);
+        }
+      }
+    setCsv(dados);
+  }, []);
+
+  
+
+  useEffect(async() => {
+    var dados=[];
+      const resp = await api("maisconsulta").get(`/export/${props.idAgendamento}/${idUser}/consulta/info`)
       
       var auxData = resp.data.split('\n')
       
@@ -118,7 +142,6 @@ export const SchedulingHistory = ({ usuario }) => {
   });
 
 
-
   return (
     <Page>
       <DivUsuario>
@@ -155,10 +178,27 @@ export const SchedulingHistory = ({ usuario }) => {
             </ButtonsSelect>
 
             <ButtonsExport>
-              <ButtonDownloadSelect type="submit" onClick={() => {
-
-              }}
-              >Baixar Selecionados</ButtonDownloadSelect>
+            <CSVLink
+                style={{
+                  width: "170px",
+                  fontSize: "14px",
+                  borderRadius: "5px",
+                  backgroundColor: "#FFFFFF",
+                  color: "#515151",
+                  fontFamily: "Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+                  cursor: "pointer",
+                  border: "#19A795 1px solid",
+                  height: "50px",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  padding: "1.7rem 1.8rem",
+                }}
+                data={csv}
+                filename={"agendamentos +Consulta.csv"}
+                target="_blank"
+              >
+                Baixar Selecionados
+              </CSVLink>
 
               <CSVLink
                 style={{
@@ -181,10 +221,6 @@ export const SchedulingHistory = ({ usuario }) => {
               >
                 Baixar todos
               </CSVLink>
-              {/* <ButtonDownload style={{ marginTop: 0 }} type="submit" onClick={()=>{
-                baixarArquivos();
-              }}
-              >Baixar Todos</ButtonDownload> */}
             </ButtonsExport>
           </BoxButtons>
         </LeftSide>
@@ -192,7 +228,7 @@ export const SchedulingHistory = ({ usuario }) => {
         <RightSide>
 
           <Container>
-            <SchedulingTwo />
+            <SchedulingTwo onClick={setIdAgendamento} idAgendamento={idAgendamento}/>
           </Container>
 
         </RightSide>
