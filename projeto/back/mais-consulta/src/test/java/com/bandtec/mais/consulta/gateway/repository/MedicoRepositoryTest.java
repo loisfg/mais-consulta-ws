@@ -17,12 +17,9 @@ class MedicoRepositoryTest {
 
     @Autowired
     private MedicoRepository medicoRepository;
-    private Agendamento agendamento;
-
 
     @Test
    void insertAndReceiveMedicoCreatedWithBuilder() {
-
         //usuario
         final String cpf = "49575413885-x";
         final String email = "JoaoFernandes@outlock.com.br";
