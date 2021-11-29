@@ -42,10 +42,9 @@ export const Calendar = (props) => {
                         });
                     }}><span>{day}</span></ListDays>
                 )}
-                {data.days && data.days.map((index, day) =>
-                    <ListDays weight='bold' isToDay={data.currentDay== day} onClick={() => {
-                        const aux = day;
-                        if(day < new Date().getDate()){
+                {data.days && data.days.map((item, index) =>
+                    <ListDays weight='bold' isToDay={ item.selected } onClick={() => {
+                        if(item.day < new Date().getDate()){
                             swal("Você não pode selecionar uma data anterior!", {
                                 buttons: false,
                                 icon: "error",
@@ -53,11 +52,10 @@ export const Calendar = (props) => {
                             });
                         }
                         else{
-                            props.setdaySelected(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${day}`)
-                            console.log(props.setdaySelected)
+                            props.setdaySelected(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${item.day}`)
+                            setColorSelecionado(index)
                         }
-                        setColorSelecionado(index)
-                    }} ><span>{day+1}</span></ListDays>
+                    }} ><span>{item.day}</span></ListDays>
                 )}
                 {data.nextDays && data.nextDays.map(day =>
                     <ListDays weight='light'><span>{day}</span></ListDays>

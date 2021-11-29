@@ -10,11 +10,11 @@ export const generate = () => {
     const now = new Date();
     const nowDays = new Date(now.getFullYear(),now.getMonth()+1, 0).getDate()
     date.weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-    date.days = Array.from({length:nowDays}, (_,index) => index+1) ;
-
+    date.days = Array.from({length:nowDays}, (_,index) => index+1);
 
     date.currentDay = now.getDate()
-
+    
+    date.days = date.days.map(day => ({ day , selected: day === date.currentDay }))
     const mounths = [
         "Janeiro",
         "Fevereiro",
