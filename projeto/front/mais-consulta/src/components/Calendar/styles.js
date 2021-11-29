@@ -8,13 +8,11 @@ export const P = styled.p`
 `
 
 export const Calendario = styled.div`
-    width: 58vh;
-    height: 42vh;
+    width: 51rem;
     background-color: var(--white-standard);
     border-radius: 0.6rem;
 `
 export const Month = styled.div`
-    width: 100%;
     height: 18%;
     background-color: var(--green-standard);
     display: flex;
@@ -28,11 +26,9 @@ export const Month = styled.div`
     }
 
     h1 {
-        font-size: 16px;
         font-weight: 500;
         text-transform: capitalize;
         letter-spacing: 0.2rem;
-        margin-bottom: 1rem;
         color:white;
     }
 
@@ -49,9 +45,6 @@ export const Month = styled.div`
 `
 
 export const Dates = styled.div`
-    display:flex;
-    align-items: center;
-    justify-content: center;
     h1{
         font-size: 18px;
     }
@@ -59,17 +52,17 @@ export const Dates = styled.div`
 
 export const Weekdays = styled.div`
     width: 100%;
-    height: 3rem;
-    padding: 0 0.1rem;
+    padding: 1rem 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-wrap:wrap;
 `
 export const ListItem = styled.div`
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.1rem;
-    width: calc(57vh / 7);
+    width: 7rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,12 +71,13 @@ export const Days = styled.div`
     flex-wrap: wrap;
     width: 100%;
     display: flex;
+    justify-content: space-between;
 `
 export const ListDays = styled.div`
     font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.1rem;
-    width: calc(57vh / 7);
+    width: 7rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,12 +85,11 @@ export const ListDays = styled.div`
     color: ${({isToDay}) => isToDay ? "#fff" : "#515151"};
     opacity: ${({weight}) => weight === 'light' ? 0.5 : 1};
     span{
-        height: 38px;
-        width: 38px;
+        height: 4rem;
+        width: 4rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 8px;
         background-color: ${({isToDay}) => isToDay ? "#19A795" : "#fff"};
         border-radius: 100px;
         :hover {

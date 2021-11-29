@@ -47,7 +47,6 @@ export const Hours = ({setHoraSelecionada}) => {
                 <List>
                     {
                         listHours && listHours.map((data,index) =>
-                        
                         <ItemListHour isActive={data.selected} onClick={(e) => {
                             setHoraSelecionada(data.hour)
                             setSelected(index)

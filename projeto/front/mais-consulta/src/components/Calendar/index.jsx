@@ -40,7 +40,7 @@ export const Calendar = (props) => {
                             buttons: false,
                             timer: 3000,
                         });
-                    }}>{day}</ListDays>
+                    }}><span>{day}</span></ListDays>
                 )}
                 {data.days && data.days.map((index, day) =>
                     <ListDays weight='bold' isToDay={data.currentDay== day} onClick={() => {
@@ -56,11 +56,11 @@ export const Calendar = (props) => {
                             props.setdaySelected(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${day}`)
                             console.log(props.setdaySelected)
                         }
-                        // setColorSelecionado(index)
-                    }} ><span>{day}</span></ListDays>
+                        setColorSelecionado(index)
+                    }} ><span>{day+1}</span></ListDays>
                 )}
                 {data.nextDays && data.nextDays.map(day =>
-                    <ListDays weight='light'>{day}</ListDays>
+                    <ListDays weight='light'><span>{day}</span></ListDays>
                 )}
             </Days>
         </Calendario>

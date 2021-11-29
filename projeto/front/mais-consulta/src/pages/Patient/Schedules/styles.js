@@ -15,7 +15,7 @@ export const DivUsuario = styled.div`
     justify-content: flex-end;
 `
 export const Content = styled.div`
-    height: 79vh;
+    height: 100%;
     min-width: 90%;
     width: 100%;
     display: flex;
@@ -24,7 +24,7 @@ export const Content = styled.div`
 `
 export const BoxLeft = styled.div`
     height: 100%;
-    width: 45%;
+    width: 50%;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -38,7 +38,7 @@ export const BoxAux = styled.div`
 
 export const BoxRight = styled.div`
     height: 100%;
-    width: 55%;
+    width: 50%;
     display:flex;
     flex-direction: column;
     justify-content: space-between;

@@ -98,8 +98,6 @@ export const Schedules = ({ usuario }) => {
                     icon: "success",
                     //CHAMAR O ENDPOINT AQUI
                   });
-                 
-
                 } else {
                   swal("Agendamento cancelado", {
                     icon: "error",
