@@ -89,5 +89,10 @@ export const Container = styled.section`
                 justify-content: space-evenly;
             }
         }
+        .btn_group{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
     }
 `;
