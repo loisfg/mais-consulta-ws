@@ -1,10 +1,12 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Consulta;
+import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO;
+import com.bandtec.mais.consulta.usecase.patient.GetEspecialidadesAgenda;
 import com.bandtec.mais.consulta.usecase.schedule.*;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,9 @@ public class AgendamentoController {
 
     @Autowired
     private PostHoursUbs postHoursUbs;
+
+    @Autowired
+    private GetEspecialidades getEspecialidades;
 
     @PatchMapping("/cancelar/{idAgendamento}/{idPaciente}")
     public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento,
@@ -99,5 +104,12 @@ public class AgendamentoController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(listHoras);
+    }
+
+    @GetMapping("/especialidades")
+    public ResponseEntity<List<Especialidade>> getEspecialidades() {
+
+        return ResponseEntity.of(getEspecialidades.execute());
+
     }
 }
