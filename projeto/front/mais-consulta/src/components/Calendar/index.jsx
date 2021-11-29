@@ -5,7 +5,7 @@ import Back from '../../assets/proximo.png';
 import { generate } from './daysGenerate';
 import swal from 'sweetalert';
 
-export const Calendar = (props) => {
+export const Calendar = ({ onClick }) => {
     const [data, setData] = useState({})
     useEffect(() => setData(generate()), [])
     const [color, setColor] = useState([]);
@@ -52,8 +52,8 @@ export const Calendar = (props) => {
                             });
                         }
                         else{
-                            props.setdaySelected(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${item.day}`)
                             setColorSelecionado(index)
+                            onClick(`${new Date().getFullYear()}-${new Date().getMonth()+1}-${item.day}`)
                         }
                     }} ><span>{item.day}</span></ListDays>
                 )}

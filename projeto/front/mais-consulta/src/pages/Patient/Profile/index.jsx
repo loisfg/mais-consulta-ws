@@ -21,7 +21,9 @@ export const Profile = () => {
       }
     }
   })
+  
   useEffect(() => {if(patientData) reset(patientData)}, [patientData])
+
   const onSubmit = async (data) => {
     const idPaciente = localStorage.getItem('id')
     try {
