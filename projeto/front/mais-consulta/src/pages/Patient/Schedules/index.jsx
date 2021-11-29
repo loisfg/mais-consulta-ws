@@ -1,31 +1,12 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../services/api"
+import { specialties } from "./specialitiesData";
 import { Page } from "./styles";
 import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux } from "./styles";
 import { UserProfilePic, Message, List, Calendar, Hours } from "../../../components";
 import swal from 'sweetalert';
-import Select, { StylesConfig } from 'react-select';
-export const Schedules = ({ usuario }) => {
-  const specialties = [
-    {value: 'Acupuntura', label: 'Acupuntura'},
-    {value: 'Alergia e Imunologia', label: 'Alergia e Imunologia'},
-    {value: 'Anestesiologia', label: 'Anestesiologia'},
-    {value: 'Medicina Legal e Perícia Médica', label: 'Medicina Legal e Perícia Médica'},
-    {value: 'Medicina Nuclear', label: 'Medicina Nuclear'},
-    {value: 'Reumatologia', label: 'Reumatologia'},
-    {value: 'Urologia', label: 'Urologia'},
-    {value: 'Áreas de Atuação reconhecidas', label: 'Áreas de Atuação reconhecidas'},
-    {value: 'Administração em Saúde', label: 'Administração em Saúde'},
-    {value: 'Ecografia Vascular com Doppler', label: 'Ecografia Vascular com Doppler'},
-    {value: 'Eletrofisiologia Clínica Invasiva', label: 'Eletrofisiologia Clínica Invasiva'},
-    {value: 'Psiquiatria da Infância e Adolescência', label: 'Psiquiatria da Infância e Adolescência'},
-    {value: 'Psiquiatria Forense', label: 'Psiquiatria Forense'},
-    {value: 'Radiologia Intervencionista e Angiorradiologia', label: 'Radiologia Intervencionista e Angiorradiologia'},
-    {value: 'Reumatologia Pediátrica', label: 'Reumatologia Pediátrica'},
-    {value: 'Sexologia', label: 'Sexologia'},
-    {value: 'Transplante de Medula Óssea', label: 'Transplante de Medula Óssea'},
-    {value: 'Ultrassonografia em Ginecologia e Obstetrícia', label: 'Ultrassonografia em Ginecologia e Obstetrícia'},
-]
+import Select from 'react-select';
+export const Schedules = () => {
   const [listUbs, setListUbs] = useState([]);
   const [daySelected, setdaySelected] = useState([0]);
   const [horaSelecionada, setHoraSelecionada] = useState();
