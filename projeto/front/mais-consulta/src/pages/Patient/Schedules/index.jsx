@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../services/api"
 import { Page } from "./styles";
-import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux, Filter, P } from "./styles";
+import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux } from "./styles";
 import { UserProfilePic, Message, List, Calendar, Hours } from "../../../components";
 import swal from 'sweetalert';
-import Select from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 export const Schedules = ({ usuario }) => {
   const specialties = [
     {value: 'Acupuntura', label: 'Acupuntura'},
@@ -25,9 +25,7 @@ export const Schedules = ({ usuario }) => {
     {value: 'Sexologia', label: 'Sexologia'},
     {value: 'Transplante de Medula Óssea', label: 'Transplante de Medula Óssea'},
     {value: 'Ultrassonografia em Ginecologia e Obstetrícia', label: 'Ultrassonografia em Ginecologia e Obstetrícia'},
-    
 ]
-
   const [listUbs, setListUbs] = useState([]);
   const [daySelected, setdaySelected] = useState([0]);
   const [horaSelecionada, setHoraSelecionada] = useState();
@@ -45,14 +43,9 @@ export const Schedules = ({ usuario }) => {
       idPaciente: userId,
       idUbs: listUbs
     }
-    
-    await api("mais-consulta")
-    .post("/agendamento/agendar/consulta", data)
-
+    await api("mais-consulta").post("/agendamento/agendar/consulta", data)
     console.log("req"+data)
   }
-  const typeOfUser = localStorage.getItem("role");
-
   useEffect(() => {
     console.log("ubs"+listUbs)
   }, [listUbs])
@@ -65,10 +58,10 @@ export const Schedules = ({ usuario }) => {
       <Content>
         <BoxLeft>
           <Message textOne="Novo agendamento de consulta" textTwo="" />
-          <Filter>
-            <P>Selecione a especialidade</P>
-            <Select options={specialties}/>
-          </Filter>
+          <div className="filter_group">
+            <p>Selecione a especialidade</p>
+            <Select options={specialties} className='react-select-container'/>
+          </div>
           <BoxAux>
             <List text="Escolha a unidade desejada" listUbs={listUbs} setListUbs={setListUbs}  />
           </BoxAux>
