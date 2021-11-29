@@ -1,6 +1,6 @@
 import styled from "styled-components";
 export const Horario = styled.div`
-    width: 51rem;
+    width: 50rem;
     display: flex;
     flex-direction: column;
     align-items: center;

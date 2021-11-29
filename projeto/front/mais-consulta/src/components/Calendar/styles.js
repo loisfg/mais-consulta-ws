@@ -8,7 +8,7 @@ export const P = styled.p`
 `
 
 export const Calendario = styled.div`
-    width: 51rem;
+    width: 50rem;
     background-color: var(--white-standard);
     border-radius: 0.6rem;
 `

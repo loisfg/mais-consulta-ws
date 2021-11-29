@@ -30,6 +30,19 @@ export const BoxLeft = styled.div`
     justify-content: space-between;
     align-items: flex-start;
     border-right: 2px solid #19A795;
+    .filter_group{
+        margin-bottom: 4rem;
+        width:55%;
+        display: flex;
+        flex-direction: column;
+        p {
+            color: var(--grey);
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            width:auto;
+            font-weight: 600;
+        }
+    }
 `
 export const BoxAux = styled.div`
     width: 85%;
@@ -38,7 +51,7 @@ export const BoxAux = styled.div`
 
 export const BoxRight = styled.div`
     height: 100%;
-    width: 50%;
+    width: 65%;
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -58,17 +71,3 @@ export const BoxRight = styled.div`
     }
 `
 
-export const Filter = styled.div`
-height:2vh;
-margin-bottom: 48px;
-width:75%;
-display: flex;
-flex-direction: column;
-`
-export const P = styled.p`
-color: #515151;
-font-size: 18px;
-width:auto;
-font-weight: 600;
-font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-`
