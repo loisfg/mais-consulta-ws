@@ -69,7 +69,7 @@ export const DataBox = ({control, Controller}) => {
             </div>
             
         </div>
-        <h2>Prontuário do Médico</h2>
+        <h2>Prontuário Médico</h2>
         <div className="panel">
           <div className="ipt_group">
             <div className='side_ipt_group'>
@@ -114,6 +114,10 @@ export const DataBox = ({control, Controller}) => {
             <label htmlFor="bloodType">Tipo Sanguineo</label>
             <Controller name='prontuario.tipoSanguineo' control={control} render={({field}) => <Select styles={{'height': '130rem'}} id='bloodType' options={bloodType}/>}/>
           </div>
+        </div>
+        <div className='btn_group'>
+          <button>Salvar</button>
+          <button>Cancelar</button>
         </div>
       </div>
     </Container>

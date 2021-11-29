@@ -14,7 +14,7 @@ export const Profile = () => {
     async function getData() {
       const idPaciente = localStorage.getItem("id"); 
       try {
-        const response = api("maisconsulta").get(`/paciente/${idPaciente}`);
+        const response = await api("maisconsulta").get(`/paciente/${idPaciente}`);
         setPatientData(response.data)
       } catch (error) {
         console.log(error);

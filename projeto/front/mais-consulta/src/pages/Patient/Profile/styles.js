@@ -5,9 +5,9 @@ export const Container = styled.section`
   height: 100vh;
   width: 100%;
   display: flex;
-  display: flex;
   justify-content: center;
   align-items: flex-start;
+  outline: none;
   .leftSide{
     width: 53rem;
     display: flex;
@@ -32,7 +32,6 @@ export const Container = styled.section`
     justify-content: flex-start;
     margin: 5rem 0 0 0;
     flex-direction: column;
-    border-right: var(--green-standard) 2px solid;
     h1{
       font-size: 1.6rem;
       font-weight: 600;
@@ -44,6 +43,10 @@ export const Container = styled.section`
       font-weight: 500;
     }
   }
+  .btn_group{
+    display: flex;
+    flex-direction: column;
+  }
 
 `;
 
@@ -51,12 +54,4 @@ export const CustomAvatar = styled(Avatar)`
   margin: 0 0 20px 0;
   width: 12rem !important;
   height: 12rem !important;
-`
-
-export const H2 = styled.div`
-color: black;
-opacity: 70%;
-font-size: 16px;
-font-weight: 600;
-font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
