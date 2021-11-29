@@ -57,19 +57,24 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
             List<Doenca> doencaDSTList = doencaList.stream().filter(Doenca::getDst).collect(Collectors.toList());
             List<Remedio> remedioControladoList = remedioList.stream().filter(Remedio::getControlado).collect(Collectors.toList());
 
-            DadosPessoaisDTO dadosPessoaisDTO = new DadosPessoaisDTO(
-                    paciente.getIdPaciente(),
-                    paciente.getNome(),
-                    calcularIdade(paciente.getDtNascimento()),
-                    endereco.getLogradouro(),
-                    endereco.getBairro(),
-                    paciente.getNumeroCarteiraSus(),
-                    usuario.getCpf(),
-                    paciente.getTelefone(),
-                    endereco.getCidade(),
-                    endereco.getEstado(),
-                    endereco.getCep()
-            );
+            DadosPessoaisDTO dadosPessoaisDTO = DadosPessoaisDTO
+                    .builder()
+                    .idPaciente(idPaciente)
+                    .nome(paciente.getNome())
+                    .idade(calcularIdade(paciente.getDtNascimento()))
+                    .endereco(endereco.getRua())
+                    .logradouro(endereco.getLogradouro())
+                    .complemento(endereco.getComplemento())
+                    .numero(endereco.getNumero())
+                    .bairro(endereco.getBairro())
+                    .numeroSus(paciente.getNumeroCarteiraSus())
+                    .cpf(usuario.getCpf())
+                    .telefone(paciente.getTelefone())
+                    .cidade(endereco.getCidade())
+                    .estado(endereco.getEstado())
+                    .celular(paciente.getTelefone())
+                    .cep(endereco.getCep())
+                    .build();
 
             ProntuarioDTO prontuarioDTO = ProntuarioDTO
                     .builder()
@@ -87,10 +92,11 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
                     .tipoSanguineo(paciente.getTipoSanguineo())
                     .build();
 
-            PacienteInfoResponseDTO pacienteInfoResponseDTO = new PacienteInfoResponseDTO(
-                    dadosPessoaisDTO,
-                    prontuarioDTO
-            );
+            PacienteInfoResponseDTO pacienteInfoResponseDTO = PacienteInfoResponseDTO
+                    .builder()
+                    .dadosPessoais(dadosPessoaisDTO)
+                    .prontuario(prontuarioDTO)
+                    .build();
 
             return Optional.of(pacienteInfoResponseDTO);
         }

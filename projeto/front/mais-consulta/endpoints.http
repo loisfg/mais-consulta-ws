@@ -56,6 +56,7 @@ GET {{url}}/paciente/2 HTTP/1.1
 # Dados enviados do formulario de atendimento
 POST {{url}}/medico/{idMedico}/atendimento HTTP/1.1
 content-type: application/json
+
 { 
     "dadosPessoais": {
         "idPaciente": 0,
