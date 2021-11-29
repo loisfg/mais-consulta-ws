@@ -7,6 +7,7 @@ import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO;
 import com.bandtec.mais.consulta.models.dto.response.MedicoHistoricoResponseDTO;
 import org.apache.tomcat.jni.Local;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -40,6 +41,9 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     List<Medico> findByNome(String nome);
 
     Set<Medico> findAllByEspecialidade(Especialidade especialidade);
+
+    @Query("select m from Medico m")
+    List<Medico> findAllMedicos();
 
     Optional<Medico> findByUsuario(Usuario usuario);
 
