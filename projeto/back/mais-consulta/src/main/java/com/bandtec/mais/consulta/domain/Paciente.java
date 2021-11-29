@@ -73,15 +73,15 @@ public class Paciente {
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
     @ToString.Exclude
-    private Set<PacienteHasDeficiencia> pacienteDeficiencias;
+    private Set<PacienteHasDeficiencia> deficiencias;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
     @ToString.Exclude
-    private Set<PacienteHasAlergia> pacienteAlergias;
+    private Set<PacienteHasAlergia> alergias;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
     @ToString.Exclude
-    private Set<PacienteHasAtividade> pacienteHasAtividades;
+    private Set<PacienteHasAtividade> atividades;
 
     @Override
     public boolean equals(Object o) {

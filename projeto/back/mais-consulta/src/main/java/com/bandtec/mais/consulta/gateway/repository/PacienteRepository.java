@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
+import com.bandtec.mais.consulta.domain.Alergia;
 import com.bandtec.mais.consulta.domain.Paciente;
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.response.PacienteAgendamentosResponseDTO;
@@ -11,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
     List<Paciente> findByNomeContaining(String nome);
@@ -34,7 +36,6 @@ public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
                                                                      @Param("dt_start") LocalDate dtStart,
                                                                      @Param("dt_end") LocalDate dtEnd);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO(a.dtAtendimento, a.hrAtendimento, a.medico.especialidade.descricao, a.medico.nome, a.medico.ubs.nome) FROM Agendamento a WHERE a.paciente.idPaciente = :id")
-    Optional<List<PacienteHistoricoResponseDTO>> findAllHistoricoPaciente(@Param("id") Integer idPaciente);
-
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO(a.dtAtendimento, a.hrAtendimento, a.medico.especialidade.descricao, a.medico.nome, a.medico.ubs.nome) FROM Agendamento a WHERE a.paciente.idPaciente = :idPaciente")
+    Optional<List<PacienteHistoricoResponseDTO>> findAllHistoricoPaciente(@Param("idPaciente") Integer idPaciente);
 }

@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("export")
 public class ExportController {
@@ -75,10 +73,10 @@ public class ExportController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("{idUser}/consultas/info")
-    public ResponseEntity<?> exportConsulta(@PathVariable Integer idUser) {
+    @GetMapping("{idPaciente}/consultas/info")
+    public ResponseEntity<?> exportConsulta(@PathVariable Integer idPaciente) {
 
-        Optional<String> oConsultaCsv = exportConsulta.execute(idUser);
+        Optional<String> oConsultaCsv = exportConsulta.execute(idPaciente);
 
         if (oConsultaCsv.isPresent()) {
 

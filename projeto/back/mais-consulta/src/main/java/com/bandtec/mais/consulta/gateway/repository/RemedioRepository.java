@@ -17,4 +17,7 @@ public interface RemedioRepository extends JpaRepository<Remedio, Integer> {
 
     @Query("SELECT r.remedio FROM PacienteHasRemedios r WHERE r.paciente.idPaciente = :id")
     List<Remedio> findByPacienteId(@Param("id") Integer id);
+
+    @Query("select r from Remedio r where r.id = ?1")
+    List<Remedio> findRemedioById(Iterable<Integer> ids);
 }
