@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.models.dto.response;
 
 import com.bandtec.mais.consulta.utils.StrFormat;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

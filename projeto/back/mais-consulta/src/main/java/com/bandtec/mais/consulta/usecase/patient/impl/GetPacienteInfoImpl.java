@@ -41,7 +41,7 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
 
         if (pacienteRepository.existsByIdPaciente(idPaciente)) {
 
-            Paciente paciente = pacienteRepository.findByIdPaciente(idPaciente).get();
+            Paciente paciente = pacienteRepository.findById(idPaciente).get();
 
             Usuario usuario = paciente.getUsuario();
             Endereco endereco = paciente.getEndereco();
@@ -93,7 +93,6 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
             );
 
             return Optional.of(pacienteInfoResponseDTO);
-
         }
 
         return Optional.empty();

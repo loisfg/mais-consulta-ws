@@ -1,17 +1,20 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
+import com.bandtec.mais.consulta.domain.Paciente;
+import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.models.dto.request.AgendaPacienteRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.PacienteInfoPutResquestDTO;
 import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteAgendamentosResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteInfoResponseDTO;
+import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
 import com.bandtec.mais.consulta.usecase.patient.GetAgenda;
 import com.bandtec.mais.consulta.usecase.patient.GetHistorico;
 import com.bandtec.mais.consulta.usecase.patient.GetPacienteInfo;
-import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
+import com.bandtec.mais.consulta.usecase.patient.PutPacienteInfo;
+import com.bandtec.mais.consulta.usecase.ubs.GetUbs;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,9 @@ public class PacienteController {
     }
 
     @Autowired
+    private GetUbs getUbs;
+
+    @Autowired
     private PacienteSignup pacienteSignup;
 
     @Autowired
@@ -43,7 +49,10 @@ public class PacienteController {
     @Autowired
     private GetHistorico getHistorico;
 
-    @GetMapping("{idPaciente}")
+    @Autowired
+    private PutPacienteInfo putPacienteInfo;
+
+    @GetMapping("/{idPaciente}")
     public ResponseEntity<PacienteInfoResponseDTO> getPacienteInfo(@PathVariable Integer idPaciente){
         return ResponseEntity.of(getPacienteInfo.execute(idPaciente));
     }
@@ -78,5 +87,17 @@ public class PacienteController {
         return oHistorico
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+    }
+
+    @GetMapping("/mapa/{idPaciente}")
+    public ResponseEntity<List<Ubs>> getUbsByLocalizacao(@PathVariable Integer idPaciente) {
+        return ResponseEntity.of(getUbs.execute(idPaciente));
+    }
+
+    @PutMapping
+    public ResponseEntity<Paciente> putInfosPaciente(@RequestBody PacienteInfoPutResquestDTO pacienteInfoPutResquestDTO) {
+        ResponseEntity.of(putPacienteInfo.execute(pacienteInfoPutResquestDTO));
+
+        return null;
     }
 }

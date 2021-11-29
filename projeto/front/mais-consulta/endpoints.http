@@ -13,7 +13,8 @@ GET {{url}}/medico/1/agendamentos HTTP/1.1
     # }
 # ]
 ### Atendimento (Medico)
-GET {{url}}/paciente/{idPaciente} HTTP/1.1
+// DONE
+GET {{url}}/paciente/2 HTTP/1.1
 # Retorno esperado
 # Dados utilizados para preenchimento automatico dos dados do paciente
 # {
@@ -97,11 +98,9 @@ content-type: application/json
     }
 }
 
-### Home (Medico)
-GET {{url}}/agendamento/pegar/horas HTTP/1.1
-
 ### Pacientes (Medico)
-GET {{url}}/medico/historico HTTP/1.1
+// DONE
+GET {{url}}/medico/1/historico HTTP/1.1
 # Tela que condiz com o historico de pacientes atendidos por esse medico
 # Retorno esperado
 # [
@@ -113,10 +112,15 @@ GET {{url}}/medico/historico HTTP/1.1
 # ]
 
 ### Mapa de unidades (Paciente)
-GET {{url}}/paciente/mapa/{idPaciente} HTTP/1.1
+// DONE
+GET {{url}}/paciente/mapa/2 HTTP/1.1
 
-### Home (Paciente)v
-GET {{url}}/paciente/agenda HTTP/1.1
+### Home (Paciente)
+// DONE
+GET {{url}}/paciente/agenda/2 HTTP/1.1
+content-type: application/json
+dtStart: 2021-12-17
+dtEnd: 2021-12-29
 # [
     # {
     #         especialidade: 'Dentista',
