@@ -55,13 +55,17 @@ export const DataBox = ({control, Controller}) => {
               <div className='side_ipt_group'>
                 <div>
                   <label>Número</label>
-                  <Controller name='dadosPessoais.endereco' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+                  <Controller name='dadosPessoais.numero' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
                 </div>
                 <div>
                   <label>Bairro</label>
                   <Controller name='dadosPessoais.bairro' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
                 </div>
               </div>
+            </div>
+            <div className='ipt_group'>
+                <label>Complemento</label>
+                <Controller name='dadosPessoais.complemento' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
             </div>
             
         </div>
@@ -95,20 +99,20 @@ export const DataBox = ({control, Controller}) => {
             <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='DST’s'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Doenças hereditárias'/>}/>
+            <Controller name='prontuario.doencasHereditarias' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Doenças hereditárias'/>}/>
           </div>
           <div className='ipt_group'>
             <Controller name='prontuario.atividadesProibidas' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Atividades proibidas'/>}/>
           </div>
           <div className='ipt_group'>
             <div>
-              <Controller name='prontuario.atividadesProibidas' control={control} render={({field}) => <Checkbox {...field} color='var(--green-standard)' label='Fumante?'/>}/>
-              <Controller name='prontuario.atividadesProibidas' control={control} render={({field}) => <Checkbox {...field} color='var(--green-standard)' label='Virgem?'/>}/>
+              <Controller name='prontuario.fumante' control={control} render={({field}) => <Checkbox {...field} color='var(--green-standard)' label='Fumante?'/>}/>
+              <Controller name='prontuario.virgem' control={control} render={({field}) => <Checkbox {...field} color='var(--green-standard)' label='Virgem?'/>}/>
             </div>
           </div>
           <div className="ipt_group">
             <label htmlFor="bloodType">Tipo Sanguineo</label>
-            <Controller name='prontuario.atividadesProibidas' control={control} render={({field}) => <Select styles={{'height': '130rem'}} id='bloodType' options={bloodType}/>}/>
+            <Controller name='prontuario.tipoSanguineo' control={control} render={({field}) => <Select styles={{'height': '130rem'}} id='bloodType' options={bloodType}/>}/>
           </div>
         </div>
       </div>

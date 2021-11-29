@@ -20,7 +20,8 @@ export const Profile = () => {
         console.log(error);
       }
     }
-  })
+    getData()
+  }, [])
   
   useEffect(() => {if(patientData) reset(patientData)}, [patientData])
 
