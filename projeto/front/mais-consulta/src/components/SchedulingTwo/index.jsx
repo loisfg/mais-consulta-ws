@@ -25,11 +25,10 @@ export const SchedulingTwo = () => {
 
   const [listConsulta, setListConsulta] = useState([]);
 
+  
   useEffect(() => {
       async function listaConsulta() {
-          const resp = await api("maisconsulta").get(`/paciente/historico/2`)
-          console.log("resp histórico: "+resp.data)
-          // const aux = resp.data.map(list => ({list, selected: false}))
+          const resp = await api("maisconsulta").get(`/paciente/historico/${idPaciente}`)
           setListConsulta(resp.data)
       }
       listaConsulta();
@@ -42,6 +41,23 @@ export const SchedulingTwo = () => {
   //     })
   //     setListConsulta(auxiliar)
   // }
+  const format = (hora) =>{
+    if(hora){
+     const hourArray = hora.split(":")
+     return (
+         `${hourArray[0]}:${hourArray[1]}`
+     )
+    }
+  }
+
+  const formatData = (data) =>{
+    var dd = String(new Date().getDate()).padStart(2, '0');
+    var mm = String(new Date().getMonth()+ 1).padStart(2, '0'); 
+    var yyyy = new Date().getFullYear();
+    
+    data = yyyy + '/' + mm + '/' + dd;
+  }
+
 
 
   return (
@@ -72,7 +88,7 @@ export const SchedulingTwo = () => {
                     sx={{ '& .MuiSvgIcon-root': { fontSize: 24 } }} style={{color:"#19A795",}}/>
                 </TableCell>
                 <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{row.dtAtendimento}</TableCell>
-                <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{row.horaAtendimento}</TableCell>
+                <TableCell align="center" style={{fontSize:16, color:"#515151"}}>{format(row.horaAtendimento)}</TableCell>
                 <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.especialidade}</TableCell>
                 <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.nomeMedico}</TableCell>
                 <TableCell align="left" style={{fontSize:16, color:"#515151"}}>{row.nomeUbs}</TableCell>
