@@ -22,11 +22,11 @@ export const Profile = () => {
 
   return (
     <Container>
-      <PatientGroup>
+      <div className="patient_group">
         <CustomAvatar sx={{ bgcolor: "deepskyblue" }} />
-        <TextSubtext textOne={username}></TextSubtext>
-        <H2>{role}</H2>
-      </PatientGroup>
+        <h1>{username}</h1>
+        <h2>{role}</h2>
+      </div>
       <DataBox usuario={username}/>
     </Container>
   );
