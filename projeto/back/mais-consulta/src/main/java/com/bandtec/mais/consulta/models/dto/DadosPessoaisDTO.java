@@ -1,19 +1,20 @@
 package com.bandtec.mais.consulta.models.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class DadosPessoaisDTO {
     private Integer idPaciente;
     private String nome;
     private Integer idade;
     private String endereco;
+    private String logradouro;
+    private String complemento;
+    private String numero;
     private String bairro;
     private String rg;
     private String numeroSus;
@@ -23,18 +24,4 @@ public class DadosPessoaisDTO {
     private String estado;
     private String celular;
     private String cep;
-
-    public DadosPessoaisDTO(Integer idPaciente, String nome, Integer idade, String endereco, String bairro, String numeroSus, String cpf, String telefone, String cidade, String estado, String cep) {
-        this.idPaciente = idPaciente;
-        this.nome = nome;
-        this.idade = idade;
-        this.endereco = endereco;
-        this.bairro = bairro;
-        this.numeroSus = numeroSus;
-        this.cpf = cpf;
-        this.telefone = telefone;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.cep = cep;
-    }
 }
