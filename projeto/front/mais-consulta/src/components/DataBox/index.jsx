@@ -12,54 +12,54 @@ export const DataBox = ({control, Controller}) => {
         <h2>Dados Cadastrais</h2>
         <div className='panel'>
             <div className='ipt_group'>
-              <label>Nome</label>
-              <Controller name='dadosPessoais.nome' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+              <label>Nome *</label>
+              <Controller name='dadosPessoais.nome' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
-              <label>CPF</label>
-              <Controller name='dadosPessoais.cpf' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+              <label>CPF *</label>
+              <Controller name='dadosPessoais.cpf' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
-              <label>Número de carteira do SUS</label>
-              <Controller name='dadosPessoais.numeroSus' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+              <label>Número de carteira do SUS *</label>
+              <Controller name='dadosPessoais.numeroSus' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
               <label>Celular</label>
               <Controller name='dadosPessoais.telefone' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
-              <label>CEP</label>
-              <Controller name='dadosPessoais.cep' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+              <label>CEP *</label>
+              <Controller name='dadosPessoais.cep' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
-              <label>RG</label>
-              <Controller name='dadosPessoais.rg' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+              <label>RG *</label>
+              <Controller name='dadosPessoais.rg' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
-              <label>Estado</label>
-              <Controller name='dadosPessoais.estado' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+              <label>Estado *</label>
+              <Controller name='dadosPessoais.estado' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
               <label>Telefone Residencial</label>
               <Controller name='dadosPessoais.telefone' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
-              <label>Cidade</label>
-              <Controller name='dadosPessoais.cidade' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+              <label>Cidade *</label>
+              <Controller name='dadosPessoais.cidade' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
-                <label>Logradouro</label>
-                <Controller name='dadosPessoais.endereco' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+                <label>Endereço *</label>
+                <Controller name='dadosPessoais.endereco' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
               <div className='side_ipt_group'>
                 <div>
-                  <label>Número</label>
-                  <Controller name='dadosPessoais.numero' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+                  <label>Número *</label>
+                  <Controller name='dadosPessoais.numero' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
                 </div>
                 <div>
-                  <label>Bairro</label>
-                  <Controller name='dadosPessoais.bairro' control={control} render={({field}) => <input {...field} className='ipt_data' type="text" />}/>
+                  <label>Bairro *</label>
+                  <Controller name='dadosPessoais.bairro' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
                 </div>
               </div>
             </div>
@@ -106,8 +106,8 @@ export const DataBox = ({control, Controller}) => {
           </div>
           <div className='ipt_group'>
             <div>
-              <Controller name='prontuario.fumante' control={control} render={({field}) => <Checkbox {...field} color='var(--green-standard)' label='Fumante?'/>}/>
-              <Controller name='prontuario.virgem' control={control} render={({field}) => <Checkbox {...field} color='var(--green-standard)' label='Virgem?'/>}/>
+              <Controller name='prontuario.fumante' control={control} render={({field}) => <Checkbox {...field} checked={false}color='var(--green-standard)' label='Fumante?'/>}/>
+              <Controller name='prontuario.virgem' control={control} render={({field}) => <Checkbox {...field} checked={false} color='var(--green-standard)' label='Virgem?'/>}/>
             </div>
           </div>
           <div className="ipt_group">
