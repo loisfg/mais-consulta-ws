@@ -34,15 +34,16 @@ export const Schedule = ({ data, setInitialDate, setLastDate }) => {
               <div className='date-appointment-group'>
                 <TextSubtext textOne = {weekDays[index]} textTwo={formatDate(day)}/>
               </div>
-              {
-                data.map((info) => 
-                  info.diaSemana === weekDays[index] &&
-                  <div className='appointment-group'>
-                    <Stickers specialty={info.especialidade} hour={info.horaAtendimento}/>
-                  </div> 
-                )
-              }
-              
+              <div className='appointment-group'>
+                {
+                  data.map((info) => 
+                    info.diaSemana === weekDays[index] &&
+                    <div className='appointment'>
+                      <Stickers specialty={info.especialidade} hour={info.horaAtendimento}/>
+                    </div> 
+                  )
+                }
+              </div>
             </Line>
           ))
         }

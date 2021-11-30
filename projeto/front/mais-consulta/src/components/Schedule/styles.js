@@ -20,9 +20,12 @@ export const Line = styled.div`
     background: var(--light-green);
   }
   .appointment-group{
-    width: 88%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    .appointment {
+      height: 4rem;
+    }
   }
 `
