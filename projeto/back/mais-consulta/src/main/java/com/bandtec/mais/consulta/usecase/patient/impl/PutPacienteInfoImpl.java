@@ -3,13 +3,11 @@ package com.bandtec.mais.consulta.usecase.patient.impl;
 import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.models.dto.request.PacienteInfoPutResquestDTO;
-import com.bandtec.mais.consulta.models.dto.response.PacienteInfoResponseDTO;
 import com.bandtec.mais.consulta.usecase.patient.PutPacienteInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class PutPacienteInfoImpl implements PutPacienteInfo {
@@ -18,19 +16,19 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
     private PacienteRepository pacienteRepository;
 
     @Autowired
-    private RemedioRepository remedioRepository;
+    private PacienteHasRemediosRepository remedioRepository;
 
     @Autowired
-    private DoencaRepository doencaRepository;
+    private PacienteHasDoencasRepository doencaRepository;
 
     @Autowired
-    private DeficienciaRepository deficienciaRepository;
+    private PacienteHasDeficienciaRepository deficienciaRepository;
 
     @Autowired
-    private AlergiaRepository alergiaRepository;
+    private PacienteHasAlergiaRepository alergiaRepository;
 
     @Autowired
-    private AtividadeRepository atividadeRepository;
+    private PacienteHasAtividadeRepository atividadeRepository;
 
     @Override
     public Optional<Paciente> execute(PacienteInfoPutResquestDTO pacienteInfoResponseDTO) {
@@ -38,14 +36,14 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
 
         if (pacienteRepository.existsById(idPaciente)) {
 
-            Set<PacienteHasAlergia> alergiaSet = new HashSet<>();
-            Set<PacienteHasRemedios> remedioSet = new HashSet<>();
-            Set<PacienteHasDoencas> doencaSet = new HashSet<>();
-            Set<PacienteHasDeficiencia> deficienciaSet = new HashSet<>();
-            Set<PacienteHasAtividade> atividadeSet = new HashSet<>();
+            Set<PacienteHasAlergia> alergiaSet = alergiaRepository.findRemedioByIdPaciente(idPaciente);
+            Set<PacienteHasRemedios> remedioSet = remedioRepository.findRemedioByIdPaciente(idPaciente);
+            Set<PacienteHasDoencas> doencaSet = doencaRepository.findRemedioByIdPaciente(idPaciente);
+            Set<PacienteHasDeficiencia> deficienciaSet = deficienciaRepository.findRemedioByIdPaciente(idPaciente);
+            Set<PacienteHasAtividade> atividadeSet = atividadeRepository.findRemedioByIdPaciente(idPaciente);
 
-            if (pacienteRepository.existsById(idPaciente)) {
-                // Alergias
+            // Alergias
+            if(pacienteInfoResponseDTO.getProntuario().getAlergias() != null) {
                 for (Integer ids : pacienteInfoResponseDTO.getProntuario().getAlergias()) {
                     PacienteHasAlergiaKey fk = PacienteHasAlergiaKey
                             .builder()
@@ -60,7 +58,9 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
 
                     alergiaSet.add(pacienteHasAlergia);
                 }
-                // Remedio
+            }
+            // Remedio
+            if (pacienteInfoResponseDTO.getProntuario().getRemedios() != null) {
                 for (Integer ids : pacienteInfoResponseDTO.getProntuario().getRemedios()) {
                     PacienteHasRemediosKey fk = PacienteHasRemediosKey
                             .builder()
@@ -75,7 +75,9 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
 
                     remedioSet.add(pacienteHasAlergia);
                 }
-                // Doenca
+            }
+            // Doenca
+            if (pacienteInfoResponseDTO.getProntuario().getDoencas() != null) {
                 for (Integer ids : pacienteInfoResponseDTO.getProntuario().getDoencas()) {
                     PacienteHasDoencasKey fk = PacienteHasDoencasKey
                             .builder()
@@ -90,7 +92,9 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
 
                     doencaSet.add(pacienteHasAlergia);
                 }
-                // Deficiencia
+            }
+            // Deficiencia
+            if (pacienteInfoResponseDTO.getProntuario().getDeficiencia() != null) {
                 for (Integer ids : pacienteInfoResponseDTO.getProntuario().getDeficiencia()) {
                     PacienteHasDeficienciaKey fk = PacienteHasDeficienciaKey
                             .builder()
@@ -105,7 +109,9 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
 
                     deficienciaSet.add(pacienteHasAlergia);
                 }
-                // Atividades
+            }
+            // Atividades
+            if(pacienteInfoResponseDTO.getProntuario().getAtividadesProibidas() != null) {
                 for (Integer ids : pacienteInfoResponseDTO.getProntuario().getAtividadesProibidas()) {
                     PacienteHasAtividadeKey fk = PacienteHasAtividadeKey
                             .builder()
@@ -121,6 +127,7 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
                     atividadeSet.add(pacienteHasAtividade);
                 }
             }
+
 
             Paciente paciente = Paciente
                     .builder()

@@ -3,8 +3,10 @@ package com.bandtec.mais.consulta.gateway.repository;
 import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,5 +30,11 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 
     @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO(a.dtAtendimento, a.hrAtendimento, a.medico.idMedico) FROM Agendamento a WHERE a.medico.ubs.idUbs = :idUbs")
     List<HoursResponseDTO> findHrAndDtAtendimentoByIdUbs(@Param("idUbs") Integer idUbs);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Agendamento a SET a.status = :status WHERE a.idAgendamento = :id")
+    void updateAgendamentoStatus(@Param("id") Integer idAgendamento,
+                                 @Param("status") String status);
 
 }
