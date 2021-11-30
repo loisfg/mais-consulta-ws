@@ -1,9 +1,7 @@
 import React from "react";
-import { CustomStyledCheckbox } from "./styles";
-import { FormControlLabel } from "@material-ui/core";
-
+import { CustomStyledCheckbox, CustomForm } from "./styles";
 export const Checkbox = ({ label, onClick, checked, color }) => (
-  <FormControlLabel
+  <CustomForm
     control={
       <CustomStyledCheckbox
         defaultChecked

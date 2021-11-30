@@ -49,7 +49,10 @@ export const Container = styled.section`
                     margin: 0 1rem 0 0;
                 }
             }
-                label{
+                label {
+                    font-size: 1.3rem;
+                }
+                label span {
                     font-size: 1.3rem;
                 }
                 .ipt_data{
