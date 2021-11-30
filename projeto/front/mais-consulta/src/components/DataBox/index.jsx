@@ -116,8 +116,8 @@ export const DataBox = ({control, Controller}) => {
           </div>
         </div>
         <div className='btn_group'>
-          <button>Salvar</button>
-          <button>Cancelar</button>
+          <button className='btn_salvar' type='submit'>Salvar</button>
+          <button className='btn_cancelar' type='button'>Cancelar</button>
         </div>
       </div>
     </Container>

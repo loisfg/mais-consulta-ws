@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Avatar } from '@material-ui/core';
 
-export const Container = styled.section`
+export const Container = styled.form`
   height: 100vh;
   width: 100%;
   display: flex;

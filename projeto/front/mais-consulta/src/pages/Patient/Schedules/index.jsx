@@ -84,8 +84,6 @@ const setSelectedHour = index => {
     setHourSelected(auxiliar[index].hour)
     setListHours(auxiliar)
 }
-
-
   return (
     <Page>
       <DivUsuario>

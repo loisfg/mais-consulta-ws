@@ -13,7 +13,13 @@ export const PersonalData = ({ formData, setFormData, required }) => {
         onChange={e => setFormData({ ...formData, paciente: { ...formData.paciente, nome: e.target.value } })}
         defaultValue={formData.paciente.nome}
       />
-
+      <Input
+        size='big'
+        required={required}
+        label="Data de nascimento"
+        onChange={e => setFormData({ ...formData, paciente: { ...formData.paciente, nome: e.target.value } })}
+        defaultValue={formData.dt_nascimento}
+      />  
       <DivInput>
         <Input
           size='big'

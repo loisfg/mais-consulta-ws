@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import api from '../../../services/api'
+import swal from 'sweetalert';
 import { DataBox } from "../../../components";
 import { Container, CustomAvatar } from "./styles";
 
@@ -28,9 +29,11 @@ export const Profile = () => {
   const onSubmit = async (data) => {
     const idPaciente = localStorage.getItem('id')
     try {
-      // await api('maisconsulta').put(`/paciente/${idPaciente}/atendimento`, data)
+      await api('maisconsulta').put(`/paciente`, {...data, idPaciente})
+      swal("Dados alterados com sucesso!");
     } catch (error) {
       console.log(error);
+      swal("Ocorreu um erro ao salvar os dados.");
     }
   }
 
