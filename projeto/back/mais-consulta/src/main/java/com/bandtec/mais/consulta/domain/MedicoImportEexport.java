@@ -21,6 +21,8 @@ public class MedicoImportEexport {
         System.out.println(registro);
         // Abre o arquivo
         try {
+
+
             // Abre o arquivo com append = true, para poder ir acrescentando registros no arquivo
             saida = new BufferedWriter(new FileWriter(nomeArq, true));
         }
@@ -39,10 +41,11 @@ public class MedicoImportEexport {
         }
     }
 
-    public void gravaArquivoTxt(List<MedicoSignUpRequestDTO> lista) {
+    public void gravaArquivoTxt(List<Medico> lista) {
+        File file = new File( "Todos-os-medicos.txt" );
+        file.delete();
 
         int contaRegDados = 0;      // contador de registros de dados (para poder gravar no trailer)
-        System.out.println(lista);
         // Monta o registro de header
         String header = "00MEDICO20212";
         Date dataDeHoje = new Date();       // Data e hora do momento, no formato padrão do Java
@@ -51,23 +54,22 @@ public class MedicoImportEexport {
         header += "01";
 
         // Grava o header
-        gravaRegistro(header, "Todos-os-medicos");
+        gravaRegistro(header, "Todos-os-medicos.txt");
 
         // Monta e grava o corpo do arquivo
-        for (MedicoSignUpRequestDTO a : lista) {
+        for (Medico a : lista) {
             // Monta o registro de corpo, de acordo com o especificado no documento de layout
             String corpo = "02";
-            corpo += String.format("%-40.40s",a.getMedico().getNome());
-            corpo += String.format("%-4.4s",a.getIdUbs());
-            corpo += String.format("%-15.15s",a.getCpf());
-            corpo += String.format("%-50.50s",a.getEmail());
-            corpo += String.format("%-30.30s",a.getPassword());
-            corpo += String.format("%-30.30s",a.getMedico().getEspecialidade().getDescricao());
+            corpo += String.format("%-40.40s",a.getNome());
+            corpo += String.format("%-4.4s",a.getUbs().getIdUbs());
+            corpo += String.format("%-15.15s",a.getUsuario().getCpf());
+            corpo += String.format("%-50.50s",a.getUsuario().getEmail());
+            corpo += String.format("%-30.30s",a.getEspecialidade().getDescricao());
 
             // Incrementa o contador de registro de dados
             contaRegDados++;
             // Grava o registro de corpo no arquivo
-            gravaRegistro(corpo, "Todos-os-medicos");
+            gravaRegistro(corpo, "Todos-os-medicos.txt");
         }
 
         // Monta e grava o registro de trailer
