@@ -19,11 +19,11 @@ const customStyles = {
     },
 };
 
-function CustomSelect({label, options, onChange}) {
+function CustomSelect({label, options, onChange, ...rest}) {
 return (
         <div>
             <label>{label}</label>
-            <Select isMulti styles={customStyles} options={options} onChange={onChange}/>
+            <Select isMulti styles={customStyles} options={options} {...rest}/>
         </div>
     )
 }

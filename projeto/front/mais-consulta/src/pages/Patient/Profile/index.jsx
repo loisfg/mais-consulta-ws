@@ -16,7 +16,19 @@ export const Profile = () => {
       const idPaciente = localStorage.getItem("id"); 
       try {
         const response = await api("maisconsulta").get(`/paciente/${idPaciente}`);
-        setPatientData(response.data)
+        const aux = {
+          ...response.data,
+          prontuario: {
+            ...response.data.prontuario,
+            doencasHereditarias: response.data.prontuario?.doencasHereditarias?.map(option => 
+                ({
+                  value: option.id,
+                  label: option.nome
+                })
+              )
+          }
+        }
+        setPatientData(aux)
       } catch (error) {
         console.log(error);
       }

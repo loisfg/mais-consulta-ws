@@ -84,25 +84,25 @@ export const DataBox = ({control, Controller}) => {
             </div>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.remediosControlados' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Remédios controlados'/>}/>
+            <Controller name='prontuario.remediosControlados' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Remédios controlados'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.doencasCronicas' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Doenças crônicas'/>}/>
+            <Controller name='prontuario.doencasCronicas' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Doenças crônicas'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.alergias' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Alergias'/>}/>
+            <Controller name='prontuario.alergias' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Alergias'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.deficiencias' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Deficiências'/>}/>
+            <Controller name='prontuario.deficiencias' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Deficiências'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='DST’s'/>}/>
+            <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='DST’s'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.doencasHereditarias' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Doenças hereditárias'/>}/>
+            <Controller name='prontuario.doencasHereditarias' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Doenças hereditárias'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.atividadesProibidas' control={control} render={({field}) => <InputCheckable {...field} color='--green-standard' titleLabel='Atividades proibidas'/>}/>
+            <Controller name='prontuario.atividadesProibidas' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Atividades proibidas'/>}/>
           </div>
           <div className='ipt_group'>
             <div>
