@@ -31,11 +31,11 @@ public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
 
     boolean existsByIdPaciente(Integer idPaciente);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PacienteAgendamentosResponseDTO(a.especialidade.descricao, a.dtAtendimento, a.hrAtendimento) FROM Agendamento a WHERE a.paciente.idPaciente = :id_paciente AND a.dtAtendimento BETWEEN :dt_start AND :dt_end")
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PacienteAgendamentosResponseDTO(a.idAgendamento, a.especialidade.descricao, a.dtAtendimento, a.hrAtendimento) FROM Agendamento a WHERE a.paciente.idPaciente = :id_paciente AND a.dtAtendimento BETWEEN :dt_start AND :dt_end")
     Optional<List<PacienteAgendamentosResponseDTO>> findAgendamentosToPaciente(@Param("id_paciente") Integer idPaciente,
                                                                      @Param("dt_start") LocalDate dtStart,
                                                                      @Param("dt_end") LocalDate dtEnd);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO(a.dtAtendimento, a.hrAtendimento, a.medico.especialidade.descricao, a.medico.nome, a.medico.ubs.nome) FROM Agendamento a WHERE a.paciente.idPaciente = :idPaciente")
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO(a.idAgendamento, a.dtAtendimento, a.hrAtendimento, a.medico.especialidade.descricao, a.medico.nome, a.medico.ubs.nome) FROM Agendamento a WHERE a.paciente.idPaciente = :idPaciente")
     Optional<List<PacienteHistoricoResponseDTO>> findAllHistoricoPaciente(@Param("idPaciente") Integer idPaciente);
 }

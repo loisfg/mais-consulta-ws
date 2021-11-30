@@ -9,13 +9,15 @@ import java.time.LocalTime;
 
 @Getter
 public class PacienteHistoricoResponseDTO {
+    Integer idAgendamento;
     LocalDate dtAtendimento;
     LocalTime horaAtendimento;
     String especialidade;
     String nomeMedico;
     String nomeUbs;
 
-    public PacienteHistoricoResponseDTO(LocalDate dtAtendimento, LocalTime horaAtendimento, String especialidade, String nomeMedico, String nomeUbs) {
+    public PacienteHistoricoResponseDTO(Integer idAgendamento, LocalDate dtAtendimento, LocalTime horaAtendimento, String especialidade, String nomeMedico, String nomeUbs) {
+        this.idAgendamento = idAgendamento;
         this.dtAtendimento = dtAtendimento;
         this.horaAtendimento = horaAtendimento;
         this.especialidade = especialidade;

@@ -8,12 +8,14 @@ import java.time.LocalTime;
 
 @Getter
 public class PacienteAgendamentosResponseDTO {
+    Integer idAgendamento;
     String especialidade;
     LocalDate dataAtendimento;
     String diaSemana;
     LocalTime horaAtendimento;
 
-    public PacienteAgendamentosResponseDTO(String especialidade, LocalDate dataAtendimento, LocalTime horaAtendimento) {
+    public PacienteAgendamentosResponseDTO(Integer idAgendamento, String especialidade, LocalDate dataAtendimento, LocalTime horaAtendimento) {
+        this.idAgendamento = idAgendamento;
         this.especialidade = especialidade;
         this.dataAtendimento = dataAtendimento;
         this.diaSemana = getDiaSemana(dataAtendimento);
