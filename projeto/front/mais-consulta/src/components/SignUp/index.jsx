@@ -15,12 +15,12 @@ export const SignUp = ({ setValue }) => {
     cpf: "",
     email: "",
     password: "",
+    dtNascimento: "",
     telefone: "",
     paciente: {
       nome: "",
       numeroCarteiraSus: "",
       sexo: "",
-      dtNascimento: "",
       endereco: {
         cep: "",
         cidade: "",
