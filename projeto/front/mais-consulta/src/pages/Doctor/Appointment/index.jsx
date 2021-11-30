@@ -21,9 +21,8 @@ export const Appointment = ({name}) => {
       const pathnameArray = location.pathname.split('/');
       const idPaciente = pathnameArray[pathnameArray.length-1];
       try {
-        // const response = await api('maisconsulta').get(`/paciente/${idPaciente}`);
-        // setData(response.data);
-        setPatientData(mockData);
+        const response = await api('maisconsulta').get(`/paciente/${idPaciente}`);
+        setPatientData(response.data);
       } catch (error) {
         console.log(error)
       }
@@ -53,7 +52,7 @@ export const Appointment = ({name}) => {
       <div className='left-side'>
         <div className='container-profile-pic'>
           <img src={UserPhoto} alt="user" />
-          <TextSubtext textOne={name} textTwo='Paciente'/>
+          <TextSubtext textOne={patientData.dadosPessoais?.nome} textTwo='Paciente'/>
           <button type={"button"} onClick={handleOpen} className='btn-patient'>
             Exibir dados do paciente 
           </button>
@@ -104,9 +103,9 @@ export const Appointment = ({name}) => {
             </div>
             <div className="row">
               <div className="field-group">
-                <Controller name='prontuario.isFumante' control={control} render={({field}) => <Checkbox {...field} sx={{ '& .MuiSvgIcon-root': { fontSize: 25 }}}/>}/>
+                <Controller name='prontuario.fumante' control={control} render={({field}) => <Checkbox {...field} sx={{ '& .MuiSvgIcon-root': { fontSize: 25 }}}/>}/>
                 <label>Fumante?</label>
-                <Controller name='prontuario.isVirgem' control={control} render={({field}) => <Checkbox {...field} sx={{ '& .MuiSvgIcon-root': { fontSize: 25 }}}/>}/>
+                <Controller name='prontuario.virgem' control={control} render={({field}) => <Checkbox {...field} sx={{ '& .MuiSvgIcon-root': { fontSize: 25 }}}/>}/>
                 <label>Virgem?</label>
               </div>
               <div className="field-group">
@@ -135,7 +134,6 @@ export const Appointment = ({name}) => {
             <label>Orientações médicas</label>
             <Controller name='diagnostico.orientacoesMedicas' control={control} render={({field}) => <textarea {...field} cols="20" rows="5"/>}/>
           </div>
-          <Controller name='diagnostico.atestado' control={control} render={({field}) => <DateInput {...field} titleLabel="Atestado"/>}/>
           <div className='btn-group'>
             <button id='btn_cancel' type={"button"}>Cancelar</button>
             <button id='btn_save' type='submit'>Salvar</button>

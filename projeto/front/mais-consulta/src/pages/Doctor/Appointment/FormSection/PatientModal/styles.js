@@ -45,6 +45,7 @@ export const CustomBox = styled(Box)`
         font-weight: 500;
       }
       input{
+        outline: none;
         margin: 0.5rem 0 0 3rem;
         padding: 0 0 0 0.5rem;
         height: 4rem;
