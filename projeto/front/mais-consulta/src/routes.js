@@ -7,10 +7,10 @@ import {
 } from "react-router-dom";
 import { isAuth } from "./services/auth";
 import { Calendar, Wrapper } from "../src/components";
-import { HomePatient, Initial, Profile, Schedules, UnitMaps,
-        SchedulingHistory, DownloadFile} from "./pages/Patient";
+import { HomePatient, Initial, Profile, Schedules, SchedulingHistory, 
+DownloadFile} from "./pages/Patient";
 import { Home, Appointment, Patients } from "./pages/Doctor";
-
+import AutoCompleteTest from './pages/AutoCompleteTest'
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const role = localStorage.getItem("role");
   return (
@@ -53,16 +53,14 @@ const Routes = () => {
         <PrivateRoute path="/calendar" component={Calendar} />
         <PrivateRoute path="/perfil" component={Profile} />
         <PrivateRoute path="/agendamento" component={Schedules} />
-        {/* <PrivateRoute path="/mapa-de-unidades" component={UnitMaps} /> */}
         <PrivateRoute path="/historico-agendamentos" component={SchedulingHistory} />
-       
-        
 
         <PrivateRoute path="/home-doctor" component={Home} />
         <PrivateRoute path='/appointment' component={Appointment} />
         <PrivateRoute path='/patients' component={Patients} />
         <Route path='/download' component={DownloadFile}/>
-        
+        <Route path='/autocomplete' component={AutoCompleteTest}/>
+
         <Route
           path="*"
           render={(props) =>(

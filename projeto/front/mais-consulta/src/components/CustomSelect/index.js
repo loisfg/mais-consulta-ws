@@ -6,15 +6,16 @@ const customStyles = {
         return {
             ...styles, 
            backgroundColor: 'white',
-           borderColor: 'var(--green-standard)'
+           borderColor: 'var(--green-standard)',
+           height: '0.5rem'
         }
     },
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      return {
-        ...styles,
-        backgroundColor: 'white',
-        color: 'black',
-        cursor: 'pointer',
+        return {
+            ...styles,
+            backgroundColor: 'white',
+            color: 'black',
+            cursor: 'pointer',
       };
     },
 };

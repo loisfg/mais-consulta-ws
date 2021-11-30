@@ -14,7 +14,7 @@ GET {{url}}/medico/1/agendamentos HTTP/1.1
 # ]
 ### Atendimento (Medico)
 // DONE
-GET {{url}}/paciente/2 HTTP/1.1
+GET {{url}}/paciente/5 HTTP/1.1
 # Retorno esperado
 # Dados utilizados para preenchimento automatico dos dados do paciente
 # {

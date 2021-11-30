@@ -19,4 +19,8 @@ export const Container = styled.div`
         width: 100%;
         max-width: 40rem;
     }
+    h1{
+        font-family: var(--rawline);
+        font-weight: 500;
+    }
 `;

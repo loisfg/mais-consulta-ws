@@ -8,6 +8,7 @@ export const InputCheckable = ({titleLabel, color, options, ...rest}) => {
   const handleEnableTextfield = (e) => setIsChecked(e.target.checked === true ? false : true );
   return (
       <Container color={color}>
+        <h1>{titleLabel}</h1>
         <CustomSelect options={options} {...rest}/>
       </Container>
   )
