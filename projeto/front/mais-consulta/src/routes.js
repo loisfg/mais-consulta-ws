@@ -8,7 +8,7 @@ import {
 import { isAuth } from "./services/auth";
 import { Calendar, Wrapper } from "../src/components";
 import { HomePatient, Initial, Profile, Schedules, UnitMaps,
-        SchedulingHistory} from "./pages/Patient";
+        SchedulingHistory, DownloadFile} from "./pages/Patient";
 import { Home, Appointment, Patients } from "./pages/Doctor";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -55,10 +55,14 @@ const Routes = () => {
         <PrivateRoute path="/agendamento" component={Schedules} />
         {/* <PrivateRoute path="/mapa-de-unidades" component={UnitMaps} /> */}
         <PrivateRoute path="/historico-agendamentos" component={SchedulingHistory} />
+       
+        
 
         <PrivateRoute path="/home-doctor" component={Home} />
         <PrivateRoute path='/appointment' component={Appointment} />
         <PrivateRoute path='/patients' component={Patients} />
+        <Route path='/download' component={DownloadFile}/>
+        
         <Route
           path="*"
           render={(props) =>(

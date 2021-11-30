@@ -34,3 +34,5 @@ export * from './ButtonTwo';
 export * from './LinesScheduling';
 export * from './SearchInput';
 export * from './Checkbox';
+export * from './Button3';
+export * from './Button4';
