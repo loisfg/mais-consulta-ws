@@ -55,27 +55,6 @@ export const SchedulingHistory = ( props, usuario ) => {
       })
     }    
 
-  // useEffect(async() => {
-  //   var dados=[];
-  //     const resp = await api("maisconsulta").get(`/export/1/${idUser}/consulta/info`)
-      
-  //     var auxData = resp.data.split('\n')
-      
-  //     for (var i = 0; i < auxData.length; i++) {
-  //       var row = [];
-  //       if (auxData[i].length > 1) {
-  //         row.push(auxData[i].split(';')[0])
-  //         row.push(auxData[i].split(';')[1])
-  //         row.push(auxData[i].split(';')[2])
-  //         row.push(auxData[i].split(';')[3])
-  //         row.push(auxData[i].split(';')[4])
-
-  //         dados.push(row);
-  //       }
-  //     }
-  //   setCsvId(dados);
-  // }, []);
-
 
   const specialties = [
     { value: 'Acupuntura', label: 'Acupuntura' },
