@@ -2,9 +2,11 @@ package com.bandtec.mais.consulta.usecase.doctor.impl;
 
 import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
+import com.bandtec.mais.consulta.gateway.repository.DiagnosticoRepository;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.models.dto.DadosPessoaisDTO;
+import com.bandtec.mais.consulta.models.dto.request.DiagnosticoDTO;
 import com.bandtec.mais.consulta.models.dto.request.PacienteInfoRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.ProntuarioResquestDTO;
 import com.bandtec.mais.consulta.usecase.doctor.PostFormularioAtendimento;
@@ -27,13 +29,17 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
     @Autowired
     private AgendamentoRepository agendamentoRepository;
 
+    @Autowired
+    private DiagnosticoRepository diagnosticoRepository;
+
     @Override
-    public Optional<?> execute(Integer idMedico, Integer idPaciente, PacienteInfoRequestDTO pacienteInfoRequestDTO) {
+    public Optional<?> execute(Integer idMedico, Integer idPaciente, Integer idAgendamento, PacienteInfoRequestDTO pacienteInfoRequestDTO) {
 
         if (medicoRepository.existsByIdMedico(idMedico) && pacienteRepository.existsByIdPaciente(idPaciente)) {
 
             DadosPessoaisDTO dadosPessoaisDTO = pacienteInfoRequestDTO.getDadosPessoais();
             ProntuarioResquestDTO prontuarioDTO = pacienteInfoRequestDTO.getProntuario();
+            DiagnosticoDTO diagnosticoDTO = pacienteInfoRequestDTO.getDiagnostico();
 
             if (pacienteRepository.existsById(idPaciente)) {
 
@@ -135,9 +141,19 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
                         .tipoSanguineo(prontuarioDTO.getTipoSanguineo())
                         .build();
 
-                pacienteRepository.save(paciente);
-                agendamentoRepository.updateAgendamentoStatus(pacienteInfoRequestDTO.getIdAgendamento(), "FINALIZADO");
+                Diagnostico diagnostico = Diagnostico
+                        .builder()
+                        .atestado(diagnosticoDTO.getAtestado())
+                        .medicamento(diagnosticoDTO.getMedicamentos())
+                        .orientacoesMedicas(diagnosticoDTO.getOrientacoesMedicas())
+                        .queixa(diagnosticoDTO.getQueixa())
+                        .terminologia(diagnosticoDTO.getTerminologia())
+                        .agendamento(agendamentoRepository.getById(idAgendamento))
+                        .build();
 
+                diagnosticoRepository.save(diagnostico);
+                pacienteRepository.save(paciente);
+                agendamentoRepository.updateAgendamentoStatus(idAgendamento, "FINALIZADO");
 
                 return Optional.of(paciente);
             }

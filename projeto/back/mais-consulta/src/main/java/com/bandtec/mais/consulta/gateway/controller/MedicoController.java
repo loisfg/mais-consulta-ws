@@ -61,8 +61,6 @@ public class MedicoController {
 
         Optional<Ubs> ubs = ubsRepository.findById(medicoSignUpRequestDTO.getIdUbs());
 
-
-
         Medico medico = medicoSignUpRequestDTO.getMedico();
         Usuario usuario = Usuario
                 .builder()
@@ -79,7 +77,6 @@ public class MedicoController {
             System.out.println(medicoSignUpRequestDTO);
             List<MedicoSignUpRequestDTO> medicoList = new ArrayList<>();
             MedicoImportEexport medicoImportEexport = new MedicoImportEexport();
-
 
             medicoList.add(medicoSignUpRequestDTO);
 
@@ -100,11 +97,12 @@ public class MedicoController {
     }
 
 
-    @PostMapping("{idMedico}/{idPaciente}/atendimento")
+    @PostMapping("{idMedico}/{idPaciente}/{idAgendamento}/atendimento")
     public ResponseEntity<?> editarFormularioAtendimento(@PathVariable Integer idMedico,
                                                          @PathVariable Integer idPaciente,
+                                                         @PathVariable Integer idAgendamento,
                                                          @RequestBody PacienteInfoRequestDTO pacienteInfoRequestDTO) {
-        return ResponseEntity.of(postFormularioAtendimento.execute(idMedico, idPaciente, pacienteInfoRequestDTO));
+        return ResponseEntity.of(postFormularioAtendimento.execute(idMedico, idPaciente, idAgendamento, pacienteInfoRequestDTO));
     }
 
     @PostMapping("/signup")

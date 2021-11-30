@@ -60,7 +60,6 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
 
             DadosPessoaisDTO dadosPessoaisDTO = DadosPessoaisDTO
                     .builder()
-                    .idPaciente(idPaciente)
                     .nome(paciente.getNome())
                     .idade(calcularIdade(paciente.getDtNascimento()))
                     .endereco(endereco.getRua())

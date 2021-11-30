@@ -8,7 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class DadosPessoaisDTO {
-    private Integer idPaciente;
     private String nome;
     private Integer idade;
     private String endereco;

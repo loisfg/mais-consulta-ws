@@ -31,9 +31,7 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
     private PacienteHasAtividadeRepository atividadeRepository;
 
     @Override
-    public Optional<Paciente> execute(PacienteInfoPutResquestDTO pacienteInfoResponseDTO) {
-        Integer idPaciente = pacienteInfoResponseDTO.getDadosPessoais().getIdPaciente();
-
+    public Optional<Paciente> execute(Integer idPaciente, PacienteInfoPutResquestDTO pacienteInfoResponseDTO) {
         if (pacienteRepository.existsById(idPaciente)) {
 
             Set<PacienteHasAlergia> alergiaSet = alergiaRepository.findRemedioByIdPaciente(idPaciente);
@@ -127,7 +125,6 @@ public class PutPacienteInfoImpl implements PutPacienteInfo {
                     atividadeSet.add(pacienteHasAtividade);
                 }
             }
-
 
             Paciente paciente = Paciente
                     .builder()

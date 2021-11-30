@@ -94,9 +94,10 @@ public class PacienteController {
         return ResponseEntity.of(getUbs.execute(idPaciente));
     }
 
-    @PutMapping
-    public ResponseEntity<Paciente> putInfosPaciente(@RequestBody PacienteInfoPutResquestDTO pacienteInfoPutResquestDTO) {
-        ResponseEntity.of(putPacienteInfo.execute(pacienteInfoPutResquestDTO));
+    @PutMapping("{idPaciente}")
+    public ResponseEntity<Paciente> putInfosPaciente(@PathVariable Integer idPaciente,
+                                                     @RequestBody PacienteInfoPutResquestDTO pacienteInfoPutResquestDTO) {
+        ResponseEntity.of(putPacienteInfo.execute(idPaciente, pacienteInfoPutResquestDTO));
 
         return null;
     }

@@ -6,5 +6,5 @@ import com.bandtec.mais.consulta.models.dto.request.PacienteInfoPutResquestDTO;
 import java.util.Optional;
 
 public interface PutPacienteInfo {
-    Optional<Paciente> execute(PacienteInfoPutResquestDTO pacienteInfoResponseDTO);
+    Optional<Paciente> execute(Integer idPaciente, PacienteInfoPutResquestDTO pacienteInfoResponseDTO);
 }
