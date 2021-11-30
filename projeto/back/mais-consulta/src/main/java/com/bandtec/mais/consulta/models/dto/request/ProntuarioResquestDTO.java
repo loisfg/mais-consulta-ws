@@ -13,11 +13,11 @@ import lombok.Setter;
 public class ProntuarioResquestDTO {
     private String peso = "";
     private Double altura = 0.0;
-    private Iterable<Integer> doencas;
-    private Iterable<Integer> remedios;
-    private Iterable<Integer> alergias;
-    private Iterable<Integer> deficiencia;
-    private Iterable<Integer> atividadesProibidas;
+    private Iterable<Integer> doencas = null;
+    private Iterable<Integer> remedios = null;
+    private Iterable<Integer> alergias = null;
+    private Iterable<Integer> deficiencia = null;
+    private Iterable<Integer> atividadesProibidas = null;
     private boolean isFumante = false;
     private boolean isVirgem = false;
     private BloodTypeEnum tipoSanguineo = BloodTypeEnum.DEFAULT;

@@ -25,6 +25,8 @@ import java.util.Set;
 @RequestMapping("agendamento")
 public class AgendamentoController {
 
+    private static final String EXTERNAL_FILE_PATH = "mais-consulta/";
+
     @Autowired
     private PostAgendamentoConsulta postAgendamentoConsulta;
 
@@ -46,7 +48,6 @@ public class AgendamentoController {
     @Autowired
     private GetEspecialidades getEspecialidades;
 
-    private static final String EXTERNAL_FILE_PATH = "mais-consulta/";
     @PatchMapping("/cancelar/{idAgendamento}/{idPaciente}")
     public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento,
                                            @PathVariable Integer idPaciente) {
@@ -110,7 +111,6 @@ public class AgendamentoController {
 
     @GetMapping("/especialidades")
     public ResponseEntity<Set<EspecialidadeResponseDTO>> getEspecialidades() {
-
         return ResponseEntity.of(getEspecialidades.execute());
 
     }
