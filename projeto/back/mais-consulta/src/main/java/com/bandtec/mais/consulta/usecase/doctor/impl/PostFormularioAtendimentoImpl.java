@@ -1,25 +1,19 @@
 package com.bandtec.mais.consulta.usecase.doctor.impl;
 
 import com.bandtec.mais.consulta.domain.*;
+import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.models.dto.DadosPessoaisDTO;
-import com.bandtec.mais.consulta.models.dto.ProntuarioDTO;
 import com.bandtec.mais.consulta.models.dto.request.PacienteInfoRequestDTO;
-import com.bandtec.mais.consulta.models.enums.BloodTypeEnum;
+import com.bandtec.mais.consulta.models.dto.request.ProntuarioResquestDTO;
 import com.bandtec.mais.consulta.usecase.doctor.PostFormularioAtendimento;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.beans.Beans;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento {
@@ -30,57 +24,124 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    private AgendamentoRepository agendamentoRepository;
+
     @Override
     public Optional<?> execute(Integer idMedico, Integer idPaciente, PacienteInfoRequestDTO pacienteInfoRequestDTO) {
 
         if (medicoRepository.existsByIdMedico(idMedico) && pacienteRepository.existsByIdPaciente(idPaciente)) {
 
             DadosPessoaisDTO dadosPessoaisDTO = pacienteInfoRequestDTO.getDadosPessoais();
-            ProntuarioDTO prontuarioDTO = pacienteInfoRequestDTO.getProntuario();
+            ProntuarioResquestDTO prontuarioDTO = pacienteInfoRequestDTO.getProntuario();
 
-            List<Doenca> doencaList = new ArrayList<>();
+            if (pacienteRepository.existsById(idPaciente)) {
 
-            List<Doenca> doencaHereditariaList = prontuarioDTO.getDoencasHereditarias();
-            List<Doenca> doencaCronicaList = prontuarioDTO.getDoencasCronicas();
-            List<Doenca> doencaDSTList = prontuarioDTO.getDsts();
-            List<Deficiencia> deficienciaList = prontuarioDTO.getDeficiencia();
-            List<Remedio> remedioList = prontuarioDTO.getRemediosControlados();
-            List<Alergia> alergiaList = prontuarioDTO.getAlergias();
+                Set<PacienteHasAlergia> alergiaSet = new HashSet<>();
+                Set<PacienteHasRemedios> remedioSet = new HashSet<>();
+                Set<PacienteHasDoencas> doencaSet = new HashSet<>();
+                Set<PacienteHasDeficiencia> deficienciaSet = new HashSet<>();
+                Set<PacienteHasAtividade> atividadeSet = new HashSet<>();
 
-            Paciente paciente = new Paciente();
+                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getAlergias()) {
+                    PacienteHasAlergiaKey fk = PacienteHasAlergiaKey
+                            .builder()
+                            .alergiaId(ids)
+                            .pacienteId(idPaciente)
+                            .build();
 
-            paciente.setIdPaciente(dadosPessoaisDTO.getIdPaciente());
-            paciente.setNome(dadosPessoaisDTO.getNome());
-//            paciente.setDtNascimento();
-            paciente.setTelefone(dadosPessoaisDTO.getTelefone());
-//            paciente.setSexo();
-            paciente.setNumeroCarteiraSus(dadosPessoaisDTO.getNumeroSus());
-            paciente.setPeso(prontuarioDTO.getPeso());
-            paciente.setAltura(prontuarioDTO.getAltura());
-            paciente.setIsVirgem(prontuarioDTO.isVirgem());
-            paciente.setIsFumante(prontuarioDTO.isFumante());
-            paciente.setTipoSanguineo(prontuarioDTO.getTipoSanguineo());
-//            paciente.setEndereco();
-//            paciente.setUsuario();
+                    PacienteHasAlergia pacienteHasAlergia = PacienteHasAlergia
+                            .builder()
+                            .id(fk)
+                            .build();
 
-            PacienteHasRemediosKey pacienteHasRemediosKey = PacienteHasRemediosKey.builder()
-                    .pacienteId(idPaciente)
-                    .remedioId(1)
-                    .build();
+                    alergiaSet.add(pacienteHasAlergia);
+                }
+                // Remedio
+                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getRemedios()) {
+                    PacienteHasRemediosKey fk = PacienteHasRemediosKey
+                            .builder()
+                            .remedioId(ids)
+                            .pacienteId(idPaciente)
+                            .build();
+
+                    PacienteHasRemedios pacienteHasAlergia = PacienteHasRemedios
+                            .builder()
+                            .id(fk)
+                            .build();
+
+                    remedioSet.add(pacienteHasAlergia);
+                }
+                // Doenca
+                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getDoencas()) {
+                    PacienteHasDoencasKey fk = PacienteHasDoencasKey
+                            .builder()
+                            .doencaId(ids)
+                            .pacienteId(idPaciente)
+                            .build();
+
+                    PacienteHasDoencas pacienteHasAlergia = PacienteHasDoencas
+                            .builder()
+                            .id(fk)
+                            .build();
+
+                    doencaSet.add(pacienteHasAlergia);
+                }
+                // Deficiencia
+                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getDeficiencia()) {
+                    PacienteHasDeficienciaKey fk = PacienteHasDeficienciaKey
+                            .builder()
+                            .deficienciaId(ids)
+                            .pacienteId(idPaciente)
+                            .build();
+
+                    PacienteHasDeficiencia pacienteHasAlergia = PacienteHasDeficiencia
+                            .builder()
+                            .id(fk)
+                            .build();
+
+                    deficienciaSet.add(pacienteHasAlergia);
+                }
+                // Atividades
+                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getAtividadesProibidas()) {
+                    PacienteHasAtividadeKey fk = PacienteHasAtividadeKey
+                            .builder()
+                            .atividadeId(ids)
+                            .pacienteId(idPaciente)
+                            .build();
+
+                    PacienteHasAtividade pacienteHasAtividade = PacienteHasAtividade
+                            .builder()
+                            .id(fk)
+                            .build();
+
+                    atividadeSet.add(pacienteHasAtividade);
+                }
+
+                Paciente paciente = Paciente
+                        .builder()
+                        .idPaciente(idPaciente)
+                        .alergias(alergiaSet)
+                        .atividades(atividadeSet)
+                        .deficiencias(deficienciaSet)
+                        .remedios(remedioSet)
+                        .doencas(doencaSet)
+                        .nome(dadosPessoaisDTO.getNome())
+                        .telefone(dadosPessoaisDTO.getTelefone())
+                        .peso(prontuarioDTO.getPeso())
+                        .altura(prontuarioDTO.getAltura())
+                        .isVirgem(prontuarioDTO.isVirgem())
+                        .isFumante(prontuarioDTO.isFumante())
+                        .tipoSanguineo(prontuarioDTO.getTipoSanguineo())
+                        .build();
+
+                pacienteRepository.save(paciente);
+                agendamentoRepository.updateAgendamentoStatus(pacienteInfoRequestDTO.getIdAgendamento(), "FINALIZADO");
 
 
-            PacienteHasRemedios.builder()
-                    .id(pacienteHasRemediosKey)
-                    .remedio(remedioList.get(1))
-                    .build();
-//            paciente.setDoencas();
-//            paciente.setRemedios();
-//            paciente.setPacienteDeficiencias();
-//            paciente.setPacienteAlergias();
-
-
+                return Optional.of(paciente);
+            }
         }
-
         return Optional.empty();
     }
 }

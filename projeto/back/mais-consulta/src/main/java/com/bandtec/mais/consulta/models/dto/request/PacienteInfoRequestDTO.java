@@ -13,7 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PacienteInfoRequestDTO {
 
+    private Integer idAgendamento;
     private DadosPessoaisDTO dadosPessoais;
-    private ProntuarioDTO prontuario;
+    private ProntuarioResquestDTO prontuario;
 
 }

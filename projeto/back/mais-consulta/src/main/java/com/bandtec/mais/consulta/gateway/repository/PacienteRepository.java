@@ -38,4 +38,6 @@ public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
 
     @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO(a.idAgendamento, a.dtAtendimento, a.hrAtendimento, a.medico.especialidade.descricao, a.medico.nome, a.medico.ubs.nome) FROM Agendamento a WHERE a.paciente.idPaciente = :idPaciente")
     Optional<List<PacienteHistoricoResponseDTO>> findAllHistoricoPaciente(@Param("idPaciente") Integer idPaciente);
+
+
 }
