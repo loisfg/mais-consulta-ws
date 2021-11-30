@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { TextField } from "@material-ui/core";
-
 export const Container = styled.section`
     width: 70%;
     display: flex;
@@ -93,6 +91,29 @@ export const Container = styled.section`
             display: flex;
             flex-direction: row;
             align-items: center;
+            padding: 2rem 7rem;
+            outline: none;
+            justify-content: flex-end;
+            .btn_cancelar{
+                cursor: pointer;
+                height: 3rem;
+                width: 7rem;
+                color: var(--grey);
+                background-color: #C0C5C1;
+                border-radius: 0.4rem;
+                border: none;
+                margin: 0 1rem;
+            }
+            .btn_salvar{
+                cursor: pointer;
+                height: 3rem;
+                width: 7rem;
+                color: white;
+                background-color: var(--green-standard);
+                border-radius: 0.4rem;
+                border: none;
+                margin: 0 1rem;
+            }
         }
     }
 `;
