@@ -11,6 +11,7 @@ import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -34,7 +35,7 @@ public class PacienteSignupImpl implements PacienteSignup {
             return Optional.empty();
         } else {
             paciente.setNome(StrFormat.toTitledCase(paciente.getNome()));
-
+            paciente.setDtNascimento(LocalDate.parse(pacienteSignUpRequestDTO.getDtNascimento()));
             paciente.setUsuario(usuario);
             enderecoRepository.save(paciente.getEndereco());
             pacienteRepository.save(paciente);

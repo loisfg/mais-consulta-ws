@@ -14,6 +14,7 @@ public class PacienteSignUpRequestDTO {
     private String email;
     protected String password;
     private Paciente paciente;
+    private String dtNascimento;
     private String role = "Paciente";
 
     public static Usuario convertFromController(PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {

@@ -6,6 +6,7 @@ import com.bandtec.mais.consulta.models.dto.DadosPessoaisDTO;
 import com.bandtec.mais.consulta.models.dto.ProntuarioDTO;
 import com.bandtec.mais.consulta.models.dto.response.PacienteInfoResponseDTO;
 import com.bandtec.mais.consulta.usecase.patient.GetPacienteInfo;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -104,6 +105,7 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
         return Optional.empty();
     }
 
+    @SneakyThrows
     public static int calcularIdade(final LocalDate aniversario) {
         return Period.between(aniversario, LocalDate.now()).getYears();
     }

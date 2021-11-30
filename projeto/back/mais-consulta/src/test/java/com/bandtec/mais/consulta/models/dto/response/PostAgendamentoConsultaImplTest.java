@@ -60,7 +60,6 @@ class PostAgendamentoConsultaImplTest {
     private final LocalTime horaAtendimento = LocalTime.of(10, 30);
     private final Optional<Paciente> oPaciente = Optional.of(mock(Paciente.class));
 
-
     @Test
     @DisplayName("Agendamento deve estar sendo criado para daqui a 2 meses")
     void criarAgendamento_DoisMesesDepoisComHorario() {

@@ -13,7 +13,7 @@ public interface UbsRepository extends JpaRepository<Ubs, Integer> {
 
     boolean existsByNome(String nome);
 
-    @Query("SELECT m.ubs FROM Medico m WHERE m.especialidade.idEspecialidade = ?1")
+    @Query("SELECT DISTINCT m.ubs FROM Medico m WHERE m.especialidade.idEspecialidade = ?1")
     List<Ubs> findUbsByEspecialidade(Integer idEspecialidade);
 
     @Query("SELECT u FROM Ubs u, Paciente p WHERE u.endereco.estado = p.endereco.estado AND p.idPaciente = :id")
