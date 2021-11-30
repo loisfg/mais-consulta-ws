@@ -153,7 +153,7 @@ export const SchedulingHistory = ( props, usuario ) => {
           <WelcomeMessageTwo text="Histórico de agendamentos" />
 
           <BoxButtons>
-            <ButtonsSelect>
+            {/* <ButtonsSelect>
               <Filter>
                 <P>Especialidade</P>
                 <Select options={specialties} />
@@ -175,10 +175,10 @@ export const SchedulingHistory = ( props, usuario ) => {
                 <P>Posto de saúde</P>
                 <Select options={listUbs} />
               </Filter>
-            </ButtonsSelect>
+            </ButtonsSelect> */}
 
             <ButtonsExport>
-            <CSVLink
+            {/* <CSVLink
                 style={{
                   width: "170px",
                   fontSize: "14px",
@@ -198,7 +198,7 @@ export const SchedulingHistory = ( props, usuario ) => {
                 target="_blank"
               >
                 Baixar Selecionados
-              </CSVLink>
+              </CSVLink> */}
 
               <CSVLink
                 style={{
