@@ -5,6 +5,7 @@ import { DivUsuario, Content, BoxLeft, BoxRight, BoxAux } from "./styles";
 import { UserProfilePic, Message, List, Calendar, Hours } from "../../../components";
 import swal from 'sweetalert';
 import Select from 'react-select';
+import { useHistory } from "react-router";
 export const Schedules = () => {
   const [specialities, setSpecialities] = useState([]);
   const [listUbs, setListUbs] = useState([]);
@@ -13,6 +14,7 @@ export const Schedules = () => {
   const [daySelected, setDaySelected] = useState([0]);
   const [hourSelected, setHourSelected] = useState();
   const [ speciality, setSpeciality ] = useState();
+  const history = useHistory();
   const userId = localStorage.getItem("id"); 
  
    async function cadastrar(e) {
@@ -25,8 +27,10 @@ export const Schedules = () => {
       idPaciente: userId,
       idUbs: ubs
     }
-    const response = await api("maisconsulta").post("/agendamento/agendar/consulta", data)
-    console.log("req"+response.status)
+      await api("maisconsulta").post("/agendamento/agendar/consulta", data)
+      swal('Atendimento realizado','Atendimento realizado com sucesso', "success")
+      .then(() => history.push('/home'))
+      .catch(() => swal('Error','Ocorreu um erro', "error"))
   }
   
   useEffect(() => {
@@ -112,24 +116,11 @@ const setSelectedHour = index => {
                   text: 'Confirmar',
                   className: 'confirmar'
                 },
-
               },
             })
-              .then((agendar) => {
-                console.log(agendar);
-                if (agendar) {
-                  cadastrar()
-                  swal("Deseja baixar o documento de confirmação do agendamento?", {
-                    icon: "success",
-                    //CHAMAR O ENDPOINT AQUI
-                  });
-                } else {
-                  swal("Agendamento cancelado", {
-                    icon: "error",
-                  });
-
-                }
-              });
+            .then(agendar => {
+              if (agendar) cadastrar()
+            });
           }}
           >Agendar</button>}
         </BoxRight>

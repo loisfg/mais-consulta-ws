@@ -11,6 +11,7 @@ export const Calendario = styled.div`
     width: 50rem;
     background-color: var(--white-standard);
     border-radius: 0.6rem;
+    margin-bottom: 10rem;
 `
 export const Month = styled.div`
     height: 18%;

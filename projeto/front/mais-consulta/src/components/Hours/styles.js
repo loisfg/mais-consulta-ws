@@ -1,9 +1,10 @@
 import styled from "styled-components";
 export const Horario = styled.div`
-    width: 50rem;
+    width: 51rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 3rem 0;
     p {
         color: var(--grey);
         font-weight: 600;
