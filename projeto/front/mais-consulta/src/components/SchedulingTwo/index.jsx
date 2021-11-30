@@ -14,7 +14,7 @@ import Select from 'react-select';
 
 export const SchedulingTwo = (props) => {
 
-
+  const [idAgendamento, setIdAgendamento] = useState();
   function createData(data, hora,  consulta, medico, local) {
     return { data, hora,  consulta, medico, local };
   }
@@ -22,10 +22,11 @@ export const SchedulingTwo = (props) => {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   const idPaciente = localStorage.getItem("id"); 
-  const [idAgendamento, setIdAgendamento] = useState();
+  // const [idAgendamento, setIdAgendamento] = useState();
   const [listConsulta, setListConsulta] = useState([]);
 
-  
+  sessionStorage.idAgend = idAgendamento;
+
   useEffect(() => {
       async function listaConsulta() {
           const resp = await api("maisconsulta").get(`/paciente/historico/${idPaciente}`)
@@ -33,8 +34,6 @@ export const SchedulingTwo = (props) => {
       }
       listaConsulta();
   }, []);
-
-
  
   const format = (hora) =>{
     if(hora){
@@ -84,7 +83,6 @@ export const SchedulingTwo = (props) => {
                     key={row.idAgendamento}
                     onClick={() =>{
                       setIdAgendamento(row.idAgendamento)
-                      console.log( idAgendamento)
                     }}
                     />
                 </TableCell>

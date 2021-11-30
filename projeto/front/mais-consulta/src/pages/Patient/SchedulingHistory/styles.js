@@ -62,6 +62,7 @@ flex-direction: row;
 `
 export const ButtonsExport = styled.div`
 height: 100%;
+width:30%;
 display:flex;
 align-items: center;
 justify-content: space-between;
