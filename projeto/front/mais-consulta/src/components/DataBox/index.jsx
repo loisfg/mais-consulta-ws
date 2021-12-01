@@ -135,8 +135,8 @@ export const DataBox = ({control, Controller}) => {
               <Controller name='dadosPessoais.cidade' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
-                <label>Endereço *</label>
-                <Controller name='dadosPessoais.endereco' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
+                <label>Logradouro *</label>
+                <Controller name='dadosPessoais.logradouro' control={control} render={({field}) => <input required {...field} className='ipt_data' type="text" />}/>
             </div>
             <div className='ipt_group'>
               <div className='side_ipt_group'>
