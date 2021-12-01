@@ -196,10 +196,10 @@ export const DataBox = ({control, Controller}) => {
             <Controller name='prontuario.tipoSanguineo' control={control} render={({field}) => <Select styles={customStyles} id='bloodType' options={bloodType}/>}/>
           </div> */}
         </div>
-        <div className='btn_group'>
+        {/* <div className='btn_group'>
           <button className='btn_salvar' type='submit'>Salvar</button>
           <button className='btn_cancelar' type='button'>Cancelar</button>
-        </div>
+        </div> */}
       </div>
     </Container>
   );
