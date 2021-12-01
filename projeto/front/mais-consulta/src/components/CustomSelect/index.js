@@ -6,24 +6,25 @@ const customStyles = {
         return {
             ...styles, 
            backgroundColor: 'white',
-           borderColor: 'var(--green-standard)'
+           borderColor: 'var(--green-standard)',
+           height: '0.5rem'
         }
     },
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      return {
-        ...styles,
-        backgroundColor: 'white',
-        color: 'black',
-        cursor: 'pointer',
+        return {
+            ...styles,
+            backgroundColor: 'white',
+            color: 'black',
+            cursor: 'pointer',
       };
     },
 };
 
-function CustomSelect({label, options, onChange, ...rest}) {
+function CustomSelect({label, options, onKeyUp, ...rest}) {
 return (
         <div>
             <label>{label}</label>
-            <Select isMulti styles={customStyles} options={options} {...rest}/>
+            <Select onKeyDown={onKeyUp} isMulti styles={customStyles} options={options} {...rest}/>
         </div>
     )
 }

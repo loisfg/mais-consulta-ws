@@ -5,7 +5,94 @@ import { InputCheckable } from '../../pages/Doctor/Appointment/FormSection/Input
 import { Checkbox } from  '../../components'
 import Select from "react-select";
 import { bloodType } from "../../pages/Doctor/Appointment/bloodType";
+import { debounceEvent } from '../../utils/debounce'
+import api from "../../services/api";
 export const DataBox = ({control, Controller}) => {
+  const [ remediosControlados, setRemediosControlados ] = useState([]);
+  const [ doencasCronicas, setDoencasCronicas ] = useState([]);
+  const [ alergias, setAlergias ] = useState([]);
+  const [ deficiencias, setDeficiencias ] = useState([]);
+  const [ dsts, setDsts ] = useState([]);
+  const getRemediosControlados = async (event) => {
+    const nome = event.target.value;
+    try {
+      const res = await api('maisconsulta').get(`/infos/remedios/auto/${nome}`);
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setRemediosControlados(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const getDoencasCronicas = async (event) => {
+    const nome = event.target.value;
+    try {
+      // const res = await api('maisconsulta').get(`/infos/doencasCronicas/auto/${nome}`);
+      const res = {data:[{id: 1, nome:'Diabetes'}]}
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setDoencasCronicas(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const getAlergias = async (event) => {
+    const nome = event.target.value;
+    try {
+      // const res = await api('maisconsulta').get(`/infos/alergias/auto/${nome}`);
+      const res = {data:[{id: 1, nome:'Gatos'}]}
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setAlergias(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const getDeficiencias = async (event) => {
+    const nome = event.target.value;
+    try {
+      // const res = await api('maisconsulta').get(`/infos/deficiencias/auto/${nome}`);
+      const res = {data:[{id: 1, nome:'Auditiva'}]}
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setDeficiencias(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const getDsts = async (event) => {
+    const nome = event.target.value;
+    try {
+      // const res = await api('maisconsulta').get(`/infos/dsts/auto/${nome}`);
+      const res = {data:[{id: 1, nome:'Sifilis'}]}
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setDsts(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
   return (
     <Container>
       <div className='box'>
@@ -84,25 +171,19 @@ export const DataBox = ({control, Controller}) => {
             </div>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.remediosControlados' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Remédios controlados'/>}/>
+            <Controller name='prontuario.remediosControlados' control={control} render={({field}) => <InputCheckable {...field} onKeyUp={debounceEvent(getRemediosControlados)} options={remediosControlados} color='--green-standard' titleLabel='Remédios controlados'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.doencasCronicas' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Doenças crônicas'/>}/>
+            <Controller name='prontuario.doencasCronicas' control={control} render={({field}) => <InputCheckable {...field} onKeyUp={debounceEvent(getDoencasCronicas)} options={doencasCronicas} color='--green-standard' titleLabel='Doenças crônicas'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.alergias' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Alergias'/>}/>
+            <Controller name='prontuario.alergias' control={control} render={({field}) => <InputCheckable {...field} onKeyUp={debounceEvent(getAlergias)} options={alergias} color='--green-standard' titleLabel='Alergias'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.deficiencias' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Deficiências'/>}/>
+            <Controller name='prontuario.deficiencias' control={control} render={({field}) => <InputCheckable {...field} onKeyUp={debounceEvent(getDeficiencias)} options={deficiencias} color='--green-standard' titleLabel='Deficiências'/>}/>
           </div>
           <div className='ipt_group'>
-            <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='DST’s'/>}/>
-          </div>
-          <div className='ipt_group'>
-            <Controller name='prontuario.doencasHereditarias' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Doenças hereditárias'/>}/>
-          </div>
-          <div className='ipt_group'>
-            <Controller name='prontuario.atividadesProibidas' control={control} render={({field}) => <InputCheckable {...field} options={'A'} color='--green-standard' titleLabel='Atividades proibidas'/>}/>
+            <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable {...field} onKeyUp={debounceEvent(getDsts)} options={dsts} color='--green-standard' titleLabel='DST’s'/>}/>
           </div>
           <div className='ipt_group'>
             <div>
