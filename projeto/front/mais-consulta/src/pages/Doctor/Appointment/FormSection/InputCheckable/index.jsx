@@ -12,7 +12,7 @@ export const InputCheckable = ({titleLabel, color, options, onKeyUp ,...rest}) =
             <input checked={isChecked} onChange={handleEnableTextfield} type="checkbox"/>
             <label>{titleLabel}</label>
         </div>
-        <CustomSelect disabled={!isChecked} onKeyUp={onKeyUp} options={options} {...rest}/>
+        <CustomSelect disabled={!isChecked} color={color} onKeyUp={onKeyUp} options={options} {...rest}/>
     </Container>
   )
 };
