@@ -11,7 +11,7 @@ export const Schedules = () => {
   const [listUbs, setListUbs] = useState([]);
   const [listHours, setListHours] = useState([]);
   const [ubs, setUbs] = useState(); 
-  const [daySelected, setDaySelected] = useState([0]);
+  const [daySelected, setDaySelected] = useState('');
   const [hourSelected, setHourSelected] = useState();
   const [ speciality, setSpeciality ] = useState();
   const history = useHistory();
@@ -21,7 +21,7 @@ export const Schedules = () => {
     
     const data = {
       descricao: "",
-      dtAtendimento: daySelected,
+      dtAtendimento: formatDate(daySelected),
       hrAtendimento: hourSelected,
       idEspecialidade : speciality,
       idPaciente: userId,
@@ -66,10 +66,22 @@ export const Schedules = () => {
     setUbs(auxiliar[index].list.idUbs)
     setListUbs(auxiliar)
 }
-
+const formatDate = date => {
+  let dia;
+  if(date) {
+    console.log(date)
+    date = date.split("-");
+    if(date[2] > 10){
+      dia = date[2]
+    } else{
+      dia = '0' + date[2];
+    }
+    return date[0] + '-' + date[1] + '-' + dia;
+  }
+}
 useEffect(() => {
   async function searchHours() {
-      const resp = await api("maisconsulta").get(`/agendamento/horarios/livres/${daySelected}/${ubs}`)
+      const resp = await api("maisconsulta").get(`/agendamento/horarios/livres/${formatDate(daySelected)}/${ubs}`)
       const aux = resp.data.map(hour => ({hour, selected: false}))
       setListHours(aux)
   }

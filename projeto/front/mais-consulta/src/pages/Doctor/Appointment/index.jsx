@@ -23,7 +23,7 @@ export const Appointment = ({name}) => {
   const getRemediosControlados = async (event) => {
     const nome = event.target.value;
     try {
-      const res = await api('maisconsulta').get(`/infos/remedios/auto/${nome}`);
+      const res = await api('maisconsulta').get(`/search/remedios/auto/${nome}`);
       console.log(res.data);
       const aux = res.data.map(option => 
         ({
@@ -39,8 +39,7 @@ export const Appointment = ({name}) => {
   const getDoencasCronicas = async (event) => {
     const nome = event.target.value;
     try {
-      // const res = await api('maisconsulta').get(`/infos/doencasCronicas/auto/${nome}`);
-      const res = {data:[{id: 1, nome:'Diabetes'}]}
+      const res = await api('maisconsulta').get(`/search/doencas-cronicas/auto/${nome}`);
       const aux = res.data.map(option => 
         ({
           value: option.id,
@@ -55,8 +54,7 @@ export const Appointment = ({name}) => {
   const getAlergias = async (event) => {
     const nome = event.target.value;
     try {
-      // const res = await api('maisconsulta').get(`/infos/alergias/auto/${nome}`);
-      const res = {data:[{id: 1, nome:'Gatos'}]}
+      const res = await api('maisconsulta').get(`/search/alergias/auto/${nome}`);
       const aux = res.data.map(option => 
         ({
           value: option.id,
@@ -71,8 +69,7 @@ export const Appointment = ({name}) => {
   const getDeficiencias = async (event) => {
     const nome = event.target.value;
     try {
-      // const res = await api('maisconsulta').get(`/infos/deficiencias/auto/${nome}`);
-      const res = {data:[{id: 1, nome:'Auditiva'}]}
+      const res = await api('maisconsulta').get(`/search/deficiencias/auto/${nome}`);
       const aux = res.data.map(option => 
         ({
           value: option.id,
@@ -87,8 +84,7 @@ export const Appointment = ({name}) => {
   const getDsts = async (event) => {
     const nome = event.target.value;
     try {
-      // const res = await api('maisconsulta').get(`/infos/dsts/auto/${nome}`);
-      const res = {data:[{id: 1, nome:'Sifilis'}]}
+      const res = await api('maisconsulta').get(`/search/dst/auto/${nome}`);
       const aux = res.data.map(option => 
         ({
           value: option.id,
@@ -127,6 +123,14 @@ export const Appointment = ({name}) => {
     const idPaciente = pathnameArray[pathnameArray.length-2];
     const idAgendamento = pathnameArray[pathnameArray.length-1];
     try {
+      data = {...data, prontuario: {
+        ...data.prontuario,
+        remediosControlados: data.prontuario?.remediosControlados?.map(doenca => doenca.value),
+        doencasCronicas: data.prontuario?.doencasCronicas?.map(doenca => doenca.value),
+        deficiencia: data.prontuario?.deficiencia?.map(doenca => doenca.value),
+        dsts: data.prontuario?.dsts?.map(doenca => doenca.value),
+        alergias: data.prontuario?.alergias?.map(doenca => doenca.value)
+      }}
       await api('maisconsulta').post(`/medico/${idMedico}/${idPaciente}/${idAgendamento}/atendimento`, data)
       swal('Atendimento realizado','Atendimento realizado com sucesso', "success").then(() => history.push('/home-doctor'))
     } catch (error) {
@@ -177,7 +181,7 @@ export const Appointment = ({name}) => {
             </div>
             <div className="row">
               <div className="field-group">
-                <Controller name='prontuario.deficiencias' control={control} render={({field}) => <InputCheckable onKeyUp={debounceEvent(getDeficiencias)} options={deficiencias} {...field} titleLabel='Deficiências'/> }/>
+                <Controller name='prontuario.deficiencia' control={control} render={({field}) => <InputCheckable onKeyUp={debounceEvent(getDeficiencias)} options={deficiencias} {...field} titleLabel='Deficiências'/> }/>
               </div>
               <div className="field-group">
                 <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable onKeyUp={debounceEvent(getDsts)} options={dsts} {...field} titleLabel='DST’s'/> }/>

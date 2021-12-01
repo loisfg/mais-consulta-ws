@@ -34,9 +34,6 @@ export const HomePatient = () => {
     }
     return day.getFullYear() + '-' + Number(day.getMonth() + 1) + '-' + dia;
   }
-  useEffect(() => console.log(initialDate), [initialDate]);
-  useEffect(() => console.log(lastDate), [lastDate]);
-
   return (
     <Page>
       <AuxDiv>

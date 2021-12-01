@@ -24,8 +24,8 @@ export const PatientModal = ({Controller, control, onClose }) => {
                         <Controller name='dadosPessoais.celular' control={control} render={({field}) => <input {...field} type="text"/>}/>
                         <label>CEP</label>
                         <Controller name='dadosPessoais.cep' control={control} render={({field}) => <input {...field} type="text"/>}/>
-                        <label>Endereço</label>
-                        <Controller name='dadosPessoais.endereco' control={control} render={({field}) => <input {...field} type="text"/>}/>
+                        <label>Logradouro</label>
+                        <Controller name='dadosPessoais.logradouro' control={control} render={({field}) => <input {...field} type="text"/>}/>
                     </div>
                     <div className='right-side'>
                         <label>RG</label> 
