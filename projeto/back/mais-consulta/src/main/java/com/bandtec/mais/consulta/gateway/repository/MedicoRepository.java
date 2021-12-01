@@ -32,7 +32,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     Optional<List<Integer>> findIdsMedicosByIdEspecialidadeAndUbs(@Param("idEspecialidade")Integer idEspecialidade,
                                                                   @Param("idUbs")Integer idUbs);
 
-    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO(a.paciente.idPaciente, a.idAgendamento, a.paciente.nome,  a.hrAtendimento, a.paciente.dtNascimento) FROM Agendamento a WHERE a.dtAtendimento = :dtAtual AND a.medico.idMedico = :id")
+    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO(a.paciente.idPaciente, a.idAgendamento, a.paciente.nome,  a.hrAtendimento, a.paciente.dtNascimento) FROM Agendamento a WHERE a.dtAtendimento = :dtAtual AND a.medico.idMedico = :id AND a.status = 'ATIVO'")
     Optional<List<MedicoAgendamentoDTO>> findAllAgendamentosByIdMedico(@Param("id") Integer idMedico,
                                                                        @Param("dtAtual") LocalDate data);
 

@@ -1,10 +1,7 @@
 package com.bandtec.mais.consulta.usecase.doctor.impl;
 
 import com.bandtec.mais.consulta.domain.*;
-import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
-import com.bandtec.mais.consulta.gateway.repository.DiagnosticoRepository;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
-import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
+import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.models.dto.DadosPessoaisDTO;
 import com.bandtec.mais.consulta.models.dto.request.DiagnosticoDTO;
 import com.bandtec.mais.consulta.models.dto.request.PacienteInfoRequestDTO;
@@ -30,6 +27,9 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
     private AgendamentoRepository agendamentoRepository;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private DiagnosticoRepository diagnosticoRepository;
 
     @Override
@@ -49,7 +49,7 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
                 Set<PacienteHasDeficiencia> deficienciaSet = new HashSet<>();
                 Set<PacienteHasAtividade> atividadeSet = new HashSet<>();
 
-                if(pacienteInfoRequestDTO.getProntuario().getAlergias() != null) {
+                if (pacienteInfoRequestDTO.getProntuario().getAlergias() != null) {
                     for (Integer ids : pacienteInfoRequestDTO.getProntuario().getAlergias()) {
                         PacienteHasAlergiaKey fk = PacienteHasAlergiaKey
                                 .builder()
@@ -74,12 +74,12 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
                                 .pacienteId(idPaciente)
                                 .build();
 
-                        PacienteHasRemedios pacienteHasAlergia = PacienteHasRemedios
+                        PacienteHasRemedios pacienteHasRemedios = PacienteHasRemedios
                                 .builder()
                                 .id(fk)
                                 .build();
 
-                        remedioSet.add(pacienteHasAlergia);
+                        remedioSet.add(pacienteHasRemedios);
                     }
                 }
                 // Doenca
@@ -91,12 +91,12 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
                                 .pacienteId(idPaciente)
                                 .build();
 
-                        PacienteHasDoencas pacienteHasAlergia = PacienteHasDoencas
+                        PacienteHasDoencas pacienteHasDoencas = PacienteHasDoencas
                                 .builder()
                                 .id(fk)
                                 .build();
 
-                        doencaSet.add(pacienteHasAlergia);
+                        doencaSet.add(pacienteHasDoencas);
                     }
                 }
                 // Deficiencia
@@ -108,16 +108,16 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
                                 .pacienteId(idPaciente)
                                 .build();
 
-                        PacienteHasDeficiencia pacienteHasAlergia = PacienteHasDeficiencia
+                        PacienteHasDeficiencia pacienteHasDeficiencia = PacienteHasDeficiencia
                                 .builder()
                                 .id(fk)
                                 .build();
 
-                        deficienciaSet.add(pacienteHasAlergia);
+                        deficienciaSet.add(pacienteHasDeficiencia);
                     }
                 }
                 // Atividades
-                if(pacienteInfoRequestDTO.getProntuario().getAtividadesProibidas() != null) {
+                if (pacienteInfoRequestDTO.getProntuario().getAtividadesProibidas() != null) {
                     for (Integer ids : pacienteInfoRequestDTO.getProntuario().getAtividadesProibidas()) {
                         PacienteHasAtividadeKey fk = PacienteHasAtividadeKey
                                 .builder()
@@ -134,22 +134,21 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
                     }
                 }
 
-                Paciente paciente = Paciente
-                        .builder()
-                        .idPaciente(idPaciente)
-                        .alergias(alergiaSet)
-                        .atividades(atividadeSet)
-                        .deficiencias(deficienciaSet)
-                        .remedios(remedioSet)
-                        .doencas(doencaSet)
-                        .nome(dadosPessoaisDTO.getNome())
-                        .telefone(dadosPessoaisDTO.getTelefone())
-                        .peso(prontuarioDTO.getPeso())
-                        .altura(prontuarioDTO.getAltura())
-                        .isVirgem(prontuarioDTO.isVirgem())
-                        .isFumante(prontuarioDTO.isFumante())
-                        .tipoSanguineo(prontuarioDTO.getTipoSanguineo())
-                        .build();
+                Paciente paciente = pacienteRepository.findById(idPaciente).get();
+
+                paciente.setIdPaciente(idPaciente);
+                paciente.setAlergias(alergiaSet);
+                paciente.setAtividades(atividadeSet);
+                paciente.setDeficiencias(deficienciaSet);
+                paciente.setRemedios(remedioSet);
+                paciente.setDoencas(doencaSet);
+                paciente.setNome(dadosPessoaisDTO.getNome());
+                paciente.setTelefone(dadosPessoaisDTO.getTelefone());
+                paciente.setPeso(prontuarioDTO.getPeso());
+                paciente.setAltura(prontuarioDTO.getAltura());
+                paciente.setIsVirgem(prontuarioDTO.isVirgem());
+                paciente.setIsFumante(prontuarioDTO.isFumante());
+                paciente.setTipoSanguineo(prontuarioDTO.getTipoSanguineo());
 
                 Diagnostico diagnostico = Diagnostico
                         .builder()

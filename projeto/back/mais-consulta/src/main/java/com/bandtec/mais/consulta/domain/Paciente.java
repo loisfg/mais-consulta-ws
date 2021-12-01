@@ -39,19 +39,14 @@ public class Paciente {
     @Column(name = "numero_carteira_sus")
     private String numeroCarteiraSus;
 
-    @Transient
     private String peso = "";
 
-    @Transient
     private Double altura = 0.0;
 
-    @Transient
     private Boolean isVirgem = false;
 
-    @Transient
     private Boolean isFumante = false;
 
-    @Transient
     private BloodTypeEnum tipoSanguineo = BloodTypeEnum.DEFAULT;
 
     @OneToOne

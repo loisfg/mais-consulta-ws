@@ -33,7 +33,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 
     @Modifying
     @Transactional
-    @Query("UPDATE Agendamento a SET a.status = :status WHERE a.idAgendamento = :id_agendamento AND a.paciente = :id_paciente")
+    @Query(value = "UPDATE Agendamento a SET a.status = :status WHERE a.idAgendamento = :id_agendamento AND a.paciente.idPaciente = :id_paciente")
     void updateAgendamentoStatus(@Param("id_agendamento") Integer idAgendamento,
                                  @Param("status") String status,
                                  @Param("id_paciente") Integer idPaciente);

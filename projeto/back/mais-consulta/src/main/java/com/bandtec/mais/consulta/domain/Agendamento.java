@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.domain;
 
 import lombok.*;
+import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Type;
 import org.hibernate.type.TimeType;
@@ -51,8 +52,9 @@ public class Agendamento {
     @OneToOne
     private Especialidade especialidade;
 
+
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", nullable = false)
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Paciente paciente;
 
     @JoinColumn(name = "medico_id", referencedColumnName = "id_medico", nullable = false)
