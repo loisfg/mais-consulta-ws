@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CustomStyledCheckbox, CustomForm } from "./styles";
-export const Checkbox = ({ label, onClick, checked, color }) => (
+export const Checkbox = ({ label, color, ...rest }) => 
+{
+  useEffect(()=> console.log(rest), [rest])
+  return(
   <CustomForm
     control={
       <CustomStyledCheckbox
-        defaultChecked
         sx={{ "& .MuiSvgIcon-root": { color: {color} } }}
-        onClick={onClick}
-        checked={checked}
+        onChange={rest.onChange}
+        value={rest.value}
+        {...rest}
       />
     }
     label={label}
   />
 );
+}
