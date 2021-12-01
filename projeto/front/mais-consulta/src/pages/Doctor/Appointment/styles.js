@@ -63,6 +63,11 @@ export const Container = styled.form `
       align-items: center;
       justify-content: space-between;
     }
+    .field_last{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
     .row{
       display: flex;
       width: 100%;
@@ -76,6 +81,12 @@ export const Container = styled.form `
         }
         label{
           font-size: 1.4rem;
+        }
+        #virgem{
+          margin: 2rem 0rem;
+        }
+        #fumante{
+          margin: 2rem 0;
         }
         .field{
           display: flex;
@@ -91,8 +102,8 @@ export const Container = styled.form `
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        width: 50%;
-        height: 7rem;
+        width: 47%;
+        margin: 1rem 0;
         > div{
           height: 50%;
           width: 60%;

@@ -20,11 +20,16 @@ const customStyles = {
     },
 };
 
-function CustomSelect({label, options, onKeyUp, ...rest}) {
+function CustomSelect({label, options, onKeyUp, disabled, ...rest}) {
 return (
         <div>
             <label>{label}</label>
-            <Select onKeyDown={onKeyUp} isMulti styles={customStyles} options={options} {...rest}/>
+            <Select isDisabled={disabled} 
+                    onKeyDown={onKeyUp} 
+                    isMulti 
+                    styles={customStyles} 
+                    options={options} 
+                    {...rest}/>
         </div>
     )
 }
