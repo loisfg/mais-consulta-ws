@@ -146,13 +146,6 @@ export const Appointment = ({name}) => {
       </div>
       <div className='right-side'>
         <Header data={patientData}/>
-        <FormSection sectionTitle='Último atendimento'>
-          <div className='form-section-last-appointment'>
-            <TextSubtext className='text-tab' textOne='Data' />
-            <TextSubtext className='text-tab' textOne='Local' />
-            <TextSubtext className='text-tab' textOne='Medico atendente' />
-          </div>
-        </FormSection>
         <FormSection sectionTitle='Prontuário'>
           <div className='form-section'>
             <div className="row">
