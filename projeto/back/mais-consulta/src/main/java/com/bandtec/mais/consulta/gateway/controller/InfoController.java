@@ -23,8 +23,6 @@ public class InfoController {
     private final PostRemedio postRemedio;
     private final GetRemedio getRemedio;
     private final PutRemedio putRemedio;
-    private final PostSameRemedio postSameRemedio;
-    private final GetRemediosToComplet getRemediosToComplet;
 
     private final PostDeficiencia postDeficiencia;
     private final GetDeficiencia getDeficiencia;
@@ -35,15 +33,13 @@ public class InfoController {
     private final PutDoenca putDoenca;
 
     @Autowired
-    public InfoController(PostAlergia postAlergia, GetAlergia getAlergia, PutAlergia putAlergia, PostRemedio postRemedio, GetRemedio getRemedio, PutRemedio putRemedio, PostSameRemedio postSameRemedio, GetRemediosToComplet getRemediosToComplet, PostDeficiencia postDeficiencia, GetDeficiencia getDeficiencia, PutDeficiencia putDeficiencia, PostDoenca postDoenca, GetDoenca getDoenca, PutDoenca putDoenca) {
+    public InfoController(PostAlergia postAlergia, GetAlergia getAlergia, PutAlergia putAlergia, PostRemedio postRemedio, GetRemedio getRemedio, PutRemedio putRemedio, PostDeficiencia postDeficiencia, GetDeficiencia getDeficiencia, PutDeficiencia putDeficiencia, PostDoenca postDoenca, GetDoenca getDoenca, PutDoenca putDoenca) {
         this.postAlergia = postAlergia;
         this.getAlergia = getAlergia;
         this.putAlergia = putAlergia;
         this.postRemedio = postRemedio;
         this.getRemedio = getRemedio;
         this.putRemedio = putRemedio;
-        this.postSameRemedio = postSameRemedio;
-        this.getRemediosToComplet = getRemediosToComplet;
         this.postDeficiencia = postDeficiencia;
         this.getDeficiencia = getDeficiencia;
         this.putDeficiencia = putDeficiencia;
@@ -92,11 +88,6 @@ public class InfoController {
         }
 
         return ResponseEntity.status(204).build();
-    }
-
-    @GetMapping("/remedios/auto/{nome}")
-    public Set<Remedio> getRemediosAuto(@PathVariable String nome) {
-        return getRemediosToComplet.execute(nome);
     }
 
     @GetMapping("/{idUser}/remedio")

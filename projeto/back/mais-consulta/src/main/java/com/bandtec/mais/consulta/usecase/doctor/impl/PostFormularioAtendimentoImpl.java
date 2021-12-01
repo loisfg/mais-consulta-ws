@@ -49,79 +49,89 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
                 Set<PacienteHasDeficiencia> deficienciaSet = new HashSet<>();
                 Set<PacienteHasAtividade> atividadeSet = new HashSet<>();
 
-                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getAlergias()) {
-                    PacienteHasAlergiaKey fk = PacienteHasAlergiaKey
-                            .builder()
-                            .alergiaId(ids)
-                            .pacienteId(idPaciente)
-                            .build();
+                if(pacienteInfoRequestDTO.getProntuario().getAlergias() != null) {
+                    for (Integer ids : pacienteInfoRequestDTO.getProntuario().getAlergias()) {
+                        PacienteHasAlergiaKey fk = PacienteHasAlergiaKey
+                                .builder()
+                                .alergiaId(ids)
+                                .pacienteId(idPaciente)
+                                .build();
 
-                    PacienteHasAlergia pacienteHasAlergia = PacienteHasAlergia
-                            .builder()
-                            .id(fk)
-                            .build();
+                        PacienteHasAlergia pacienteHasAlergia = PacienteHasAlergia
+                                .builder()
+                                .id(fk)
+                                .build();
 
-                    alergiaSet.add(pacienteHasAlergia);
+                        alergiaSet.add(pacienteHasAlergia);
+                    }
                 }
                 // Remedio
-                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getRemedios()) {
-                    PacienteHasRemediosKey fk = PacienteHasRemediosKey
-                            .builder()
-                            .remedioId(ids)
-                            .pacienteId(idPaciente)
-                            .build();
+                if (pacienteInfoRequestDTO.getProntuario().getRemedios() != null) {
+                    for (Integer ids : pacienteInfoRequestDTO.getProntuario().getRemedios()) {
+                        PacienteHasRemediosKey fk = PacienteHasRemediosKey
+                                .builder()
+                                .remedioId(ids)
+                                .pacienteId(idPaciente)
+                                .build();
 
-                    PacienteHasRemedios pacienteHasAlergia = PacienteHasRemedios
-                            .builder()
-                            .id(fk)
-                            .build();
+                        PacienteHasRemedios pacienteHasAlergia = PacienteHasRemedios
+                                .builder()
+                                .id(fk)
+                                .build();
 
-                    remedioSet.add(pacienteHasAlergia);
+                        remedioSet.add(pacienteHasAlergia);
+                    }
                 }
                 // Doenca
-                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getDoencas()) {
-                    PacienteHasDoencasKey fk = PacienteHasDoencasKey
-                            .builder()
-                            .doencaId(ids)
-                            .pacienteId(idPaciente)
-                            .build();
+                if (pacienteInfoRequestDTO.getProntuario().getDoencas() != null) {
+                    for (Integer ids : pacienteInfoRequestDTO.getProntuario().getDoencas()) {
+                        PacienteHasDoencasKey fk = PacienteHasDoencasKey
+                                .builder()
+                                .doencaId(ids)
+                                .pacienteId(idPaciente)
+                                .build();
 
-                    PacienteHasDoencas pacienteHasAlergia = PacienteHasDoencas
-                            .builder()
-                            .id(fk)
-                            .build();
+                        PacienteHasDoencas pacienteHasAlergia = PacienteHasDoencas
+                                .builder()
+                                .id(fk)
+                                .build();
 
-                    doencaSet.add(pacienteHasAlergia);
+                        doencaSet.add(pacienteHasAlergia);
+                    }
                 }
                 // Deficiencia
-                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getDeficiencia()) {
-                    PacienteHasDeficienciaKey fk = PacienteHasDeficienciaKey
-                            .builder()
-                            .deficienciaId(ids)
-                            .pacienteId(idPaciente)
-                            .build();
+                if (pacienteInfoRequestDTO.getProntuario().getDeficiencia() != null) {
+                    for (Integer ids : pacienteInfoRequestDTO.getProntuario().getDeficiencia()) {
+                        PacienteHasDeficienciaKey fk = PacienteHasDeficienciaKey
+                                .builder()
+                                .deficienciaId(ids)
+                                .pacienteId(idPaciente)
+                                .build();
 
-                    PacienteHasDeficiencia pacienteHasAlergia = PacienteHasDeficiencia
-                            .builder()
-                            .id(fk)
-                            .build();
+                        PacienteHasDeficiencia pacienteHasAlergia = PacienteHasDeficiencia
+                                .builder()
+                                .id(fk)
+                                .build();
 
-                    deficienciaSet.add(pacienteHasAlergia);
+                        deficienciaSet.add(pacienteHasAlergia);
+                    }
                 }
                 // Atividades
-                for (Integer ids : pacienteInfoRequestDTO.getProntuario().getAtividadesProibidas()) {
-                    PacienteHasAtividadeKey fk = PacienteHasAtividadeKey
-                            .builder()
-                            .atividadeId(ids)
-                            .pacienteId(idPaciente)
-                            .build();
+                if(pacienteInfoRequestDTO.getProntuario().getAtividadesProibidas() != null) {
+                    for (Integer ids : pacienteInfoRequestDTO.getProntuario().getAtividadesProibidas()) {
+                        PacienteHasAtividadeKey fk = PacienteHasAtividadeKey
+                                .builder()
+                                .atividadeId(ids)
+                                .pacienteId(idPaciente)
+                                .build();
 
-                    PacienteHasAtividade pacienteHasAtividade = PacienteHasAtividade
-                            .builder()
-                            .id(fk)
-                            .build();
+                        PacienteHasAtividade pacienteHasAtividade = PacienteHasAtividade
+                                .builder()
+                                .id(fk)
+                                .build();
 
-                    atividadeSet.add(pacienteHasAtividade);
+                        atividadeSet.add(pacienteHasAtividade);
+                    }
                 }
 
                 Paciente paciente = Paciente

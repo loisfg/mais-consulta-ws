@@ -6,6 +6,7 @@ import com.bandtec.mais.consulta.usecase.info.GetRemediosToComplet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -15,7 +16,7 @@ public class GetRemediosToCompletImpl implements GetRemediosToComplet {
     RemedioRepository remedioRepository;
 
     @Override
-    public Set<Remedio> execute(String nome) {
+    public Optional<Set<Remedio>> execute(String nome) {
         return remedioRepository.findByNomeStartingWithIgnoreCase(nome);
     }
 }
