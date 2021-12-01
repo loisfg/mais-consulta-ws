@@ -24,6 +24,17 @@ export const Div = styled.div`
   > span {
     font-size: 1.2rem;
   }
+  button {
+    padding: 1rem 1.4rem;
+    font-size: 1.3rem;
+    border-style: none;
+    border-radius: 0.5rem;
+    color: white;
+    background-color: var(--green-standard);
+    cursor: pointer;
+    height: 4rem;
+    margin-top: 16px;
+  }
 `
 
 export const CustomInputMask = styled(InputMask)`

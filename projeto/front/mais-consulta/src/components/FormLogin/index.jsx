@@ -63,7 +63,7 @@ export const FormLogin = () => {
               setIsRemember(!isRemember);
             }}
           />
-          <Button type="submit" text="Entrar" />
+          <button type='submit'>Entrar</button>
         </Div>
       </CustomForm>
     </>
