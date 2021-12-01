@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -34,7 +35,7 @@ public class Agendamento {
     @Temporal(TemporalType.DATE)
     private Date dhInsert;
 
-    @Future
+    @FutureOrPresent
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "dt_atendimento", nullable = false)
     private LocalDate dtAtendimento;
