@@ -22,8 +22,8 @@ export const SchedulingHistory = ( props, usuario ) => {
   const [csv, setCsv] = useState([]);
   const [csvid, setCsvId] = useState([]);
 
-  const idAgen = localStorage.getItem("idAgend"); 
-
+  const idAgen =sessionStorage.getItem("idAgend"); 
+  console.log("id ag:", idAgen)
   useEffect(() => {
     async function searchListUbs() {
       const resp = await api("maisconsulta").get(`/search/ubs/1`)
@@ -35,7 +35,7 @@ export const SchedulingHistory = ( props, usuario ) => {
   }, []);
 
   function getAgendamentosId() {
-    api("maisconsulta").get(`/export/${idAgen}/${idUser}/consulta/info`)
+    api("maisconsulta").get(`/export/${sessionStorage.getItem("idAgend")}/${idUser}/consulta/info`)
     .then((res) => {
       setCsvId(res.data);
     })
