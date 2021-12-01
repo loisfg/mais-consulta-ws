@@ -162,7 +162,7 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
 
                 diagnosticoRepository.save(diagnostico);
                 pacienteRepository.save(paciente);
-                agendamentoRepository.updateAgendamentoStatus(idAgendamento, "FINALIZADO");
+                agendamentoRepository.updateAgendamentoStatus(idAgendamento, "FINALIZADO", idPaciente);
 
                 return Optional.of(paciente);
             }
