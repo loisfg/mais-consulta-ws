@@ -162,11 +162,11 @@ export const DataBox = ({control, Controller}) => {
             <div className='side_ipt_group'>
               <div>
                 <label>Peso</label>
-                <Controller name='prontuario.peso' control={control} render={({field}) => <SmallInput {...field} measure="kg"/>}/>
+                <Controller name='prontuario.peso' control={control}  render={({field}) => <SmallInput {...field} role={'Paciente'} measure="kg"/>}/>
               </div>
               <div>
                 <label>Altura</label>
-                <Controller name='prontuario.altura' control={control} render={({field}) => <SmallInput {...field} measure="cm"/>}/>
+                <Controller name='prontuario.altura' control={control} render={({field}) => <SmallInput {...field} role={'Paciente'} measure="cm"/>}/>
               </div>
             </div>
           </div>
@@ -187,14 +187,14 @@ export const DataBox = ({control, Controller}) => {
           </div>
           <div className='ipt_group'>
             <div>
-              <Controller name='prontuario.fumante' control={control} render={({field}) => <Checkbox {...field} checked={false}color='var(--green-standard)' label='Fumante?'/>}/>
-              <Controller name='prontuario.virgem' control={control} render={({field}) => <Checkbox {...field} checked={false} color='var(--green-standard)' label='Virgem?'/>}/>
+              <Controller name='prontuario.fumante' control={control} render={({field}) => <Checkbox {...field} color='var(--green-standard)' label='Fumante?'/>}/>
+              <Controller name='prontuario.virgem' control={control} render={({field}) => <Checkbox {...field} color='var(--green-standard)' label='Virgem?'/>}/>
             </div>
           </div>
-          <div className="ipt_group">
+          {/* <div className="ipt_group">
             <label htmlFor="bloodType">Tipo Sanguineo</label>
-            <Controller name='prontuario.tipoSanguineo' control={control} render={({field}) => <Select styles={{'height': '130rem'}} id='bloodType' options={bloodType}/>}/>
-          </div>
+            <Controller name='prontuario.tipoSanguineo' control={control} render={({field}) => <Select styles={customStyles} id='bloodType' options={bloodType}/>}/>
+          </div> */}
         </div>
         <div className='btn_group'>
           <button className='btn_salvar' type='submit'>Salvar</button>

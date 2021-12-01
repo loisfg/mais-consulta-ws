@@ -91,10 +91,11 @@ export const Container = styled.section`
             }
         }
         .btn_group{
+            width: 90%;
             display: flex;
             flex-direction: row;
             align-items: center;
-            padding: 2rem 7rem;
+            padding: 2rem 0;
             outline: none;
             justify-content: flex-end;
             .btn_cancelar{
