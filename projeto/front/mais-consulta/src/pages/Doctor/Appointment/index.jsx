@@ -199,13 +199,13 @@ export const Appointment = ({name}) => {
         <FormSection sectionTitle='Diagnóstico'>
           <div className='input-group'>
             <label>Queixas</label>
-            <Controller name='diagnostico.queixa' control={control} render={({field}) => <input {...field} type="text" /> }/>
+            <Controller name='diagnostico.queixa' control={control} render={({field}) => <input required {...field} type="text" /> }/>
             <label>Terminologia</label>
-            <Controller name='diagnostico.terminologia' control={control} render={({field}) => <input {...field} type="text" /> }/>
+            <Controller name='diagnostico.terminologia' control={control} render={({field}) => <input required {...field} type="text" /> }/>
             <label>Medicamentos</label>
-            <Controller name='diagnostico.medicamentos' control={control} render={({field}) => <input {...field} type="text" /> }/>
+            <Controller name='diagnostico.medicamentos' control={control} render={({field}) => <input required {...field} type="text" /> }/>
             <label>Orientações médicas</label>
-            <Controller name='diagnostico.orientacoesMedicas' control={control} render={({field}) => <textarea {...field} cols="20" rows="5"/>}/>
+            <Controller name='diagnostico.orientacoesMedicas' control={control} render={({field}) => <textarea required {...field} cols="20" rows="5"/>}/>
           </div>
           <div className='btn-group'>
             <button id='btn_cancel' type={"button"}>Cancelar</button>
