@@ -35,7 +35,7 @@ public class Agendamento {
     @Temporal(TemporalType.DATE)
     private Date dhInsert;
 
-    @FutureOrPresent
+    @FutureOrPresent(message = "Data passada deve ser uma data futura")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "dt_atendimento", nullable = false)
     private LocalDate dtAtendimento;

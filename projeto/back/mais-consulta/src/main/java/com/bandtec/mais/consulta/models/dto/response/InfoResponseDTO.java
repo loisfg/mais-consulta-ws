@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InfoResponseDTO {
     Integer id;
-    String descricao;
+    String nome;
 }
