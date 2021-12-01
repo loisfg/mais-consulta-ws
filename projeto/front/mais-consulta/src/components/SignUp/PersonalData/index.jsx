@@ -17,8 +17,8 @@ export const PersonalData = ({ formData, setFormData, required }) => {
         size='big'
         required={required}
         label="Data de nascimento"
-        onChange={e => setFormData({ ...formData, paciente: { ...formData.paciente, nome: e.target.value } })}
-        defaultValue={formData.dt_nascimento}
+        onChange={e => setFormData({ ...formData, dtNascimento: e.target.value.split('/')[2]+'-'+e.target.value.split('/')[1]+'-'+e.target.value.split('/')[0] })}
+        defaultValue={formData.dtNascimento}
       />  
       <DivInput>
         <Input

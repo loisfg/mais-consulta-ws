@@ -143,7 +143,6 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
 
                 Diagnostico diagnostico = Diagnostico
                         .builder()
-                        .atestado(diagnosticoDTO.getAtestado())
                         .medicamento(diagnosticoDTO.getMedicamentos())
                         .orientacoesMedicas(diagnosticoDTO.getOrientacoesMedicas())
                         .queixa(diagnosticoDTO.getQueixa())

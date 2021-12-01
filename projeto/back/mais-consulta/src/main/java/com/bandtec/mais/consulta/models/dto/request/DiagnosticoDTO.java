@@ -12,5 +12,4 @@ public class DiagnosticoDTO {
     private String terminologia;
     private String medicamentos;
     private String orientacoesMedicas;
-    private String atestado;
 }

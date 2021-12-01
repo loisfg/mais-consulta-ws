@@ -44,7 +44,7 @@ export const Home = () => {
                     <label>Próximo paciente</label>
                     <div className='schedule_group'>
                     <label>{formatHour(data[0].hrAtendimento)}</label>
-                    <Link to={`/appointment/${data[0].idPaciente}`}>
+                    <Link to={`/appointment/${data[0].idPaciente}/${data[0].idAgendamento}`}>
                         <Patient isNext={true} name={data[0].nome} age={data[0].idade + ' anos'}/>
                     </Link>
                     </div>

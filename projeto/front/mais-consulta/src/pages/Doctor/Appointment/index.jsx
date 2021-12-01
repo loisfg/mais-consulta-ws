@@ -24,6 +24,7 @@ export const Appointment = ({name}) => {
     const nome = event.target.value;
     try {
       const res = await api('maisconsulta').get(`/infos/remedios/auto/${nome}`);
+      console.log(res.data);
       const aux = res.data.map(option => 
         ({
           value: option.id,
@@ -104,7 +105,7 @@ export const Appointment = ({name}) => {
     setBloodType(bloodData)
      const getPatientData = async () => {
       const pathnameArray = location.pathname.split('/');
-      const idPaciente = pathnameArray[pathnameArray.length-1];
+      const idPaciente = pathnameArray[pathnameArray.length-2];
       try {
         const response = await api('maisconsulta').get(`/paciente/${idPaciente}`);
         setPatientData(response.data);
@@ -122,8 +123,11 @@ export const Appointment = ({name}) => {
   const handleClose = () => setShowModal(false);
   const onSubmit = async (data) => {
     const idMedico = localStorage.getItem('id');
+    const pathnameArray = location.pathname.split('/');
+    const idPaciente = pathnameArray[pathnameArray.length-2];
+    const idAgendamento = pathnameArray[pathnameArray.length-1];
     try {
-      // await api('maisconsulta').post(`/medico/${idMedico}/atendimento`, data)
+      await api('maisconsulta').post(`/medico/${idMedico}/${idPaciente}/${idAgendamento}/atendimento`, data)
       swal('Atendimento realizado','Atendimento realizado com sucesso', "success").then(() => history.push('/home-doctor'))
     } catch (error) {
       console.log(error)
@@ -160,7 +164,7 @@ export const Appointment = ({name}) => {
                 </div>
               </div>
               <div className="field-group">
-                <Controller name='prontuario.remediosControlados' onKeyUp={debounceEvent(getRemediosControlados)} options={remediosControlados} control={control} render={({field}) => <InputCheckable {...field} titleLabel='Remédios controlados'/> }/>
+                <Controller name='prontuario.remediosControlados' control={control} render={({field}) => <InputCheckable onKeyUp={debounceEvent(getRemediosControlados)} options={remediosControlados} {...field} titleLabel='Remédios controlados'/> }/>
               </div>
             </div>
             <div className="row">

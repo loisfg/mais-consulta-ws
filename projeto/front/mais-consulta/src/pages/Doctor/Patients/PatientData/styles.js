@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   cursor: pointer;
   height: 20vh;
-  width: 20%;
+  width: 35rem;
   margin: 0 2rem 1rem 3rem;
   font-family: 'Rawline';
   img{
