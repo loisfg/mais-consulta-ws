@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  cursor: pointer;
   height: 20vh;
-  width: 25%;
+  width: 20%;
   margin: 0 2rem 1rem 3rem;
   font-family: 'Rawline';
   img{

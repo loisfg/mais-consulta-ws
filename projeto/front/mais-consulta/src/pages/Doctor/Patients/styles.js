@@ -15,8 +15,8 @@ export const Container = styled.div`
         padding: 0 3rem 0 0;
     }
     .form_group{
-        height: 25%;
         width: 100%;
+        margin-bottom: 5rem;
         display: flex;
         flex-direction: column;
         .textfield{
@@ -35,8 +35,7 @@ export const Container = styled.div`
     .patient_group{
         display: flex;
         width: 100%;
-        justify-content: space-between;
-        overflow-y: auto;
+        overflow-y: au  to;
         flex-wrap: wrap;
     }
 `;

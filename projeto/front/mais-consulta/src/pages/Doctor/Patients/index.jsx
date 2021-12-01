@@ -9,9 +9,10 @@ export const Patients = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                // const response = await api('maisconsulta').get('/medico/historico');
-                // setData(response.data);
-                setData(oldData);
+                const idMedico = localStorage.getItem('id')
+                const response = await api('maisconsulta').get(`/medico/${idMedico}/historico`);
+                setData(response.data);
+                // setData(oldData);
             } catch (error) {
                 console.error(error);
             }
@@ -27,15 +28,16 @@ export const Patients = () => {
                 <div className='textfield'>
                     <h1>Histórico de pacientes</h1>
                 </div>
-                <SearchInput title='Buscar paciente'/>
+                {/* <SearchInput title='Buscar paciente'/> */}
             </div>
             <div className='patient_group'>
                 {
                     data.map((patient) =>{
                         return( 
-                                <PatientData name={patient.name} 
-                                             age={patient.age} 
-                                             lastAppointment={patient.lastAppointment}
+                                <PatientData name={patient.nome} 
+                                             age={patient.idade} 
+                                             lastAppointment={patient.ultimoAtendimento}
+                                             onClick={() => console.log('Teste')}
                                 />
                             )
                         })
