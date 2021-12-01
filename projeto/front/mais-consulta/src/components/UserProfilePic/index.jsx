@@ -6,9 +6,6 @@ export const UserProfilePic = () => {
     const role = localStorage.getItem('role');
     return (
         <Container>
-            <DivNotifications>
-                <img src={Notifications} alt="Logo +Consulta" />
-            </DivNotifications>
             <AlignText>
                 <H3>{nome}</H3>
                 <H4> {role} </H4>
