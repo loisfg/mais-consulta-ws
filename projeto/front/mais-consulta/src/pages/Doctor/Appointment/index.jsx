@@ -6,6 +6,7 @@ import UserPhoto from '../../../assets/next-user.svg';
 import api from '../../../services/api';
 import {  Checkbox, Modal, Container, TextSubtext, Header, FormSection, InputCheckable, DateInput, bloodData, SmallInput, PatientModal, mockData} from './appointmentImports';
 import swal from 'sweetalert';
+import { debounceEvent } from '../../../utils/debounce';
 
 export const Appointment = ({name}) => {
   const [bloodType, setBloodType] = useState([]);
@@ -14,6 +15,90 @@ export const Appointment = ({name}) => {
   const [ patientData, setPatientData ] = useState({})
   const location = useLocation();
   const history = useHistory();
+  const [ remediosControlados, setRemediosControlados ] = useState([]);
+  const [ doencasCronicas, setDoencasCronicas ] = useState([]);
+  const [ alergias, setAlergias ] = useState([]);
+  const [ deficiencias, setDeficiencias ] = useState([]);
+  const [ dsts, setDsts ] = useState([]);
+  const getRemediosControlados = async (event) => {
+    const nome = event.target.value;
+    try {
+      const res = await api('maisconsulta').get(`/infos/remedios/auto/${nome}`);
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setRemediosControlados(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const getDoencasCronicas = async (event) => {
+    const nome = event.target.value;
+    try {
+      // const res = await api('maisconsulta').get(`/infos/doencasCronicas/auto/${nome}`);
+      const res = {data:[{id: 1, nome:'Diabetes'}]}
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setDoencasCronicas(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const getAlergias = async (event) => {
+    const nome = event.target.value;
+    try {
+      // const res = await api('maisconsulta').get(`/infos/alergias/auto/${nome}`);
+      const res = {data:[{id: 1, nome:'Gatos'}]}
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setAlergias(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const getDeficiencias = async (event) => {
+    const nome = event.target.value;
+    try {
+      // const res = await api('maisconsulta').get(`/infos/deficiencias/auto/${nome}`);
+      const res = {data:[{id: 1, nome:'Auditiva'}]}
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setDeficiencias(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const getDsts = async (event) => {
+    const nome = event.target.value;
+    try {
+      // const res = await api('maisconsulta').get(`/infos/dsts/auto/${nome}`);
+      const res = {data:[{id: 1, nome:'Sifilis'}]}
+      const aux = res.data.map(option => 
+        ({
+          value: option.id,
+          label: option.nome
+        })
+      )
+      setDsts(aux)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     setBloodType(bloodData)
@@ -82,57 +167,45 @@ export const Appointment = ({name}) => {
                 </div>
               </div>
               <div className="field-group">
-                <Controller name='prontuario.doencasCronicas' control={control} render={({field}) => <InputCheckable {...field} titleLabel='Doenças crônicas'/>} />
+                <Controller name='prontuario.remediosControlados' onKeyUp={debounceEvent(getRemediosControlados)} options={remediosControlados} control={control} render={({field}) => <InputCheckable {...field} titleLabel='Remédios controlados'/> }/>
               </div>
             </div>
             <div className="row">
               <div className="field-group">
-                <Controller name='prontuario.remediosControlados' control={control} render={({field}) => <InputCheckable {...field} titleLabel='Remédios controlados'/> }/>
+                <Controller name='prontuario.doencasCronicas' control={control} render={({field}) => <InputCheckable onKeyUp={debounceEvent(getDoencasCronicas)} options={doencasCronicas} {...field} titleLabel='Doenças crônicas'/>} />
               </div>
               <div className="field-group">
-                <Controller name='prontuario.alergias' control={control} render={({field}) => <InputCheckable {...field} titleLabel='Alergias'/> }/>
+                <Controller name='prontuario.alergias' control={control} render={({field}) => <InputCheckable onKeyUp={debounceEvent(getAlergias)} options={alergias} {...field} titleLabel='Alergias'/> }/>
               </div>
             </div>
             <div className="row">
               <div className="field-group">
-                <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable {...field} titleLabel='DST’s'/> }/>
+                <Controller name='prontuario.deficiencias' control={control} render={({field}) => <InputCheckable onKeyUp={debounceEvent(getDeficiencias)} options={deficiencias} {...field} titleLabel='Deficiências'/> }/>
               </div>
               <div className="field-group">
-                <Controller name='prontuario.deficiencias' control={control} render={({field}) => <InputCheckable {...field} titleLabel='Deficiências'/> }/>
+                <Controller name='prontuario.dsts' control={control} render={({field}) => <InputCheckable onKeyUp={debounceEvent(getDsts)} options={dsts} {...field} titleLabel='DST’s'/> }/>
               </div>
             </div>
             <div className="row">
               <div className="field-group">
                 <Controller name='prontuario.fumante' control={control} render={({field}) => <Checkbox {...field} sx={{ '& .MuiSvgIcon-root': { fontSize: 25 }}}/>}/>
-                <label>Fumante?</label>
+                <label id='fumante'>Fumante?</label>
                 <Controller name='prontuario.virgem' control={control} render={({field}) => <Checkbox {...field} sx={{ '& .MuiSvgIcon-root': { fontSize: 25 }}}/>}/>
-                <label>Virgem?</label>
+                <label id='virgem'>Virgem?</label>
               </div>
-              <div className="field-group">
-                <Controller name='prontuario.doencasHereditarias' control={control} render={({field}) => <InputCheckable {...field} titleLabel='Doenças hereditárias'/> }/>
-              </div>
-            </div>
-            <div className="row">
-                <div className='select-group'>
-                  <label>Tipo Sanguíneo</label>
-                  <Controller name='prontuario.tipoSanguineo' control={control} render={({field}) => <Select {...field} options={bloodType}/>}/>
-                </div>
-                <div className="field-group">
-                  <Controller name='prontuario.atividadesProibidas' control={control} render={({field}) => <InputCheckable {...field} titleLabel='Atividades proibidas'/> }/>
-                </div>
             </div>
           </div>
         </FormSection>
         <FormSection sectionTitle='Diagnóstico'>
           <div className='input-group'>
             <label>Queixas</label>
-            <Controller name='diagnostico.queixa' control={control} render={({field}) => <input {...field} type="text" /> }/>
+            <Controller name='diagnostico.queixa' control={control} render={({field}) => <input required {...field} type="text" /> }/>
             <label>Terminologia</label>
-            <Controller name='diagnostico.terminologia' control={control} render={({field}) => <input {...field} type="text" /> }/>
+            <Controller name='diagnostico.terminologia' control={control} render={({field}) => <input required {...field} type="text" /> }/>
             <label>Medicamentos</label>
-            <Controller name='diagnostico.medicamentos' control={control} render={({field}) => <input {...field} type="text" /> }/>
+            <Controller name='diagnostico.medicamentos' control={control} render={({field}) => <input required {...field} type="text" /> }/>
             <label>Orientações médicas</label>
-            <Controller name='diagnostico.orientacoesMedicas' control={control} render={({field}) => <textarea {...field} cols="20" rows="5"/>}/>
+            <Controller name='diagnostico.orientacoesMedicas' control={control} render={({field}) => <textarea required {...field} cols="20" rows="5"/>}/>
           </div>
           <div className='btn-group'>
             <button id='btn_cancel' type={"button"}>Cancelar</button>

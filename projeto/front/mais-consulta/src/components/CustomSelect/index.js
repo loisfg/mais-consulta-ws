@@ -1,8 +1,7 @@
 import React from 'react';
 import Select from "react-select";
 
-function CustomSelect({label, options, color='--light-blue', onKeyUp, ...rest}) {
-    
+function CustomSelect({label, options, color='--light-blue', onKeyUp, disabled, ...rest}) {
     const customStyles = {
         control: (styles) => {
             return {
@@ -21,11 +20,15 @@ function CustomSelect({label, options, color='--light-blue', onKeyUp, ...rest}) 
           };
         },
     };
-    
 return (
         <div>
             <label>{label}</label>
-            <Select onKeyDown={onKeyUp} isMulti styles={customStyles} options={options} {...rest}/>
+            <Select isDisabled={disabled} 
+                    onKeyDown={onKeyUp} 
+                    isMulti 
+                    styles={customStyles} 
+                    options={options} 
+                    {...rest}/>
         </div>
     )
 }
