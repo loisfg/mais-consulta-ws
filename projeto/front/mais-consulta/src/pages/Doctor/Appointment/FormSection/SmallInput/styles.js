@@ -15,6 +15,6 @@ export const Field = styled(OutlinedInput)`
     width: 11rem;
     margin: 1rem 0rem;
     > fieldset{
-        border: var(--light-blue) 0.15rem solid !important;
+        border: var(${({ role }) => role ==='Paciente' ? '--green-standard' : '--light-blue'}) 0.15rem solid !important;
     }
 `;

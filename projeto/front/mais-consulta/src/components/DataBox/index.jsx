@@ -162,11 +162,11 @@ export const DataBox = ({control, Controller}) => {
             <div className='side_ipt_group'>
               <div>
                 <label>Peso</label>
-                <Controller name='prontuario.peso' control={control} render={({field}) => <SmallInput {...field} measure="kg"/>}/>
+                <Controller name='prontuario.peso' control={control}  render={({field}) => <SmallInput {...field} role={'Paciente'} measure="kg"/>}/>
               </div>
               <div>
                 <label>Altura</label>
-                <Controller name='prontuario.altura' control={control} render={({field}) => <SmallInput {...field} measure="cm"/>}/>
+                <Controller name='prontuario.altura' control={control} render={({field}) => <SmallInput {...field} role={'Paciente'} measure="cm"/>}/>
               </div>
             </div>
           </div>
