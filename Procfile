@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar --consulta/projeto/back/mais-consulta/target/*.jar
