@@ -21,9 +21,9 @@ public class CreateNotificationImpl implements CreateNotification {
     private NotificationFactory notificationFactory;
 
     @Override
-    public void execute(Agendamento agendamento, String consulta) {
+    public void execute(Agendamento agendamento, String type) {
 
-        NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter(consulta);
+        NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter(type);
         String descricaoNotification = notificationMessageService.buildNotificationMessage(agendamento);
 
         Notification notification = new Notification();

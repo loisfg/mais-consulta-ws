@@ -31,7 +31,7 @@ public class AgendamentoSchedulerConfig {
     @Autowired
     private PostAgendamentoExame postAgendamentoExame;
 
-    @Scheduled(fixedRate = 1000000000000l)
+    @Scheduled(fixedRate = 50000L)
     public void tratarAgendamentoConsulta() {
         FilaObj<AgendamentoConsultaRequestDTO> fila = filaAgendamentoConsulta.getFilaAgendamentoConsulta();
 
@@ -42,7 +42,7 @@ public class AgendamentoSchedulerConfig {
         }
     }
 
-    @Scheduled(fixedRate = 1000000000000l)
+    @Scheduled(fixedRate = 1000000000000L)
     public void tratarAgendamentoExame() {
 
         FilaObj<AgendamentoExameRequestDTO> fila = filaAgendamentoExame.getFilaAgendamentoExame();

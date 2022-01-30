@@ -1,18 +1,28 @@
 package com.bandtec.mais.consulta.models.enums;
 
-import com.bandtec.mais.consulta.utils.StrFormat;
-
 public enum AgendamentoStatusEnum {
-    GERAL(StrFormat.toTitledCase("Clinico Geral")),
-    OUTROS("");
+    CANCELADO("CANCELADO", "Seu agendamento foi cancelado"),
+    ATIVO("ATIVO", "Seu agendamento está marcado"),
+    AGUARDE("AGUARDE", "Seu agendamento está na fila de espera"),
+    FINALIZADO("FINALIZADO", "Seu agendamento foi finalizado com sucesso");
 
     private final String description;
+    private final String message;
 
-    AgendamentoStatusEnum(String description){
+    AgendamentoStatusEnum(String description, String message){
         this.description = description;
+        this.message = message;
     }
 
     public String getDescription(){
         return description;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public static AgendamentoStatusEnum statusAgendamento(String status) {
+        return valueOf(status);
     }
 }

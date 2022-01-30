@@ -10,6 +10,7 @@ import com.bandtec.mais.consulta.gateway.repository.ConsultaRepository;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
 import com.bandtec.mais.consulta.usecase.schedule.impl.PostAgendamentoConsultaImpl;
 import org.apache.tomcat.jni.Local;
@@ -75,10 +76,10 @@ class PostAgendamentoConsultaImplTest {
         when(medicoRepository.findMedicosByUbsId(1))
                 .thenReturn(medicosList);
 
-        when(medicoRepository.findMedicosByAgendamento(dataAtendimento, horaAtendimento))
+        when(medicoRepository.findMedicosByAgendamento(dataAtendimento, horaAtendimento, AgendamentoStatusEnum.CANCELADO.getDescription()))
                 .thenReturn(medicosOcupados);
 
-        AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO = new AgendamentoConsultaRequestDTO(dataAtendimento, horaAtendimento, "Consulta test", 1, 1, 1, "PEND");
+        AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO = new AgendamentoConsultaRequestDTO(dataAtendimento, horaAtendimento, "Consulta test", 1, 1, 1, "AGUARDE");
         Optional<Consulta> consulta = postAgendamentoConsulta.execute(agendamentoConsultaRequestDTO);
 
         assertEquals(consulta.get().getDescricao(), "Consulta test");
@@ -101,7 +102,7 @@ class PostAgendamentoConsultaImplTest {
         when(medicoRepository.findMedicosByUbsId(1))
                 .thenReturn(medicosOcupados);
 
-        when(medicoRepository.findMedicosByAgendamento(dataAtendimento, horaAtendimento))
+        when(medicoRepository.findMedicosByAgendamento(dataAtendimento, horaAtendimento,AgendamentoStatusEnum.CANCELADO.getDescription()))
                 .thenReturn(medicosOcupados);
 
     }

@@ -1,10 +1,7 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
-import com.bandtec.mais.consulta.domain.*;
-import com.bandtec.mais.consulta.gateway.repository.EspecialidadeRepository;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
-import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
-import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
+import com.bandtec.mais.consulta.domain.Consulta;
+import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO;
@@ -17,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -24,8 +22,6 @@ import java.util.Set;
 @RestController
 @RequestMapping("agendamento")
 public class AgendamentoController {
-
-    private static final String EXTERNAL_FILE_PATH = "mais-consulta/";
 
     @Autowired
     private PostAgendamentoConsulta postAgendamentoConsulta;
@@ -99,9 +95,9 @@ public class AgendamentoController {
     }
 
     @GetMapping("/horarios/livres/{dia}/{idUbs}")
-    public ResponseEntity<List<LocalTime>> getAvaibleTime(@PathVariable Integer idUbs,
-                                                          @PathVariable String dia) {
-        List<LocalTime> listHoras = postHoursUbs.execute(idUbs, dia);
+    public ResponseEntity<HashMap<LocalTime, String>> getAvaibleTime(@PathVariable Integer idUbs,
+                                                                     @PathVariable String dia) {
+        HashMap<LocalTime, String> listHoras = postHoursUbs.execute(idUbs, dia);
         if(listHoras.isEmpty()) {
            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }

@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.models.dto.request;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.domain.Exame;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

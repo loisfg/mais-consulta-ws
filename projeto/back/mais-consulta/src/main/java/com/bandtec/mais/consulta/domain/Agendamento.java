@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.domain;
 
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import lombok.*;
 import org.hibernate.FetchMode;
 import org.hibernate.Hibernate;

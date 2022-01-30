@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Service
@@ -24,36 +26,31 @@ public class PostHoursUbsImpl implements PostHoursUbs {
 
     @SneakyThrows
     @Override
-    public List<LocalTime> execute(Integer idUbs, String dia) {
-        List<HoursResponseDTO> listHoursOcupeds = agendamentoRepository.findHrAndDtAtendimentoByIdUbs(idUbs);
+    public HashMap<LocalTime, String> execute(Integer idUbs, String dia) {
+        List<HoursResponseDTO> listHoursOcupeds = agendamentoRepository.findHrAndDtAtendimentoByIdUbs(idUbs, LocalDate.parse(dia));
         List<LocalTime> horariosTrabalho = addHours();
-        List<LocalTime> horariosLivres = new ArrayList<>();
+        LinkedHashMap<LocalTime, String> horarios = new LinkedHashMap<>();
 
         horariosTrabalho.forEach(hrTrabalho -> {
-            horariosLivres.add(hrTrabalho);
+            horarios.put(hrTrabalho, "Livre");
             listHoursOcupeds.forEach(hrOcuped -> {
-                        if (hrOcuped.getHrAtendimento().equals(hrTrabalho)
-                        && hrOcuped.getDtAtendimento().equals(LocalDate.parse(dia))) {
-                            horariosLivres.remove(hrTrabalho);
+                        if (horarios.containsKey(hrOcuped.getHrAtendimento())) {
+                            horarios.replace(hrOcuped.getHrAtendimento(), "Ocupado");
                         }
                     }
             );
         });
 
-        return horariosLivres;
+        return horarios;
     }
 
     public List<LocalTime> addHours() {
-        LocalTime horas;
         List<LocalTime> allHours = new ArrayList<>();
-        int result = 0;
-
+        List<Integer> hrs = List.of(8,9,10,11,12,13,14,15,16,17,18);
         try {
-            for (int i = 8; i < 18; i++) {
-                result = i % 2 == 0 ? 0 : 1;
-                horas = LocalTime.of(i, result * 30);
-
-                allHours.add(horas);
+            for (Integer hr : hrs) {
+                allHours.add(LocalTime.of(hr, 0));
+                allHours.add(LocalTime.of(hr, 30));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

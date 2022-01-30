@@ -6,6 +6,7 @@ import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.domain.Usuario;
 import com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO;
 import com.bandtec.mais.consulta.models.dto.response.MedicoHistoricoResponseDTO;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import org.apache.tomcat.jni.Local;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -47,12 +48,13 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
 
     Optional<Medico> findByUsuario(Usuario usuario);
 
-    @Query("select m from Medico m where m.ubs.idUbs = ?1")
-    List<Medico> findMedicosByUbsId(Integer idUbs);
+    @Query("SELECT m FROM Medico m WHERE m.ubs.idUbs = :id_ubs")
+    List<Medico> findMedicosByUbsId(@Param("id_ubs") Integer idUbs);
 
-    @Query("SELECT a.medico FROM Agendamento a WHERE a.dtAtendimento = :dt_atendimento AND a.hrAtendimento = :hr_atendimento")
+    @Query("SELECT a.medico FROM Agendamento a WHERE a.dtAtendimento = :dt_atendimento AND a.hrAtendimento = :hr_atendimento AND a.status <> :status")
     List<Medico> findMedicosByAgendamento(@Param("dt_atendimento") LocalDate dtAtendimento,
-                                          @Param("hr_atendimento") LocalTime hrAtendimento) ;
+                                          @Param("hr_atendimento") LocalTime hrAtendimento,
+                                          @Param("status") String status) ;
 
     boolean existsByIdMedico(Integer idMedico);
 

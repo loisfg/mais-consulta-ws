@@ -5,6 +5,7 @@ import com.bandtec.mais.consulta.domain.Exame;
 import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoExame;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
 import lombok.extern.slf4j.Slf4j;
@@ -49,10 +50,10 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
 
                     Agendamento agendamento = oAgendamento.get();
 
-                    if (agendamento.getStatus().equals("CANCELADO")) {
+                    if (agendamento.getStatus().equals(AgendamentoStatusEnum.CANCELADO.getDescription())) {
                         efetuarAgendamentoExame(agendamentoExameRequestDTO, exame);
                     } else {
-                        agendamentoExameRequestDTO.setStatus("AGUARDANDO");
+                        agendamentoExameRequestDTO.setStatus(AgendamentoStatusEnum.AGUARDE.getDescription());
                         filaAgendamentoExame.setFilaAgendamentoExame(agendamentoExameRequestDTO);
                         return Optional.of(exame);
                     }
@@ -70,7 +71,7 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
 
     private void efetuarAgendamentoExame(AgendamentoExameRequestDTO agendamentoExameRequestDTO, Exame exame) {
         Agendamento agendamento = exame.getAgendamento();
-        agendamento.setStatus("ATIVO");
+        agendamento.setStatus(AgendamentoStatusEnum.ATIVO.getDescription());
         agendamento.setPaciente(pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get());
         agendamento.setEspecialidade(especialidadeRepository.findById(agendamentoExameRequestDTO.getIdEspecialidade()).get());
         agendamento.setMedico(medicoRepository.findMedicosByIdEspecialidadeAndIdUbs(agendamentoExameRequestDTO.getIdEspecialidade(), agendamentoExameRequestDTO.getIdUbs()).get());

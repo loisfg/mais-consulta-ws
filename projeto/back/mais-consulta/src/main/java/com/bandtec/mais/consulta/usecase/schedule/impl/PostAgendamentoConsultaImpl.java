@@ -4,22 +4,15 @@ import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
-import com.bandtec.mais.consulta.factory.NotificationAdapter;
-import com.bandtec.mais.consulta.factory.NotificationFactory;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
-import com.bandtec.mais.consulta.utils.CalendarService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NonUniqueResultException;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.TemporalField;
 import java.time.temporal.TemporalQuery;
 import java.util.*;
 
@@ -66,10 +59,10 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
                     Agendamento agendamento = oAgendamento.get();
 
-                    if (agendamento.getStatus().equals("CANCELADO")) {
+                    if (agendamento.getStatus().equals(AgendamentoStatusEnum.CANCELADO.getDescription())) {
                         efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
                     } else {
-                        agendamentoConsultaRequestDTO.setStatus("AGUARDANDO");
+                        agendamentoConsultaRequestDTO.setStatus(AgendamentoStatusEnum.AGUARDE.getDescription());
                         filaAgendamentoConsulta.setFilaAgendamentoConsulta(agendamentoConsultaRequestDTO);
                         return Optional.of(consulta);
                     }
@@ -95,7 +88,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         agendamento.setMedico(medico);
         agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
         agendamento.setEspecialidade(medico.getEspecialidade());
-        agendamento.setStatus("ATIVO");
+        agendamento.setStatus(AgendamentoStatusEnum.ATIVO.getDescription());
 
         consultaRepository.save(consulta);
         agendamentoRepository.save(agendamento);
@@ -106,7 +99,11 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
     @SneakyThrows
     private List<Medico> medicosLivres(AgendamentoConsultaRequestDTO reqDTO) {
         List<Medico> medicosInUbs = medicoRepository.findMedicosByUbsId(reqDTO.getIdUbs());
-        List<Medico> medicosOcupados = medicoRepository.findMedicosByAgendamento(reqDTO.getDtAtendimento(), reqDTO.getHrAtendimento());
+        List<Medico> medicosOcupados = medicoRepository.findMedicosByAgendamento(
+                reqDTO.getDtAtendimento(),
+                reqDTO.getHrAtendimento(),
+                AgendamentoStatusEnum.CANCELADO.getDescription()
+        );
         List<Medico> medicosLivres = new ArrayList<>();
 
         if (medicosOcupados.isEmpty()) {
@@ -120,8 +117,6 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
                 }
             });
         });
-
-
 
         return medicosLivres;
     }

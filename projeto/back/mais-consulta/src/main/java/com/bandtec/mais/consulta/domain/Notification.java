@@ -28,37 +28,6 @@ public class Notification {
     @Column(name = "id_usuario")
     private Integer idUsuario;
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public LocalDateTime getInsertDt() {
-        return insertDt;
-    }
-
-    public Integer getIdNotification() {
-        return idNotification;
-    }
-
-    public void setIdNotification(Integer idNotification) {
-        this.idNotification = idNotification;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setInsertDt(LocalDateTime insertDt) {
-        this.insertDt = insertDt;
-    }
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     @Override
     public boolean equals(Object o) {
