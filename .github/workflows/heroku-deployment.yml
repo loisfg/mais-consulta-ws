@@ -5,12 +5,10 @@ on:
     branches: [ main ]
 
 jobs:
-  deploy:
-      if: github.repository == 'loisfg/--consulta/projeto/back/mais-consulta/'
-      runs-on: ubuntu-latest
-  
-  build:   
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2
     - name: Deploy to Heroku
