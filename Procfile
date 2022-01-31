@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.bandtec.mais.consulta.MaisConsultaApplication
+java -Dserver.port=$PORT $JAVA_OPTS -jar projeto/back/mais-consulta/target/*.jar
