@@ -5,8 +5,8 @@ on:
     branches: [ main ]
 
 jobs:
-  production-deploy:
-      if: github.repository == 'octo-org/octo-repo-prod'
+  deploy:
+      if: github.repository == 'loisfg/--consulta/projeto/back/mais-consulta/'
       runs-on: ubuntu-latest
   
   build:   
