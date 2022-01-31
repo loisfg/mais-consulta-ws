@@ -1,1 +1,0 @@
-java -Dserver.port=$PORT $JAVA_OPTS -jar projeto/back/mais-consulta/target/*.jar
