@@ -39,7 +39,6 @@ class PostAgendamentoConsultaImplTest {
     @Autowired
     PostAgendamentoConsultaImpl postAgendamentoConsultaImpl;
 
-
     @Autowired
     AgendamentoController agendamentoController;
 
@@ -104,7 +103,6 @@ class PostAgendamentoConsultaImplTest {
 
         when(medicoRepository.findMedicosByAgendamento(dataAtendimento, horaAtendimento,AgendamentoStatusEnum.CANCELADO.getDescription()))
                 .thenReturn(medicosOcupados);
-
     }
 
     @Test
