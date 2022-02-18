@@ -16,13 +16,14 @@ public class CancelAgendamentoImpl implements CancelAgendamento {
     private AgendamentoRepository agendamentoRepository;
 
     @Override
-    public Optional<Agendamento> execute(Integer idPaciente, Integer idAgendamento) {
+    public Optional<Agendamento> execute(Integer idAgendamento) {
 
         if (agendamentoRepository.existsById(idAgendamento)) {
+            Agendamento agendamento = agendamentoRepository.findById(idAgendamento).get();
 
-            agendamentoRepository.updateAgendamentoStatus(idAgendamento, AgendamentoStatusEnum.CANCELADO.getDescription(), idPaciente);
+            agendamentoRepository.updateAgendamentoStatus(agendamento.getIdAgendamento(), AgendamentoStatusEnum.statusAgendamento("CANCELADO"));
 
-            return Optional.of(agendamentoRepository.getById(idAgendamento));
+            return Optional.of(agendamento);
         }
 
         return Optional.empty();

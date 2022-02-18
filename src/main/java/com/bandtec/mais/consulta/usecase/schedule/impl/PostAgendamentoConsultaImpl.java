@@ -4,19 +4,20 @@ import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
-import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
-import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.NonUniqueResultException;
 import java.time.DayOfWeek;
 import java.time.temporal.TemporalQuery;
 import java.util.*;
 
+import static com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum.*;
+
 @Service
+@Slf4j
 public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
     @Autowired
@@ -29,13 +30,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
     private MedicoRepository medicoRepository;
 
     @Autowired
-    private UbsRepository ubsRepository;
-
-    @Autowired
     private ConsultaRepository consultaRepository;
-
-    @Autowired
-    private EspecialidadeRepository especialidadeRepository;
 
     @Autowired
     private CreateNotification createNotification;
@@ -48,47 +43,45 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         Consulta consulta = AgendamentoConsultaRequestDTO.convertFromController(agendamentoConsultaRequestDTO);
 
         if (fds.queryFrom(consulta.getAgendamento().getDtAtendimento())) {
+            log.info("Não realizamos agendamentos aos fins de semana {}", consulta.getAgendamento().getDtAtendimento());
             return Optional.empty();
         }
 
         if (pacienteRepository.existsById(agendamentoConsultaRequestDTO.getIdPaciente())) {
+            switch (agendamentoConsultaRequestDTO.getStatus()) {
+                case ATIVO:
+                    efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
+                    break;
 
-            try {
-                Optional<Agendamento> oAgendamento = agendamentoRepository.findByDtAtendimentoAndHrAtendimento(agendamentoConsultaRequestDTO.getDtAtendimento(), agendamentoConsultaRequestDTO.getHrAtendimento());
-                if (oAgendamento.isPresent()) {
+                case AGUARDE:
+                    filaAgendamentoConsulta.setFilaAgendamentoConsulta(agendamentoConsultaRequestDTO);
+                    efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
+                    break;
 
-                    Agendamento agendamento = oAgendamento.get();
+                case CANCELADO:
+                case FINALIZADO:
+                    break;
 
-                    if (agendamento.getStatus().equals(AgendamentoStatusEnum.CANCELADO.getDescription())) {
-                        efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
-                    } else {
-                        agendamentoConsultaRequestDTO.setStatus(AgendamentoStatusEnum.AGUARDE.getDescription());
-                        filaAgendamentoConsulta.setFilaAgendamentoConsulta(agendamentoConsultaRequestDTO);
-                        return Optional.of(consulta);
-                    }
-                }
-
-            } catch (NonUniqueResultException nonUniqueResultException) {
-                System.out.println("Tratar esse erro");
+                default:
+                    throw new IllegalStateException("Unexpected value: " + agendamentoConsultaRequestDTO.getStatus());
             }
-
-            efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
-
+        } else {
+            log.info("Usuário não existe ou não é um paciente");
+            return Optional.empty();
+            // TODO adicionar Throw de usuário não existente.
         }
+
         return Optional.of(consulta);
     }
 
     private void efetuarAgendamentoConsulta(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO, Consulta consulta) {
-        List<Medico> medicoList = medicosLivres(agendamentoConsultaRequestDTO);
+        // TODO Adicionar Excpetion para médico não encontrado (procurar locais que precisam e adicionar; por logs tb
         Agendamento agendamento = consulta.getAgendamento();
-        if (medicoList.isEmpty()) {
-            return;
-        }
-        Medico medico = medicoList.stream().findFirst().orElseThrow();
+        Medico medico = medicoRepository.findMedicosByIdEspecialidadeAndIdUbs
+                (agendamentoConsultaRequestDTO.getIdEspecialidade(), agendamentoConsultaRequestDTO.getIdUbs()).orElseThrow();
         agendamento.setMedico(medico);
         agendamento.setPaciente(pacienteRepository.findById(agendamentoConsultaRequestDTO.getIdPaciente()).get());
         agendamento.setEspecialidade(medico.getEspecialidade());
-        agendamento.setStatus(AgendamentoStatusEnum.ATIVO.getDescription());
 
         consultaRepository.save(consulta);
         agendamentoRepository.save(agendamento);
@@ -96,32 +89,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         createNotification.execute(agendamento, "consulta");
     }
 
-    @SneakyThrows
-    private List<Medico> medicosLivres(AgendamentoConsultaRequestDTO reqDTO) {
-        List<Medico> medicosInUbs = medicoRepository.findMedicosByUbsId(reqDTO.getIdUbs());
-        List<Medico> medicosOcupados = medicoRepository.findMedicosByAgendamento(
-                reqDTO.getDtAtendimento(),
-                reqDTO.getHrAtendimento(),
-                AgendamentoStatusEnum.CANCELADO.getDescription()
-        );
-        List<Medico> medicosLivres = new ArrayList<>();
-
-        if (medicosOcupados.isEmpty()) {
-            medicosLivres.addAll(medicosInUbs);
-        }
-
-        medicosInUbs.forEach((medico) -> {
-            medicosOcupados.forEach(ocuped -> {
-                if (ocuped.equals(medico)) {
-                    medicosLivres.remove(medico);
-                }
-            });
-        });
-
-        return medicosLivres;
-    }
-
-    TemporalQuery<Boolean> fds = t -> {
+    private final TemporalQuery<Boolean> fds = t -> {
         DayOfWeek dow = DayOfWeek.from(t);
         return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
     };

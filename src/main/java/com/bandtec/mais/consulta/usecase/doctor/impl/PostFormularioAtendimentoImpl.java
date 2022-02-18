@@ -6,6 +6,7 @@ import com.bandtec.mais.consulta.models.dto.DadosPessoaisDTO;
 import com.bandtec.mais.consulta.models.dto.request.DiagnosticoDTO;
 import com.bandtec.mais.consulta.models.dto.request.PacienteInfoRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.ProntuarioResquestDTO;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import com.bandtec.mais.consulta.usecase.doctor.PostFormularioAtendimento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -161,7 +162,7 @@ public class PostFormularioAtendimentoImpl implements PostFormularioAtendimento 
 
                 diagnosticoRepository.save(diagnostico);
                 pacienteRepository.save(paciente);
-                agendamentoRepository.updateAgendamentoStatus(idAgendamento, "FINALIZADO", idPaciente);
+                agendamentoRepository.updateAgendamentoStatus(idAgendamento, AgendamentoStatusEnum.FINALIZADO);
 
                 return Optional.of(paciente);
             }

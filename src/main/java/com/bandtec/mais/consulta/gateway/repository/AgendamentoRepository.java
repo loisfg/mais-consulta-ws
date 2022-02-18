@@ -2,6 +2,7 @@ package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -34,9 +35,8 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Intege
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Agendamento a SET a.status = :status WHERE a.idAgendamento = :id_agendamento AND a.paciente.idPaciente = :id_paciente")
+    @Query(value = "UPDATE Agendamento a SET a.status = :status WHERE a.idAgendamento = :id_agendamento")
     void updateAgendamentoStatus(@Param("id_agendamento") Integer idAgendamento,
-                                 @Param("status") String status,
-                                 @Param("id_paciente") Integer idPaciente);
+                                 @Param("status") AgendamentoStatusEnum status);
 
 }

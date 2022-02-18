@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.usecase.export.utils;
 
 import com.bandtec.mais.consulta.domain.*;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ public class BuildExportArquivo {
 
         String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
 
-        String status = agendamento.getStatus();
+        AgendamentoStatusEnum status = agendamento.getStatus();
 
         Medico medico = agendamento.getMedico();
         String nomeMedico = medico.getNome();

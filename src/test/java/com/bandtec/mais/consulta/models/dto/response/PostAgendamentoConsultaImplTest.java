@@ -78,7 +78,7 @@ class PostAgendamentoConsultaImplTest {
         when(medicoRepository.findMedicosByAgendamento(dataAtendimento, horaAtendimento, AgendamentoStatusEnum.CANCELADO.getDescription()))
                 .thenReturn(medicosOcupados);
 
-        AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO = new AgendamentoConsultaRequestDTO(dataAtendimento, horaAtendimento, "Consulta test", 1, 1, 1, "AGUARDE");
+        AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO = new AgendamentoConsultaRequestDTO(dataAtendimento, horaAtendimento, "Consulta test", 1, 1, 1, AgendamentoStatusEnum.AGUARDE);
         Optional<Consulta> consulta = postAgendamentoConsulta.execute(agendamentoConsultaRequestDTO);
 
         assertEquals(consulta.get().getDescricao(), "Consulta test");

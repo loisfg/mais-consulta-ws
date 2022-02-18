@@ -27,7 +27,7 @@ public class AgendamentoConsultaRequestDTO {
     Integer idEspecialidade;
     Integer idPaciente;
     Integer idUbs;
-    String status;
+    AgendamentoStatusEnum status;
 
     public static Consulta convertFromController(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO) {
         log.info("Consulta DTO {}", agendamentoConsultaRequestDTO);

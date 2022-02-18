@@ -44,10 +44,9 @@ public class AgendamentoController {
     @Autowired
     private GetEspecialidades getEspecialidades;
 
-    @PatchMapping("/cancelar/{idAgendamento}/{idPaciente}")
-    public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento,
-                                           @PathVariable Integer idPaciente) {
-        return ResponseEntity.ok(cancelAgendamento.execute(idPaciente, idAgendamento));
+    @PatchMapping("/cancelar/{idAgendamento}")
+    public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento) {
+        return ResponseEntity.ok(cancelAgendamento.execute(idAgendamento));
     }
 
     @PostMapping("/agendar/exame")
