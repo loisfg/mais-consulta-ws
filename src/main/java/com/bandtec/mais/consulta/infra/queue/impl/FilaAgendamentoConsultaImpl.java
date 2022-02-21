@@ -1,24 +1,36 @@
 package com.bandtec.mais.consulta.infra.queue.impl;
 
+import com.bandtec.mais.consulta.domain.Consulta;
+import com.bandtec.mais.consulta.gateway.repository.ConsultaRepository;
 import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
 import com.bandtec.mais.consulta.models.FilaObj;
-import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
+import com.bandtec.mais.consulta.utils.CalendarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @Scope("singleton")
 public class FilaAgendamentoConsultaImpl implements FilaAgendamentoConsulta {
 
-    FilaObj<AgendamentoConsultaRequestDTO> filaAgendamentoConsulta = new FilaObj<>(10);
+    private static FilaObj<Consulta> instance;
+
+    public static FilaObj<Consulta> getInstance() {
+        if (instance == null) instance = new FilaObj<Consulta>(1000);
+        return instance;
+    }
+
+    @Autowired
+    ConsultaRepository consultaRepository;
 
     @Override
-    public FilaObj<AgendamentoConsultaRequestDTO> getFilaAgendamentoConsulta() {
-        return filaAgendamentoConsulta;
+    public FilaObj<Consulta> getFilaAgendamentoConsulta() {
+        return instance;
     }
 
     @Override
-    public void setFilaAgendamentoConsulta(AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO) {
-        this.filaAgendamentoConsulta.insert(agendamentoConsultaRequestDTO);
+    public void setFilaAgendamentoConsulta(Consulta consulta) {
+        instance.insert(consulta);
     }
 }

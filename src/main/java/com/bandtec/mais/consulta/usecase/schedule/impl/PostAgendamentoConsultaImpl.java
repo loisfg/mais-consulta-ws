@@ -55,8 +55,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
                     break;
 
                 case AGUARDE:
-                    filaAgendamentoConsulta.setFilaAgendamentoConsulta(agendamentoConsultaRequestDTO);
-                    efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
+                    filaAgendamentoConsulta.setFilaAgendamentoConsulta(consulta);
                     break;
 
                 case CANCELADO:

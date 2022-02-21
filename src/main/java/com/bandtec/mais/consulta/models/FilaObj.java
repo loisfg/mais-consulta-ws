@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.models;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class FilaObj<T> {
 
@@ -52,6 +53,17 @@ public class FilaObj<T> {
         }
 
         return elemento;
+    }
+
+    public void addList(List<T> list) {
+        if (isFull()) {
+            System.out.println("Fila esta cheia");
+        }
+        if (list.size() < (capacidade - tamanho))
+        list.forEach(it -> {
+            fila[tamanho] = it;
+            tamanho++;
+        });
     }
 
     public void exibe(){
