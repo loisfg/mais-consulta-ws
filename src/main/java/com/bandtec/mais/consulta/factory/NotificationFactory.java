@@ -26,7 +26,6 @@ public class NotificationFactory {
         }
     }
 
-
     public NotificationAdapter getNotificationAdapter(String type) {
         return notificationAdaptersAsHashMap.get(type);
     }

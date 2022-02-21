@@ -54,9 +54,7 @@ public class AgendamentoController {
             @RequestBody AgendamentoExameRequestDTO agendamentoExameRequestDTO
     ) {
 
-        Optional<Exame> oExame = postAgendamentoExame.execute(agendamentoExameRequestDTO);
-
-        return oExame
+        return postAgendamentoExame.execute(agendamentoExameRequestDTO)
                 .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
@@ -65,30 +63,21 @@ public class AgendamentoController {
     public ResponseEntity<Consulta> createAgendamentoConsulta(
             @RequestBody AgendamentoConsultaRequestDTO agendamentoConsultaRequestDTO
     ) {
-
-        Optional<Consulta> oConsulta = postAgendamentoConsulta.execute(agendamentoConsultaRequestDTO);
-
-        return oConsulta
+        return postAgendamentoConsulta.execute(agendamentoConsultaRequestDTO)
                 .map(ResponseEntity.status(HttpStatus.CREATED)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.BAD_REQUEST)::build);
     }
 
     @GetMapping("/exames/{idUser}")
     public ResponseEntity<?> getExamesByIdUser(@PathVariable Integer idUser) {
-
-        Optional<List<AgendamentoResponseDTO>> oListExames = getAgendamentoExame.execute(idUser);
-
-        return oListExames
+        return getAgendamentoExame.execute(idUser)
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
     @GetMapping("/consulta/{idUser}")
     public ResponseEntity<?> getConsultaByIdUser(@PathVariable Integer idUser) {
-
-        Optional<List<AgendamentoResponseDTO>> oListConsultas = getAgendamentoConsulta.execute(idUser);
-
-        return oListConsultas
+        return getAgendamentoConsulta.execute(idUser)
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Scope("singleton")
 public class FilaAgendamentoConsultaImpl implements FilaAgendamentoConsulta {
 
-    FilaObj<AgendamentoConsultaRequestDTO> filaAgendamentoConsulta = new FilaObj<>(1000000);
+    FilaObj<AgendamentoConsultaRequestDTO> filaAgendamentoConsulta = new FilaObj<>(10);
 
     @Override
     public FilaObj<AgendamentoConsultaRequestDTO> getFilaAgendamentoConsulta() {

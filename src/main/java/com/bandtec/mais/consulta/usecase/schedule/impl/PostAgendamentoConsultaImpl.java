@@ -8,16 +8,16 @@ import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.temporal.TemporalQuery;
 import java.util.*;
 
-import static com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum.*;
-
 @Service
 @Slf4j
+@Primary
 public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
 
     @Autowired
@@ -48,6 +48,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
         }
 
         if (pacienteRepository.existsById(agendamentoConsultaRequestDTO.getIdPaciente())) {
+            log.info("Efetuando agendamento com status {}", agendamentoConsultaRequestDTO.getStatus());
             switch (agendamentoConsultaRequestDTO.getStatus()) {
                 case ATIVO:
                     efetuarAgendamentoConsulta(agendamentoConsultaRequestDTO, consulta);
@@ -63,7 +64,7 @@ public class PostAgendamentoConsultaImpl implements PostAgendamentoConsulta {
                     break;
 
                 default:
-                    throw new IllegalStateException("Unexpected value: " + agendamentoConsultaRequestDTO.getStatus());
+                    throw new IllegalStateException("Status não tratado: " + agendamentoConsultaRequestDTO.getStatus());
             }
         } else {
             log.info("Usuário não existe ou não é um paciente");
