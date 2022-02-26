@@ -4,6 +4,7 @@ import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.MedicoImportEexport;
 import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.error.ResourceNotFoundException;
 import com.bandtec.mais.consulta.gateway.repository.EspecialidadeRepository;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
