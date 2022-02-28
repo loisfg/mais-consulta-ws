@@ -4,7 +4,6 @@ import com.bandtec.mais.consulta.domain.Medico;
 import com.bandtec.mais.consulta.domain.MedicoImportEexport;
 import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.error.ResourceNotFoundException;
 import com.bandtec.mais.consulta.gateway.repository.EspecialidadeRepository;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
@@ -18,6 +17,7 @@ import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
 import com.bandtec.mais.consulta.usecase.doctor.MedicoHistorico;
 import com.bandtec.mais.consulta.usecase.doctor.PostFormularioAtendimento;
 import com.bandtec.mais.consulta.usecase.doctor.MedicoAgendamentos;
+import com.bandtec.mais.consulta.validation.Validation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +44,9 @@ public class MedicoController {
 
     @Autowired
     private MedicoHistorico medicoHistorico;
+
+    @Autowired
+    private Validation validation;
 
     @Autowired
     private PostFormularioAtendimento postFormularioAtendimento;
@@ -119,6 +122,7 @@ public class MedicoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> medicoDelete(@PathVariable Integer id) {
+        validation.verifyMedicoExists(id);
         if (medicoDelete.execute(id)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }
@@ -128,6 +132,7 @@ public class MedicoController {
     @GetMapping("/{idMedico}/agendamentos")
     public ResponseEntity<List<MedicoAgendamentoDTO>> getAgendamentosByMedico(@PathVariable Integer idMedico) {
         Optional<List<MedicoAgendamentoDTO>> oAgendamentos = medicoAgendamentos.execute(idMedico);
+        validation.verifyMedicoExists(idMedico);
 
         return oAgendamentos
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
@@ -137,6 +142,7 @@ public class MedicoController {
     @GetMapping("/{idMedico}/historico")
     public ResponseEntity<List<MedicoHistoricoResponseDTO>> getHistoricoByMedico(@PathVariable Integer idMedico) {
         Optional<List<MedicoHistoricoResponseDTO>> oHistorico = medicoHistorico.execute(idMedico);
+        validation.verifyMedicoExists(idMedico);
 
         return oHistorico
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))

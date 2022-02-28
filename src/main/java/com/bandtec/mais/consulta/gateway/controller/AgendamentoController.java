@@ -2,6 +2,8 @@ package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Consulta;
 import com.bandtec.mais.consulta.domain.Exame;
+import com.bandtec.mais.consulta.error.ResourceNotFoundException;
+import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.AgendamentoResponseDTO;
@@ -110,4 +112,5 @@ public class AgendamentoController {
         return ResponseEntity.of(getEspecialidades.execute());
 
     }
+
 }
