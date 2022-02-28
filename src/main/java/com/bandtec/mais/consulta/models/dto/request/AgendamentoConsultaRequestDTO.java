@@ -2,17 +2,13 @@ package com.bandtec.mais.consulta.models.dto.request;
 
 import com.bandtec.mais.consulta.domain.Agendamento;
 import com.bandtec.mais.consulta.domain.Consulta;
-import com.bandtec.mais.consulta.domain.Especialidade;
 import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
