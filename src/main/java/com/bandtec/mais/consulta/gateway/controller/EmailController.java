@@ -18,8 +18,9 @@ public class EmailController {
     @Autowired
     EmailSend emailSend;
 
-    @PostMapping("/sending-email")
-    public ResponseEntity<Email> sendingEmail(@RequestBody @Valid EmailDTO emailDto) {
-        return new ResponseEntity<>(emailSend.execute(emailDto), HttpStatus.CREATED);
+    @PostMapping("/sending-email/{idPaciente}")
+    public ResponseEntity<Email> sendingEmail(@RequestBody @Valid EmailDTO emailDto,
+                                              @PathVariable Integer idPaciente) {
+        return new ResponseEntity<>(emailSend.execute(emailDto, idPaciente), HttpStatus.CREATED);
     }
 }
