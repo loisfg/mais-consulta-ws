@@ -50,10 +50,10 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
 
                     Agendamento agendamento = oAgendamento.get();
 
-                    if (agendamento.getStatus().equals(AgendamentoStatusEnum.CANCELADO.getDescription())) {
+                    if (agendamento.getStatus().equals(AgendamentoStatusEnum.CANCELADO)) {
                         efetuarAgendamentoExame(agendamentoExameRequestDTO, exame);
                     } else {
-                        agendamentoExameRequestDTO.setStatus(AgendamentoStatusEnum.AGUARDE.getDescription());
+                        agendamentoExameRequestDTO.setStatus(AgendamentoStatusEnum.AGUARDE);
                         filaAgendamentoExame.setFilaAgendamentoExame(agendamentoExameRequestDTO);
                         return Optional.of(exame);
                     }
@@ -71,7 +71,7 @@ public class PostAgendamentoExameImpl implements PostAgendamentoExame {
 
     private void efetuarAgendamentoExame(AgendamentoExameRequestDTO agendamentoExameRequestDTO, Exame exame) {
         Agendamento agendamento = exame.getAgendamento();
-        agendamento.setStatus(AgendamentoStatusEnum.ATIVO.getDescription());
+        agendamento.setStatus(AgendamentoStatusEnum.ATIVO);
         agendamento.setPaciente(pacienteRepository.findById(agendamentoExameRequestDTO.getIdPaciente()).get());
         agendamento.setEspecialidade(especialidadeRepository.findById(agendamentoExameRequestDTO.getIdEspecialidade()).get());
         agendamento.setMedico(medicoRepository.findMedicosByIdEspecialidadeAndIdUbs(agendamentoExameRequestDTO.getIdEspecialidade(), agendamentoExameRequestDTO.getIdUbs()).get());

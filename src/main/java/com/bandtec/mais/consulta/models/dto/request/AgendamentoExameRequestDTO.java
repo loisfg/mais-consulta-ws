@@ -22,7 +22,7 @@ public class AgendamentoExameRequestDTO {
     Integer idEspecialidade;
     Integer idPaciente;
     Integer idUbs;
-    String status;
+    AgendamentoStatusEnum status;
 
     public static Exame convertFromController(AgendamentoExameRequestDTO agendamentoExameRequestDTO) {
 

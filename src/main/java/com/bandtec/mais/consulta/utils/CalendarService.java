@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CalendarService {
-    private final static Logger log = LoggerFactory.getLogger(CalendarService.class);
     private static final Map<Integer, Map<Integer, Map<String, Integer>>> hashDiasCorridos = new HashMap<>();
     private static CalendarService instance;
     private final Map<String, Map<String, Integer>> hashMonthDataUtil = new HashMap<>();

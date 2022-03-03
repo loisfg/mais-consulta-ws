@@ -72,44 +72,5 @@ public class PilhaObj<T> {
             }
         }
     }
-
-    public void ehPalindromo() {
-
-        T[] novaPilha = (T[]) new Object[capacidade];
-        T[] novoArray = (T[]) new Object[capacidade];
-        int i = 0;
-        while (i < capacidade) {
-            T elemento = pop();
-            novaPilha[i] = elemento;
-            novoArray[i] = elemento;
-            i++;
-        }
-
-        inverter(novoArray);
-
-        if (Arrays.equals(novoArray, novaPilha)) {
-            System.out.println("é palindromo");
-        } else {
-            System.out.println("não é palindromo");
-        }
-
-    }
-
-    public void inverter(T[] array) {
-        for (int i = 0; i < array.length / 2; i++) {
-            T temp = array[i];
-            array[i] = array[array.length - 1 - i];
-            array[array.length - 1 - i] = temp;
-        }
-    }
-
-    public void inverter() {
-        for (int i = 0; i < pilha.length / 2; i++) {
-            T temp = pilha[i];
-            pilha[i] = pilha[pilha.length - 1 - i];
-            pilha[pilha.length - 1 - i] = temp;
-        }
-    }
-
 }
 
