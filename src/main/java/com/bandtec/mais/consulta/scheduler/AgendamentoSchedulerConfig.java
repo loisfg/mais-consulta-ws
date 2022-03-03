@@ -1,57 +1,60 @@
 package com.bandtec.mais.consulta.scheduler;
 
-import com.bandtec.mais.consulta.gateway.controller.AgendamentoController;
-import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
-import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoExame;
+import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Consulta;
+import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
+import com.bandtec.mais.consulta.gateway.repository.ConsultaRepository;
+import com.bandtec.mais.consulta.infra.queue.impl.FilaAgendamentoConsultaImpl;
 import com.bandtec.mais.consulta.models.FilaObj;
-import com.bandtec.mais.consulta.models.dto.request.AgendamentoConsultaRequestDTO;
-import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
-import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoConsulta;
-import com.bandtec.mais.consulta.usecase.schedule.PostAgendamentoExame;
+import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.util.List;
+import java.util.Optional;
+
 @Configuration
 @EnableScheduling
 @EnableAsync
+@Slf4j
 public class AgendamentoSchedulerConfig {
+    private final long SEGUNDO = 1000;
+    private final long MINUTO = SEGUNDO * 60;
+    private final long HORA = MINUTO * 60;
 
     @Autowired
-    private FilaAgendamentoExame filaAgendamentoExame;
+    private AgendamentoRepository agendamentoRepository;
 
     @Autowired
-    private FilaAgendamentoConsulta filaAgendamentoConsulta;
+    private ConsultaRepository consultaRepository;
 
-    @Autowired
-    private PostAgendamentoConsulta postAgendamentoConsulta;
+    private final FilaObj<Consulta> fila = FilaAgendamentoConsultaImpl.getInstance();
 
-    @Autowired
-    private PostAgendamentoExame postAgendamentoExame;
+    @Scheduled(fixedDelay = HORA)
+    public void getAgendamentos() {
+        log.info("Try get schedules");
+        List<Consulta> consultas = consultaRepository.findConsultasByAgendamento_Status(AgendamentoStatusEnum.AGUARDE);
+        fila.addList(consultas);
+    }
 
-    @Scheduled(fixedRate = 50000L)
+    @Scheduled(fixedRate = MINUTO * 30)
     public void tratarAgendamentoConsulta() {
-        FilaObj<AgendamentoConsultaRequestDTO> fila = filaAgendamentoConsulta.getFilaAgendamentoConsulta();
+        if (!fila.isEmpty()) {
+            Consulta consulta = fila.poll();
+            log.info("Agendamento sendo alterado || id_consulta {}", consulta.getIdConsulta());
+            Optional<Agendamento> agendamento = agendamentoRepository.findAgendamentoByDtAtendimentoAndHrAtendimentoAndStatus(
+                    consulta.getAgendamento().getDtAtendimento(), consulta.getAgendamento().getHrAtendimento(), AgendamentoStatusEnum.CANCELADO);
 
-        if (fila.isEmpty()) {
-            System.out.println("Nenhuma requisição de consulta para tratar");
+            if (agendamento.isPresent()) {
+                consulta.getAgendamento().setStatus(AgendamentoStatusEnum.ATIVO);
+                agendamentoRepository.updateAgendamentoStatus(consulta.getAgendamento().getIdAgendamento(), consulta.getAgendamento().getStatus());
+            }
         } else {
-            postAgendamentoConsulta.execute(fila.poll());
+            log.info("Sem agendamentos em AGUARDE || {}", "NOT_SCHEDULE_TIME");
         }
     }
-
-    @Scheduled(fixedRate = 1000000000000L)
-    public void tratarAgendamentoExame() {
-
-        FilaObj<AgendamentoExameRequestDTO> fila = filaAgendamentoExame.getFilaAgendamentoExame();
-
-        if (fila.isEmpty()) {
-            System.out.println("Nenhuma requisição de exame para tratar");
-        } else {
-            postAgendamentoExame.execute(fila.poll());
-        }
-    }
-
 }

@@ -25,6 +25,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     List<Integer> findIdsMedicosByIdEspecialidadeAndIdUbs(@Param("idEspecialidade") Integer idEspecialidade,
                                                                     @Param("idUbs") Integer idUbs);
 
+    //TODO POR DTO AQUI, select tá mto grande
     @Query(value = "SELECT m FROM Medico m WHERE m.especialidade.idEspecialidade = :idEspecialidade AND m.ubs.idUbs= :idUbs")
     Optional<Medico> findMedicosByIdEspecialidadeAndIdUbs(@Param("idEspecialidade") Integer idEspecialidade,
                                                           @Param("idUbs") Integer idUbs);

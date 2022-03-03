@@ -48,7 +48,6 @@ public class InfoController {
         this.putDoenca = putDoenca;
     }
 
-    //-----------POST/GET/PUT----- ALERGIA -----------POST/GET/PUT-----
     @PostMapping("/alergia/{idUser}")
     public ResponseEntity<List<Alergia>> postAlergia(@PathVariable Integer idUser,
                                                       @RequestBody Iterable<Integer> alergia) {
@@ -77,7 +76,6 @@ public class InfoController {
         return ResponseEntity.of(oAlergia);
     }
 
-    //-----------POST/GET/PUT----- REMEDIO-----------POST/GET/PUT-----
     @PostMapping("/remedio/{idUser}")
     public ResponseEntity<List<Remedio>> postRemedio(@PathVariable Integer idUser,
                                                     @RequestBody Iterable<Integer> remedio) {
@@ -106,7 +104,6 @@ public class InfoController {
         return ResponseEntity.of(oRemedio);
     }
 
-    //-----------POST/GET/PUT----- DEFICIENCIA -----------POST/GET/PUT-----
     @PostMapping("/deficiencia/{idUser}")
     public ResponseEntity<List<Deficiencia>> postDeficiencia(@PathVariable Integer idUser,
                                                             @RequestBody Iterable<Integer> deficiencia) {
@@ -131,12 +128,9 @@ public class InfoController {
     @PutMapping("/{id}/deficiencia")
     public ResponseEntity<Deficiencia> putDeficiencia(@PathVariable Integer id,
                                                       @RequestBody Deficiencia deficiencia) {
-
-        Optional<Deficiencia> oDeficiencia = putDeficiencia.execute(id, deficiencia);
-        return ResponseEntity.of(oDeficiencia);
+        return ResponseEntity.of(putDeficiencia.execute(id, deficiencia));
     }
 
-    //-----------POST/GET/PUT----- DOENCA -----------POST/GET/PUT-----
     @PostMapping("/doenca/{idUser}")
     public ResponseEntity<List<Doenca>> postDoenca(@PathVariable Integer idUser,
                                                   @RequestBody Iterable<Integer> doenca) {

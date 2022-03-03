@@ -16,8 +16,8 @@ spring:
     password: "#Grupo02"
 
   jpa:
-    show-sql: true
-    format_sql: true
+#    show-sql: true
+#    format_sql: true
     hibernate:
       ddl-auto: update
       dialect: org.hibernate.dialect.SQLServer2012Dialect

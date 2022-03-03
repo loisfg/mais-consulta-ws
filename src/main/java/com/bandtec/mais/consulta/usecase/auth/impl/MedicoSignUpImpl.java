@@ -41,8 +41,7 @@ public class MedicoSignUpImpl implements MedicoSignUp {
             log.info("Usuario já existente");
             return Optional.empty();
         } else {
-            boolean existsEspecialidade = especialidadeRepository.existsByDescricao(medico.getEspecialidade().getDescricao());
-            if (existsEspecialidade) {
+            if (especialidadeRepository.existsByDescricao(medico.getEspecialidade().getDescricao())) {
                 medico.setEspecialidade(especialidadeRepository.findByDescricao(medico.getEspecialidade().getDescricao()));
             }
             ubs.ifPresent(medico::setUbs);
