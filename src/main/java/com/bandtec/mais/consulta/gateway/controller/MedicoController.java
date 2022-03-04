@@ -106,6 +106,8 @@ public class MedicoController {
                                                          @PathVariable Integer idPaciente,
                                                          @PathVariable Integer idAgendamento,
                                                          @RequestBody PacienteInfoRequestDTO pacienteInfoRequestDTO) {
+        validation.verifyMedicoExists(idMedico);
+
         return ResponseEntity.of(postFormularioAtendimento.execute(idMedico, idPaciente, idAgendamento, pacienteInfoRequestDTO));
     }
 
@@ -131,8 +133,8 @@ public class MedicoController {
 
     @GetMapping("/{idMedico}/agendamentos")
     public ResponseEntity<List<MedicoAgendamentoDTO>> getAgendamentosByMedico(@PathVariable Integer idMedico) {
-        Optional<List<MedicoAgendamentoDTO>> oAgendamentos = medicoAgendamentos.execute(idMedico);
         validation.verifyMedicoExists(idMedico);
+        Optional<List<MedicoAgendamentoDTO>> oAgendamentos = medicoAgendamentos.execute(idMedico);
 
         return oAgendamentos
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
@@ -141,8 +143,8 @@ public class MedicoController {
 
     @GetMapping("/{idMedico}/historico")
     public ResponseEntity<List<MedicoHistoricoResponseDTO>> getHistoricoByMedico(@PathVariable Integer idMedico) {
-        Optional<List<MedicoHistoricoResponseDTO>> oHistorico = medicoHistorico.execute(idMedico);
         validation.verifyMedicoExists(idMedico);
+        Optional<List<MedicoHistoricoResponseDTO>> oHistorico = medicoHistorico.execute(idMedico);
 
         return oHistorico
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))

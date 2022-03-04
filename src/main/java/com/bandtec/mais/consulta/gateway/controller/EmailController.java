@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.gateway.controller;
 import com.bandtec.mais.consulta.domain.Email;
 import com.bandtec.mais.consulta.models.dto.request.EmailDTO;
 import com.bandtec.mais.consulta.usecase.email.EmailSend;
+import com.bandtec.mais.consulta.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,13 @@ public class EmailController {
     @Autowired
     EmailSend emailSend;
 
+    @Autowired
+    private Validation validation;
+
     @PostMapping("/sending-email/{idPaciente}")
     public ResponseEntity<Email> sendingEmail(@RequestBody @Valid EmailDTO emailDto,
                                               @PathVariable Integer idPaciente) {
+        validation.verifyPatient(idPaciente);
         return new ResponseEntity<>(emailSend.execute(emailDto, idPaciente), HttpStatus.CREATED);
     }
 }
