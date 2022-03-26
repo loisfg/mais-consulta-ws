@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.validation;
 
-import com.bandtec.mais.consulta.domain.Medico;
+import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.error.ResourceNotFoundException;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class ValidationImpl implements Validation {
     @Override
     public void verifyMedicoExists(Integer idMedico) {
 
-        Optional<Medico> medico= medicoRepository.findById(idMedico);
+        Optional<Doctor> medico= medicoRepository.findById(idMedico);
         if (medico.isEmpty()) {
             throw new ResourceNotFoundException("ID doctor:" + idMedico+" NOT FOUND");
         }

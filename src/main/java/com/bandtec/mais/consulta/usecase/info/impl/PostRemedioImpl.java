@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Paciente;
-import com.bandtec.mais.consulta.domain.PacienteHasRemedios;
-import com.bandtec.mais.consulta.domain.PacienteHasRemediosKey;
-import com.bandtec.mais.consulta.domain.Remedio;
+import com.bandtec.mais.consulta.domain.Patient;
+import com.bandtec.mais.consulta.domain.PatientHasMedicine;
+import com.bandtec.mais.consulta.domain.PatientHasMedicinesKey;
+import com.bandtec.mais.consulta.domain.Medicine;
 import com.bandtec.mais.consulta.gateway.repository.PacienteHasRemediosRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.gateway.repository.RemedioRepository;
@@ -28,32 +28,32 @@ public class PostRemedioImpl implements PostRemedio {
     private PacienteHasRemediosRepository pacienteHasRemediosRepository;
 
     @Override
-    public List<Remedio> execute(Iterable<Integer> remedios, Integer idPaciente) {
-        Set<PacienteHasRemedios> pacienteHasRemediosSet = new HashSet<>();
+    public List<Medicine> execute(Iterable<Integer> remedios, Integer idPaciente) {
+        Set<PatientHasMedicine> patientHasMedicineSet = new HashSet<>();
         if (pacienteRepository.existsById(idPaciente)) {
             for (Integer remedioId : remedios) {
-                PacienteHasRemediosKey fk = PacienteHasRemediosKey
+                PatientHasMedicinesKey fk = PatientHasMedicinesKey
                         .builder()
-                        .remedioId(remedioId)
-                        .pacienteId(idPaciente)
+                        .medicineId(remedioId)
+                        .patientId(idPaciente)
                         .build();
 
-                PacienteHasRemedios pacienteHasRemedios = PacienteHasRemedios
+                PatientHasMedicine patientHasMedicine = PatientHasMedicine
                         .builder()
-                        .id(fk)
+                        .patientHasMedicinesId(fk)
                         .build();
 
-                pacienteHasRemediosSet.add(pacienteHasRemedios);
+                patientHasMedicineSet.add(patientHasMedicine);
             }
 
-            Paciente paciente = Paciente
+            Patient patient = Patient
                     .builder()
-                    .idPaciente(idPaciente)
-                    .remedios(pacienteHasRemediosSet)
+                    .patientId(idPaciente)
+                    .medicines(patientHasMedicineSet)
                     .build();
 
-            pacienteRepository.save(paciente);
-            pacienteHasRemediosRepository.saveAll(pacienteHasRemediosSet);
+            pacienteRepository.save(patient);
+            pacienteHasRemediosRepository.saveAll(patientHasMedicineSet);
 
         }
 

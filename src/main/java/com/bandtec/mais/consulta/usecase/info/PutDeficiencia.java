@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.info;
 
-import com.bandtec.mais.consulta.domain.Deficiencia;
+import com.bandtec.mais.consulta.domain.Deficiency;
 
 import java.util.Optional;
 
 public interface PutDeficiencia {
-    Optional<Deficiencia> execute(Integer id, Deficiencia deficiencia);
+    Optional<Deficiency> execute(Integer id, Deficiency deficiency);
 }

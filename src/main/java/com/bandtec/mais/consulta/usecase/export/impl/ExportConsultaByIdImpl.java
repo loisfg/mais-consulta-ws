@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
-import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Scheduling;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.usecase.export.ExportConsultaById;
@@ -24,7 +24,7 @@ public class ExportConsultaByIdImpl implements ExportConsultaById {
 
         if (usuarioRepository.existsById(idUser) && agendamentoRepository.existsById(idAgendamento)) {
 
-            Optional<Agendamento> oAgendamento = agendamentoRepository.findByIdAgendamento(idAgendamento);
+            Optional<Scheduling> oAgendamento = agendamentoRepository.findByIdAgendamento(idAgendamento);
 
             if (oAgendamento.isEmpty()) {
                 return Optional.empty();

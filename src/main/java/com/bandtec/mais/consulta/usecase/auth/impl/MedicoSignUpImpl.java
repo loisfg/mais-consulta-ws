@@ -1,13 +1,13 @@
 package com.bandtec.mais.consulta.usecase.auth.impl;
 
-import com.bandtec.mais.consulta.domain.Medico;
+import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.domain.Ubs;
-import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.domain.User;
 import com.bandtec.mais.consulta.gateway.repository.EspecialidadeRepository;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
-import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.SignUpDoctorRequestDTO;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,23 +32,23 @@ public class MedicoSignUpImpl implements MedicoSignUp {
     private UbsRepository ubsRepository;
 
     @Override
-    public Optional<Usuario> execute(MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
-        Medico medico = medicoSignUpRequestDTO.getMedico();
-        Usuario usuario = MedicoSignUpRequestDTO.convertFromController(medicoSignUpRequestDTO);
-        Optional<Ubs> ubs = ubsRepository.findById(medicoSignUpRequestDTO.getIdUbs());
+    public Optional<User> execute(SignUpDoctorRequestDTO signUpDoctorRequestDTO) {
+        Doctor doctor = signUpDoctorRequestDTO.getDoctor();
+        User user = SignUpDoctorRequestDTO.convertFromController(signUpDoctorRequestDTO);
+        Optional<Ubs> ubs = ubsRepository.findById(signUpDoctorRequestDTO.getUbsId());
 
-        if (usuarioRepository.existsByCpf(usuario.getCpf())) {
+        if (usuarioRepository.existsByCpf(user.getCpf())) {
             log.info("Usuario já existente");
             return Optional.empty();
         } else {
-            if (especialidadeRepository.existsByDescricao(medico.getEspecialidade().getDescricao())) {
-                medico.setEspecialidade(especialidadeRepository.findByDescricao(medico.getEspecialidade().getDescricao()));
+            if (especialidadeRepository.existsByDescricao(doctor.getSpecialty().getDescription())) {
+                doctor.setSpecialty(especialidadeRepository.findByDescricao(doctor.getSpecialty().getDescription()));
             }
-            ubs.ifPresent(medico::setUbs);
-            medico.setUsuario(usuario);
-            medicoRepository.save(medico);
+            ubs.ifPresent(doctor::setUbs);
+            doctor.setUser(user);
+            medicoRepository.save(doctor);
 
-            return Optional.of(usuarioRepository.save(usuario));
+            return Optional.of(usuarioRepository.save(user));
         }
     }
 

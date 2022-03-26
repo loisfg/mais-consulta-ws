@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bandtec</groupId>
-    <artifactId>mais-consulta</artifactId>
+    <artifactId>mais-consult</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mais-consulta</name>
+    <name>mais-consult</name>
     <description>Projeto semestral de Pesquisa e Inovação</description>
     <properties>
         <java.version>11</java.version>

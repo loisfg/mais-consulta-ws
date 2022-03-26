@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Alergia;
+import com.bandtec.mais.consulta.domain.Allergy;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
 import com.bandtec.mais.consulta.usecase.info.PutAlergia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ public class PutAlergiaImpl implements PutAlergia {
     private AlergiaRepository alergiaRepository;
 
     @Override
-    public Optional<Alergia> execute(Integer id, Alergia alergia) {
+    public Optional<Allergy> execute(Integer id, Allergy allergy) {
         if (alergiaRepository.existsById(id)) {
-            alergia.setId(id);
-            return Optional.of(alergiaRepository.save(alergia));
+            allergy.setAllergyId(id);
+            return Optional.of(alergiaRepository.save(allergy));
         }
         return Optional.empty();
     }

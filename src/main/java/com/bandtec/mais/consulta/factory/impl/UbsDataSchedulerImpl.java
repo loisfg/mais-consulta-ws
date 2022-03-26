@@ -11,13 +11,12 @@ public class UbsDataSchedulerImpl implements UbsDataScheduler {
 
     Timer timer = new Timer();
 
-
-
     @Override
     public void run() {
         timer.scheduleAtFixedRate(new TimerTask() {
-            @Override public void run() {
-                //TODO fazer logica para ler os dados da folha
+            @Override
+            public void run() {
+                // TODO: make logic to read data from sheet
             }
 
         }, 1000, 5000);

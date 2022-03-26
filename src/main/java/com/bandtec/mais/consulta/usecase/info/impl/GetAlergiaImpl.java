@@ -1,8 +1,7 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Alergia;
+import com.bandtec.mais.consulta.domain.Allergy;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
-import com.bandtec.mais.consulta.gateway.repository.PacienteHasAlergiaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.usecase.info.GetAlergia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class GetAlergiaImpl implements GetAlergia {
     private PacienteRepository pacienteRepository;
 
     @Override
-    public List<Alergia> execute(Integer idUser) {
+    public List<Allergy> execute(Integer idUser) {
         if(pacienteRepository.existsById(idUser)) {
             return alergiaRepository.findByPacienteId(idUser);
         }

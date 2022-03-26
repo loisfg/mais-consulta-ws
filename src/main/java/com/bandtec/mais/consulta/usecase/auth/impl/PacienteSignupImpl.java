@@ -1,11 +1,11 @@
 package com.bandtec.mais.consulta.usecase.auth.impl;
 
-import com.bandtec.mais.consulta.domain.Paciente;
-import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.domain.Patient;
+import com.bandtec.mais.consulta.domain.User;
 import com.bandtec.mais.consulta.gateway.repository.EnderecoRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
-import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.SignUpPatientRequestDTO;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
 import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +27,19 @@ public class PacienteSignupImpl implements PacienteSignup {
     private EnderecoRepository enderecoRepository;
 
     @Override
-    public Optional<Usuario> execute(PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
-        Paciente paciente = pacienteSignUpRequestDTO.getPaciente();
-        Usuario usuario = PacienteSignUpRequestDTO.convertFromController(pacienteSignUpRequestDTO);
+    public Optional<User> execute(SignUpPatientRequestDTO signUpPatientRequestDTO) {
+        Patient patient = signUpPatientRequestDTO.getPatient();
+        User user = SignUpPatientRequestDTO.convertFromController(signUpPatientRequestDTO);
 
-        if (usuarioRepository.existsByCpf(usuario.getCpf())) {
+        if (usuarioRepository.existsByCpf(user.getCpf())) {
             return Optional.empty();
         } else {
-            paciente.setNome(StrFormat.toTitledCase(paciente.getNome()));
-            paciente.setDtNascimento(LocalDate.parse(pacienteSignUpRequestDTO.getDtNascimento()));
-            paciente.setUsuario(usuario);
-            enderecoRepository.save(paciente.getEndereco());
-            pacienteRepository.save(paciente);
-            return Optional.of(usuarioRepository.save(usuario));
+            patient.setName(StrFormat.toTitledCase(patient.getName()));
+            patient.setBirthDate(LocalDate.parse(signUpPatientRequestDTO.getBirthDate()));
+            patient.setUser(user);
+            enderecoRepository.save(patient.getAddress());
+            pacienteRepository.save(patient);
+            return Optional.of(usuarioRepository.save(user));
         }
     }
 

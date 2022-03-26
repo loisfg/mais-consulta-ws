@@ -41,8 +41,8 @@ public class GetNotificationImpl implements GetNotification {
                 .forEach(notification -> {
                     NotificationDTO newNotificationDTO = new NotificationDTO();
 
-                    newNotificationDTO.setDescricao(notification.getDescricao());
-                    newNotificationDTO.setInsertDt(notification.getInsertDt());
+                    newNotificationDTO.setDescription(notification.getDescription());
+                    newNotificationDTO.setInsertDateTime(notification.getInsertDateTime());
 
                     notificationDTOList.add(newNotificationDTO);
                 });

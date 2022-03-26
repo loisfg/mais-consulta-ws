@@ -36,7 +36,7 @@ public class SearchController {
     }
 
     @GetMapping("/{especialidade}")
-    public ResponseEntity<Set<Medico>> getMedicosEspecialidade(@PathVariable String especialidade) {
+    public ResponseEntity<Set<Doctor>> getMedicosEspecialidade(@PathVariable String especialidade) {
         return searchEspecialidade.execute(especialidade).isEmpty() ?
                 ResponseEntity.status(204).build() : ResponseEntity.status(200).body(
                         (searchEspecialidade.execute(especialidade))
@@ -51,17 +51,17 @@ public class SearchController {
     }
 
     @GetMapping("/remedios/auto/{nome}")
-    public ResponseEntity<Set<Remedio>> getRemediosAuto(@PathVariable String nome) {
+    public ResponseEntity<Set<Medicine>> getRemediosAuto(@PathVariable String nome) {
         return ResponseEntity.of(getRemediosToComplet.execute(nome));
     }
 
     @GetMapping("/alergias/auto/{nome}")
-    public ResponseEntity<Set<Alergia>> getAlergiaAuto(@PathVariable String nome) {
+    public ResponseEntity<Set<Allergy>> getAlergiaAuto(@PathVariable String nome) {
         return ResponseEntity.of(getAlergiasToComplet.execute(nome));
     }
 
     @GetMapping("/deficiencias/auto/{nome}")
-    public ResponseEntity<Set<Deficiencia>> getDeficienciaAuto(@PathVariable String nome) {
+    public ResponseEntity<Set<Deficiency>> getDeficienciaAuto(@PathVariable String nome) {
         return ResponseEntity.of(getDeficienciaToComplet.execute(nome));
     }
 

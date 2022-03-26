@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.doctor.impl;
 
-import com.bandtec.mais.consulta.domain.Medico;
+import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.error.ResourceNotFoundException;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
-import com.bandtec.mais.consulta.models.dto.response.MedicoHistoricoResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.DoctorHistoricResponseDTO;
 import com.bandtec.mais.consulta.usecase.doctor.MedicoHistorico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class MedicoHistoricoImpl implements MedicoHistorico {
     MedicoRepository medicoRepository;
 
     @Override
-    public Optional<List<MedicoHistoricoResponseDTO>> execute(Integer idMedico) {
+    public Optional<List<DoctorHistoricResponseDTO>> execute(Integer idMedico) {
 
 
         return medicoRepository.findHistoricoAgendamentos(idMedico);
@@ -26,7 +26,7 @@ public class MedicoHistoricoImpl implements MedicoHistorico {
 
     @Override
     public void verify(Integer idMedico) {
-        Optional<Medico> medico= medicoRepository.findById(idMedico);
+        Optional<Doctor> medico= medicoRepository.findById(idMedico);
         if (medico.isEmpty()) {
             throw new ResourceNotFoundException("ID doctor:" + idMedico+" NOT FOUND");
         }

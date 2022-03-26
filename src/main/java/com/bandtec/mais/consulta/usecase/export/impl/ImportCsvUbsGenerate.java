@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
-import com.bandtec.mais.consulta.domain.Endereco;
+import com.bandtec.mais.consulta.domain.Address;
 import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.gateway.repository.EnderecoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
@@ -23,7 +23,7 @@ public class ImportCsvUbsGenerate implements ImportCsv {
     @Autowired
     EnderecoRepository enderecoRepository;
 
-    public static List<Ubs> leSalvaUbsCmEndereco(List<Endereco> enderecoList) {
+    public static List<Ubs> leSalvaUbsCmEndereco(List<Address> addressList) {
         FileReader arq = null;
         Scanner entrada = null;
         Boolean deuRuim = false;
@@ -44,7 +44,7 @@ public class ImportCsvUbsGenerate implements ImportCsv {
                 Integer id = list.size() + 1;
                 String nome = entrada.next();
                 String telefone = "(11)" + gerador.nextInt(8999) + "-" + gerador.nextInt(9999);
-                list.add(new Ubs(id, nome, telefone, enderecoList.get(id - 1)));
+                list.add(new Ubs(id, nome, telefone, addressList.get(id - 1)));
             }
         } catch (NoSuchElementException erro) {
             System.out.println("Arquivo com problemas");
@@ -65,12 +65,12 @@ public class ImportCsvUbsGenerate implements ImportCsv {
             }
         }
 
-        list.removeIf(ubs -> ubs.getNome().equals(""));
+        list.removeIf(ubs -> ubs.getName().equals(""));
 
         return list;
     }
 
-    public static List<Endereco> leSalvaEndereco() {
+    public static List<Address> leSalvaEndereco() {
         FileReader arq = null;
         Scanner entrada = null;
         Boolean deuRuim = false;
@@ -84,14 +84,14 @@ public class ImportCsvUbsGenerate implements ImportCsv {
             System.exit(1);
         }
 
-        List<Endereco> listEndereco = new ArrayList<>();
+        List<Address> listAddress = new ArrayList<>();
 
         List<String> estados = List.of("SP", "RJ", "ES", "MT", "MG");
 
         Random gerador = new Random();
         try {
             while (entrada.hasNext()) {
-                Integer id = listEndereco.size() + 1;
+                Integer id = listAddress.size() + 1;
                 String cep = gerador.nextInt(+99999) + "-" + gerador.nextInt(+999);
                 String estado = estados.get(gerador.nextInt(estados.size()));
                 String logradouro = "";
@@ -100,8 +100,8 @@ public class ImportCsvUbsGenerate implements ImportCsv {
                 String cidade = "Jd " + StrFormat.toTitledCase(bairro);
                 String numero = String.valueOf(gerador.nextInt(+2000));
                 String complemento = "";
-                Endereco endereco = new Endereco(id, cep, cidade, estado, bairro, rua, logradouro, numero, complemento);
-                listEndereco.add(endereco);
+                Address address = new Address(id, cep, cidade, estado, bairro, rua, logradouro, numero, complemento);
+                listAddress.add(address);
             }
         } catch (NoSuchElementException erro) {
             System.out.println("Arquivo com problemas");
@@ -122,12 +122,12 @@ public class ImportCsvUbsGenerate implements ImportCsv {
             }
         }
 
-        return listEndereco;
+        return listAddress;
     }
 
     @Override
     public void run() {
-        List<Endereco> enderecoList = leSalvaEndereco();
-        List<Ubs> listUbs = leSalvaUbsCmEndereco(enderecoList);
+        List<Address> addressList = leSalvaEndereco();
+        List<Ubs> listUbs = leSalvaUbsCmEndereco(addressList);
     }
 }

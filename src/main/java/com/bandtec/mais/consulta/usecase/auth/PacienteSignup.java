@@ -1,10 +1,10 @@
 package com.bandtec.mais.consulta.usecase.auth;
 
-import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
+import com.bandtec.mais.consulta.domain.User;
+import com.bandtec.mais.consulta.models.dto.request.SignUpPatientRequestDTO;
 
 import java.util.Optional;
 
 public interface PacienteSignup {
-    Optional<Usuario> execute(PacienteSignUpRequestDTO pacienteSignUpRequestDTO);
+    Optional<User> execute(SignUpPatientRequestDTO signUpPatientRequestDTO);
 }

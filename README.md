@@ -1,2 +1,2 @@
-# -consulta
+# -consult
 this is the power

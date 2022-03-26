@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Alergia;
-import com.bandtec.mais.consulta.domain.Paciente;
-import com.bandtec.mais.consulta.domain.PacienteHasAlergia;
-import com.bandtec.mais.consulta.domain.PacienteHasAlergiaKey;
+import com.bandtec.mais.consulta.domain.Allergy;
+import com.bandtec.mais.consulta.domain.Patient;
+import com.bandtec.mais.consulta.domain.PatientHasAllergy;
+import com.bandtec.mais.consulta.domain.PatientHasAllergyKey;
 import com.bandtec.mais.consulta.gateway.repository.AlergiaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteHasAlergiaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
@@ -28,32 +28,32 @@ public class PostAlergiaImpl implements PostAlergia {
     PacienteHasAlergiaRepository pacienteHasAlergiaRepository;
 
     @Override
-    public List<Alergia> execute(Iterable<Integer> alergias, Integer idPaciente) {
-        Set<PacienteHasAlergia> pacienteHasAlergiasSet = new HashSet<>();
+    public List<Allergy> execute(Iterable<Integer> alergias, Integer idPaciente) {
+        Set<PatientHasAllergy> patientHasAlergiasSet = new HashSet<>();
         if (pacienteRepository.existsById(idPaciente)) {
             for (Integer alergiaId : alergias) {
-                PacienteHasAlergiaKey fk = PacienteHasAlergiaKey
+                PatientHasAllergyKey fk = PatientHasAllergyKey
                         .builder()
-                        .alergiaId(alergiaId)
-                        .pacienteId(idPaciente)
+                        .allergyId(alergiaId)
+                        .patientId(idPaciente)
                         .build();
 
-                PacienteHasAlergia pacienteHasAlergia = PacienteHasAlergia
+                PatientHasAllergy patientHasAllergy = PatientHasAllergy
                         .builder()
-                        .id(fk)
+                        .patientHasAllergyId(fk)
                         .build();
 
-                pacienteHasAlergiasSet.add(pacienteHasAlergia);
+                patientHasAlergiasSet.add(patientHasAllergy);
             }
 
-            Paciente paciente = Paciente
+            Patient patient = Patient
                     .builder()
-                    .idPaciente(idPaciente)
-                    .alergias(pacienteHasAlergiasSet)
+                    .patientId(idPaciente)
+                    .allergies(patientHasAlergiasSet)
                     .build();
 
-            pacienteRepository.save(paciente);
-            pacienteHasAlergiaRepository.saveAll(pacienteHasAlergiasSet);
+            pacienteRepository.save(patient);
+            pacienteHasAlergiaRepository.saveAll(patientHasAlergiasSet);
         }
 
         return alergiaRepository.findAllById(alergias);

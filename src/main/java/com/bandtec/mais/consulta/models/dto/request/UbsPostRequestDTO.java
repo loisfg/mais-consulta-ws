@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.models.dto.request;
 
-import com.bandtec.mais.consulta.domain.Endereco;
+import com.bandtec.mais.consulta.domain.Address;
 import com.bandtec.mais.consulta.domain.Ubs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,17 +12,17 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @Slf4j
 public class UbsPostRequestDTO {
-    private String nome;
-    private String telefone;
-    private Endereco endereco;
+    private String name;
+    private String phone;
+    private Address address;
 
     public static Ubs convertFromController(UbsPostRequestDTO ubsPostRequestDTO) {
-        log.debug("CRIANDO UBS {}", ubsPostRequestDTO);
+        log.debug("Creating UBS {}", ubsPostRequestDTO);
         return Ubs
                 .builder()
-                .nome(ubsPostRequestDTO.nome)
-                .endereco(ubsPostRequestDTO.endereco)
-                .telefone(ubsPostRequestDTO.telefone)
+                .name(ubsPostRequestDTO.name)
+                .address(ubsPostRequestDTO.address)
+                .phone(ubsPostRequestDTO.phone)
                 .build();
     }
 }

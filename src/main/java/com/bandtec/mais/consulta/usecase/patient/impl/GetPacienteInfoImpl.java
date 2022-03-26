@@ -2,9 +2,9 @@ package com.bandtec.mais.consulta.usecase.patient.impl;
 
 import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.gateway.repository.*;
-import com.bandtec.mais.consulta.models.dto.DadosPessoaisDTO;
-import com.bandtec.mais.consulta.models.dto.ProntuarioDTO;
-import com.bandtec.mais.consulta.models.dto.response.PacienteInfoResponseDTO;
+import com.bandtec.mais.consulta.models.dto.PersonalDataDTO;
+import com.bandtec.mais.consulta.models.dto.MedicalChartDTO;
+import com.bandtec.mais.consulta.models.dto.response.PatientInfoResponseDTO;
 import com.bandtec.mais.consulta.usecase.patient.GetPacienteInfo;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,67 +38,67 @@ public class GetPacienteInfoImpl implements GetPacienteInfo {
     private AtividadeRepository atividadeRepository;
 
     @Override
-    public Optional<PacienteInfoResponseDTO> execute(Integer idPaciente) {
+    public Optional<PatientInfoResponseDTO> execute(Integer idPaciente) {
 
         if (pacienteRepository.existsByIdPaciente(idPaciente)) {
 
-            Paciente paciente = pacienteRepository.findById(idPaciente).get();
+            Patient patient = pacienteRepository.findById(idPaciente).get();
 
-            Usuario usuario = paciente.getUsuario();
-            Endereco endereco = paciente.getEndereco();
+            User user = patient.getUser();
+            Address address = patient.getAddress();
 
-            List<Doenca> doencaList = doencaRepository.findByPacienteId(idPaciente);
-            List<Alergia> alergiaList = alergiaRepository.findByPacienteId(idPaciente);
-            List<Deficiencia> deficienciaList = deficienciaRepository.findByPacienteId(idPaciente);
-            List<Remedio> remedioList = remedioRepository.findByPacienteId(idPaciente);
-            List<Atividade> atividadeList = atividadeRepository.findByPacienteId(idPaciente);
+            List<Disease> diseaseList = doencaRepository.findByPacienteId(idPaciente);
+            List<Allergy> allergyList = alergiaRepository.findByPacienteId(idPaciente);
+            List<Deficiency> deficiencyList = deficienciaRepository.findByPacienteId(idPaciente);
+            List<Medicine> medicineList = remedioRepository.findByPacienteId(idPaciente);
+            List<Activity> activityList = atividadeRepository.findByPacienteId(idPaciente);
 
-            List<Doenca> doencaHereditariaList = doencaList.stream().filter(Doenca::getHereditaria).collect(Collectors.toList());
-            List<Doenca> doencaCronicaList = doencaList.stream().filter(Doenca::getCronico).collect(Collectors.toList());
-            List<Doenca> doencaDSTList = doencaList.stream().filter(Doenca::getDst).collect(Collectors.toList());
-            List<Remedio> remedioControladoList = remedioList.stream().filter(Remedio::getControlado).collect(Collectors.toList());
+            List<Disease> diseaseHereditariaList = diseaseList.stream().filter(Disease::getHereditary).collect(Collectors.toList());
+            List<Disease> diseaseCronicaList = diseaseList.stream().filter(Disease::getChronic).collect(Collectors.toList());
+            List<Disease> diseaseDSTList = diseaseList.stream().filter(Disease::getStd).collect(Collectors.toList());
+            List<Medicine> medicineControladoList = medicineList.stream().filter(Medicine::getControlled).collect(Collectors.toList());
 
-            DadosPessoaisDTO dadosPessoaisDTO = DadosPessoaisDTO
+            PersonalDataDTO personalDataDTO = PersonalDataDTO
                     .builder()
-                    .nome(paciente.getNome())
-                    .idade(calcularIdade(paciente.getDtNascimento()))
-                    .endereco(endereco.getRua())
-                    .logradouro(endereco.getLogradouro())
-                    .complemento(endereco.getComplemento())
-                    .numero(endereco.getNumero())
-                    .bairro(endereco.getBairro())
-                    .numeroSus(paciente.getNumeroCarteiraSus())
-                    .cpf(usuario.getCpf())
-                    .telefone(paciente.getTelefone())
-                    .cidade(endereco.getCidade())
-                    .estado(endereco.getEstado())
-                    .celular(paciente.getTelefone())
-                    .cep(endereco.getCep())
+                    .name(patient.getName())
+                    .age(calcularIdade(patient.getBirthDate()))
+                    .address(address.getStreet())
+                    .publicPlace(address.getPublicPlace())
+                    .complement(address.getComplemento())
+                    .number(address.getNumero())
+                    .district(address.getDistrict())
+                    .susNumber(patient.getSusNumberWallet())
+                    .cpf(user.getCpf())
+                    .phone(patient.getPhone())
+                    .city(address.getCity())
+                    .state(address.getState())
+                    .cellPhone(patient.getPhone())
+                    .cep(address.getZipCode())
                     .build();
 
-            ProntuarioDTO prontuarioDTO = ProntuarioDTO
+            MedicalChartDTO medicalChartDTO = MedicalChartDTO
                     .builder()
-                    .peso(paciente.getPeso())
-                    .altura(paciente.getAltura())
-                    .doencasCronicas(doencaCronicaList)
-                    .remediosControlados(remedioControladoList)
-                    .alergias(alergiaList)
-                    .dsts(doencaDSTList)
-                    .isFumante(paciente.getIsFumante())
-                    .isVirgem(paciente.getIsVirgem())
-                    .deficiencia(deficienciaList)
-                    .doencasHereditarias(doencaHereditariaList)
-                    .atividadesProibidas(atividadeList)
-                    .tipoSanguineo(paciente.getTipoSanguineo())
+                    .weight(patient.getWeight())
+                    .height(patient.getHeight())
+                    .chronicDiseases(diseaseCronicaList)
+                    .prescriptionDrugs(medicineControladoList)
+                    .allergies(allergyList)
+                    .stds(diseaseDSTList)
+                    .isSmoker(patient.getIsSmoker())
+                    .isVirgin(patient.getIsVirgin())
+                    .deficiency(deficiencyList)
+                    .hereditaryDiseases(diseaseHereditariaList)
+                    .prohibitedActivities(activityList)
+                    .bloodType(patient.getBloodType())
                     .build();
 
-            PacienteInfoResponseDTO pacienteInfoResponseDTO = PacienteInfoResponseDTO
+            PatientInfoResponseDTO patientInfoResponseDTO = PatientInfoResponseDTO
                     .builder()
-                    .dadosPessoais(dadosPessoaisDTO)
-                    .prontuario(prontuarioDTO)
+                    .personalData(personalDataDTO)
+                    .medicalChart(medicalChartDTO)
                     .build();
 
-            return Optional.of(pacienteInfoResponseDTO);
+            return Optional.of(patientInfoResponseDTO);
         }
 
         return Optional.empty();

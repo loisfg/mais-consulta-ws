@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
-import com.bandtec.mais.consulta.domain.Diagnostico;
+import com.bandtec.mais.consulta.domain.Diagnosis;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DiagnosticoRepository extends JpaRepository<Diagnostico, Integer> {
+public interface DiagnosticoRepository extends JpaRepository<Diagnosis, Integer> {
 }

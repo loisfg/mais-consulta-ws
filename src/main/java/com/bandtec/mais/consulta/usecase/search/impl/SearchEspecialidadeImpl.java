@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.usecase.search.impl;
 
-import com.bandtec.mais.consulta.domain.Especialidade;
-import com.bandtec.mais.consulta.domain.Medico;
+import com.bandtec.mais.consulta.domain.Specialty;
+import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.gateway.repository.EspecialidadeRepository;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.usecase.search.SearchEspecialidade;
@@ -19,10 +19,10 @@ public class SearchEspecialidadeImpl implements SearchEspecialidade {
     MedicoRepository medicoRepository;
 
     @Override
-    public Set<Medico> execute(String descricao) {
-        Especialidade especialidade = especialidadeRepository.findByDescricao(descricao);
+    public Set<Doctor> execute(String descricao) {
+        Specialty specialty = especialidadeRepository.findByDescricao(descricao);
 
-        return medicoRepository.findAllByEspecialidade(especialidade);
+        return medicoRepository.findAllByEspecialidade(specialty);
 
         //TODO retirar especialidade do retorno do JSON;
     }

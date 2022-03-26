@@ -19,15 +19,15 @@ public class Ubs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_ubs")
-    private Integer idUbs;
+    private Integer ubsId;
 
-    private String nome;
+    private String name;
 
-    private String telefone;
+    private String phone;
 
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
-    private Endereco endereco;
+    private Address address;
 
     @Override
     public boolean equals(Object o) {
@@ -35,7 +35,7 @@ public class Ubs {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Ubs ubs = (Ubs) o;
 
-        return Objects.equals(idUbs, ubs.idUbs);
+        return Objects.equals(ubsId, ubs.ubsId);
     }
 
     @Override

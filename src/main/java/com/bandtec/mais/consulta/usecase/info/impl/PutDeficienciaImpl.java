@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Deficiencia;
+import com.bandtec.mais.consulta.domain.Deficiency;
 import com.bandtec.mais.consulta.gateway.repository.DeficienciaRepository;
 import com.bandtec.mais.consulta.usecase.info.PutDeficiencia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ public class PutDeficienciaImpl implements PutDeficiencia {
     private DeficienciaRepository deficienciaRepository;
 
     @Override
-    public Optional<Deficiencia> execute(Integer id, Deficiencia deficiencia) {
+    public Optional<Deficiency> execute(Integer id, Deficiency deficiency) {
 
         if (deficienciaRepository.existsById(id)) {
-            deficiencia.setId(id);
-            return Optional.of(deficienciaRepository.save(deficiencia));
+            deficiency.setDeficiencyId(id);
+            return Optional.of(deficienciaRepository.save(deficiency));
         }
 
         return Optional.empty();

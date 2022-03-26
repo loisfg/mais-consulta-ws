@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -26,31 +25,31 @@ public class PostDoencaImpl implements PostDoenca {
     private DoencaRepository doencaRepository;
 
     @Override
-    public List<Doenca> execute(Iterable<Integer> doencas, Integer idPaciente) {
-        Set<PacienteHasDoencas> pacienteHasRemediosSet = new HashSet<>();
+    public List<Disease> execute(Iterable<Integer> doencas, Integer idPaciente) {
+        Set<PatientHasDisease> pacienteHasRemediosSet = new HashSet<>();
         if (pacienteRepository.existsById(idPaciente)) {
             for (Integer alergiaId : doencas) {
-                PacienteHasDoencasKey fk = PacienteHasDoencasKey
+                PatientHasDiseaseKey fk = PatientHasDiseaseKey
                         .builder()
-                        .doencaId(alergiaId)
-                        .pacienteId(idPaciente)
+                        .diseaseId(alergiaId)
+                        .patientId(idPaciente)
                         .build();
 
-                PacienteHasDoencas pacienteHasDoencas = PacienteHasDoencas
+                PatientHasDisease patientHasDisease = PatientHasDisease
                         .builder()
-                        .id(fk)
+                        .patientHasDiseasesId(fk)
                         .build();
 
-                pacienteHasRemediosSet.add(pacienteHasDoencas);
+                pacienteHasRemediosSet.add(patientHasDisease);
             }
 
-            Paciente paciente = Paciente
+            Patient patient = Patient
                     .builder()
-                    .idPaciente(idPaciente)
-                    .doencas(pacienteHasRemediosSet)
+                    .patientId(idPaciente)
+                    .diseases(pacienteHasRemediosSet)
                     .build();
 
-            pacienteRepository.save(paciente);
+            pacienteRepository.save(patient);
             pacienteHasDoencaRepository.saveAll(pacienteHasRemediosSet);
         }
 

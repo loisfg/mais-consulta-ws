@@ -1,18 +1,13 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
-import com.bandtec.mais.consulta.domain.Agendamento;
-import com.bandtec.mais.consulta.domain.Medico;
-import com.bandtec.mais.consulta.domain.Paciente;
+import com.bandtec.mais.consulta.domain.Scheduling;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
 import com.bandtec.mais.consulta.usecase.export.ExportLastConsulta;
 import com.bandtec.mais.consulta.usecase.export.utils.BuildExportArquivo;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,7 +25,7 @@ public class ExportLastConsultaImpl implements ExportLastConsulta {
 
         if (usuarioRepository.existsById(idUser)) {
 
-            Optional<Agendamento> oAgendamento = agendamentoRepository.findFirstByPaciente_Usuario_IdUsuarioOrderByDtAtendimentoDesc(idUser);
+            Optional<Scheduling> oAgendamento = agendamentoRepository.findFirstByPaciente_Usuario_IdUsuarioOrderByDtAtendimentoDesc(idUser);
 
             if (oAgendamento.isEmpty()) {
                 return Optional.empty();

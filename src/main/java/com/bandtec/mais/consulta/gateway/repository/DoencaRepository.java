@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public interface DoencaRepository extends JpaRepository<Doenca,Integer> {
+public interface DoencaRepository extends JpaRepository<Disease,Integer> {
     @Query("SELECT d.doenca FROM PacienteHasDoencas d WHERE d.paciente.idPaciente = :id")
-    List<Doenca> findByPacienteId(@Param("id") Integer id);
+    List<Disease> findByPacienteId(@Param("id") Integer id);
 
     @Query("SELECT d FROM PacienteHasDoencas d WHERE d.paciente.idPaciente = :id")
-    Set<PacienteHasDoencas> findDoencasByPacienteId(@Param("id") Integer id);
+    Set<PatientHasDisease> findDoencasByPacienteId(@Param("id") Integer id);
 
     @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.InfoResponseDTO(d.id, d.nome) FROM Doenca d WHERE d.cronico = true")
     Optional<Set<InfoResponseDTO>> findDoencaByNomeStartingWithIgnoreCaseAndCronico(String nome);

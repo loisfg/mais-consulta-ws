@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Remedio;
+import com.bandtec.mais.consulta.domain.Medicine;
 import com.bandtec.mais.consulta.gateway.repository.RemedioRepository;
 import com.bandtec.mais.consulta.usecase.info.GetRemediosToComplet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class GetRemediosToCompletImpl implements GetRemediosToComplet {
     RemedioRepository remedioRepository;
 
     @Override
-    public Optional<Set<Remedio>> execute(String nome) {
+    public Optional<Set<Medicine>> execute(String nome) {
         return remedioRepository.findByNomeStartingWithIgnoreCase(nome);
     }
 }

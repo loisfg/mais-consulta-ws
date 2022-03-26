@@ -5,10 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Set;
 
-public interface PacienteHasAlergiaRepository extends JpaRepository<PacienteHasAlergia, PacienteHasAlergiaKey> {
+public interface PacienteHasAlergiaRepository extends JpaRepository<PatientHasAllergy, PatientHasAllergyKey> {
     @Query("SELECT a.paciente.alergias FROM PacienteHasAlergia a WHERE a.paciente.idPaciente = :id")
-    Set<PacienteHasAlergia> findRemedioByIdPaciente(@Param("id") Integer id);
+    Set<PatientHasAllergy> findRemedioByIdPaciente(@Param("id") Integer id);
 }

@@ -1,17 +1,17 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
-import com.bandtec.mais.consulta.domain.Medico;
-import com.bandtec.mais.consulta.domain.MedicoImportEexport;
+import com.bandtec.mais.consulta.domain.Doctor;
+import com.bandtec.mais.consulta.domain.DoctorImportExport;
 import com.bandtec.mais.consulta.domain.Ubs;
-import com.bandtec.mais.consulta.domain.Usuario;
+import com.bandtec.mais.consulta.domain.User;
 import com.bandtec.mais.consulta.gateway.repository.EspecialidadeRepository;
 import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
-import com.bandtec.mais.consulta.models.dto.request.MedicoSignUpRequestDTO;
-import com.bandtec.mais.consulta.models.dto.request.PacienteInfoRequestDTO;
-import com.bandtec.mais.consulta.models.dto.response.MedicoAgendamentoDTO;
-import com.bandtec.mais.consulta.models.dto.response.MedicoHistoricoResponseDTO;
+import com.bandtec.mais.consulta.models.dto.request.SignUpDoctorRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.PatientInfoRequestDTO;
+import com.bandtec.mais.consulta.models.dto.response.DoctorSchedulingDTO;
+import com.bandtec.mais.consulta.models.dto.response.DoctorHistoricResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.MedicoDelete;
 import com.bandtec.mais.consulta.usecase.auth.MedicoSignUp;
 import com.bandtec.mais.consulta.usecase.doctor.MedicoHistorico;
@@ -61,41 +61,41 @@ public class MedicoController {
     private EspecialidadeRepository especialidadeRepository;
 
     @PostMapping("import")
-    public Optional<Usuario> medicoimport(@RequestBody MedicoSignUpRequestDTO medicoSignUpRequestDTO){
+    public Optional<User> medicoimport(@RequestBody SignUpDoctorRequestDTO signUpDoctorRequestDTO){
 
-        Optional<Ubs> ubs = ubsRepository.findById(medicoSignUpRequestDTO.getIdUbs());
+        Optional<Ubs> ubs = ubsRepository.findById(signUpDoctorRequestDTO.getUbsId());
 
-        Medico medico = medicoSignUpRequestDTO.getMedico();
-        Usuario usuario = Usuario
+        Doctor doctor = signUpDoctorRequestDTO.getDoctor();
+        User user = User
                 .builder()
-                .cpf(medicoSignUpRequestDTO.getCpf())
-                .email(medicoSignUpRequestDTO.getEmail())
-                .password(medicoSignUpRequestDTO.getPassword())
-                .role(medicoSignUpRequestDTO.getRole())
+                .cpf(signUpDoctorRequestDTO.getCpf())
+                .email(signUpDoctorRequestDTO.getEmail())
+                .password(signUpDoctorRequestDTO.getPassword())
+                .role(signUpDoctorRequestDTO.getRole())
                 .build();
 
-        if (usuarioRepository.existsByCpf(usuario.getCpf())) {
+        if (usuarioRepository.existsByCpf(user.getCpf())) {
             log.info("Usuario já existente");
             return Optional.empty();
         } else {
-            System.out.println(medicoSignUpRequestDTO);
-            List<MedicoSignUpRequestDTO> medicoList = new ArrayList<>();
-            MedicoImportEexport medicoImportEexport = new MedicoImportEexport();
+            System.out.println(signUpDoctorRequestDTO);
+            List<SignUpDoctorRequestDTO> medicoList = new ArrayList<>();
+            DoctorImportExport doctorImportExport = new DoctorImportExport();
 
-            medicoList.add(medicoSignUpRequestDTO);
+            medicoList.add(signUpDoctorRequestDTO);
 
-            boolean existsEspecialidade = especialidadeRepository.existsByDescricao(medico.getEspecialidade().getDescricao());
+            boolean existsEspecialidade = especialidadeRepository.existsByDescricao(doctor.getSpecialty().getDescription());
             if (existsEspecialidade) {
-                medico.setEspecialidade(especialidadeRepository.findByDescricao(medico.getEspecialidade().getDescricao()));
+                doctor.setSpecialty(especialidadeRepository.findByDescricao(doctor.getSpecialty().getDescription()));
             }
-            ubs.ifPresent(medico::setUbs);
-            medico.setUsuario(usuario);
-            medicoRepository.save(medico);
-            System.out.println("medico"+medico);
-            List<Medico> medicoList1 = medicoRepository.findAllMedicos();
+            ubs.ifPresent(doctor::setUbs);
+            doctor.setUser(user);
+            medicoRepository.save(doctor);
+            System.out.println("medico"+ doctor);
+            List<Doctor> doctorList1 = medicoRepository.findAllMedicos();
 
-            medicoImportEexport.gravaArquivoTxt(medicoList1);
-            return Optional.of(usuarioRepository.save(usuario));
+            doctorImportExport.recordTxtFile(doctorList1);
+            return Optional.of(usuarioRepository.save(user));
 
         }
     }
@@ -105,14 +105,14 @@ public class MedicoController {
     public ResponseEntity<?> editarFormularioAtendimento(@PathVariable Integer idMedico,
                                                          @PathVariable Integer idPaciente,
                                                          @PathVariable Integer idAgendamento,
-                                                         @RequestBody PacienteInfoRequestDTO pacienteInfoRequestDTO) {
-        return ResponseEntity.of(postFormularioAtendimento.execute(idMedico, idPaciente, idAgendamento, pacienteInfoRequestDTO));
+                                                         @RequestBody PatientInfoRequestDTO patientInfoRequestDTO) {
+        return ResponseEntity.of(postFormularioAtendimento.execute(idMedico, idPaciente, idAgendamento, patientInfoRequestDTO));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Usuario> medicoSignUp(@RequestBody MedicoSignUpRequestDTO medicoSignUpRequestDTO) {
+    public ResponseEntity<User> medicoSignUp(@RequestBody SignUpDoctorRequestDTO signUpDoctorRequestDTO) {
 
-        Optional<Usuario> oUsuario = medicoSignup.execute(medicoSignUpRequestDTO);
+        Optional<User> oUsuario = medicoSignup.execute(signUpDoctorRequestDTO);
 
         return oUsuario
                 .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
@@ -130,8 +130,8 @@ public class MedicoController {
     }
 
     @GetMapping("/{idMedico}/agendamentos")
-    public ResponseEntity<List<MedicoAgendamentoDTO>> getAgendamentosByMedico(@PathVariable Integer idMedico) {
-        Optional<List<MedicoAgendamentoDTO>> oAgendamentos = medicoAgendamentos.execute(idMedico);
+    public ResponseEntity<List<DoctorSchedulingDTO>> getAgendamentosByMedico(@PathVariable Integer idMedico) {
+        Optional<List<DoctorSchedulingDTO>> oAgendamentos = medicoAgendamentos.execute(idMedico);
         validation.verifyMedicoExists(idMedico);
 
         return oAgendamentos
@@ -140,8 +140,8 @@ public class MedicoController {
     }
 
     @GetMapping("/{idMedico}/historico")
-    public ResponseEntity<List<MedicoHistoricoResponseDTO>> getHistoricoByMedico(@PathVariable Integer idMedico) {
-        Optional<List<MedicoHistoricoResponseDTO>> oHistorico = medicoHistorico.execute(idMedico);
+    public ResponseEntity<List<DoctorHistoricResponseDTO>> getHistoricoByMedico(@PathVariable Integer idMedico) {
+        Optional<List<DoctorHistoricResponseDTO>> oHistorico = medicoHistorico.execute(idMedico);
         validation.verifyMedicoExists(idMedico);
 
         return oHistorico

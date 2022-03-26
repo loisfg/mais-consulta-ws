@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Remedio;
+import com.bandtec.mais.consulta.domain.Medicine;
 import com.bandtec.mais.consulta.gateway.repository.RemedioRepository;
 import com.bandtec.mais.consulta.usecase.info.PutRemedio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ public class PutRemedioImpl implements PutRemedio {
     private RemedioRepository remedioRepository;
 
     @Override
-    public Optional<Remedio> execute(Integer id, Remedio remedio) {
+    public Optional<Medicine> execute(Integer id, Medicine medicine) {
 
         if (remedioRepository.existsById(id)) {
-            remedio.setId(id);
-            return Optional.of(remedioRepository.save(remedio));
+            medicine.setMedicineId(id);
+            return Optional.of(remedioRepository.save(medicine));
         }
 
         return Optional.empty();

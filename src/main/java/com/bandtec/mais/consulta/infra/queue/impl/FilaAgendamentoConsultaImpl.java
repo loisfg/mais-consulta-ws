@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.infra.queue.impl;
 
-import com.bandtec.mais.consulta.domain.Consulta;
+import com.bandtec.mais.consulta.domain.Consult;
 import com.bandtec.mais.consulta.gateway.repository.ConsultaRepository;
 import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
 import com.bandtec.mais.consulta.models.FilaObj;
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 @Scope("singleton")
 public class FilaAgendamentoConsultaImpl implements FilaAgendamentoConsulta {
 
-    private static FilaObj<Consulta> instance;
+    private static FilaObj<Consult> instance;
 
-    public static FilaObj<Consulta> getInstance() {
+    public static FilaObj<Consult> getInstance() {
         if (instance == null) instance = new FilaObj<>(1000);
         return instance;
     }
@@ -24,12 +24,12 @@ public class FilaAgendamentoConsultaImpl implements FilaAgendamentoConsulta {
     ConsultaRepository consultaRepository;
 
     @Override
-    public FilaObj<Consulta> getFilaAgendamentoConsulta() {
+    public FilaObj<Consult> getFilaAgendamentoConsulta() {
         return instance;
     }
 
     @Override
-    public void setFilaAgendamentoConsulta(Consulta consulta) {
-        instance.insert(consulta);
+    public void setFilaAgendamentoConsulta(Consult consult) {
+        instance.insert(consult);
     }
 }

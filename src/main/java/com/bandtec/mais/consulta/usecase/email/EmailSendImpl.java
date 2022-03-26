@@ -2,7 +2,7 @@ package com.bandtec.mais.consulta.usecase.email;
 
 
 import com.bandtec.mais.consulta.domain.Email;
-import com.bandtec.mais.consulta.domain.Paciente;
+import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.gateway.repository.EmailRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
 import com.bandtec.mais.consulta.models.dto.request.EmailDTO;
@@ -32,8 +32,8 @@ public class EmailSendImpl implements EmailSend {
     @Override
     public Email execute(EmailDTO emailDTO, Integer id) {
         Email email = new Email();
-        Optional<Paciente> paciente = pacienteRepository.findById(id);
-        paciente.ifPresent(value -> emailDTO.setEmailTo(value.getUsuario().getEmail()));
+        Optional<Patient> paciente = pacienteRepository.findById(id);
+        paciente.ifPresent(value -> emailDTO.setEmailTo(value.getUser().getEmail()));
         BeanUtils.copyProperties(emailDTO, email);
         email.setSendDateEmail(LocalDateTime.now());
         try {

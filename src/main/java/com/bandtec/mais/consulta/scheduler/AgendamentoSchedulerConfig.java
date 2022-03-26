@@ -1,12 +1,12 @@
 package com.bandtec.mais.consulta.scheduler;
 
-import com.bandtec.mais.consulta.domain.Agendamento;
-import com.bandtec.mais.consulta.domain.Consulta;
+import com.bandtec.mais.consulta.domain.Consult;
+import com.bandtec.mais.consulta.domain.Scheduling;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.ConsultaRepository;
 import com.bandtec.mais.consulta.infra.queue.impl.FilaAgendamentoConsultaImpl;
 import com.bandtec.mais.consulta.models.FilaObj;
-import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
+import com.bandtec.mais.consulta.models.enums.SchedulingStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -32,26 +32,26 @@ public class AgendamentoSchedulerConfig {
     @Autowired
     private ConsultaRepository consultaRepository;
 
-    private final FilaObj<Consulta> fila = FilaAgendamentoConsultaImpl.getInstance();
+    private final FilaObj<Consult> fila = FilaAgendamentoConsultaImpl.getInstance();
 
     @Scheduled(fixedDelay = HORA)
     public void getAgendamentos() {
         log.info("Try get schedules");
-        List<Consulta> consultas = consultaRepository.findConsultasByAgendamento_Status(AgendamentoStatusEnum.AGUARDE);
-        fila.addList(consultas);
+        List<Consult> consults = consultaRepository.findConsultasByAgendamento_Status(SchedulingStatusEnum.HOLD);
+        fila.addList(consults);
     }
 
     @Scheduled(fixedRate = MINUTO * 30)
     public void tratarAgendamentoConsulta() {
         if (!fila.isEmpty()) {
-            Consulta consulta = fila.poll();
-            log.info("Agendamento sendo alterado || id_consulta {}", consulta.getIdConsulta());
-            Optional<Agendamento> agendamento = agendamentoRepository.findAgendamentoByDtAtendimentoAndHrAtendimentoAndStatus(
-                    consulta.getAgendamento().getDtAtendimento(), consulta.getAgendamento().getHrAtendimento(), AgendamentoStatusEnum.CANCELADO);
+            Consult consult = fila.poll();
+            log.info("Agendamento sendo alterado || id_consulta {}", consult.getConsultId());
+            Optional<Scheduling> agendamento = agendamentoRepository.findAgendamentoByDtAtendimentoAndHrAtendimentoAndStatus(
+                    consult.getScheduling().getDtAtendimento(), consult.getScheduling().getHrAtendimento(), SchedulingStatusEnum.CANCELLED);
 
             if (agendamento.isPresent()) {
-                consulta.getAgendamento().setStatus(AgendamentoStatusEnum.ATIVO);
-                agendamentoRepository.updateAgendamentoStatus(consulta.getAgendamento().getIdAgendamento(), consulta.getAgendamento().getStatus());
+                consult.getScheduling().setStatus(SchedulingStatusEnum.ACTIVE);
+                agendamentoRepository.updateAgendamentoStatus(consult.getScheduling().getIdAgendamento(), consult.getScheduling().getStatus());
             }
         } else {
             log.info("Sem agendamentos em AGUARDE || {}", "NOT_SCHEDULE_TIME");

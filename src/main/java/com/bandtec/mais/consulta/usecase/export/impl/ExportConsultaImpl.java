@@ -1,8 +1,8 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
-import com.bandtec.mais.consulta.domain.Agendamento;
-import com.bandtec.mais.consulta.domain.Medico;
-import com.bandtec.mais.consulta.domain.Paciente;
+import com.bandtec.mais.consulta.domain.Scheduling;
+import com.bandtec.mais.consulta.domain.Doctor;
+import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.domain.Ubs;
 import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
@@ -28,7 +28,7 @@ public class ExportConsultaImpl implements ExportConsulta {
 
         if (usuarioRepository.existsById(idPaciente)) {
 
-            List<Agendamento> agendamentoList = agendamentoRepository.findByAgendamentoByPacienteId(idPaciente);
+            List<Scheduling> agendamentoList = agendamentoRepository.findByAgendamentoByPacienteId(idPaciente);
 
             if (agendamentoList.isEmpty()) {
                 return Optional.empty();
@@ -42,7 +42,7 @@ public class ExportConsultaImpl implements ExportConsulta {
         return Optional.empty();
     }
 
-    public String buildDadosArquivoAgendamento(List<Agendamento> agendamentoList) {
+    public String buildDadosArquivoAgendamento(List<Scheduling> agendamentoList) {
 
         StringBuilder texto = new StringBuilder();
         String cabecalho = "data do atendimento;especialidade da consulta;nome do paciente;nome do medico;nome da ubs\n";
@@ -50,12 +50,12 @@ public class ExportConsultaImpl implements ExportConsulta {
         agendamentoList.forEach(agendamento -> {
             String especialidade = agendamento.getEspecialidade().getDescricao();
             LocalDate dataAtendimento = agendamento.getDtAtendimento();
-            Paciente paciente = agendamento.getPaciente();
-            String nomePaciente = paciente.getNome();
-            Medico medico = agendamento.getMedico();
-            String nomeMedico = medico.getNome();
-            Ubs ubs = medico.getUbs();
-            String nomeUbs = ubs.getNome();
+            Patient patient = agendamento.getPaciente();
+            String nomePaciente = patient.getName();
+            Doctor doctor = agendamento.getMedico();
+            String nomeMedico = doctor.getName();
+            Ubs ubs = doctor.getUbs();
+            String nomeUbs = ubs.getName();
             texto.append(buildTextoAgendamento(especialidade, dataAtendimento, nomePaciente, nomeMedico, nomeUbs));
         });
 

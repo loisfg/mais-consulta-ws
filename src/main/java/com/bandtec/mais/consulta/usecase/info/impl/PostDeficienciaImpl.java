@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.info.impl;
 
-import com.bandtec.mais.consulta.domain.Deficiencia;
-import com.bandtec.mais.consulta.domain.Paciente;
-import com.bandtec.mais.consulta.domain.PacienteHasDeficiencia;
-import com.bandtec.mais.consulta.domain.PacienteHasDeficienciaKey;
+import com.bandtec.mais.consulta.domain.Deficiency;
+import com.bandtec.mais.consulta.domain.Patient;
+import com.bandtec.mais.consulta.domain.PatientHasDeficiency;
+import com.bandtec.mais.consulta.domain.PatientHasDeficiencyKey;
 import com.bandtec.mais.consulta.gateway.repository.DeficienciaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteHasDeficienciaRepository;
 import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -28,31 +27,31 @@ public class PostDeficienciaImpl implements PostDeficiencia {
     private PacienteHasDeficienciaRepository pacienteHasDeficienciaRepository;
 
     @Override
-    public List<Deficiencia> execute(Iterable<Integer> deficiencias, Integer idPaciente) {
-        Set<PacienteHasDeficiencia> pacienteHasRemediosSet = new HashSet<>();
+    public List<Deficiency> execute(Iterable<Integer> deficiencias, Integer idPaciente) {
+        Set<PatientHasDeficiency> pacienteHasRemediosSet = new HashSet<>();
         if (pacienteRepository.existsById(idPaciente)) {
             for (Integer deficienciaId : deficiencias) {
-                PacienteHasDeficienciaKey fk = PacienteHasDeficienciaKey
+                PatientHasDeficiencyKey fk = PatientHasDeficiencyKey
                         .builder()
-                        .deficienciaId(deficienciaId)
-                        .pacienteId(idPaciente)
+                        .deficiencyId(deficienciaId)
+                        .patientId(idPaciente)
                         .build();
 
-                PacienteHasDeficiencia pacienteHasDeficiencia = PacienteHasDeficiencia
+                PatientHasDeficiency patientHasDeficiency = PatientHasDeficiency
                         .builder()
-                        .id(fk)
+                        .patientHasDeficiencyId(fk)
                         .build();
 
-                pacienteHasRemediosSet.add(pacienteHasDeficiencia);
+                pacienteHasRemediosSet.add(patientHasDeficiency);
             }
 
-            Paciente paciente = Paciente
+            Patient patient = Patient
                     .builder()
-                    .idPaciente(idPaciente)
-                    .deficiencias(pacienteHasRemediosSet)
+                    .patientId(idPaciente)
+                    .deficiencies(pacienteHasRemediosSet)
                     .build();
 
-            pacienteRepository.save(paciente);
+            pacienteRepository.save(patient);
             pacienteHasDeficienciaRepository.saveAll(pacienteHasRemediosSet);
         }
 

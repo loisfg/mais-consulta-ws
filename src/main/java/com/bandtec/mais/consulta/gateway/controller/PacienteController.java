@@ -1,13 +1,13 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
-import com.bandtec.mais.consulta.domain.Paciente;
+import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.domain.Ubs;
-import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.models.dto.request.PacienteInfoPutResquestDTO;
-import com.bandtec.mais.consulta.models.dto.request.PacienteSignUpRequestDTO;
-import com.bandtec.mais.consulta.models.dto.response.PacienteAgendamentosResponseDTO;
-import com.bandtec.mais.consulta.models.dto.response.PacienteHistoricoResponseDTO;
-import com.bandtec.mais.consulta.models.dto.response.PacienteInfoResponseDTO;
+import com.bandtec.mais.consulta.domain.User;
+import com.bandtec.mais.consulta.models.dto.request.PatientInfoPutRequestDTO;
+import com.bandtec.mais.consulta.models.dto.request.SignUpPatientRequestDTO;
+import com.bandtec.mais.consulta.models.dto.response.PatientSchedulingResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.PatientHistoricResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.PatientInfoResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.PacienteSignup;
 import com.bandtec.mais.consulta.usecase.patient.GetAgenda;
 import com.bandtec.mais.consulta.usecase.patient.GetHistorico;
@@ -28,7 +28,7 @@ import java.util.Optional;
 @RequestMapping("paciente")
 public class PacienteController {
 
-    private final List<Usuario> usuariosLogados;
+    private final List<User> usuariosLogados;
 
     public PacienteController() {
         this.usuariosLogados = new ArrayList<>();
@@ -53,14 +53,14 @@ public class PacienteController {
     private PutPacienteInfo putPacienteInfo;
 
     @GetMapping("/{idPaciente}")
-    public ResponseEntity<PacienteInfoResponseDTO> getPacienteInfo(@PathVariable Integer idPaciente){
+    public ResponseEntity<PatientInfoResponseDTO> getPacienteInfo(@PathVariable Integer idPaciente){
         return ResponseEntity.of(getPacienteInfo.execute(idPaciente));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<Usuario> pacienteSignUp(@RequestBody PacienteSignUpRequestDTO pacienteSignUpRequestDTO) {
+    public ResponseEntity<User> pacienteSignUp(@RequestBody SignUpPatientRequestDTO signUpPatientRequestDTO) {
 
-        Optional<Usuario> oUsuario = pacienteSignup.execute(pacienteSignUpRequestDTO);
+        Optional<User> oUsuario = pacienteSignup.execute(signUpPatientRequestDTO);
 
         return oUsuario
                 .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
@@ -68,11 +68,11 @@ public class PacienteController {
     }
 
     @GetMapping("/agenda/{idPaciente}")
-    public ResponseEntity<List<PacienteAgendamentosResponseDTO>> getAgendaPaciente(@PathVariable Integer idPaciente,
-                                                                                   @RequestHeader(value="dtStart") String dataInicio,
-                                                                                   @RequestHeader(value="dtEnd") String dataFim
+    public ResponseEntity<List<PatientSchedulingResponseDTO>> getAgendaPaciente(@PathVariable Integer idPaciente,
+                                                                                @RequestHeader(value="dtStart") String dataInicio,
+                                                                                @RequestHeader(value="dtEnd") String dataFim
                                                                                    ) {
-        Optional<List<PacienteAgendamentosResponseDTO>> oAgenda = getAgenda.execute(idPaciente, dataInicio,dataFim);
+        Optional<List<PatientSchedulingResponseDTO>> oAgenda = getAgenda.execute(idPaciente, dataInicio,dataFim);
 
         return oAgenda
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
@@ -80,9 +80,9 @@ public class PacienteController {
     }
 
     @GetMapping("/historico/{idPaciente}")
-    public ResponseEntity<List<PacienteHistoricoResponseDTO>> getHistoricoPaciente(@PathVariable Integer idPaciente) {
+    public ResponseEntity<List<PatientHistoricResponseDTO>> getHistoricoPaciente(@PathVariable Integer idPaciente) {
 
-        Optional<List<PacienteHistoricoResponseDTO>> oHistorico = getHistorico.execute(idPaciente);
+        Optional<List<PatientHistoricResponseDTO>> oHistorico = getHistorico.execute(idPaciente);
 
         return oHistorico
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
@@ -95,9 +95,9 @@ public class PacienteController {
     }
 
     @PutMapping("{idPaciente}")
-    public ResponseEntity<Paciente> putInfosPaciente(@PathVariable Integer idPaciente,
-                                                     @RequestBody PacienteInfoPutResquestDTO pacienteInfoPutResquestDTO) {
-        ResponseEntity.of(putPacienteInfo.execute(idPaciente, pacienteInfoPutResquestDTO));
+    public ResponseEntity<Patient> putInfosPaciente(@PathVariable Integer idPaciente,
+                                                    @RequestBody PatientInfoPutRequestDTO patientInfoPutRequestDTO) {
+        ResponseEntity.of(putPacienteInfo.execute(idPaciente, patientInfoPutRequestDTO));
 
         return null;
     }

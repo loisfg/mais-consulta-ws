@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.usecase.notification;
 
-import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Scheduling;
 
 public interface CreateNotification {
-    void execute(Agendamento agendamento, String consulta);
+    void execute(Scheduling agendamento, String consulta);
 }

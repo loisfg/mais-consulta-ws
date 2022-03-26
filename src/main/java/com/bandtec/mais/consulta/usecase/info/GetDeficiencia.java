@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.info;
 
-import com.bandtec.mais.consulta.domain.Deficiencia;
+import com.bandtec.mais.consulta.domain.Deficiency;
 
 import java.util.List;
 
 public interface GetDeficiencia {
-    List<Deficiencia> execute(Integer idUser);
+    List<Deficiency> execute(Integer idUser);
 }

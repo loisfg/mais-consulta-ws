@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.usecase.export.utils;
 
 import com.bandtec.mais.consulta.domain.*;
-import com.bandtec.mais.consulta.models.enums.AgendamentoStatusEnum;
+import com.bandtec.mais.consulta.models.enums.SchedulingStatusEnum;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
@@ -11,29 +11,29 @@ import java.util.Map;
 public class BuildExportArquivo {
 
     @NotNull
-    public static Map<String, String> buildDadosArquivoAgendamento(Agendamento agendamento) {
+    public static Map<String, String> buildDadosArquivoAgendamento(Scheduling agendamento) {
 
         Integer id = agendamento.getIdAgendamento();
         String especialidade = agendamento.getEspecialidade().getDescricao();
         LocalDate dataAtendimento = agendamento.getDtAtendimento();
 
-        Paciente paciente = agendamento.getPaciente();
-        String nomePaciente = paciente.getNome();
+        Patient patient = agendamento.getPaciente();
+        String nomePaciente = patient.getName();
 
-        String numeroCarteiraSus = paciente.getNumeroCarteiraSus();
+        String numeroCarteiraSus = patient.getSusNumberWallet();
 
-        AgendamentoStatusEnum status = agendamento.getStatus();
+        SchedulingStatusEnum status = agendamento.getStatus();
 
-        Medico medico = agendamento.getMedico();
-        String nomeMedico = medico.getNome();
+        Doctor doctor = agendamento.getMedico();
+        String nomeMedico = doctor.getName();
 
-        Ubs ubs = medico.getUbs();
-        String nomeUbs = ubs.getNome();
-        Endereco enderecoUbs = ubs.getEndereco();
+        Ubs ubs = doctor.getUbs();
+        String nomeUbs = ubs.getName();
+        Address addressUbs = ubs.getAddress();
 
-        String ruaUbs = enderecoUbs.getRua();
-        String numeroUbs = enderecoUbs.getNumero();
-        String telefoneUbs = ubs.getTelefone();
+        String ruaUbs = addressUbs.getStreet();
+        String numeroUbs = addressUbs.getNumero();
+        String telefoneUbs = ubs.getPhone();
 
         String texto = buildTextoAgendamento(id, especialidade, dataAtendimento, nomePaciente, nomeMedico, nomeUbs);
 
