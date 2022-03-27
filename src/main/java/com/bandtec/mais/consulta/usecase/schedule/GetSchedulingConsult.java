@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GetSchedulingConsult {
-    Optional<List<SchedulingResponseDTO>> execute(Integer idUser);
+    Optional<List<SchedulingResponseDTO>> execute(Integer userId);
 }

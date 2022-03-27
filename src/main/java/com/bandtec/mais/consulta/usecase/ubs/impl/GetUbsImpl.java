@@ -20,7 +20,7 @@ public class GetUbsImpl implements GetUbs {
     UbsRepository ubsRepository;
 
     @Override
-    public Optional<List<Ubs>> execute(Integer idPaciente) {
-        return ubsRepository.findUbsByPatientId(idPaciente);
+    public Optional<List<Ubs>> execute(Integer patientId) {
+        return ubsRepository.findUbsByPatientId(patientId);
     }
 }

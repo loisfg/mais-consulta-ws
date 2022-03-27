@@ -44,14 +44,16 @@ public class PostSchedulingExamImpl implements PostSchedulingExam {
         Exam exam = ExamSchedulingRequestDTO.convertFromController(examSchedulingRequestDTO);
 
         if (patientRepository.existsById(examSchedulingRequestDTO.getPatientId())) {
-            try{
-                Optional<Scheduling> oAgendamento = schedulingRepository.findBySchedulingDateAndSchedulingTime(examSchedulingRequestDTO.getSchedulingDate(), examSchedulingRequestDTO.getSchedulingTime());
-                if (oAgendamento.isPresent()) {
+            try {
+                Optional<Scheduling> oScheduling = schedulingRepository
+                        .findBySchedulingDateAndSchedulingTime(examSchedulingRequestDTO
+                                .getSchedulingDate(), examSchedulingRequestDTO.getSchedulingTime());
+                if (oScheduling.isPresent()) {
 
-                    Scheduling agendamento = oAgendamento.get();
+                    Scheduling scheduling = oScheduling.get();
 
-                    if (agendamento.getStatus().equals(SchedulingStatusEnum.CANCELLED)) {
-                        efetuarAgendamentoExame(examSchedulingRequestDTO, exam);
+                    if (scheduling.getStatus().equals(SchedulingStatusEnum.CANCELLED)) {
+                        makeExamScheduling(examSchedulingRequestDTO, exam);
                     } else {
                         examSchedulingRequestDTO.setStatus(SchedulingStatusEnum.HOLD);
                         schedulingExamQueue.setSchedulingExamQueue(examSchedulingRequestDTO);
@@ -59,25 +61,25 @@ public class PostSchedulingExamImpl implements PostSchedulingExam {
                     }
                 }
 
-            }catch (NonUniqueResultException nonUniqueResultException){
-                System.out.println("Tratar esse erro");
+            } catch (NonUniqueResultException nonUniqueResultException) {
+                System.out.println("Treat this error");
             }
 
-            efetuarAgendamentoExame(examSchedulingRequestDTO, exam);
+            makeExamScheduling(examSchedulingRequestDTO, exam);
         }
 
         return Optional.of(exam);
     }
 
-    private void efetuarAgendamentoExame(ExamSchedulingRequestDTO examSchedulingRequestDTO, Exam exam) {
-        Scheduling agendamento = exam.getScheduling();
-        agendamento.setStatus(SchedulingStatusEnum.ACTIVE);
-        agendamento.setPaciente(patientRepository.findById(examSchedulingRequestDTO.getPatientId()).get());
-        agendamento.setEspecialidade(specialtyRepository.findById(examSchedulingRequestDTO.getSpecialtyId()).get());
-        agendamento.setMedico(doctorRepository.findDoctorsBySpecialtyIdAndUbsId(examSchedulingRequestDTO.getSpecialtyId(), examSchedulingRequestDTO.getUbsId()).get());
+    private void makeExamScheduling(ExamSchedulingRequestDTO examSchedulingRequestDTO, Exam exam) {
+        Scheduling scheduling = exam.getScheduling();
+        scheduling.setStatus(SchedulingStatusEnum.ACTIVE);
+        scheduling.setPatient(patientRepository.findById(examSchedulingRequestDTO.getPatientId()).get());
+        scheduling.setSpecialty(specialtyRepository.findById(examSchedulingRequestDTO.getSpecialtyId()).get());
+        scheduling.setDoctor(doctorRepository.findDoctorsBySpecialtyIdAndUbsId(examSchedulingRequestDTO.getSpecialtyId(), examSchedulingRequestDTO.getUbsId()).get());
 
         examRepository.save(exam);
-        schedulingRepository.save(agendamento);
-        createNotification.execute(agendamento, "exame");
+        schedulingRepository.save(scheduling);
+        createNotification.execute(scheduling, "exame");
     }
 }

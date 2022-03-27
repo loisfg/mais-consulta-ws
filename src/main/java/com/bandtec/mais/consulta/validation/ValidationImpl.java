@@ -15,11 +15,11 @@ public class ValidationImpl implements Validation {
     DoctorRepository doctorRepository;
 
     @Override
-    public void verifyMedicoExists(Integer idMedico) {
+    public void verifyMedicoExists(Integer doctorId) {
 
-        Optional<Doctor> medico= doctorRepository.findById(idMedico);
-        if (medico.isEmpty()) {
-            throw new ResourceNotFoundException("ID doctor:" + idMedico+" NOT FOUND");
+        Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+        if (doctor.isEmpty()) {
+            throw new ResourceNotFoundException("doctor ID:" + doctorId + " NOT FOUND");
         }
     }
 }

@@ -26,27 +26,28 @@ public class PostHoursUbsImpl implements PostHoursUbs {
 
     @SneakyThrows
     @Override
-    public HashMap<LocalTime, String> execute(Integer idUbs, String dia) {
-        List<HoursResponseDTO> listHoursOcupeds = schedulingRepository.findTimeAndSchedulingDateByUbsId(idUbs, LocalDate.parse(dia));
-        List<LocalTime> horariosTrabalho = addHours();
-        LinkedHashMap<LocalTime, String> horarios = new LinkedHashMap<>();
+    public HashMap<LocalTime, String> execute(Integer ubsId, String day) {
+        List<HoursResponseDTO> listHoursOccupied = schedulingRepository
+                .findTimeAndSchedulingDateByUbsId(ubsId, LocalDate.parse(day));
+        List<LocalTime> workingHours = addHours();
+        LinkedHashMap<LocalTime, String> hours = new LinkedHashMap<>();
 
-        horariosTrabalho.forEach(hrTrabalho -> {
-            horarios.put(hrTrabalho, "Livre");
-            listHoursOcupeds.forEach(hrOcuped -> {
-                        if (horarios.containsKey(hrOcuped.getHrAtendimento())) {
-                            horarios.replace(hrOcuped.getHrAtendimento(), "Ocupado");
+        workingHours.forEach(workingHour -> {
+            hours.put(workingHour, "Livre");
+            listHoursOccupied.forEach(hourOccupied -> {
+                        if (hours.containsKey(hourOccupied.getSchedulingTime())) {
+                            hours.replace(hourOccupied.getSchedulingTime(), "Ocupado");
                         }
                     }
             );
         });
 
-        return horarios;
+        return hours;
     }
 
     public List<LocalTime> addHours() {
         List<LocalTime> allHours = new ArrayList<>();
-        List<Integer> hrs = List.of(8,9,10,11,12,13,14,15,16,17,18);
+        List<Integer> hrs = List.of(8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
         try {
             for (Integer hr : hrs) {
                 allHours.add(LocalTime.of(hr, 0));

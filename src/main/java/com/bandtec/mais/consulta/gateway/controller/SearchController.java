@@ -3,7 +3,7 @@ package com.bandtec.mais.consulta.gateway.controller;
 import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.models.dto.response.InfoResponseDTO;
 import com.bandtec.mais.consulta.usecase.info.*;
-import com.bandtec.mais.consulta.usecase.search.SearchEspecialidade;
+import com.bandtec.mais.consulta.usecase.search.SearchSpecialty;
 import com.bandtec.mais.consulta.usecase.search.SearchUbs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("search")
 public class SearchController {
-    private final SearchEspecialidade searchSpecialties;
+    private final SearchSpecialty searchSpecialties;
     private final SearchUbs searchUbs;
     private final GetMedicinesToComplete getMedicinesToComplete;
     private final GetDeficiencyToComplete getDeficienciesToComplete;
@@ -25,7 +25,7 @@ public class SearchController {
     private final GetChronicDiseaseToComplete getChronicDiseasesToComplete;
 
     @Autowired
-    public SearchController(SearchEspecialidade searchSpecialties,
+    public SearchController(SearchSpecialty searchSpecialties,
                             SearchUbs searchUbs,
                             GetMedicinesToComplete getMedicinesToComplete,
                             GetDeficiencyToComplete getDeficienciesToComplete,

@@ -20,13 +20,13 @@ public class GetSchedulingConsultImpl implements GetSchedulingConsult {
     SchedulingRepository schedulingRepository;
 
     @Override
-    public Optional<List<SchedulingResponseDTO>> execute(Integer idUser) {
-        Optional<List<SchedulingResponseDTO>> consultas = consultRepository.findAllConsultsByIdUser(idUser);
+    public Optional<List<SchedulingResponseDTO>> execute(Integer userId) {
+        Optional<List<SchedulingResponseDTO>> consults = consultRepository.findAllConsultsByIdUser(userId);
 
-        if (consultas.isEmpty()) {
+        if (consults.isEmpty()) {
             return Optional.of(List.of());
         }
 
-        return consultas;
+        return consults;
     }
 }

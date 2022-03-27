@@ -4,6 +4,6 @@ import com.bandtec.mais.consulta.domain.Doctor;
 
 import java.util.Set;
 
-public interface SearchEspecialidade {
-    Set<Doctor> execute(String especialidade);
+public interface SearchSpecialty {
+    Set<Doctor> execute(String specialty);
 }

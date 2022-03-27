@@ -35,7 +35,7 @@ class PostSchedulingConsultImplTest {
     PostSchedulingConsult postSchedulingConsult;
 
     @Autowired
-    PostSchedulingConsultImpl postAgendamentoConsultaImpl;
+    PostSchedulingConsultImpl postSchedulingConsultImpl;
 
     @Autowired
     SchedulingController schedulingController;
@@ -52,61 +52,64 @@ class PostSchedulingConsultImplTest {
     @MockBean
     DoctorRepository doctorRepository;
 
-    private final List<Doctor> medicosList = List.of(mock(Doctor.class), mock(Doctor.class), mock(Doctor.class));
-    private final List<Doctor> medicosOcupados = List.of(mock(Doctor.class));
-    private final LocalDate dataAtendimento = LocalDate.now().plusMonths(2);
-    private final LocalTime horaAtendimento = LocalTime.of(10, 30);
-    private final Optional<Patient> oPaciente = Optional.of(mock(Patient.class));
+    private final List<Doctor> doctorsList = List.of(mock(Doctor.class), mock(Doctor.class), mock(Doctor.class));
+    private final List<Doctor> busyDoctors = List.of(mock(Doctor.class));
+    private final LocalDate schedulingDate = LocalDate.now().plusMonths(2);
+    private final LocalTime schedulingTime = LocalTime.of(10, 30);
+    private final Optional<Patient> oPatient = Optional.of(mock(Patient.class));
 
     @Test
     @DisplayName("Agendamento deve estar sendo criado para daqui a 2 meses")
-    void criarAgendamento_DoisMesesDepoisComHorario() {
+    void createScheduling_TwoMonthsAfterWithHour() {
         when(patientRepository.findByPatientId(1))
-                .thenReturn(oPaciente);
+                .thenReturn(oPatient);
 
         when(patientRepository.existsByPatientId(1))
                 .thenReturn(true);
 
-        when(schedulingRepository.findBySchedulingDateAndSchedulingTime(dataAtendimento, horaAtendimento))
+        when(schedulingRepository.findBySchedulingDateAndSchedulingTime(schedulingDate, schedulingTime))
                 .thenReturn(Optional.of(mock(Scheduling.class)));
 
         when(doctorRepository.findDoctorsByUbsId(1))
-                .thenReturn(medicosList);
+                .thenReturn(doctorsList);
 
-        when(doctorRepository.findDoctorsByScheduling(dataAtendimento, horaAtendimento, SchedulingStatusEnum.CANCELLED.getDescription()))
-                .thenReturn(medicosOcupados);
+        when(doctorRepository.findDoctorsByScheduling(schedulingDate, schedulingTime, SchedulingStatusEnum
+                .CANCELLED.getDescription()))
+                .thenReturn(busyDoctors);
 
-        ConsultSchedulingRequestDTO consultSchedulingRequestDTO = new ConsultSchedulingRequestDTO(dataAtendimento, horaAtendimento, "Consulta test", 1, 1, 1, SchedulingStatusEnum.HOLD);
-        Optional<Consult> consulta = postSchedulingConsult.execute(consultSchedulingRequestDTO);
+        ConsultSchedulingRequestDTO consultSchedulingRequestDTO = new ConsultSchedulingRequestDTO(
+                schedulingDate,
+                schedulingTime,
+                "Consulta test",
+                1,
+                1,
+                1,
+                SchedulingStatusEnum.HOLD);
+        Optional<Consult> consult = postSchedulingConsult.execute(consultSchedulingRequestDTO);
 
-        assertEquals(consulta.get().getDescription(), "Consulta test");
-        assertEquals(consulta.get().getScheduling().getHrAtendimento(), horaAtendimento);
-        assertEquals(consulta.get().getScheduling().getDtAtendimento(), dataAtendimento);
+        assertEquals(consult.get().getDescription(), "Consulta test");
+        assertEquals(consult.get().getScheduling().getSchedulingTime(), schedulingTime);
+        assertEquals(consult.get().getScheduling().getSchedulingDate(), schedulingDate);
     }
 
     @Test
     @DisplayName("Agendamento falha ao tentar no mesmo dia e horario existente")
-    void erroAoAgendar_MesmoDia() {
+    void errorInSchedule_SameDay() {
         when(patientRepository.findByPatientId(1))
-                .thenReturn(oPaciente);
+                .thenReturn(oPatient);
 
         when(patientRepository.existsByPatientId(1))
                 .thenReturn(true);
 
-        when(schedulingRepository.findBySchedulingDateAndSchedulingTime(dataAtendimento, horaAtendimento))
+        when(schedulingRepository.findBySchedulingDateAndSchedulingTime(schedulingDate, schedulingTime))
                 .thenReturn(Optional.of(mock(Scheduling.class)));
 
         when(doctorRepository.findDoctorsByUbsId(1))
-                .thenReturn(medicosOcupados);
+                .thenReturn(busyDoctors);
 
-        when(doctorRepository.findDoctorsByScheduling(dataAtendimento, horaAtendimento, SchedulingStatusEnum.CANCELLED.getDescription()))
-                .thenReturn(medicosOcupados);
-    }
-
-    @Test
-    @DisplayName("Agendamento com campos faltando")
-    void pacienteNaoSelecionouTodosCampos() {
-
+        when(doctorRepository.findDoctorsByScheduling(schedulingDate, schedulingTime, SchedulingStatusEnum
+                .CANCELLED.getDescription()))
+                .thenReturn(busyDoctors);
     }
 
 }

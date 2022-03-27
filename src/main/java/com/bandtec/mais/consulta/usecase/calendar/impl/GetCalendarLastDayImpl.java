@@ -15,7 +15,7 @@ public class GetCalendarLastDayImpl implements GetCalendarLastDay {
     @SneakyThrows
     @Override
     public Date execute(Integer monthYear) {
-        Integer lastDay = calendar.getUltimaDataDoMes(monthYear);
+        Integer lastDay = calendar.getLastDayMonth(monthYear);
 
         return calendar.getIntToDate(lastDay);
     }

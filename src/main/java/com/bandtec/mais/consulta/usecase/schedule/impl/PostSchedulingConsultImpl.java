@@ -42,16 +42,16 @@ public class PostSchedulingConsultImpl implements PostSchedulingConsult {
     public Optional<Consult> execute(ConsultSchedulingRequestDTO consultSchedulingRequestDTO) {
         Consult consult = ConsultSchedulingRequestDTO.convertFromController(consultSchedulingRequestDTO);
 
-        if (fds.queryFrom(consult.getScheduling().getDtAtendimento())) {
-            log.info("Não realizamos agendamentos aos fins de semana {}", consult.getScheduling().getDtAtendimento());
+        if (fds.queryFrom(consult.getScheduling().getSchedulingDate())) {
+            log.info("We do not provide schedules on weekends. {}", consult.getScheduling().getSchedulingDate());
             return Optional.empty();
         }
 
         if (patientRepository.existsById(consultSchedulingRequestDTO.getPatientId())) {
-            log.info("Efetuando agendamento com status {}", consultSchedulingRequestDTO.getStatus());
+            log.info("Scheduling with status {}", consultSchedulingRequestDTO.getStatus());
             switch (consultSchedulingRequestDTO.getStatus()) {
                 case ACTIVE:
-                    efetuarAgendamentoConsulta(consultSchedulingRequestDTO, consult);
+                    makeSchedulingConsult(consultSchedulingRequestDTO, consult);
                     break;
 
                 case HOLD:
@@ -63,10 +63,10 @@ public class PostSchedulingConsultImpl implements PostSchedulingConsult {
                     break;
 
                 default:
-                    throw new IllegalStateException("Status não tratado: " + consultSchedulingRequestDTO.getStatus());
+                    throw new IllegalStateException("Status not treated: " + consultSchedulingRequestDTO.getStatus());
             }
         } else {
-            log.info("Usuário não existe ou não é um paciente");
+            log.info("User does not exist or is not a patient");
             return Optional.empty();
             // TODO adicionar Throw de usuário não existente.
         }
@@ -74,19 +74,19 @@ public class PostSchedulingConsultImpl implements PostSchedulingConsult {
         return Optional.of(consult);
     }
 
-    private void efetuarAgendamentoConsulta(ConsultSchedulingRequestDTO consultSchedulingRequestDTO, Consult consult) {
+    private void makeSchedulingConsult(ConsultSchedulingRequestDTO consultSchedulingRequestDTO, Consult consult) {
         // TODO Adicionar Excpetion para médico não encontrado (procurar locais que precisam e adicionar; por logs tb
-        Scheduling agendamento = consult.getScheduling();
+        Scheduling scheduling = consult.getScheduling();
         Doctor doctor = doctorRepository.findDoctorsBySpecialtyIdAndUbsId
                 (consultSchedulingRequestDTO.getSpecialtyId(), consultSchedulingRequestDTO.getUbsId()).orElseThrow();
-        agendamento.setMedico(doctor);
-        agendamento.setPaciente(patientRepository.findById(consultSchedulingRequestDTO.getPatientId()).get());
-        agendamento.setEspecialidade(doctor.getSpecialty());
+        scheduling.setDoctor(doctor);
+        scheduling.setPatient(patientRepository.findById(consultSchedulingRequestDTO.getPatientId()).get());
+        scheduling.setSpecialty(doctor.getSpecialty());
 
         consultRepository.save(consult);
-        schedulingRepository.save(agendamento);
+        schedulingRepository.save(scheduling);
 
-        createNotification.execute(agendamento, "consulta");
+        createNotification.execute(scheduling, "consulta");
     }
 
     private final TemporalQuery<Boolean> fds = t -> {

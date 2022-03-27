@@ -25,17 +25,17 @@ public class GetSchedulingExamImpl implements GetSchedulingExam {
     UserRepository userRepository;
 
     @Override
-    public Optional<List<SchedulingResponseDTO>> execute(Integer idUser) {
-        Optional<List<SchedulingResponseDTO>> exames = examRepository.findAllExamsByUserId(idUser);
-        Optional user = userRepository.findById(idUser);
+    public Optional<List<SchedulingResponseDTO>> execute(Integer userId) {
+        Optional<List<SchedulingResponseDTO>> exams = examRepository.findAllExamsByUserId(userId);
+        Optional user = userRepository.findById(userId);
         if (user.isEmpty()) {
-            throw new ResourceNotFoundException("user ID :" +idUser+" NOT FOUND");
+            throw new ResourceNotFoundException("user ID :" + userId + " NOT FOUND");
         }
 
-        if (exames.isEmpty()) {
+        if (exams.isEmpty()) {
             return Optional.of(List.of());
         }
 
-        return exames;
+        return exams;
     }
 }

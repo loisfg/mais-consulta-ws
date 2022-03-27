@@ -4,14 +4,14 @@ import com.bandtec.mais.consulta.domain.Specialty;
 import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.gateway.repository.SpecialtyRepository;
 import com.bandtec.mais.consulta.gateway.repository.DoctorRepository;
-import com.bandtec.mais.consulta.usecase.search.SearchEspecialidade;
+import com.bandtec.mais.consulta.usecase.search.SearchSpecialty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class SearchEspecialidadeImpl implements SearchEspecialidade {
+public class SearchSpecialtyImpl implements SearchSpecialty {
     @Autowired
     SpecialtyRepository specialtyRepository;
 
@@ -19,11 +19,11 @@ public class SearchEspecialidadeImpl implements SearchEspecialidade {
     DoctorRepository doctorRepository;
 
     @Override
-    public Set<Doctor> execute(String descricao) {
-        Specialty specialty = specialtyRepository.findByDescription(descricao);
+    public Set<Doctor> execute(String description) {
+        Specialty specialty = specialtyRepository.findByDescription(description);
 
         return doctorRepository.findAllBySpecialties(specialty);
 
-        //TODO retirar especialidade do retorno do JSON;
+        // TODO: retirar especialidade do retorno do JSON;
     }
 }

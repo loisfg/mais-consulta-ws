@@ -3,7 +3,6 @@ package com.bandtec.mais.consulta.utils;
 public class StrFormat {
 
     public static String toTitledCase(String str) {
-        // CLASSE PARA ALTERAR A PRIMEIRA LETRA DA PALAVRA PARA MAISCULO
         try {
             String[] words = str.split("\\s");
             int theLast = 0;
@@ -19,7 +18,7 @@ public class StrFormat {
 
             return sb.toString();
         } catch (Exception e) {
-            System.out.println("ERRO AO REESCREVER MENSAGEM: " + e.getMessage());
+            System.out.println("Error rewriting message: " + e.getMessage());
             return "";
         }
     }

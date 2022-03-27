@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GetUbs {
-    Optional<List<Ubs>> execute(Integer idPaciente);
+    Optional<List<Ubs>> execute(Integer patientId);
 }

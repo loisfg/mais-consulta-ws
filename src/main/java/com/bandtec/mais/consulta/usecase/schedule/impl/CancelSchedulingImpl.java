@@ -17,14 +17,14 @@ public class CancelSchedulingImpl implements CancelScheduling {
     private SchedulingRepository schedulingRepository;
 
     @Override
-    public Optional<Scheduling> execute(Integer idAgendamento) {
+    public Optional<Scheduling> execute(Integer schedulingId) {
 
-        if (schedulingRepository.existsById(idAgendamento)) {
-            Scheduling agendamento = schedulingRepository.findById(idAgendamento).orElseThrow();
+        if (schedulingRepository.existsById(schedulingId)) {
+            Scheduling scheduling = schedulingRepository.findById(schedulingId).orElseThrow();
 
-            schedulingRepository.updateSchedulingStatus(agendamento.getSchedulingId(), CANCELLED);
+            schedulingRepository.updateSchedulingStatus(scheduling.getSchedulingId(), CANCELLED);
 
-            return Optional.of(agendamento);
+            return Optional.of(scheduling);
         }
 
         return Optional.empty();
