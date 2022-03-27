@@ -21,15 +21,15 @@ public class CreateNotificationImpl implements CreateNotification {
     private NotificationFactory notificationFactory;
 
     @Override
-    public void execute(Scheduling agendamento, String type) {
+    public void execute(Scheduling scheduling, String consult) {
 
-        NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter(type);
-        String descricaoNotification = notificationMessageService.buildNotificationMessage(agendamento);
+        NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter(consult);
+        String notificationDescription = notificationMessageService.buildNotificationMessage(scheduling);
 
         Notification notification = new Notification();
 
-        notification.setDescription(descricaoNotification);
-        notification.setUserId(agendamento.getPaciente().getUsuario().getIdUsuario());
+        notification.setDescription(notificationDescription);
+        notification.setUserId(scheduling.getPatient().getUser().getUserId());
         notification.setInsertDateTime(LocalDateTime.now());
 
         notificationRepository.save(notification);

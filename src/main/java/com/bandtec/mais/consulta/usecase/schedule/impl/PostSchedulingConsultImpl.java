@@ -2,7 +2,7 @@ package com.bandtec.mais.consulta.usecase.schedule.impl;
 
 import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.gateway.repository.*;
-import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoConsulta;
+import com.bandtec.mais.consulta.infra.queue.SchedulingConsultQueue;
 import com.bandtec.mais.consulta.models.dto.request.ConsultSchedulingRequestDTO;
 import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
 import com.bandtec.mais.consulta.usecase.schedule.PostSchedulingConsult;
@@ -21,22 +21,22 @@ import java.util.*;
 public class PostSchedulingConsultImpl implements PostSchedulingConsult {
 
     @Autowired
-    private AgendamentoRepository agendamentoRepository;
+    private SchedulingRepository schedulingRepository;
 
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    private MedicoRepository medicoRepository;
+    private DoctorRepository doctorRepository;
 
     @Autowired
-    private ConsultaRepository consultaRepository;
+    private ConsultRepository consultRepository;
 
     @Autowired
     private CreateNotification createNotification;
 
     @Autowired
-    private FilaAgendamentoConsulta filaAgendamentoConsulta;
+    private SchedulingConsultQueue schedulingConsultQueue;
 
     @Override
     public Optional<Consult> execute(ConsultSchedulingRequestDTO consultSchedulingRequestDTO) {
@@ -47,7 +47,7 @@ public class PostSchedulingConsultImpl implements PostSchedulingConsult {
             return Optional.empty();
         }
 
-        if (pacienteRepository.existsById(consultSchedulingRequestDTO.getPatientId())) {
+        if (patientRepository.existsById(consultSchedulingRequestDTO.getPatientId())) {
             log.info("Efetuando agendamento com status {}", consultSchedulingRequestDTO.getStatus());
             switch (consultSchedulingRequestDTO.getStatus()) {
                 case ACTIVE:
@@ -55,7 +55,7 @@ public class PostSchedulingConsultImpl implements PostSchedulingConsult {
                     break;
 
                 case HOLD:
-                    filaAgendamentoConsulta.setFilaAgendamentoConsulta(consult);
+                    schedulingConsultQueue.setSchedulingConsultQueue(consult);
                     break;
 
                 case CANCELLED:
@@ -77,14 +77,14 @@ public class PostSchedulingConsultImpl implements PostSchedulingConsult {
     private void efetuarAgendamentoConsulta(ConsultSchedulingRequestDTO consultSchedulingRequestDTO, Consult consult) {
         // TODO Adicionar Excpetion para médico não encontrado (procurar locais que precisam e adicionar; por logs tb
         Scheduling agendamento = consult.getScheduling();
-        Doctor doctor = medicoRepository.findMedicosByIdEspecialidadeAndIdUbs
+        Doctor doctor = doctorRepository.findDoctorsBySpecialtyIdAndUbsId
                 (consultSchedulingRequestDTO.getSpecialtyId(), consultSchedulingRequestDTO.getUbsId()).orElseThrow();
         agendamento.setMedico(doctor);
-        agendamento.setPaciente(pacienteRepository.findById(consultSchedulingRequestDTO.getPatientId()).get());
+        agendamento.setPaciente(patientRepository.findById(consultSchedulingRequestDTO.getPatientId()).get());
         agendamento.setEspecialidade(doctor.getSpecialty());
 
-        consultaRepository.save(consult);
-        agendamentoRepository.save(agendamento);
+        consultRepository.save(consult);
+        schedulingRepository.save(agendamento);
 
         createNotification.execute(agendamento, "consulta");
     }

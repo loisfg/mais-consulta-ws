@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.usecase.schedule.impl;
 
 import com.bandtec.mais.consulta.domain.Scheduling;
-import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
+import com.bandtec.mais.consulta.gateway.repository.SchedulingRepository;
 import com.bandtec.mais.consulta.usecase.schedule.CancelScheduling;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +14,15 @@ import static com.bandtec.mais.consulta.models.enums.SchedulingStatusEnum.CANCEL
 public class CancelSchedulingImpl implements CancelScheduling {
 
     @Autowired
-    private AgendamentoRepository agendamentoRepository;
+    private SchedulingRepository schedulingRepository;
 
     @Override
     public Optional<Scheduling> execute(Integer idAgendamento) {
 
-        if (agendamentoRepository.existsById(idAgendamento)) {
-            Scheduling agendamento = agendamentoRepository.findById(idAgendamento).orElseThrow();
+        if (schedulingRepository.existsById(idAgendamento)) {
+            Scheduling agendamento = schedulingRepository.findById(idAgendamento).orElseThrow();
 
-            agendamentoRepository.updateAgendamentoStatus(agendamento.getIdAgendamento(), CANCELLED);
+            schedulingRepository.updateSchedulingStatus(agendamento.getSchedulingId(), CANCELLED);
 
             return Optional.of(agendamento);
         }

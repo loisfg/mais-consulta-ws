@@ -5,10 +5,10 @@ import com.bandtec.mais.consulta.domain.Scheduling;
 import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.gateway.controller.SchedulingController;
-import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
-import com.bandtec.mais.consulta.gateway.repository.ConsultaRepository;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
-import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
+import com.bandtec.mais.consulta.gateway.repository.SchedulingRepository;
+import com.bandtec.mais.consulta.gateway.repository.ConsultRepository;
+import com.bandtec.mais.consulta.gateway.repository.DoctorRepository;
+import com.bandtec.mais.consulta.gateway.repository.PatientRepository;
 import com.bandtec.mais.consulta.models.dto.request.ConsultSchedulingRequestDTO;
 import com.bandtec.mais.consulta.models.enums.SchedulingStatusEnum;
 import com.bandtec.mais.consulta.usecase.schedule.PostSchedulingConsult;
@@ -41,16 +41,16 @@ class PostSchedulingConsultImplTest {
     SchedulingController schedulingController;
 
     @MockBean
-    AgendamentoRepository agendamentoRepository;
+    SchedulingRepository schedulingRepository;
 
     @MockBean
-    PacienteRepository pacienteRepository;
+    PatientRepository patientRepository;
 
     @MockBean
-    ConsultaRepository consultaRepository;
+    ConsultRepository consultRepository;
 
     @MockBean
-    MedicoRepository medicoRepository;
+    DoctorRepository doctorRepository;
 
     private final List<Doctor> medicosList = List.of(mock(Doctor.class), mock(Doctor.class), mock(Doctor.class));
     private final List<Doctor> medicosOcupados = List.of(mock(Doctor.class));
@@ -61,19 +61,19 @@ class PostSchedulingConsultImplTest {
     @Test
     @DisplayName("Agendamento deve estar sendo criado para daqui a 2 meses")
     void criarAgendamento_DoisMesesDepoisComHorario() {
-        when(pacienteRepository.findByIdPaciente(1))
+        when(patientRepository.findByPatientId(1))
                 .thenReturn(oPaciente);
 
-        when(pacienteRepository.existsByIdPaciente(1))
+        when(patientRepository.existsByPatientId(1))
                 .thenReturn(true);
 
-        when(agendamentoRepository.findByDtAtendimentoAndHrAtendimento(dataAtendimento, horaAtendimento))
+        when(schedulingRepository.findBySchedulingDateAndSchedulingTime(dataAtendimento, horaAtendimento))
                 .thenReturn(Optional.of(mock(Scheduling.class)));
 
-        when(medicoRepository.findMedicosByUbsId(1))
+        when(doctorRepository.findDoctorsByUbsId(1))
                 .thenReturn(medicosList);
 
-        when(medicoRepository.findMedicosByAgendamento(dataAtendimento, horaAtendimento, SchedulingStatusEnum.CANCELLED.getDescription()))
+        when(doctorRepository.findDoctorsByScheduling(dataAtendimento, horaAtendimento, SchedulingStatusEnum.CANCELLED.getDescription()))
                 .thenReturn(medicosOcupados);
 
         ConsultSchedulingRequestDTO consultSchedulingRequestDTO = new ConsultSchedulingRequestDTO(dataAtendimento, horaAtendimento, "Consulta test", 1, 1, 1, SchedulingStatusEnum.HOLD);
@@ -87,19 +87,19 @@ class PostSchedulingConsultImplTest {
     @Test
     @DisplayName("Agendamento falha ao tentar no mesmo dia e horario existente")
     void erroAoAgendar_MesmoDia() {
-        when(pacienteRepository.findByIdPaciente(1))
+        when(patientRepository.findByPatientId(1))
                 .thenReturn(oPaciente);
 
-        when(pacienteRepository.existsByIdPaciente(1))
+        when(patientRepository.existsByPatientId(1))
                 .thenReturn(true);
 
-        when(agendamentoRepository.findByDtAtendimentoAndHrAtendimento(dataAtendimento, horaAtendimento))
+        when(schedulingRepository.findBySchedulingDateAndSchedulingTime(dataAtendimento, horaAtendimento))
                 .thenReturn(Optional.of(mock(Scheduling.class)));
 
-        when(medicoRepository.findMedicosByUbsId(1))
+        when(doctorRepository.findDoctorsByUbsId(1))
                 .thenReturn(medicosOcupados);
 
-        when(medicoRepository.findMedicosByAgendamento(dataAtendimento, horaAtendimento, SchedulingStatusEnum.CANCELLED.getDescription()))
+        when(doctorRepository.findDoctorsByScheduling(dataAtendimento, horaAtendimento, SchedulingStatusEnum.CANCELLED.getDescription()))
                 .thenReturn(medicosOcupados);
     }
 

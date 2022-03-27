@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.schedule.impl;
 
 import com.bandtec.mais.consulta.error.ResourceNotFoundException;
-import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
-import com.bandtec.mais.consulta.gateway.repository.ExameRepository;
-import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
+import com.bandtec.mais.consulta.gateway.repository.SchedulingRepository;
+import com.bandtec.mais.consulta.gateway.repository.ExamRepository;
+import com.bandtec.mais.consulta.gateway.repository.UserRepository;
 import com.bandtec.mais.consulta.models.dto.response.SchedulingResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.GetSchedulingExam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +16,18 @@ import java.util.Optional;
 public class GetSchedulingExamImpl implements GetSchedulingExam {
 
     @Autowired
-    ExameRepository exameRepository;
+    ExamRepository examRepository;
 
     @Autowired
-    AgendamentoRepository agendamentoRepository;
+    SchedulingRepository schedulingRepository;
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    UserRepository userRepository;
 
     @Override
     public Optional<List<SchedulingResponseDTO>> execute(Integer idUser) {
-        Optional<List<SchedulingResponseDTO>> exames = exameRepository.findAllExamesByIdUser(idUser);
-        Optional user = usuarioRepository.findById(idUser);
+        Optional<List<SchedulingResponseDTO>> exames = examRepository.findAllExamsByUserId(idUser);
+        Optional user = userRepository.findById(idUser);
         if (user.isEmpty()) {
             throw new ResourceNotFoundException("user ID :" +idUser+" NOT FOUND");
         }

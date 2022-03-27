@@ -23,7 +23,7 @@ public class UbsController {
     private ImportCsv importCsv;
 
     @PostMapping
-    public ResponseEntity<?> postUbs(@RequestBody UbsPostRequestDTO ubsPostRequestDTO){
+    public ResponseEntity<?> postUbs(@RequestBody UbsPostRequestDTO ubsPostRequestDTO) {
         return ResponseEntity.of(postUbs.execute(ubsPostRequestDTO));
     }
 

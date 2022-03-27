@@ -16,62 +16,68 @@ import java.util.Set;
 @RestController
 @RequestMapping("search")
 public class SearchController {
-    private final SearchEspecialidade searchEspecialidade;
+    private final SearchEspecialidade searchSpecialties;
     private final SearchUbs searchUbs;
-    private final GetRemediosToComplet getRemediosToComplet;
-    private final GetDeficienciaToComplet getDeficienciaToComplet;
-    private final GetAlergiasToComplet getAlergiasToComplet;
-    private final GetDstToComplet getDstToComplet;
-    private final GetDoencaCronicaToComplet getDoencasCronicasToComplet;
+    private final GetMedicinesToComplete getMedicinesToComplete;
+    private final GetDeficiencyToComplete getDeficienciesToComplete;
+    private final GetAllergiesToComplete getAllergiesToComplete;
+    private final GetStdsToComplete getStdsToComplete;
+    private final GetChronicDiseaseToComplete getChronicDiseasesToComplete;
 
     @Autowired
-    public SearchController(SearchEspecialidade searchEspecialidade, SearchUbs searchUbs, GetRemediosToComplet getRemediosToComplet, GetDeficienciaToComplet getDeficienciaToComplet, GetAlergiasToComplet getAlergiasToComplet, GetDstToComplet getDstToComplet, GetDoencaCronicaToComplet getDoencasCronicasToComplet) {
-        this.searchEspecialidade = searchEspecialidade;
+    public SearchController(SearchEspecialidade searchSpecialties,
+                            SearchUbs searchUbs,
+                            GetMedicinesToComplete getMedicinesToComplete,
+                            GetDeficiencyToComplete getDeficienciesToComplete,
+                            GetAllergiesToComplete getAllergiesToComplete,
+                            GetStdsToComplete getStdsToComplete,
+                            GetChronicDiseaseToComplete getChronicDiseasesToComplete) {
+        this.searchSpecialties = searchSpecialties;
         this.searchUbs = searchUbs;
-        this.getRemediosToComplet = getRemediosToComplet;
-        this.getDeficienciaToComplet = getDeficienciaToComplet;
-        this.getAlergiasToComplet = getAlergiasToComplet;
-        this.getDstToComplet = getDstToComplet;
-        this.getDoencasCronicasToComplet = getDoencasCronicasToComplet;
+        this.getMedicinesToComplete = getMedicinesToComplete;
+        this.getDeficienciesToComplete = getDeficienciesToComplete;
+        this.getAllergiesToComplete = getAllergiesToComplete;
+        this.getStdsToComplete = getStdsToComplete;
+        this.getChronicDiseasesToComplete = getChronicDiseasesToComplete;
     }
 
     @GetMapping("/{especialidade}")
-    public ResponseEntity<Set<Doctor>> getMedicosEspecialidade(@PathVariable String especialidade) {
-        return searchEspecialidade.execute(especialidade).isEmpty() ?
+    public ResponseEntity<Set<Doctor>> getDoctorsSpecialties(@PathVariable String specialty) {
+        return searchSpecialties.execute(specialty).isEmpty() ?
                 ResponseEntity.status(204).build() : ResponseEntity.status(200).body(
-                        (searchEspecialidade.execute(especialidade))
+                (searchSpecialties.execute(specialty))
         );
     }
 
     @GetMapping("/ubs/{idEspecialidade}")
-    public ResponseEntity<List<Ubs>> getUbs(@PathVariable Integer idEspecialidade) {
-        List<Ubs> ubs = searchUbs.execute(idEspecialidade);
+    public ResponseEntity<List<Ubs>> getUbs(@PathVariable Integer specialtyId) {
+        List<Ubs> ubs = searchUbs.execute(specialtyId);
         return ubs.isEmpty() ?
                 ResponseEntity.status(204).build() : ResponseEntity.status(200).body(ubs);
     }
 
     @GetMapping("/remedios/auto/{nome}")
-    public ResponseEntity<Set<Medicine>> getRemediosAuto(@PathVariable String nome) {
-        return ResponseEntity.of(getRemediosToComplet.execute(nome));
+    public ResponseEntity<Set<Medicine>> getAutoMedicines(@PathVariable String name) {
+        return ResponseEntity.of(getMedicinesToComplete.execute(name));
     }
 
     @GetMapping("/alergias/auto/{nome}")
-    public ResponseEntity<Set<Allergy>> getAlergiaAuto(@PathVariable String nome) {
-        return ResponseEntity.of(getAlergiasToComplet.execute(nome));
+    public ResponseEntity<Set<Allergy>> getAutoAllergies(@PathVariable String name) {
+        return ResponseEntity.of(getAllergiesToComplete.execute(name));
     }
 
     @GetMapping("/deficiencias/auto/{nome}")
-    public ResponseEntity<Set<Deficiency>> getDeficienciaAuto(@PathVariable String nome) {
-        return ResponseEntity.of(getDeficienciaToComplet.execute(nome));
+    public ResponseEntity<Set<Deficiency>> getAutoDeficiency(@PathVariable String name) {
+        return ResponseEntity.of(getDeficienciesToComplete.execute(name));
     }
 
     @GetMapping("/doencas-cronicas/auto/{nome}")
-    public ResponseEntity<Set<InfoResponseDTO>> getDoencaCronicaAuto(@PathVariable String nome) {
-        return ResponseEntity.of(getDoencasCronicasToComplet.execute(nome));
+    public ResponseEntity<Set<InfoResponseDTO>> getAutoChronicDisease(@PathVariable String name) {
+        return ResponseEntity.of(getChronicDiseasesToComplete.execute(name));
     }
 
     @GetMapping("/dst/auto/{nome}")
-    public ResponseEntity<Set<InfoResponseDTO>> getDstAuto(@PathVariable String nome) {
-        return ResponseEntity.of(getDstToComplet.execute(nome));
+    public ResponseEntity<Set<InfoResponseDTO>> getAutoStds(@PathVariable String name) {
+        return ResponseEntity.of(getStdsToComplete.execute(name));
     }
 }

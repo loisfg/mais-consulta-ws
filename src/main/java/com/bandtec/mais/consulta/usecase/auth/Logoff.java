@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface Logoff {
-    Optional<?> execute(Integer idUsuario, List<User> usuariosLogados);
+    Optional<?> execute(Integer userId, List<User> connectedUsers);
 }

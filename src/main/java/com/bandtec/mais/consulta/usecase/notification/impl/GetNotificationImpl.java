@@ -2,7 +2,7 @@ package com.bandtec.mais.consulta.usecase.notification.impl;
 
 import com.bandtec.mais.consulta.domain.Notification;
 import com.bandtec.mais.consulta.gateway.repository.NotificationRepository;
-import com.bandtec.mais.consulta.models.PilhaObj;
+import com.bandtec.mais.consulta.models.StackObj;
 import com.bandtec.mais.consulta.models.dto.NotificationDTO;
 import com.bandtec.mais.consulta.usecase.notification.GetNotification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +19,25 @@ public class GetNotificationImpl implements GetNotification {
     private NotificationRepository notificationRepository;
 
     @Override
-    public Optional<PilhaObj<NotificationDTO>> execute(Integer idUser) {
+    public Optional<StackObj<NotificationDTO>> execute(Integer userId) {
 
-        List<Notification> notificationList = notificationRepository.findAllByIdUsuario(idUser);
+        List<Notification> notificationList = notificationRepository.findAllByUserId(userId);
 
-        if (notificationList.size() == 0){
+        if (notificationList.size() == 0) {
             return Optional.empty();
         }
 
         List<NotificationDTO> notificationDTOList = new ArrayList<>();
-        PilhaObj<NotificationDTO> notificationPilhaObj = new PilhaObj<>(notificationList.size());
+        StackObj<NotificationDTO> notificationStackObj = new StackObj<>(notificationList.size());
 
         buildListNotificationsDTO(notificationList, notificationDTOList);
-        buildPilhaNotificationDTO(notificationList, notificationDTOList, notificationPilhaObj);
+        buildStackNotificationDTO(notificationList, notificationDTOList, notificationStackObj);
 
-        return Optional.of(notificationPilhaObj);
+        return Optional.of(notificationStackObj);
     }
 
-    private void buildListNotificationsDTO(List<Notification> notificationList, List<NotificationDTO> notificationDTOList) {
+    private void buildListNotificationsDTO(List<Notification> notificationList,
+                                           List<NotificationDTO> notificationDTOList) {
         notificationList
                 .forEach(notification -> {
                     NotificationDTO newNotificationDTO = new NotificationDTO();
@@ -48,9 +49,11 @@ public class GetNotificationImpl implements GetNotification {
                 });
     }
 
-    private void buildPilhaNotificationDTO(List<Notification> notificationList, List<NotificationDTO> notificationDTOList, PilhaObj<NotificationDTO> notificationPilhaObj) {
+    private void buildStackNotificationDTO(List<Notification> notificationList,
+                                           List<NotificationDTO> notificationDTOList,
+                                           StackObj<NotificationDTO> notificationStackObj) {
         for (int i = 0; i < notificationList.size(); i++) {
-            notificationPilhaObj.push(notificationDTOList.get(i));
+            notificationStackObj.push(notificationDTOList.get(i));
         }
     }
 }

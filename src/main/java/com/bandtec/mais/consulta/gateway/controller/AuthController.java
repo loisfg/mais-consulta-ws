@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequestMapping("auth")
 public class AuthController {
 
-    private final List<User> usuariosLogados;
+    private final List<User> connectedUsers;
 
     @Autowired
     private Logoff logoff;
@@ -28,22 +28,22 @@ public class AuthController {
 
     @Autowired
     public AuthController() {
-        usuariosLogados = new ArrayList<>();
+        connectedUsers = new ArrayList<>();
     }
 
     @PostMapping("/{idUsuario}/logoff")
-    public ResponseEntity<?> logoff(@PathVariable Integer idUsuario) {
-        return ResponseEntity.of(logoff.execute(idUsuario, usuariosLogados));
+    public ResponseEntity<?> logoff(@PathVariable Integer userId) {
+        return ResponseEntity.of(logoff.execute(userId, connectedUsers));
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody SignInUserRequestDTO signInUserRequestDTO) {
+    public ResponseEntity<?> signIn(@RequestBody SignInUserRequestDTO signInUserRequestDTO) {
 
-        Optional<?> oUsuario = signIn.execute(signInUserRequestDTO, usuariosLogados);
+        Optional<?> oUser = signIn.execute(signInUserRequestDTO, connectedUsers);
 
-        return oUsuario
+        return oUser
                 .map(ResponseEntity::ok)
-                    .orElseGet(ResponseEntity.status(HttpStatus.NOT_FOUND)::build);
+                .orElseGet(ResponseEntity.status(HttpStatus.NOT_FOUND)::build);
     }
 
 }

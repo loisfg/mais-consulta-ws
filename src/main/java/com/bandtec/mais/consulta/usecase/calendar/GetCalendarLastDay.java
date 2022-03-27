@@ -4,5 +4,5 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public interface GetCalendarLastDay {
-    Date execute(Integer mesAno);
+    Date execute(Integer monthYear);
 }

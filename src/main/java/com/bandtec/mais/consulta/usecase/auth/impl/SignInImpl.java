@@ -3,9 +3,9 @@ package com.bandtec.mais.consulta.usecase.auth.impl;
 import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.domain.User;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
-import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
-import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
+import com.bandtec.mais.consulta.gateway.repository.DoctorRepository;
+import com.bandtec.mais.consulta.gateway.repository.PatientRepository;
+import com.bandtec.mais.consulta.gateway.repository.UserRepository;
 import com.bandtec.mais.consulta.models.dto.request.SignInUserRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.SignInDoctorResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.SignInPatientResponseDTO;
@@ -22,25 +22,25 @@ import java.util.Optional;
 public class SignInImpl implements SignIn {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    private MedicoRepository medicoRepository;
+    private DoctorRepository doctorRepository;
 
     @Override
-    public Optional<?> execute(SignInUserRequestDTO signInUserRequestDTO, List<User> usuariosLogados) {
-        if (usuarioRepository.existsByCpf(signInUserRequestDTO.getCpf())) {
-            User user = usuarioRepository
+    public Optional<?> execute(SignInUserRequestDTO signInUserRequestDTO, List<User> connectedUsers) {
+        if (userRepository.existsByCpf(signInUserRequestDTO.getCpf())) {
+            User user = userRepository
                     .findByCpfAndPassword(signInUserRequestDTO.getCpf(), signInUserRequestDTO.getPassword()).get();
 
-            usuariosLogados.add(user);
+            connectedUsers.add(user);
 
             if (user.getRole().equals("Medico")) {
-                log.info("USUARIO É UM MEDICO");
-                Doctor doctor = medicoRepository.findByUsuario(user).get();
+                log.info("User is a doctor");
+                Doctor doctor = doctorRepository.findByUser(user).get();
 
                 SignInDoctorResponseDTO signInDoctorResponseDTO = SignInDoctorResponseDTO
                         .builder()
@@ -50,10 +50,9 @@ public class SignInImpl implements SignIn {
                         .build();
 
                 return Optional.of(signInDoctorResponseDTO);
-            }
-            else {
-                log.info("USUARIO É UM PACIENTE");
-                Patient patient = pacienteRepository.findByUsuario(user).get();
+            } else {
+                log.info("User is a patient");
+                Patient patient = patientRepository.findByUser(user).get();
 
                 SignInPatientResponseDTO signInPatientResponseDTO = SignInPatientResponseDTO
                         .builder()

@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UbsRepository extends JpaRepository<Ubs, Integer> {
-    Optional<Ubs> findUbsByNome(String nome);
+    Optional<Ubs> findUbsByName(String name);
 
-    boolean existsByNome(String nome);
+    boolean existsByName(String name);
 
     @Query("SELECT DISTINCT m.ubs FROM Medico m WHERE m.especialidade.idEspecialidade = ?1")
-    List<Ubs> findUbsByEspecialidade(Integer idEspecialidade);
+    List<Ubs> findUbsBySpecialty(Integer specialtyId);
 
     @Query("SELECT u FROM Ubs u, Paciente p WHERE u.endereco.estado = p.endereco.estado AND p.idPaciente = :id")
-    Optional<List<Ubs>> findUbsByPacienteId(@Param("id") Integer idPaciente);
+    Optional<List<Ubs>> findUbsByPatientId(@Param("id") Integer patientId);
 }

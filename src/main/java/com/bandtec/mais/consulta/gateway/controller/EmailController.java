@@ -20,7 +20,7 @@ public class EmailController {
 
     @PostMapping("/sending-email/{idPaciente}")
     public ResponseEntity<Email> sendingEmail(@RequestBody @Valid EmailDTO emailDto,
-                                              @PathVariable Integer idPaciente) {
-        return new ResponseEntity<>(emailSend.execute(emailDto, idPaciente), HttpStatus.CREATED);
+                                              @PathVariable Integer patientId) {
+        return new ResponseEntity<>(emailSend.execute(emailDto, patientId), HttpStatus.CREATED);
     }
 }

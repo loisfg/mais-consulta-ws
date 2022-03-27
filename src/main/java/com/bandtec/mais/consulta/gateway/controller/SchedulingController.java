@@ -58,7 +58,7 @@ public class SchedulingController {
     }
 
     @PostMapping("/agendar/consulta")
-    public ResponseEntity<Consult> createAgendamentoConsulta(
+    public ResponseEntity<Consult> createSchedulingConsult(
             @RequestBody @Valid ConsultSchedulingRequestDTO consultSchedulingRequestDTO
     ) {
         return postSchedulingConsult.execute(consultSchedulingRequestDTO)
@@ -67,32 +67,32 @@ public class SchedulingController {
     }
 
     @GetMapping("/exames/{idUser}")
-    public ResponseEntity<?> getExamesByIdUser(@PathVariable Integer idUser) {
-        return getSchedulingExam.execute(idUser)
+    public ResponseEntity<?> getExamsByUser(@PathVariable Integer userId) {
+        return getSchedulingExam.execute(userId)
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
     @GetMapping("/consulta/{idUser}")
-    public ResponseEntity<?> getConsultaByIdUser(@PathVariable Integer idUser) {
-        return getSchedulingConsult.execute(idUser)
+    public ResponseEntity<?> getConsultByUserId(@PathVariable Integer userId) {
+        return getSchedulingConsult.execute(userId)
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
     @GetMapping("/horarios/livres/{dia}/{idUbs}")
-    public ResponseEntity<HashMap<LocalTime, String>> getAvaibleTime(@PathVariable Integer idUbs,
-                                                                     @PathVariable String dia) {
-        HashMap<LocalTime, String> listHoras = postHoursUbs.execute(idUbs, dia);
-        if (listHoras.isEmpty()) {
+    public ResponseEntity<HashMap<LocalTime, String>> getAvailableTime(@PathVariable Integer ubsId,
+                                                                       @PathVariable String day) {
+        HashMap<LocalTime, String> hoursList = postHoursUbs.execute(ubsId, day);
+        if (hoursList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(listHoras);
+        return ResponseEntity.status(HttpStatus.OK).body(hoursList);
     }
 
     @GetMapping("/especialidades")
-    public ResponseEntity<Set<SpecialtyResponseDTO>> getEspecialidades() {
+    public ResponseEntity<Set<SpecialtyResponseDTO>> getSpecialties() {
         return ResponseEntity.of(getSpecialties.execute());
 
     }

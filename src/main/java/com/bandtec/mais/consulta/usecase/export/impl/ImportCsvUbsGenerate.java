@@ -2,7 +2,7 @@ package com.bandtec.mais.consulta.usecase.export.impl;
 
 import com.bandtec.mais.consulta.domain.Address;
 import com.bandtec.mais.consulta.domain.Ubs;
-import com.bandtec.mais.consulta.gateway.repository.EnderecoRepository;
+import com.bandtec.mais.consulta.gateway.repository.AddressRepository;
 import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
 import com.bandtec.mais.consulta.usecase.export.ImportCsv;
 import com.bandtec.mais.consulta.utils.StrFormat;
@@ -21,46 +21,46 @@ public class ImportCsvUbsGenerate implements ImportCsv {
     UbsRepository ubsRepository;
 
     @Autowired
-    EnderecoRepository enderecoRepository;
+    AddressRepository addressRepository;
 
-    public static List<Ubs> leSalvaUbsCmEndereco(List<Address> addressList) {
-        FileReader arq = null;
-        Scanner entrada = null;
-        Boolean deuRuim = false;
+    public static List<Ubs> readSaveUbsWithAddress(List<Address> addressList) {
+        FileReader file = null;
+        Scanner entrance = null;
+        Boolean internError = false;
         List<Ubs> list = new ArrayList();
-        String nomeArq = "ubs.csv";
+        String fileName = "ubs.csv";
 
         try {
-            arq = new FileReader(nomeArq);
-            entrada = new Scanner(arq).useDelimiter(";|\\n");
-        } catch (FileNotFoundException erro) {
-            System.out.println("Arquivo não encontrado");
+            file = new FileReader(fileName);
+            entrance = new Scanner(file).useDelimiter(";|\\n");
+        } catch (FileNotFoundException error) {
+            System.out.println("File not found");
             System.exit(1);
         }
-        Random gerador = new Random();
+        Random generator = new Random();
 
         try {
-            while (entrada.hasNext()) {
+            while (entrance.hasNext()) {
                 Integer id = list.size() + 1;
-                String nome = entrada.next();
-                String telefone = "(11)" + gerador.nextInt(8999) + "-" + gerador.nextInt(9999);
-                list.add(new Ubs(id, nome, telefone, addressList.get(id - 1)));
+                String name = entrance.next();
+                String phone = "(11)" + generator.nextInt(8999) + "-" + generator.nextInt(9999);
+                list.add(new Ubs(id, name, phone, addressList.get(id - 1)));
             }
-        } catch (NoSuchElementException erro) {
-            System.out.println("Arquivo com problemas");
-            deuRuim = true;
-        } catch (IllegalStateException erro) {
-            System.out.println("Erro na leitura do arquivo");
-            deuRuim = true;
+        } catch (NoSuchElementException error) {
+            System.out.println("File with problems");
+            internError = true;
+        } catch (IllegalStateException error) {
+            System.out.println("Error reading file");
+            internError = true;
         } finally {
-            entrada.close();
+            entrance.close();
             try {
-                arq.close();
-            } catch (IOException erro) {
-                System.out.println("Erro ao fechar o arquivo");
-                deuRuim = true;
+                file.close();
+            } catch (IOException error) {
+                System.out.println("Error closing file");
+                internError = true;
             }
-            if (deuRuim) {
+            if (internError) {
                 System.exit(1);
             }
         }
@@ -70,54 +70,54 @@ public class ImportCsvUbsGenerate implements ImportCsv {
         return list;
     }
 
-    public static List<Address> leSalvaEndereco() {
-        FileReader arq = null;
-        Scanner entrada = null;
-        Boolean deuRuim = false;
-        String nomeArq = "endereco.csv";
+    public static List<Address> readSaveAddress() {
+        FileReader file = null;
+        Scanner entrance = null;
+        Boolean internError = false;
+        String fileName = "endereco.csv";
 
         try {
-            arq = new FileReader(nomeArq);
-            entrada = new Scanner(arq).useDelimiter(";|\\n");
-        } catch (FileNotFoundException erro) {
-            System.out.println("Arquivo não encontrado " + erro);
+            file = new FileReader(fileName);
+            entrance = new Scanner(file).useDelimiter(";|\\n");
+        } catch (FileNotFoundException error) {
+            System.out.println("File not found " + error);
             System.exit(1);
         }
 
         List<Address> listAddress = new ArrayList<>();
 
-        List<String> estados = List.of("SP", "RJ", "ES", "MT", "MG");
+        List<String> states = List.of("SP", "RJ", "ES", "MT", "MG");
 
-        Random gerador = new Random();
+        Random generator = new Random();
         try {
-            while (entrada.hasNext()) {
+            while (entrance.hasNext()) {
                 Integer id = listAddress.size() + 1;
-                String cep = gerador.nextInt(+99999) + "-" + gerador.nextInt(+999);
-                String estado = estados.get(gerador.nextInt(estados.size()));
-                String logradouro = "";
-                String rua = StrFormat.toTitledCase(entrada.next());
-                String bairro = StrFormat.toTitledCase(entrada.next());
-                String cidade = "Jd " + StrFormat.toTitledCase(bairro);
-                String numero = String.valueOf(gerador.nextInt(+2000));
-                String complemento = "";
-                Address address = new Address(id, cep, cidade, estado, bairro, rua, logradouro, numero, complemento);
+                String cep = generator.nextInt(+99999) + "-" + generator.nextInt(+999);
+                String state = states.get(generator.nextInt(states.size()));
+                String publicPlace = "";
+                String street = StrFormat.toTitledCase(entrance.next());
+                String district = StrFormat.toTitledCase(entrance.next());
+                String city = "Jd " + StrFormat.toTitledCase(district);
+                String number = String.valueOf(generator.nextInt(+2000));
+                String complement = "";
+                Address address = new Address(id, cep, city, state, district, street, publicPlace, number, complement);
                 listAddress.add(address);
             }
-        } catch (NoSuchElementException erro) {
-            System.out.println("Arquivo com problemas");
-            deuRuim = true;
-        } catch (IllegalStateException erro) {
-            System.out.println("Erro na leitura do arquivo");
-            deuRuim = true;
+        } catch (NoSuchElementException error) {
+            System.out.println("File with problems");
+            internError = true;
+        } catch (IllegalStateException error) {
+            System.out.println("Error reading file");
+            internError = true;
         } finally {
-            entrada.close();
+            entrance.close();
             try {
-                arq.close();
-            } catch (IOException erro) {
-                System.out.println("Erro ao fechar o arquivo");
-                deuRuim = true;
+                file.close();
+            } catch (IOException error) {
+                System.out.println("Error closing file");
+                internError = true;
             }
-            if (deuRuim) {
+            if (internError) {
                 System.exit(1);
             }
         }
@@ -127,7 +127,7 @@ public class ImportCsvUbsGenerate implements ImportCsv {
 
     @Override
     public void run() {
-        List<Address> addressList = leSalvaEndereco();
-        List<Ubs> listUbs = leSalvaUbsCmEndereco(addressList);
+        List<Address> addressList = readSaveAddress();
+        List<Ubs> listUbs = readSaveUbsWithAddress(addressList);
     }
 }

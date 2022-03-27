@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.usecase.ubs.impl;
 
-import com.bandtec.mais.consulta.gateway.repository.AgendamentoRepository;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
+import com.bandtec.mais.consulta.gateway.repository.SchedulingRepository;
+import com.bandtec.mais.consulta.gateway.repository.DoctorRepository;
 import com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
 import lombok.SneakyThrows;
@@ -19,15 +19,15 @@ import java.util.List;
 public class PostHoursUbsImpl implements PostHoursUbs {
 
     @Autowired
-    MedicoRepository medicoRepository;
+    DoctorRepository doctorRepository;
 
     @Autowired
-    AgendamentoRepository agendamentoRepository;
+    SchedulingRepository schedulingRepository;
 
     @SneakyThrows
     @Override
     public HashMap<LocalTime, String> execute(Integer idUbs, String dia) {
-        List<HoursResponseDTO> listHoursOcupeds = agendamentoRepository.findHrAndDtAtendimentoByIdUbs(idUbs, LocalDate.parse(dia));
+        List<HoursResponseDTO> listHoursOcupeds = schedulingRepository.findTimeAndSchedulingDateByUbsId(idUbs, LocalDate.parse(dia));
         List<LocalTime> horariosTrabalho = addHours();
         LinkedHashMap<LocalTime, String> horarios = new LinkedHashMap<>();
 

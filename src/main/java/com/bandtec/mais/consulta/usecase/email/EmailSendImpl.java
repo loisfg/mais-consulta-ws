@@ -4,7 +4,7 @@ package com.bandtec.mais.consulta.usecase.email;
 import com.bandtec.mais.consulta.domain.Email;
 import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.gateway.repository.EmailRepository;
-import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
+import com.bandtec.mais.consulta.gateway.repository.PatientRepository;
 import com.bandtec.mais.consulta.models.dto.request.EmailDTO;
 import com.bandtec.mais.consulta.models.enums.StatusEmail;
 import org.springframework.beans.BeanUtils;
@@ -27,13 +27,13 @@ public class EmailSendImpl implements EmailSend {
     private JavaMailSender emailSender;
 
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private PatientRepository patientRepository;
 
     @Override
     public Email execute(EmailDTO emailDTO, Integer id) {
         Email email = new Email();
-        Optional<Patient> paciente = pacienteRepository.findById(id);
-        paciente.ifPresent(value -> emailDTO.setEmailTo(value.getUser().getEmail()));
+        Optional<Patient> patient = patientRepository.findById(id);
+        patient.ifPresent(value -> emailDTO.setEmailTo(value.getUser().getEmail()));
         BeanUtils.copyProperties(emailDTO, email);
         email.setSendDateEmail(LocalDateTime.now());
         try {

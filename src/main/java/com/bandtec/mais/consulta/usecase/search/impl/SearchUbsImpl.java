@@ -1,14 +1,12 @@
 package com.bandtec.mais.consulta.usecase.search.impl;
 
 import com.bandtec.mais.consulta.domain.Ubs;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
 import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
 import com.bandtec.mais.consulta.usecase.search.SearchUbs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SearchUbsImpl implements SearchUbs {
@@ -17,6 +15,6 @@ public class SearchUbsImpl implements SearchUbs {
 
     @Override
     public List<Ubs> execute(Integer id) {
-        return ubsRepository.findUbsByEspecialidade(id);
+        return ubsRepository.findUbsBySpecialty(id);
     }
 }

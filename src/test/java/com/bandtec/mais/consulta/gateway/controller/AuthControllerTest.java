@@ -1,15 +1,11 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
-import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
+import com.bandtec.mais.consulta.gateway.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest()
 class AuthControllerTest {
@@ -18,7 +14,7 @@ class AuthControllerTest {
     AuthController controller;
 
     @MockBean
-    UsuarioRepository repository;
+    UserRepository repository;
 
     @Test
     @DisplayName("Logar usuário tipo Paciente")

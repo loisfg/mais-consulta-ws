@@ -3,7 +3,7 @@ package com.bandtec.mais.consulta.usecase.schedule.impl;
 import com.bandtec.mais.consulta.domain.Scheduling;
 import com.bandtec.mais.consulta.domain.Exam;
 import com.bandtec.mais.consulta.gateway.repository.*;
-import com.bandtec.mais.consulta.infra.queue.FilaAgendamentoExame;
+import com.bandtec.mais.consulta.infra.queue.SchedulingExamQueue;
 import com.bandtec.mais.consulta.models.dto.request.ExamSchedulingRequestDTO;
 import com.bandtec.mais.consulta.models.enums.SchedulingStatusEnum;
 import com.bandtec.mais.consulta.usecase.notification.CreateNotification;
@@ -19,33 +19,33 @@ import java.util.Optional;
 @Slf4j
 public class PostSchedulingExamImpl implements PostSchedulingExam {
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    private EspecialidadeRepository especialidadeRepository;
+    private SpecialtyRepository specialtyRepository;
 
     @Autowired
-    private MedicoRepository medicoRepository;
+    private DoctorRepository doctorRepository;
 
     @Autowired
-    private ExameRepository exameRepository;
+    private ExamRepository examRepository;
 
     @Autowired
-    private AgendamentoRepository agendamentoRepository;
+    private SchedulingRepository schedulingRepository;
 
     @Autowired
     private CreateNotification createNotification;
 
     @Autowired
-    private FilaAgendamentoExame filaAgendamentoExame;
+    private SchedulingExamQueue schedulingExamQueue;
 
     @Override
     public Optional<Exam> execute(ExamSchedulingRequestDTO examSchedulingRequestDTO) {
         Exam exam = ExamSchedulingRequestDTO.convertFromController(examSchedulingRequestDTO);
 
-        if (pacienteRepository.existsById(examSchedulingRequestDTO.getPatientId())) {
+        if (patientRepository.existsById(examSchedulingRequestDTO.getPatientId())) {
             try{
-                Optional<Scheduling> oAgendamento = agendamentoRepository.findByDtAtendimentoAndHrAtendimento(examSchedulingRequestDTO.getSchedulingDate(), examSchedulingRequestDTO.getSchedulingTime());
+                Optional<Scheduling> oAgendamento = schedulingRepository.findBySchedulingDateAndSchedulingTime(examSchedulingRequestDTO.getSchedulingDate(), examSchedulingRequestDTO.getSchedulingTime());
                 if (oAgendamento.isPresent()) {
 
                     Scheduling agendamento = oAgendamento.get();
@@ -54,7 +54,7 @@ public class PostSchedulingExamImpl implements PostSchedulingExam {
                         efetuarAgendamentoExame(examSchedulingRequestDTO, exam);
                     } else {
                         examSchedulingRequestDTO.setStatus(SchedulingStatusEnum.HOLD);
-                        filaAgendamentoExame.setFilaAgendamentoExame(examSchedulingRequestDTO);
+                        schedulingExamQueue.setSchedulingExamQueue(examSchedulingRequestDTO);
                         return Optional.of(exam);
                     }
                 }
@@ -72,12 +72,12 @@ public class PostSchedulingExamImpl implements PostSchedulingExam {
     private void efetuarAgendamentoExame(ExamSchedulingRequestDTO examSchedulingRequestDTO, Exam exam) {
         Scheduling agendamento = exam.getScheduling();
         agendamento.setStatus(SchedulingStatusEnum.ACTIVE);
-        agendamento.setPaciente(pacienteRepository.findById(examSchedulingRequestDTO.getPatientId()).get());
-        agendamento.setEspecialidade(especialidadeRepository.findById(examSchedulingRequestDTO.getSpecialtyId()).get());
-        agendamento.setMedico(medicoRepository.findMedicosByIdEspecialidadeAndIdUbs(examSchedulingRequestDTO.getSpecialtyId(), examSchedulingRequestDTO.getUbsId()).get());
+        agendamento.setPaciente(patientRepository.findById(examSchedulingRequestDTO.getPatientId()).get());
+        agendamento.setEspecialidade(specialtyRepository.findById(examSchedulingRequestDTO.getSpecialtyId()).get());
+        agendamento.setMedico(doctorRepository.findDoctorsBySpecialtyIdAndUbsId(examSchedulingRequestDTO.getSpecialtyId(), examSchedulingRequestDTO.getUbsId()).get());
 
-        exameRepository.save(exam);
-        agendamentoRepository.save(agendamento);
+        examRepository.save(exam);
+        schedulingRepository.save(agendamento);
         createNotification.execute(agendamento, "exame");
     }
 }
