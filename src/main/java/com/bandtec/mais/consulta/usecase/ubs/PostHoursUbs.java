@@ -6,5 +6,5 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface PostHoursUbs {
-    HashMap<LocalTime, String> execute(Integer idUbs, String dia);
+    HashMap<String, List<LocalTime>> execute(Integer idUbs, String dia);
 }

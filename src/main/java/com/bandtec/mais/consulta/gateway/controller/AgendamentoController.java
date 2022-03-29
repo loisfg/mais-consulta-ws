@@ -91,9 +91,9 @@ public class AgendamentoController {
     }
 
     @GetMapping("/horarios/livres/{dia}/{idUbs}")
-    public ResponseEntity<HashMap<LocalTime, String>> getAvaibleTime(@PathVariable Integer idUbs,
+    public ResponseEntity<HashMap<String, List<LocalTime>>> getAvaibleTime(@PathVariable Integer idUbs,
                                                                      @PathVariable String dia) {
-        HashMap<LocalTime, String> listHoras = postHoursUbs.execute(idUbs, dia);
+        HashMap<String, List<LocalTime>> listHoras = postHoursUbs.execute(idUbs, dia);
         if(listHoras.isEmpty()) {
            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }

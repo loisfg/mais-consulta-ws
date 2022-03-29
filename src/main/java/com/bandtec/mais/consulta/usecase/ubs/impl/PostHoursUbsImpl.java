@@ -26,27 +26,34 @@ public class PostHoursUbsImpl implements PostHoursUbs {
 
     @SneakyThrows
     @Override
-    public HashMap<LocalTime, String> execute(Integer idUbs, String dia) {
+    public HashMap<String, List<LocalTime>> execute(Integer idUbs, String dia) {
         List<HoursResponseDTO> listHoursOcupeds = agendamentoRepository.findHrAndDtAtendimentoByIdUbs(idUbs, LocalDate.parse(dia));
         List<LocalTime> horariosTrabalho = addHours();
-        LinkedHashMap<LocalTime, String> horarios = new LinkedHashMap<>();
+        LinkedHashMap<String, List<LocalTime>> horarios = new LinkedHashMap<>();
+        List<LocalTime> horariosLivres = new ArrayList<>();
+        List<LocalTime> horariosOcupados = new ArrayList<>();
 
-        horariosTrabalho.forEach(hrTrabalho -> {
-            horarios.put(hrTrabalho, "Livre");
-            listHoursOcupeds.forEach(hrOcuped -> {
-                        if (horarios.containsKey(hrOcuped.getHrAtendimento())) {
-                            horarios.replace(hrOcuped.getHrAtendimento(), "Ocupado");
-                        }
+        horariosTrabalho.forEach(horario -> {
+            horariosLivres.add(horario);
+            listHoursOcupeds.forEach(medicosOcupados -> {
+                if (medicosOcupados.getDtAtendimento().equals(LocalDate.parse(dia))) {
+                    if (medicosOcupados.getHrAtendimento().equals(horario)) {
+                        horariosOcupados.add(horario);
+                        horariosLivres.remove(horario);
                     }
-            );
+                }
+            });
         });
+
+        horarios.put("Livre", horariosLivres);
+        horarios.put("Ocupado", horariosOcupados);
 
         return horarios;
     }
 
     public List<LocalTime> addHours() {
         List<LocalTime> allHours = new ArrayList<>();
-        List<Integer> hrs = List.of(8,9,10,11,12,13,14,15,16,17,18);
+        List<Integer> hrs = List.of(8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
         try {
             for (Integer hr : hrs) {
                 allHours.add(LocalTime.of(hr, 0));
