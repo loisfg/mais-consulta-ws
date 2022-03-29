@@ -14,6 +14,7 @@ import com.bandtec.mais.consulta.usecase.patient.GetHistorico;
 import com.bandtec.mais.consulta.usecase.patient.GetPacienteInfo;
 import com.bandtec.mais.consulta.usecase.patient.PutPacienteInfo;
 import com.bandtec.mais.consulta.usecase.ubs.GetUbs;
+import com.bandtec.mais.consulta.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,8 +53,12 @@ public class PacienteController {
     @Autowired
     private PutPacienteInfo putPacienteInfo;
 
+    @Autowired
+    private Validation validation;
+
     @GetMapping("/{idPaciente}")
     public ResponseEntity<PacienteInfoResponseDTO> getPacienteInfo(@PathVariable Integer idPaciente){
+        validation.verifyPatient(idPaciente);
         return ResponseEntity.of(getPacienteInfo.execute(idPaciente));
     }
 
@@ -97,6 +102,7 @@ public class PacienteController {
     @PutMapping("{idPaciente}")
     public ResponseEntity<Paciente> putInfosPaciente(@PathVariable Integer idPaciente,
                                                      @RequestBody PacienteInfoPutResquestDTO pacienteInfoPutResquestDTO) {
+        validation.verifyPatient(idPaciente);
         ResponseEntity.of(putPacienteInfo.execute(idPaciente, pacienteInfoPutResquestDTO));
 
         return null;

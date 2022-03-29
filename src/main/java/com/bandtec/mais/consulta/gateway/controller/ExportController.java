@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.gateway.controller;
 import com.bandtec.mais.consulta.usecase.export.ExportConsulta;
 import com.bandtec.mais.consulta.usecase.export.ExportConsultaById;
 import com.bandtec.mais.consulta.usecase.export.ExportLastConsulta;
+import com.bandtec.mais.consulta.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,8 +27,12 @@ public class ExportController {
     @Autowired
     private ExportConsulta exportConsulta;
 
+    @Autowired
+    private Validation validation;
+
     @GetMapping("/{idUser}/consulta/info")
     public ResponseEntity<?> exportLastConsulta(@PathVariable Integer idUser) {
+        validation.verifyPatient(idUser);
         Optional<Map<String, String>> oAgendamentoCsv = exportLastConsulta.execute(idUser);
 
         if (oAgendamentoCsv.isPresent()) {
@@ -51,6 +56,7 @@ public class ExportController {
     @GetMapping("/{idAgendamento}/{idUser}/consulta/info")
     public ResponseEntity<?> exportConsultaById(@PathVariable Integer idAgendamento,
                                                 @PathVariable Integer idUser) {
+        validation.verifyPatient(idUser);
 
         Optional<Map<String, String>> oConsultaCsv = exportConsultaById.execute(idAgendamento, idUser);
 
@@ -76,6 +82,7 @@ public class ExportController {
     @GetMapping("{idPaciente}/consultas/info")
     public ResponseEntity<?> exportConsulta(@PathVariable Integer idPaciente) {
 
+        validation.verifyPatient(idPaciente);
         Optional<String> oConsultaCsv = exportConsulta.execute(idPaciente);
 
         if (oConsultaCsv.isPresent()) {

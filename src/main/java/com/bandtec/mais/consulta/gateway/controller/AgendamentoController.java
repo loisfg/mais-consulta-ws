@@ -9,6 +9,7 @@ import com.bandtec.mais.consulta.models.dto.request.AgendamentoExameRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.EspecialidadeResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
+import com.bandtec.mais.consulta.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,9 @@ public class AgendamentoController {
     @Autowired
     private GetEspecialidades getEspecialidades;
 
+    @Autowired
+    private Validation validation;
+
     @PatchMapping("/cancelar/{idAgendamento}")
     public ResponseEntity<?> cancelarExame(@PathVariable Integer idAgendamento) {
         return ResponseEntity.ok(cancelAgendamento.execute(idAgendamento));
@@ -71,6 +75,8 @@ public class AgendamentoController {
 
     @GetMapping("/exames/{idUser}")
     public ResponseEntity<?> getExamesByIdUser(@PathVariable Integer idUser) {
+
+        validation.verifyPatient(idUser);
         return getAgendamentoExame.execute(idUser)
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
@@ -78,6 +84,7 @@ public class AgendamentoController {
 
     @GetMapping("/consulta/{idUser}")
     public ResponseEntity<?> getConsultaByIdUser(@PathVariable Integer idUser) {
+        validation.verifyPatient(idUser);
         return getAgendamentoConsulta.execute(idUser)
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
