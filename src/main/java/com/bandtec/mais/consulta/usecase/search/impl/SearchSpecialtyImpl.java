@@ -22,8 +22,6 @@ public class SearchSpecialtyImpl implements SearchSpecialty {
     public Set<Doctor> execute(String description) {
         Specialty specialty = specialtyRepository.findByDescription(description);
 
-        return doctorRepository.findAllBySpecialties(specialty);
-
-        // TODO: retirar especialidade do retorno do JSON;
+        return doctorRepository.findAllBySpecialty(specialty);
     }
 }

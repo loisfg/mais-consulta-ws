@@ -27,22 +27,26 @@ public class Patient {
     private Integer patientId;
 
     @NotBlank
+    @Column(name = "nome")
     private String name;
 
     @Column(name = "dt_nascimento")
     private LocalDate birthDate;
 
+    @Column(name = "telefone")
     private String phone;
+
+    @Column(name = "sexo")
     private String gender;
 
     @Column(name = "numero_carteira_sus")
     private String susNumberWallet;
 
+    @Column(name = "peso")
     private String weight = "";
+
+    @Column(name = "altura")
     private Double height = 0.0;
-    private Boolean isVirgin = false;
-    private Boolean isSmoker = false;
-    private BloodTypeEnum bloodType = BloodTypeEnum.DEFAULT;
 
     @OneToOne
     @JoinColumn(name = "endereco_id")
@@ -52,26 +56,6 @@ public class Patient {
     @JoinColumn(name = "usuario_id", referencedColumnName = "idUsuario", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     protected User user;
-
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
-    @ToString.Exclude
-    private Set<PatientHasDisease> diseases;
-
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
-    @ToString.Exclude
-    private Set<PatientHasMedicine> medicines;
-
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
-    @ToString.Exclude
-    private Set<PatientHasDeficiency> deficiencies;
-
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
-    @ToString.Exclude
-    private Set<PatientHasAllergy> allergies;
-
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.PERSIST)
-    @ToString.Exclude
-    private Set<PatientHasActivity> activities;
 
     @Override
     public boolean equals(Object o) {

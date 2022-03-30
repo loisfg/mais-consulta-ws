@@ -22,21 +22,6 @@ public class GetPatientInfoImpl implements GetPatientInfo {
     @Autowired
     private PatientRepository patientRepository;
 
-    @Autowired
-    private MedicineRepository medicineRepository;
-
-    @Autowired
-    private DiseaseRepository diseaseRepository;
-
-    @Autowired
-    private DeficiencyRepository deficiencyRepository;
-
-    @Autowired
-    private AllergyRepository allergyRepository;
-
-    @Autowired
-    private ActivityRepository activityRepository;
-
     @Override
     public Optional<PatientInfoResponseDTO> execute(Integer patientId) {
 
@@ -46,17 +31,6 @@ public class GetPatientInfoImpl implements GetPatientInfo {
 
             User user = patient.getUser();
             Address address = patient.getAddress();
-
-            List<Disease> diseaseList = diseaseRepository.findByPatientId(patientId);
-            List<Allergy> allergyList = allergyRepository.findByPatientId(patientId);
-            List<Deficiency> deficiencyList = deficiencyRepository.findByPatientId(patientId);
-            List<Medicine> medicineList = medicineRepository.findByPatientId(patientId);
-            List<Activity> activityList = activityRepository.findByPatientId(patientId);
-
-            List<Disease> hereditaryDiseaseList = diseaseList.stream().filter(Disease::getHereditary).collect(Collectors.toList());
-            List<Disease> chronicDiseaseList = diseaseList.stream().filter(Disease::getChronic).collect(Collectors.toList());
-            List<Disease> StdsDiseaseList = diseaseList.stream().filter(Disease::getStd).collect(Collectors.toList());
-            List<Medicine> controlledMedicineList = medicineList.stream().filter(Medicine::getControlled).collect(Collectors.toList());
 
             PersonalDataDTO personalDataDTO = PersonalDataDTO
                     .builder()
@@ -76,26 +50,9 @@ public class GetPatientInfoImpl implements GetPatientInfo {
                     .cep(address.getZipCode())
                     .build();
 
-            MedicalChartDTO medicalChartDTO = MedicalChartDTO
-                    .builder()
-                    .weight(patient.getWeight())
-                    .height(patient.getHeight())
-                    .chronicDiseases(chronicDiseaseList)
-                    .prescriptionDrugs(controlledMedicineList)
-                    .allergies(allergyList)
-                    .stds(StdsDiseaseList)
-                    .isSmoker(patient.getIsSmoker())
-                    .isVirgin(patient.getIsVirgin())
-                    .deficiency(deficiencyList)
-                    .hereditaryDiseases(hereditaryDiseaseList)
-                    .prohibitedActivities(activityList)
-                    .bloodType(patient.getBloodType())
-                    .build();
-
             PatientInfoResponseDTO patientInfoResponseDTO = PatientInfoResponseDTO
                     .builder()
                     .personalData(personalDataDTO)
-                    .medicalChart(medicalChartDTO)
                     .build();
 
             return Optional.of(patientInfoResponseDTO);

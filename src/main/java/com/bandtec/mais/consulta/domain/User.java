@@ -25,14 +25,17 @@ public class User {
     @Column(name = "idUsuario")
     private Integer userId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "cpf")
     private String cpf;
+
+    @Column(name = "email")
     private String email;
 
     @JsonIgnore
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "role")
     private String role;
 
     @Override

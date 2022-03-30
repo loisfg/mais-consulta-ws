@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     boolean existsByCpf(String cpf);
 
-    @Query("SELECT p.usuario FROM Paciente p WHERE p.idPaciente = :id")
+    @Query("SELECT p.user FROM Paciente p WHERE p.patientId = :id")
     Optional<User> findPatientUser(@Param("id") Integer patientId);
 
 }

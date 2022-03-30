@@ -24,7 +24,7 @@ public class ExportConsultByIdImpl implements ExportConsultById {
 
         if (userRepository.existsById(userId) && schedulingRepository.existsById(schedulingId)) {
 
-            Optional<Scheduling> oScheduling = schedulingRepository.findByIdScheduling(schedulingId);
+            Optional<Scheduling> oScheduling = schedulingRepository.findBySchedulingId(schedulingId);
 
             if (oScheduling.isEmpty()) {
                 return Optional.empty();

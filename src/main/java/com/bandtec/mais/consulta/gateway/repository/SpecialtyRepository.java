@@ -15,6 +15,6 @@ public interface SpecialtyRepository extends JpaRepository<Specialty, Integer> {
 
     Specialty findFirstByDescription(String description);
 
-    @Query("SELECT DISTINCT new com.bandtec.mais.consulta.models.dto.response.EspecialidadeResponseDTO(m.especialidade.descricao, m.especialidade.idEspecialidade) FROM Medico m")
+    @Query("SELECT DISTINCT new com.bandtec.mais.consulta.models.dto.response.SpecialtyResponseDTO(m.specialty.description, m.specialty.specialtyId) FROM Doctor m")
     Optional<Set<SpecialtyResponseDTO>> findAllSpecialties();
 }

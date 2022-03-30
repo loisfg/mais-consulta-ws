@@ -21,13 +21,28 @@ public class Address {
     @Column(name = "id_endereco")
     private Integer addressId;
 
+    @Column(name = "cep")
     private String zipCode;
+
+    @Column(name = "cidade")
     private String city;
+
+    @Column(name = "estado")
     private String state;
+
+    @Column(name = "bairro")
     private String district;
+
+    @Column(name = "rua")
     private String street;
+
+    @Column(name = "logradouro")
     private String publicPlace;
+
+    @Column(name = "numero")
     private String number;
+
+    @Column(name = "complemento")
     private String complement;
 
     @Override

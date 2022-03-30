@@ -1,9 +1,0 @@
-package com.bandtec.mais.consulta.usecase.info;
-
-import com.bandtec.mais.consulta.domain.Allergy;
-
-import java.util.List;
-
-public interface PostAllergy {
-    List<Allergy> execute(Iterable<Integer> allergyId, Integer patientId);
-}

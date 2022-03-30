@@ -42,6 +42,7 @@ public class Scheduling {
     private LocalTime schedulingTime;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private SchedulingStatusEnum status;
 
     @JoinColumn(name = "especialidade_id", referencedColumnName = "id_especialidade", nullable = false)

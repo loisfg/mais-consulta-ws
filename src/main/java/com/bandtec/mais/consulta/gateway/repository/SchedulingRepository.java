@@ -16,14 +16,14 @@ import java.util.Optional;
 
 public interface SchedulingRepository extends JpaRepository<Scheduling, Integer> {
 
-    @Query("SELECT a FROM Agendamento a WHERE a.paciente.idPaciente = :id")
+    @Query("SELECT a FROM Scheduling a WHERE a.patient.patientId = :id")
     List<Scheduling> findBySchedulingByPatientId(@Param("id") Integer patientId);
 
-    Optional<Scheduling> findByIdScheduling(Integer schedulingId);
+    Optional<Scheduling> findBySchedulingId(Integer schedulingId);
 
     Optional<Scheduling> findFirstByPatient_User_UserIdOrderBySchedulingDateDesc(Integer userId);
 
-    @Query("SELECT a FROM Agendamento a WHERE a.dtAtendimento = :dt_atendimento AND a.hrAtendimento = :hr_atendimento")
+    @Query("SELECT a FROM Scheduling a WHERE a.schedulingDate = :dt_atendimento AND a.schedulingTime = :hr_atendimento")
     Optional<Scheduling> findBySchedulingDateAndSchedulingTime(@Param("dt_atendimento") LocalDate schedulingDate,
                                                                @Param("hr_atendimento") LocalTime schedulingTime);
 
@@ -31,13 +31,13 @@ public interface SchedulingRepository extends JpaRepository<Scheduling, Integer>
                                                                                   LocalTime schedulingTime,
                                                                                   SchedulingStatusEnum status);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO(a.dtAtendimento, a.hrAtendimento, a.medico.idMedico) FROM Agendamento a WHERE a.medico.ubs.idUbs = :idUbs AND a.dtAtendimento = :dia")
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO(a.schedulingDate, a.schedulingTime, a.doctor.doctorId) FROM Scheduling a WHERE a.doctor.ubs.ubsId = :idUbs AND a.schedulingDate = :dia")
     List<HoursResponseDTO> findTimeAndSchedulingDateByUbsId(@Param("idUbs") Integer ubsId,
                                                             @Param("dia") LocalDate day);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Agendamento a SET a.status = :status WHERE a.idAgendamento = :id_agendamento")
+    @Query(value = "UPDATE Scheduling a SET a.status = :status WHERE a.schedulingId = :id_agendamento")
     void updateSchedulingStatus(@Param("id_agendamento") Integer schedulingId,
                                 @Param("status") SchedulingStatusEnum status);
 

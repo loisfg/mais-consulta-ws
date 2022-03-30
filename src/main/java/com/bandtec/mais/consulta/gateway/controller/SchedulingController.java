@@ -1,9 +1,7 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Consult;
-import com.bandtec.mais.consulta.domain.Exam;
 import com.bandtec.mais.consulta.models.dto.request.ConsultSchedulingRequestDTO;
-import com.bandtec.mais.consulta.models.dto.request.ExamSchedulingRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.SpecialtyResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
 import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
@@ -26,12 +24,6 @@ public class SchedulingController {
     private PostSchedulingConsult postSchedulingConsult;
 
     @Autowired
-    private PostSchedulingExam postSchedulingExam;
-
-    @Autowired
-    private GetSchedulingExam getSchedulingExam;
-
-    @Autowired
     private GetSchedulingConsult getSchedulingConsult;
 
     @Autowired
@@ -48,15 +40,6 @@ public class SchedulingController {
         return ResponseEntity.ok(cancelScheduling.execute(schedulingId));
     }
 
-    @PostMapping("/agendar/exame")
-    public ResponseEntity<Exam> createSchedulingExam(
-            @RequestBody ExamSchedulingRequestDTO examSchedulingRequestDTO
-    ) {
-        return postSchedulingExam.execute(examSchedulingRequestDTO)
-                .map(it -> ResponseEntity.status(HttpStatus.CREATED).body(it))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
-    }
-
     @PostMapping("/agendar/consulta")
     public ResponseEntity<Consult> createSchedulingConsult(
             @RequestBody @Valid ConsultSchedulingRequestDTO consultSchedulingRequestDTO
@@ -64,13 +47,6 @@ public class SchedulingController {
         return postSchedulingConsult.execute(consultSchedulingRequestDTO)
                 .map(ResponseEntity.status(HttpStatus.CREATED)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.BAD_REQUEST)::build);
-    }
-
-    @GetMapping("/exames/{idUser}")
-    public ResponseEntity<?> getExamsByUser(@PathVariable Integer userId) {
-        return getSchedulingExam.execute(userId)
-                .map(ResponseEntity.status(HttpStatus.OK)::body)
-                .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
     @GetMapping("/consulta/{idUser}")

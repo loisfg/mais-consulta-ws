@@ -21,8 +21,10 @@ public class Ubs {
     @Column(name = "id_ubs")
     private Integer ubsId;
 
+    @Column(name = "nome")
     private String name;
 
+    @Column(name = "telefone")
     private String phone;
 
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco", nullable = false)

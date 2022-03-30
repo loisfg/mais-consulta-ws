@@ -23,7 +23,7 @@ public class Specialty {
     @Column(name = "id_especialidade")
     private Integer specialtyId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "descricao")
     private String description;
 
     @Transient

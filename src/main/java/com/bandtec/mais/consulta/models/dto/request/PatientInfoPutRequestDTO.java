@@ -12,5 +12,4 @@ import lombok.Setter;
 @Setter
 public class PatientInfoPutRequestDTO {
     public PersonalDataDTO personalData;
-    public MedicalChartRequestDTO medicalChart;
 }

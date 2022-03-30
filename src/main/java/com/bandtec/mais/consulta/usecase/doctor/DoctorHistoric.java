@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface DoctorHistoric {
     Optional<List<DoctorHistoricResponseDTO>> execute(Integer patientId);
+
     void verify(Integer patientId);
 }

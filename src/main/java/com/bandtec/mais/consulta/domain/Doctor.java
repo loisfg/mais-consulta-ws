@@ -22,6 +22,7 @@ public class Doctor {
     @Column(name = "id_medico")
     private Integer doctorId;
 
+    @Column(name = "nome")
     private String name;
 
     @JsonIgnore

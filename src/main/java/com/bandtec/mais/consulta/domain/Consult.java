@@ -20,6 +20,7 @@ public class Consult {
     @Column(name = "id_consulta")
     private Integer consultId;
 
+    @Column(name = "descricao")
     private String description;
 
     @JoinColumn(name = "agendamento_id", referencedColumnName = "id_agendamento", nullable = false)
