@@ -1,6 +1,5 @@
 package com.bandtec.mais.consulta.domain;
 
-import com.bandtec.mais.consulta.models.enums.BloodTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 @AllArgsConstructor
 @Getter
@@ -39,14 +37,8 @@ public class Patient {
     @Column(name = "sexo")
     private String gender;
 
-    @Column(name = "numero_carteira_sus")
-    private String susNumberWallet;
-
-    @Column(name = "peso")
-    private String weight = "";
-
-    @Column(name = "altura")
-    private Double height = 0.0;
+    @Column(name = "numero_carteira")
+    private String numberWallet;
 
     @OneToOne
     @JoinColumn(name = "endereco_id")

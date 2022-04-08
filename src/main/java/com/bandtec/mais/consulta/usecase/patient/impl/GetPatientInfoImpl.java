@@ -3,7 +3,6 @@ package com.bandtec.mais.consulta.usecase.patient.impl;
 import com.bandtec.mais.consulta.domain.*;
 import com.bandtec.mais.consulta.gateway.repository.*;
 import com.bandtec.mais.consulta.models.dto.PersonalDataDTO;
-import com.bandtec.mais.consulta.models.dto.MedicalChartDTO;
 import com.bandtec.mais.consulta.models.dto.response.PatientInfoResponseDTO;
 import com.bandtec.mais.consulta.usecase.patient.GetPatientInfo;
 import lombok.SneakyThrows;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class GetPatientInfoImpl implements GetPatientInfo {
@@ -41,7 +38,7 @@ public class GetPatientInfoImpl implements GetPatientInfo {
                     .complement(address.getComplement())
                     .number(address.getNumber())
                     .district(address.getDistrict())
-                    .susNumber(patient.getSusNumberWallet())
+                    .susNumber(patient.getNumberWallet())
                     .cpf(user.getCpf())
                     .phone(patient.getPhone())
                     .city(address.getCity())

@@ -20,7 +20,7 @@ public class BuildExportFile {
         Patient patient = scheduling.getPatient();
         String patientName = patient.getName();
 
-        String susNumberWallet = patient.getSusNumberWallet();
+        String susNumberWallet = patient.getNumberWallet();
 
         SchedulingStatusEnum status = scheduling.getStatus();
 

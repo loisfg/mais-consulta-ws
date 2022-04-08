@@ -47,8 +47,6 @@ public class PostSchedulingFormImpl implements PostTreatmentForm {
                 patient.setPatientId(patientId);
                 patient.setName(personalDataDTO.getName());
                 patient.setPhone(personalDataDTO.getPhone());
-                patient.setWeight(medicalChartDTO.getWeight());
-                patient.setHeight(medicalChartDTO.getHeight());
 
                 patientRepository.save(patient);
                 schedulingRepository.updateSchedulingStatus(schedulingId, SchedulingStatusEnum.FINISHED);

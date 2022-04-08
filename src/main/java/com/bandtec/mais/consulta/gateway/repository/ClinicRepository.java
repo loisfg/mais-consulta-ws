@@ -16,9 +16,9 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
     @Query("SELECT DISTINCT m.clinic FROM Doctor m WHERE m.specialty.specialtyId = ?1")
     List<Clinic> findClinicBySpecialty(Integer specialtyId);
 
-    @Query("SELECT c FROM Clinica c, Paciente p WHERE c.address.state = p.address.state AND p.patientId = :patientId")
+    @Query("SELECT c FROM Clinic c, Paciente p WHERE c.address.state = p.address.state AND p.patientId = :patientId")
     Optional<List<Clinic>> findClinicByPatientId(@Param("patientId") Integer patientId);
 
-    @Query("SELECT c FROM Clinica c, Paciente p WHERE c.address.district = p.address.district AND c.address.district = :district")
+    @Query("SELECT c FROM Clinic c, Paciente p WHERE c.address.district = p.address.district AND c.address.district = :district")
     List<Clinic> findClinicByDistrict(@Param("district") String district);
 }

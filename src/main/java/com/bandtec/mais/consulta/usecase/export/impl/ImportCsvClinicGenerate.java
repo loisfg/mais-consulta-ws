@@ -129,5 +129,6 @@ public class ImportCsvClinicGenerate implements ImportCsv {
     public void run() {
         List<Address> addressList = readSaveAddress();
         List<Clinic> listClinic = readSaveClinicWithAddress(addressList);
+        clinicRepository.saveAllAndFlush(listClinic);
     }
 }
