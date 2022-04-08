@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.gateway.controller;
 import com.bandtec.mais.consulta.usecase.export.ExportConsult;
 import com.bandtec.mais.consulta.usecase.export.ExportConsultById;
 import com.bandtec.mais.consulta.usecase.export.ExportLastConsult;
+import com.bandtec.mais.consulta.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,6 +26,9 @@ public class ExportController {
 
     @Autowired
     private ExportConsult exportConsult;
+
+    @Autowired
+    private Validation validation;
 
     @GetMapping("/{idUser}/consulta/info")
     public ResponseEntity<?> exportLastConsult(@PathVariable Integer userId) {

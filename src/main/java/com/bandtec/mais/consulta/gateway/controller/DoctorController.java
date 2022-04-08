@@ -123,7 +123,7 @@ public class DoctorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> doctorDelete(@PathVariable Integer id) {
-        validation.verifyMedicoExists(id);
+        validation.verifyDoctorExists(id);
         if (doctorDelete.execute(id)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }
@@ -133,7 +133,7 @@ public class DoctorController {
     @GetMapping("/{doctorId}/agendamentos")
     public ResponseEntity<List<DoctorSchedulingDTO>> getSchedulesByDoctor(@PathVariable Integer doctorId) {
         Optional<List<DoctorSchedulingDTO>> oSchedules = doctorSchedules.execute(doctorId);
-        validation.verifyMedicoExists(doctorId);
+        validation.verifyDoctorExists(doctorId);
 
         return oSchedules
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
@@ -143,7 +143,7 @@ public class DoctorController {
     @GetMapping("/{doctorId}/historico")
     public ResponseEntity<List<DoctorHistoricResponseDTO>> getHistoricByDoctor(@PathVariable Integer doctorId) {
         Optional<List<DoctorHistoricResponseDTO>> oHistoric = doctorHistoric.execute(doctorId);
-        validation.verifyMedicoExists(doctorId);
+        validation.verifyDoctorExists(doctorId);
 
         return oHistoric
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
