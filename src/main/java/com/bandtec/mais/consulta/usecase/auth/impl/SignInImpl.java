@@ -1,14 +1,14 @@
 package com.bandtec.mais.consulta.usecase.auth.impl;
 
-import com.bandtec.mais.consulta.domain.Medico;
-import com.bandtec.mais.consulta.domain.Paciente;
-import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
-import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
-import com.bandtec.mais.consulta.gateway.repository.UsuarioRepository;
-import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
-import com.bandtec.mais.consulta.models.dto.response.MedicoSignInResponseDTO;
-import com.bandtec.mais.consulta.models.dto.response.PacienteSignInResponseDTO;
+import com.bandtec.mais.consulta.domain.Doctor;
+import com.bandtec.mais.consulta.domain.Patient;
+import com.bandtec.mais.consulta.domain.User;
+import com.bandtec.mais.consulta.gateway.repository.DoctorRepository;
+import com.bandtec.mais.consulta.gateway.repository.PatientRepository;
+import com.bandtec.mais.consulta.gateway.repository.UserRepository;
+import com.bandtec.mais.consulta.models.dto.request.SignInUserRequestDTO;
+import com.bandtec.mais.consulta.models.dto.response.SignInDoctorResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.SignInPatientResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.SignIn;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,49 +22,48 @@ import java.util.Optional;
 public class SignInImpl implements SignIn {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private PacienteRepository pacienteRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    private MedicoRepository medicoRepository;
+    private DoctorRepository doctorRepository;
 
     @Override
-    public Optional<?> execute(UsuarioSignInRequestDTO usuarioSignInRequestDTO, List<Usuario> usuariosLogados) {
-        if (usuarioRepository.existsByCpf(usuarioSignInRequestDTO.getCpf())) {
-            Usuario usuario = usuarioRepository
-                    .findByCpfAndPassword(usuarioSignInRequestDTO.getCpf(), usuarioSignInRequestDTO.getPassword()).get();
+    public Optional<?> execute(SignInUserRequestDTO signInUserRequestDTO, List<User> connectedUsers) {
+        if (userRepository.existsByCpf(signInUserRequestDTO.getCpf())) {
+            User user = userRepository
+                    .findByCpfAndPassword(signInUserRequestDTO.getCpf(), signInUserRequestDTO.getPassword()).get();
 
-            usuariosLogados.add(usuario);
+            connectedUsers.add(user);
 
-            if (usuario.getRole().equals("Medico")) {
-                log.info("USUARIO É UM MEDICO");
-                Medico medico = medicoRepository.findByUsuario(usuario).get();
+            if (user.getRole().equals("Medico")) {
+                log.info("User is a doctor");
+                Doctor doctor = doctorRepository.findByUser(user).get();
 
-                MedicoSignInResponseDTO medicoSignInResponseDTO = MedicoSignInResponseDTO
+                SignInDoctorResponseDTO signInDoctorResponseDTO = SignInDoctorResponseDTO
                         .builder()
-                        .id(medico.getIdMedico())
-                        .nome(medico.getNome())
-                        .role(usuario.getRole())
+                        .id(doctor.getDoctorId())
+                        .name(doctor.getName())
+                        .role(user.getRole())
                         .build();
 
-                return Optional.of(medicoSignInResponseDTO);
-            }
-            else {
-                log.info("USUARIO É UM PACIENTE");
-                Paciente paciente = pacienteRepository.findByUsuario(usuario).get();
+                return Optional.of(signInDoctorResponseDTO);
+            } else {
+                log.info("User is a patient");
+                Patient patient = patientRepository.findByUser(user).get();
 
-                PacienteSignInResponseDTO pacienteSignInResponseDTO = PacienteSignInResponseDTO
+                SignInPatientResponseDTO signInPatientResponseDTO = SignInPatientResponseDTO
                         .builder()
-                        .id(paciente.getIdPaciente())
-                        .nome(paciente.getNome())
-                        .role(usuario.getRole())
+                        .id(patient.getPatientId())
+                        .name(patient.getName())
+                        .role(user.getRole())
                         .build();
 
-                pacienteSignInResponseDTO.setRole(usuario.getRole());
+                signInPatientResponseDTO.setRole(user.getRole());
 
-                return Optional.of(pacienteSignInResponseDTO);
+                return Optional.of(signInPatientResponseDTO);
             }
         }
         return Optional.empty();

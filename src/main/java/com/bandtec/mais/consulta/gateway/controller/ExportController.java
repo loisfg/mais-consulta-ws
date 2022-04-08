@@ -1,8 +1,8 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
-import com.bandtec.mais.consulta.usecase.export.ExportConsulta;
-import com.bandtec.mais.consulta.usecase.export.ExportConsultaById;
-import com.bandtec.mais.consulta.usecase.export.ExportLastConsulta;
+import com.bandtec.mais.consulta.usecase.export.ExportConsult;
+import com.bandtec.mais.consulta.usecase.export.ExportConsultById;
+import com.bandtec.mais.consulta.usecase.export.ExportLastConsult;
 import com.bandtec.mais.consulta.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,82 +19,79 @@ import java.util.Optional;
 public class ExportController {
 
     @Autowired
-    private ExportLastConsulta exportLastConsulta;
+    private ExportLastConsult exportLastConsult;
 
     @Autowired
-    private ExportConsultaById exportConsultaById;
+    private ExportConsultById exportConsultById;
 
     @Autowired
-    private ExportConsulta exportConsulta;
+    private ExportConsult exportConsult;
 
     @Autowired
     private Validation validation;
 
     @GetMapping("/{idUser}/consulta/info")
-    public ResponseEntity<?> exportLastConsulta(@PathVariable Integer idUser) {
-        validation.verifyPatient(idUser);
-        Optional<Map<String, String>> oAgendamentoCsv = exportLastConsulta.execute(idUser);
+    public ResponseEntity<?> exportLastConsult(@PathVariable Integer userId) {
+        Optional<Map<String, String>> oSchedulingCsv = exportLastConsult.execute(userId);
 
-        if (oAgendamentoCsv.isPresent()) {
+        if (oSchedulingCsv.isPresent()) {
 
-            Map<String, String> agendamentoCsv = oAgendamentoCsv.get();
+            Map<String, String> schedulingCsv = oSchedulingCsv.get();
 
-            String arquivo = agendamentoCsv.get("informacoesConsulta");
-            String filename = agendamentoCsv.get("nomeArquivo");
+            String file = schedulingCsv.get("consultInfo");
+            String filename = schedulingCsv.get("fileName");
             String extension = ".csv";
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s%s", filename, extension))
-                    .contentLength(arquivo.length())
+                    .contentLength(file.length())
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(arquivo);
+                    .body(file);
 
         }
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{idAgendamento}/{idUser}/consulta/info")
-    public ResponseEntity<?> exportConsultaById(@PathVariable Integer idAgendamento,
-                                                @PathVariable Integer idUser) {
-        validation.verifyPatient(idUser);
+    @GetMapping("/{schedulingId}/{idUser}/consulta/info")
+    public ResponseEntity<?> exportConsultById(@PathVariable Integer schedulingId,
+                                               @PathVariable Integer idUser) {
 
-        Optional<Map<String, String>> oConsultaCsv = exportConsultaById.execute(idAgendamento, idUser);
+        Optional<Map<String, String>> oConsultCsv = exportConsultById.execute(schedulingId, idUser);
 
-        if (oConsultaCsv.isPresent()) {
+        if (oConsultCsv.isPresent()) {
 
-            Map<String, String> agendamentoCsv = oConsultaCsv.get();
+            Map<String, String> schedulingCsv = oConsultCsv.get();
 
-            String arquivo = agendamentoCsv.get("informacoesConsulta");
-            String filename = agendamentoCsv.get("nomeArquivo");
+            String file = schedulingCsv.get("informacoesConsulta");
+            String filename = schedulingCsv.get("nomeArquivo");
             String extension = ".csv";
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s%s", filename, extension))
-                    .contentLength(arquivo.length())
+                    .contentLength(file.length())
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(arquivo);
+                    .body(file);
 
         }
 
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("{idPaciente}/consultas/info")
-    public ResponseEntity<?> exportConsulta(@PathVariable Integer idPaciente) {
+    @GetMapping("{patientId}/consultas/info")
+    public ResponseEntity<?> exportConsult(@PathVariable Integer patientId) {
 
-        validation.verifyPatient(idPaciente);
-        Optional<String> oConsultaCsv = exportConsulta.execute(idPaciente);
+        Optional<String> oConsultCsv = exportConsult.execute(patientId);
 
-        if (oConsultaCsv.isPresent()) {
+        if (oConsultCsv.isPresent()) {
 
-            String agendamentoCsv = oConsultaCsv.get();
+            String schedulingCsv = oConsultCsv.get();
             String extension = ".csv";
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s%s", "consultas", extension))
-                    .contentLength(agendamentoCsv.length())
+                    .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=%s%s", "consults", extension))
+                    .contentLength(schedulingCsv.length())
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .body(agendamentoCsv);
+                    .body(schedulingCsv);
 
         }
         return ResponseEntity.noContent().build();

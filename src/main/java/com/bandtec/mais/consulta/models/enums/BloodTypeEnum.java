@@ -1,19 +1,19 @@
 package com.bandtec.mais.consulta.models.enums;
 
 public enum BloodTypeEnum {
-    A_POSITIVO("A+"),
-    A_NEGATIVO("A-"),
-    B_POSITIVO("B+"),
-    B_NEGATIVO("B-"),
-    AB_POSITIVO("AB+"),
-    AB_NEGATIVO("AB-"),
-    O_POSITIVO("O+"),
+    A_POSITIVE("A+"),
+    A_NEGATIVE("A-"),
+    B_POSITIVE("B+"),
+    B_NEGATIVE("B-"),
+    AB_POSITIVE("AB+"),
+    AB_NEGATIVE("AB-"),
+    O_POSITIVE("O+"),
     O("O"),
     DEFAULT("");
 
-    private String tipoSanguineo;
+    private String bloodType;
 
-    BloodTypeEnum(final String tipoSanguineo) {
-        this.tipoSanguineo = tipoSanguineo;
+    BloodTypeEnum(final String bloodType) {
+        this.bloodType = bloodType;
     }
 }

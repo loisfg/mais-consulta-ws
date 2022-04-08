@@ -17,17 +17,16 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_notification")
-    private Integer idNotification;
+    private Integer notificationId;
 
     @Column(name = "descricao")
-    private String descricao;
+    private String description;
 
     @Column(name = "insert_dt")
-    private LocalDateTime insertDt;
+    private LocalDateTime insertDateTime;
 
     @Column(name = "id_usuario")
-    private Integer idUsuario;
-
+    private Integer userId;
 
     @Override
     public boolean equals(Object o) {
@@ -35,7 +34,7 @@ public class Notification {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Notification that = (Notification) o;
 
-        return Objects.equals(idNotification, that.idNotification);
+        return Objects.equals(notificationId, that.notificationId);
     }
 
     @Override

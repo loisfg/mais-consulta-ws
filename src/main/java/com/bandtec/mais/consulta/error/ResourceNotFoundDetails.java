@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.error;
 
 public class ResourceNotFoundDetails {
-    private String title;
+    private final String title;
     private int status;
     private String detail;
     private long timestamp;

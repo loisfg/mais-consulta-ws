@@ -1,6 +1,6 @@
 package com.bandtec.mais.consulta.usecase.notification.impl;
 
-import com.bandtec.mais.consulta.domain.Agendamento;
+import com.bandtec.mais.consulta.domain.Scheduling;
 import com.bandtec.mais.consulta.domain.Notification;
 import com.bandtec.mais.consulta.factory.NotificationAdapter;
 import com.bandtec.mais.consulta.factory.NotificationFactory;
@@ -21,16 +21,16 @@ public class CreateNotificationImpl implements CreateNotification {
     private NotificationFactory notificationFactory;
 
     @Override
-    public void execute(Agendamento agendamento, String type) {
+    public void execute(Scheduling scheduling, String consult) {
 
-        NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter(type);
-        String descricaoNotification = notificationMessageService.buildNotificationMessage(agendamento);
+        NotificationAdapter notificationMessageService = notificationFactory.getNotificationAdapter(consult);
+        String notificationDescription = notificationMessageService.buildNotificationMessage(scheduling);
 
         Notification notification = new Notification();
 
-        notification.setDescricao(descricaoNotification);
-        notification.setIdUsuario(agendamento.getPaciente().getUsuario().getIdUsuario());
-        notification.setInsertDt(LocalDateTime.now());
+        notification.setDescription(notificationDescription);
+        notification.setUserId(scheduling.getPatient().getUser().getUserId());
+        notification.setInsertDateTime(LocalDateTime.now());
 
         notificationRepository.save(notification);
     }

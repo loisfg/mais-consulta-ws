@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
-import com.bandtec.mais.consulta.domain.Usuario;
-import com.bandtec.mais.consulta.models.dto.request.UsuarioSignInRequestDTO;
+import com.bandtec.mais.consulta.domain.User;
+import com.bandtec.mais.consulta.models.dto.request.SignInUserRequestDTO;
 import com.bandtec.mais.consulta.usecase.auth.Logoff;
 import com.bandtec.mais.consulta.usecase.auth.SignIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequestMapping("auth")
 public class AuthController {
 
-    private final List<Usuario> usuariosLogados;
+    private final List<User> connectedUsers;
 
     @Autowired
     private Logoff logoff;
@@ -28,22 +28,22 @@ public class AuthController {
 
     @Autowired
     public AuthController() {
-        usuariosLogados = new ArrayList<>();
+        connectedUsers = new ArrayList<>();
     }
 
-    @PostMapping("/{idUsuario}/logoff")
-    public ResponseEntity<?> logoff(@PathVariable Integer idUsuario) {
-        return ResponseEntity.of(logoff.execute(idUsuario, usuariosLogados));
+    @PostMapping("/{userId}/logoff")
+    public ResponseEntity<?> logoff(@PathVariable Integer userId) {
+        return ResponseEntity.of(logoff.execute(userId, connectedUsers));
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody UsuarioSignInRequestDTO usuarioSignInRequestDTO) {
+    public ResponseEntity<?> signIn(@RequestBody SignInUserRequestDTO signInUserRequestDTO) {
 
-        Optional<?> oUsuario = signIn.execute(usuarioSignInRequestDTO, usuariosLogados);
+        Optional<?> oUser = signIn.execute(signInUserRequestDTO, connectedUsers);
 
-        return oUsuario
+        return oUser
                 .map(ResponseEntity::ok)
-                    .orElseGet(ResponseEntity.status(HttpStatus.NOT_FOUND)::build);
+                .orElseGet(ResponseEntity.status(HttpStatus.NOT_FOUND)::build);
     }
 
 }

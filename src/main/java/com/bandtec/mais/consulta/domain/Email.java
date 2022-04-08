@@ -12,7 +12,8 @@ import java.time.LocalDateTime;
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long emailId;
     private String ownerRef;
     private String emailFrom;
     private String emailTo;

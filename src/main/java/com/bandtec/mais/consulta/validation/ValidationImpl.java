@@ -1,10 +1,10 @@
 package com.bandtec.mais.consulta.validation;
 
-import com.bandtec.mais.consulta.domain.Medico;
-import com.bandtec.mais.consulta.domain.Paciente;
+import com.bandtec.mais.consulta.domain.Doctor;
+import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.error.ResourceNotFoundException;
-import com.bandtec.mais.consulta.gateway.repository.MedicoRepository;
-import com.bandtec.mais.consulta.gateway.repository.PacienteRepository;
+import com.bandtec.mais.consulta.gateway.repository.DoctorRepository;
+import com.bandtec.mais.consulta.gateway.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,25 +14,25 @@ import java.util.Optional;
 public class ValidationImpl implements Validation {
 
     @Autowired
-    PacienteRepository pacienteRepository;
+    DoctorRepository doctorRepository;
 
     @Autowired
-    MedicoRepository medicoRepository;
+    PatientRepository patientRepository;
 
     @Override
-    public void verifyMedicoExists(Integer idMedico) {
+    public void verifyDoctorExists(Integer doctorId) {
 
-        Optional<Medico> medico = medicoRepository.findById(idMedico);
-        if (medico.isEmpty()) {
-            throw new ResourceNotFoundException("ID doctor:" + idMedico + " NOT FOUND");
+        Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+        if (doctor.isEmpty()) {
+            throw new ResourceNotFoundException("doctor ID:" + doctorId + " NOT FOUND");
         }
     }
 
     @Override
-    public void verifyPatient(Integer idPatient) {
-        Optional<Paciente> patient = pacienteRepository.findById(idPatient);
+    public void verifyPatient(Integer patientId) {
+        Optional<Patient> patient = patientRepository.findById(patientId);
         if (patient.isEmpty()) {
-            throw new ResourceNotFoundException("ID Patient:" + idPatient + " NOT FOUND");
+            throw new ResourceNotFoundException("ID Patient:" + patientId + " NOT FOUND");
         }
     }
 }

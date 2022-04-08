@@ -22,10 +22,10 @@ public class EmailController {
     @Autowired
     private Validation validation;
 
-    @PostMapping("/sending-email/{idPaciente}")
+    @PostMapping("/sending-email/{patientId}")
     public ResponseEntity<Email> sendingEmail(@RequestBody @Valid EmailDTO emailDto,
-                                              @PathVariable Integer idPaciente) {
-        validation.verifyPatient(idPaciente);
-        return new ResponseEntity<>(emailSend.execute(emailDto, idPaciente), HttpStatus.CREATED);
+                                              @PathVariable Integer patientId) {
+        validation.verifyPatient(patientId);
+        return new ResponseEntity<>(emailSend.execute(emailDto, patientId), HttpStatus.CREATED);
     }
 }
