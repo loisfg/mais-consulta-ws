@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.models.dto.request;
 
 import com.bandtec.mais.consulta.domain.Address;
-import com.bandtec.mais.consulta.domain.Ubs;
+import com.bandtec.mais.consulta.domain.Clinic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,18 +11,18 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Data
 @Slf4j
-public class UbsPostRequestDTO {
+public class ClinicPostRequestDTO {
     private String name;
     private String phone;
     private Address address;
 
-    public static Ubs convertFromController(UbsPostRequestDTO ubsPostRequestDTO) {
-        log.debug("Creating UBS {}", ubsPostRequestDTO);
-        return Ubs
+    public static Clinic convertFromController(ClinicPostRequestDTO clinicPostRequestDTO) {
+        log.debug("Creating Clinic {}", clinicPostRequestDTO);
+        return Clinic
                 .builder()
-                .name(ubsPostRequestDTO.name)
-                .address(ubsPostRequestDTO.address)
-                .phone(ubsPostRequestDTO.phone)
+                .name(clinicPostRequestDTO.name)
+                .address(clinicPostRequestDTO.address)
+                .phone(clinicPostRequestDTO.phone)
                 .build();
     }
 }

@@ -31,9 +31,9 @@ public interface SchedulingRepository extends JpaRepository<Scheduling, Integer>
                                                                                   LocalTime schedulingTime,
                                                                                   SchedulingStatusEnum status);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO(a.schedulingDate, a.schedulingTime, a.doctor.doctorId) FROM Scheduling a WHERE a.doctor.ubs.ubsId = :idUbs AND a.schedulingDate = :dia")
-    List<HoursResponseDTO> findTimeAndSchedulingDateByUbsId(@Param("idUbs") Integer ubsId,
-                                                            @Param("dia") LocalDate day);
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO(a.schedulingDate, a.schedulingTime, a.doctor.doctorId) FROM Scheduling a WHERE a.doctor.clinic.clinicId = :clinicId AND a.schedulingDate = :dia")
+    List<HoursResponseDTO> findTimeAndSchedulingDateByClinicId(@Param("clinicId") Integer clinicId,
+                                                               @Param("dia") LocalDate day);
 
     @Modifying
     @Transactional

@@ -17,18 +17,14 @@ import java.util.Set;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
-    @Query(value = "SELECT m.doctorId FROM Doctor m WHERE m.specialty.specialtyId = :idEspecialidade AND m.ubs.ubsId=:idUbs")
-    List<Integer> findDoctorsIdsBySpecialtyIdAndUbsId(@Param("idEspecialidade") Integer specialtyId,
-                                                      @Param("idUbs") Integer ubsId);
-
     // TODO: Make DTO here, select is too big
-    @Query(value = "SELECT m FROM Doctor m WHERE m.specialty.specialtyId = :idEspecialidade AND m.ubs.ubsId= :idUbs")
-    Optional<Doctor> findDoctorsBySpecialtyIdAndUbsId(@Param("idEspecialidade") Integer specialtyId,
-                                                      @Param("idUbs") Integer ubsId);
+    @Query(value = "SELECT m FROM Doctor m WHERE m.specialty.specialtyId = :idEspecialidade AND m.clinic.clinicId= :clinicId")
+    Optional<Doctor> findDoctorsBySpecialtyIdAndClinicId(@Param("idEspecialidade") Integer specialtyId,
+                                                         @Param("clinicId") Integer clinicId);
 
-    @Query(value = "SELECT m.doctorId FROM Doctor m WHERE m.specialty.specialtyId = :idEspecialidade AND m.ubs.ubsId= :idUbs")
-    Optional<List<Integer>> findDoctorsIdsBySpecialtyIdAndUbs(@Param("idEspecialidade") Integer specialtyId,
-                                                              @Param("idUbs") Integer ubsId);
+    @Query(value = "SELECT m.doctorId FROM Doctor m WHERE m.specialty.specialtyId = :idEspecialidade AND m.clinic.clinicId= :clinicId")
+    Optional<List<Integer>> findDoctorsIdsBySpecialtyIdAndClinic(@Param("idEspecialidade") Integer specialtyId,
+                                                                 @Param("clinicId") Integer clinicId);
 
     @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.DoctorSchedulingDTO(a.patient.patientId, a.schedulingId, a.patient.name,  a.schedulingTime, a.patient.birthDate) FROM Scheduling a WHERE a.schedulingDate = :dtAtual AND a.doctor.doctorId = :id AND a.status = 'ATIVO'")
     Optional<List<DoctorSchedulingDTO>> findAllSchedulesByDoctorId(@Param("id") Integer doctorId,
@@ -45,8 +41,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     Optional<Doctor> findByUser(User user);
 
-    @Query("SELECT m FROM Doctor m WHERE m.ubs.ubsId = :id_ubs")
-    List<Doctor> findDoctorsByUbsId(@Param("id_ubs") Integer ubsId);
+    @Query("SELECT m FROM Doctor m WHERE m.clinic.clinicId = :clinicId")
+    List<Doctor> findDoctorsByClinicId(@Param("clinicId") Integer clinicId);
 
     @Query("SELECT a.doctor FROM Scheduling a WHERE a.schedulingDate = :dt_atendimento AND a.schedulingTime = :hr_atendimento AND a.status <> :status")
     List<Doctor> findDoctorsByScheduling(@Param("dt_atendimento") LocalDate schedulingDate,

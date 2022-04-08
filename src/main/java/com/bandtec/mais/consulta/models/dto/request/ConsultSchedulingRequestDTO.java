@@ -22,7 +22,7 @@ public class ConsultSchedulingRequestDTO {
     String description;
     Integer specialtyId;
     Integer patientId;
-    Integer ubsId;
+    Integer clinicId;
     SchedulingStatusEnum status;
 
     public static Consult convertFromController(ConsultSchedulingRequestDTO consultSchedulingRequestDTO) {

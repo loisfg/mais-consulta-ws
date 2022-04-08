@@ -15,7 +15,7 @@ public class NotificationController {
     @Autowired
     private GetNotification getNotification;
 
-    @GetMapping("/{idUser}")
+    @GetMapping("/{userId}")
     public ResponseEntity<StackObj<NotificationDTO>> getNotifications(@PathVariable Integer userId) {
         return ResponseEntity.of(getNotification.execute(userId));
     }

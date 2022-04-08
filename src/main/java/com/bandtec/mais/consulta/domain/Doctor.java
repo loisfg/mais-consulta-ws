@@ -26,9 +26,9 @@ public class Doctor {
     private String name;
 
     @JsonIgnore
-    @JoinColumn(name = "ubs_id", referencedColumnName = "id_ubs", nullable = false)
+    @JoinColumn(name = "clinica_id", referencedColumnName = "id_clinica", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
-    private Ubs ubs;
+    private Clinic clinic;
 
     @JsonIgnore
     @JoinColumn(name = "usuario_id", referencedColumnName = "idUsuario", nullable = false)

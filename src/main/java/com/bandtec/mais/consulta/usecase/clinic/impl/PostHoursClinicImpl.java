@@ -1,9 +1,9 @@
-package com.bandtec.mais.consulta.usecase.ubs.impl;
+package com.bandtec.mais.consulta.usecase.clinic.impl;
 
 import com.bandtec.mais.consulta.gateway.repository.SchedulingRepository;
 import com.bandtec.mais.consulta.gateway.repository.DoctorRepository;
 import com.bandtec.mais.consulta.models.dto.response.HoursResponseDTO;
-import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
+import com.bandtec.mais.consulta.usecase.clinic.PostHoursClinic;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 @Service
-public class PostHoursUbsImpl implements PostHoursUbs {
+public class PostHoursClinicImpl implements PostHoursClinic {
 
     @Autowired
     DoctorRepository doctorRepository;
@@ -26,9 +26,9 @@ public class PostHoursUbsImpl implements PostHoursUbs {
 
     @SneakyThrows
     @Override
-    public HashMap<LocalTime, String> execute(Integer ubsId, String day) {
+    public HashMap<LocalTime, String> execute(Integer clinicId, String day) {
         List<HoursResponseDTO> listHoursOccupied = schedulingRepository
-                .findTimeAndSchedulingDateByUbsId(ubsId, LocalDate.parse(day));
+                .findTimeAndSchedulingDateByClinicId(clinicId, LocalDate.parse(day));
         List<LocalTime> workingHours = addHours();
         LinkedHashMap<LocalTime, String> hours = new LinkedHashMap<>();
 

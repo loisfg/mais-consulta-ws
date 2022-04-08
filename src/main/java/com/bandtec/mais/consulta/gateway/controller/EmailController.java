@@ -18,7 +18,7 @@ public class EmailController {
     @Autowired
     EmailSend emailSend;
 
-    @PostMapping("/sending-email/{idPaciente}")
+    @PostMapping("/sending-email/{patientId}")
     public ResponseEntity<Email> sendingEmail(@RequestBody @Valid EmailDTO emailDto,
                                               @PathVariable Integer patientId) {
         return new ResponseEntity<>(emailSend.execute(emailDto, patientId), HttpStatus.CREATED);

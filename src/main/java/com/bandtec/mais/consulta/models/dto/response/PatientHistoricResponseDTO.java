@@ -13,19 +13,19 @@ public class PatientHistoricResponseDTO {
     LocalTime schedulingTime;
     String specialty;
     String doctorName;
-    String ubsName;
+    String clinicName;
 
     public PatientHistoricResponseDTO(Integer schedulingId,
                                       LocalDate schedulingDate,
                                       LocalTime schedulingTime,
                                       String specialty,
                                       String doctorName,
-                                      String ubsName) {
+                                      String clinicName) {
         this.schedulingId = schedulingId;
         this.schedulingDate = schedulingDate;
         this.schedulingTime = schedulingTime;
         this.specialty = specialty;
         this.doctorName = doctorName;
-        this.ubsName = StrFormat.toTitledCase(ubsName);
+        this.clinicName = StrFormat.toTitledCase(clinicName);
     }
 }

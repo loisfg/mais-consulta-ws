@@ -27,15 +27,15 @@ public class BuildExportFile {
         Doctor doctor = scheduling.getDoctor();
         String doctorName = doctor.getName();
 
-        Ubs ubs = doctor.getUbs();
-        String ubsName = ubs.getName();
-        Address ubsAddress = ubs.getAddress();
+        Clinic clinic = doctor.getClinic();
+        String clinicName = clinic.getName();
+        Address clinicAddress = clinic.getAddress();
 
-        String ubsStreet = ubsAddress.getStreet();
-        String ubsNumber = ubsAddress.getNumber();
-        String ubsPhone = ubs.getPhone();
+        String clinicStreet = clinicAddress.getStreet();
+        String clinicNumber = clinicAddress.getNumber();
+        String clinicPhone = clinic.getPhone();
 
-        String text = buildTextoAgendamento(id, specialty, schedulingDate, patientName, doctorName, ubsName);
+        String text = buildTextoAgendamento(id, specialty, schedulingDate, patientName, doctorName, clinicName);
 
         return createResponseMap(id, schedulingDate, patientName, text);
     }
@@ -55,15 +55,15 @@ public class BuildExportFile {
                                                 LocalDate schedulingDate,
                                                 String patientName,
                                                 String doctorName,
-                                                String ubsName) {
-        String header = "id do agendamento;data do atendimento;especialidade da consulta;nome do paciente;nome do medico;nome da ubs\n";
+                                                String clinicName) {
+        String header = "id do agendamento;data do atendimento;especialidade da consulta;nome do paciente;nome do medico;nome da clinica\n";
         String body = String.format("%s;%s;%s;%s;%s;%s\n",
                 id,
                 schedulingDate,
                 specialty,
                 patientName,
                 doctorName,
-                ubsName);
+                clinicName);
         return header + body;
     }
 

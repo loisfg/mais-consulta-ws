@@ -48,7 +48,7 @@ public class ExportController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{idAgendamento}/{idUser}/consulta/info")
+    @GetMapping("/{schedulingId}/{idUser}/consulta/info")
     public ResponseEntity<?> exportConsultById(@PathVariable Integer schedulingId,
                                                @PathVariable Integer idUser) {
 
@@ -73,7 +73,7 @@ public class ExportController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("{idPaciente}/consultas/info")
+    @GetMapping("{patientId}/consultas/info")
     public ResponseEntity<?> exportConsult(@PathVariable Integer patientId) {
 
         Optional<String> oConsultCsv = exportConsult.execute(patientId);

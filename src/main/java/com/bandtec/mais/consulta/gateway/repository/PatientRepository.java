@@ -34,7 +34,7 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
                                                                         @Param("dt_start") LocalDate startDate,
                                                                         @Param("dt_end") LocalDate endDate);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PatientHistoricResponseDTO(a.schedulingId, a.schedulingDate, a.schedulingTime, a.doctor.specialty.description, a.doctor.name, a.doctor.ubs.name) FROM Scheduling a WHERE a.patient.patientId = :idPaciente")
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PatientHistoricResponseDTO(a.schedulingId, a.schedulingDate, a.schedulingTime, a.doctor.specialty.description, a.doctor.name, a.doctor.clinic.name) FROM Scheduling a WHERE a.patient.patientId = :idPaciente")
     Optional<List<PatientHistoricResponseDTO>> findAllPatientHistoric(@Param("idPaciente") Integer patientId);
 
 

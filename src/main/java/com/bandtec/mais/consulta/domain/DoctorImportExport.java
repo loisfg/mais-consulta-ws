@@ -46,7 +46,7 @@ public class DoctorImportExport {
         for (Doctor a : list) {
             String body = "02";
             body += String.format("%-40.40s", a.getName());
-            body += String.format("%-4.4s", a.getUbs().getUbsId());
+            body += String.format("%-4.4s", a.getClinic().getClinicId());
             body += String.format("%-15.15s", a.getUser().getCpf());
             body += String.format("%-50.50s", a.getUser().getEmail());
             body += String.format("%-30.30s", a.getSpecialty().getDescription());

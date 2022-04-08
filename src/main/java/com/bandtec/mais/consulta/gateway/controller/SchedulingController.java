@@ -4,7 +4,7 @@ import com.bandtec.mais.consulta.domain.Consult;
 import com.bandtec.mais.consulta.models.dto.request.ConsultSchedulingRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.SpecialtyResponseDTO;
 import com.bandtec.mais.consulta.usecase.schedule.*;
-import com.bandtec.mais.consulta.usecase.ubs.PostHoursUbs;
+import com.bandtec.mais.consulta.usecase.clinic.PostHoursClinic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +30,12 @@ public class SchedulingController {
     private CancelScheduling cancelScheduling;
 
     @Autowired
-    private PostHoursUbs postHoursUbs;
+    private PostHoursClinic postHoursClinic;
 
     @Autowired
     private GetSpecialties getSpecialties;
 
-    @PatchMapping("/cancelar/{idAgendamento}")
+    @PatchMapping("/cancelar/{schedulingId}")
     public ResponseEntity<?> cancelExam(@PathVariable Integer schedulingId) {
         return ResponseEntity.ok(cancelScheduling.execute(schedulingId));
     }
@@ -49,17 +49,17 @@ public class SchedulingController {
                 .orElseGet(ResponseEntity.status(HttpStatus.BAD_REQUEST)::build);
     }
 
-    @GetMapping("/consulta/{idUser}")
+    @GetMapping("/consulta/{userId}")
     public ResponseEntity<?> getConsultByUserId(@PathVariable Integer userId) {
         return getSchedulingConsult.execute(userId)
                 .map(ResponseEntity.status(HttpStatus.OK)::body)
                 .orElseGet(ResponseEntity.status(HttpStatus.NO_CONTENT)::build);
     }
 
-    @GetMapping("/horarios/livres/{dia}/{idUbs}")
-    public ResponseEntity<HashMap<LocalTime, String>> getAvailableTime(@PathVariable Integer ubsId,
+    @GetMapping("/horarios/livres/{day}/{clinicId}")
+    public ResponseEntity<HashMap<LocalTime, String>> getAvailableTime(@PathVariable Integer clinicId,
                                                                        @PathVariable String day) {
-        HashMap<LocalTime, String> hoursList = postHoursUbs.execute(ubsId, day);
+        HashMap<LocalTime, String> hoursList = postHoursClinic.execute(clinicId, day);
         if (hoursList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }

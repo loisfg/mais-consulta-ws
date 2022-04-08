@@ -31,7 +31,7 @@ public class AuthController {
         connectedUsers = new ArrayList<>();
     }
 
-    @PostMapping("/{idUsuario}/logoff")
+    @PostMapping("/{userId}/logoff")
     public ResponseEntity<?> logoff(@PathVariable Integer userId) {
         return ResponseEntity.of(logoff.execute(userId, connectedUsers));
     }

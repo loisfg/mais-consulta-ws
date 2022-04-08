@@ -3,7 +3,7 @@ package com.bandtec.mais.consulta.usecase.export.impl;
 import com.bandtec.mais.consulta.domain.Scheduling;
 import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.domain.Patient;
-import com.bandtec.mais.consulta.domain.Ubs;
+import com.bandtec.mais.consulta.domain.Clinic;
 import com.bandtec.mais.consulta.gateway.repository.SchedulingRepository;
 import com.bandtec.mais.consulta.gateway.repository.UserRepository;
 import com.bandtec.mais.consulta.usecase.export.ExportConsult;
@@ -45,7 +45,7 @@ public class ExportConsultImpl implements ExportConsult {
     public String buildDataSchedulingFile(List<Scheduling> schedulingList) {
 
         StringBuilder text = new StringBuilder();
-        String header = "data do atendimento;especialidade da consulta;nome do paciente;nome do medico;nome da ubs\n";
+        String header = "data do atendimento;especialidade da consulta;nome do paciente;nome do medico;nome da clinica\n";
         text.append(header);
         schedulingList.forEach(scheduling -> {
             String specialty = scheduling.getSpecialty().getDescription();
@@ -54,9 +54,9 @@ public class ExportConsultImpl implements ExportConsult {
             String patientName = patient.getName();
             Doctor doctor = scheduling.getDoctor();
             String doctorName = doctor.getName();
-            Ubs ubs = doctor.getUbs();
-            String ubsName = ubs.getName();
-            text.append(buildSchedulingText(specialty, schedulingData, patientName, doctorName, ubsName));
+            Clinic clinic = doctor.getClinic();
+            String clinicName = clinic.getName();
+            text.append(buildSchedulingText(specialty, schedulingData, patientName, doctorName, clinicName));
         });
 
         return text.toString();
@@ -67,8 +67,8 @@ public class ExportConsultImpl implements ExportConsult {
                                        LocalDate schedulingData,
                                        String patientName,
                                        String doctorName,
-                                       String ubsName) {
-        return String.format("%s;%s;%s;%s;%s\n", schedulingData, specialty, patientName, doctorName, ubsName);
+                                       String clinicName) {
+        return String.format("%s;%s;%s;%s;%s\n", schedulingData, specialty, patientName, doctorName, clinicName);
     }
 
 }

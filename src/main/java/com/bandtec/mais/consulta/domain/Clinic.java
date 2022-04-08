@@ -6,7 +6,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Table(name = "Ubs", schema = "dbo", catalog = "maisconsultadb")
+@Table(name = "Clinica", schema = "dbo", catalog = "maisconsultadb")
 @Entity
 @Getter
 @Setter
@@ -14,12 +14,12 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ubs {
+public class Clinic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ubs")
-    private Integer ubsId;
+    @Column(name = "id_clinica")
+    private Integer clinicId;
 
     @Column(name = "nome")
     private String name;
@@ -35,9 +35,9 @@ public class Ubs {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Ubs ubs = (Ubs) o;
+        Clinic clinic = (Clinic) o;
 
-        return Objects.equals(ubsId, ubs.ubsId);
+        return Objects.equals(clinicId, clinic.clinicId);
     }
 
     @Override

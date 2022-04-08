@@ -18,15 +18,15 @@ public class DoctorHistoricImpl implements DoctorHistoric {
     DoctorRepository doctorRepository;
 
     @Override
-    public Optional<List<DoctorHistoricResponseDTO>> execute(Integer patientId) {
-        return doctorRepository.findSchedulesHistoric(patientId);
+    public Optional<List<DoctorHistoricResponseDTO>> execute(Integer doctorId) {
+        return doctorRepository.findSchedulesHistoric(doctorId);
     }
 
     @Override
-    public void verify(Integer patientId) {
-        Optional<Doctor> doctor = doctorRepository.findById(patientId);
+    public void verify(Integer doctorId) {
+        Optional<Doctor> doctor = doctorRepository.findById(doctorId);
         if (doctor.isEmpty()) {
-            throw new ResourceNotFoundException("ID doctor:" + patientId + " NOT FOUND");
+            throw new ResourceNotFoundException("ID doctor:" + doctorId + " NOT FOUND");
         }
     }
 }

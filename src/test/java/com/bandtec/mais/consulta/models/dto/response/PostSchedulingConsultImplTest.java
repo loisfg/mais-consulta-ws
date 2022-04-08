@@ -70,7 +70,7 @@ class PostSchedulingConsultImplTest {
         when(schedulingRepository.findBySchedulingDateAndSchedulingTime(schedulingDate, schedulingTime))
                 .thenReturn(Optional.of(mock(Scheduling.class)));
 
-        when(doctorRepository.findDoctorsByUbsId(1))
+        when(doctorRepository.findDoctorsByClinicId(1))
                 .thenReturn(doctorsList);
 
         when(doctorRepository.findDoctorsByScheduling(schedulingDate, schedulingTime, SchedulingStatusEnum
@@ -104,7 +104,7 @@ class PostSchedulingConsultImplTest {
         when(schedulingRepository.findBySchedulingDateAndSchedulingTime(schedulingDate, schedulingTime))
                 .thenReturn(Optional.of(mock(Scheduling.class)));
 
-        when(doctorRepository.findDoctorsByUbsId(1))
+        when(doctorRepository.findDoctorsByClinicId(1))
                 .thenReturn(busyDoctors);
 
         when(doctorRepository.findDoctorsByScheduling(schedulingDate, schedulingTime, SchedulingStatusEnum

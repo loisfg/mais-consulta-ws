@@ -1,9 +1,9 @@
 package com.bandtec.mais.consulta.usecase.export.impl;
 
 import com.bandtec.mais.consulta.domain.Address;
-import com.bandtec.mais.consulta.domain.Ubs;
+import com.bandtec.mais.consulta.domain.Clinic;
 import com.bandtec.mais.consulta.gateway.repository.AddressRepository;
-import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
+import com.bandtec.mais.consulta.gateway.repository.ClinicRepository;
 import com.bandtec.mais.consulta.usecase.export.ImportCsv;
 import com.bandtec.mais.consulta.utils.StrFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +15,20 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
-public class ImportCsvUbsGenerate implements ImportCsv {
+public class ImportCsvClinicGenerate implements ImportCsv {
 
     @Autowired
-    UbsRepository ubsRepository;
+    ClinicRepository clinicRepository;
 
     @Autowired
     AddressRepository addressRepository;
 
-    public static List<Ubs> readSaveUbsWithAddress(List<Address> addressList) {
+    public static List<Clinic> readSaveClinicWithAddress(List<Address> addressList) {
         FileReader file = null;
         Scanner entrance = null;
         Boolean internError = false;
-        List<Ubs> list = new ArrayList();
-        String fileName = "ubs.csv";
+        List<Clinic> list = new ArrayList();
+        String fileName = "clinic.csv";
 
         try {
             file = new FileReader(fileName);
@@ -44,7 +44,7 @@ public class ImportCsvUbsGenerate implements ImportCsv {
                 Integer id = list.size() + 1;
                 String name = entrance.next();
                 String phone = "(11)" + generator.nextInt(8999) + "-" + generator.nextInt(9999);
-                list.add(new Ubs(id, name, phone, addressList.get(id - 1)));
+                list.add(new Clinic(id, name, phone, addressList.get(id - 1)));
             }
         } catch (NoSuchElementException error) {
             System.out.println("File with problems");
@@ -65,7 +65,7 @@ public class ImportCsvUbsGenerate implements ImportCsv {
             }
         }
 
-        list.removeIf(ubs -> ubs.getName().equals(""));
+        list.removeIf(clinic -> clinic.getName().equals(""));
 
         return list;
     }
@@ -74,7 +74,7 @@ public class ImportCsvUbsGenerate implements ImportCsv {
         FileReader file = null;
         Scanner entrance = null;
         Boolean internError = false;
-        String fileName = "endereco.csv";
+        String fileName = "address.csv";
 
         try {
             file = new FileReader(fileName);
@@ -128,6 +128,6 @@ public class ImportCsvUbsGenerate implements ImportCsv {
     @Override
     public void run() {
         List<Address> addressList = readSaveAddress();
-        List<Ubs> listUbs = readSaveUbsWithAddress(addressList);
+        List<Clinic> listClinic = readSaveClinicWithAddress(addressList);
     }
 }

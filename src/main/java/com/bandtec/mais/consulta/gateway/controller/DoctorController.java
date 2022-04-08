@@ -2,11 +2,11 @@ package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.domain.DoctorImportExport;
-import com.bandtec.mais.consulta.domain.Ubs;
+import com.bandtec.mais.consulta.domain.Clinic;
 import com.bandtec.mais.consulta.domain.User;
 import com.bandtec.mais.consulta.gateway.repository.SpecialtyRepository;
 import com.bandtec.mais.consulta.gateway.repository.DoctorRepository;
-import com.bandtec.mais.consulta.gateway.repository.UbsRepository;
+import com.bandtec.mais.consulta.gateway.repository.ClinicRepository;
 import com.bandtec.mais.consulta.gateway.repository.UserRepository;
 import com.bandtec.mais.consulta.models.dto.request.SignUpDoctorRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.PatientInfoRequestDTO;
@@ -55,7 +55,7 @@ public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
-    private UbsRepository ubsRepository;
+    private ClinicRepository clinicRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -64,7 +64,7 @@ public class DoctorController {
     @PostMapping("import")
     public Optional<User> doctorImport(@RequestBody SignUpDoctorRequestDTO signUpDoctorRequestDTO) {
 
-        Optional<Ubs> ubs = ubsRepository.findById(signUpDoctorRequestDTO.getUbsId());
+        Optional<Clinic> clinic = clinicRepository.findById(signUpDoctorRequestDTO.getClinicId());
 
         Doctor doctor = signUpDoctorRequestDTO.getDoctor();
         User user = User
@@ -89,7 +89,7 @@ public class DoctorController {
             if (existsSpecialties) {
                 doctor.setSpecialty(specialtyRepository.findByDescription(doctor.getSpecialty().getDescription()));
             }
-            ubs.ifPresent(doctor::setUbs);
+            clinic.ifPresent(doctor::setClinic);
             doctor.setUser(user);
             doctorRepository.save(doctor);
             System.out.println("medico" + doctor);
@@ -102,7 +102,7 @@ public class DoctorController {
     }
 
 
-    @PostMapping("{idMedico}/{idPaciente}/{idAgendamento}/atendimento")
+    @PostMapping("{doctorId}/{patientId}/{schedulingId}/atendimento")
     public ResponseEntity<?> editTreatmentForm(@PathVariable Integer doctorId,
                                                @PathVariable Integer patientId,
                                                @PathVariable Integer schedulingId,
@@ -130,7 +130,7 @@ public class DoctorController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @GetMapping("/{idMedico}/agendamentos")
+    @GetMapping("/{doctorId}/agendamentos")
     public ResponseEntity<List<DoctorSchedulingDTO>> getSchedulesByDoctor(@PathVariable Integer doctorId) {
         Optional<List<DoctorSchedulingDTO>> oSchedules = doctorSchedules.execute(doctorId);
         validation.verifyMedicoExists(doctorId);
@@ -140,7 +140,7 @@ public class DoctorController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 
-    @GetMapping("/{idMedico}/historico")
+    @GetMapping("/{doctorId}/historico")
     public ResponseEntity<List<DoctorHistoricResponseDTO>> getHistoricByDoctor(@PathVariable Integer doctorId) {
         Optional<List<DoctorHistoricResponseDTO>> oHistoric = doctorHistoric.execute(doctorId);
         validation.verifyMedicoExists(doctorId);

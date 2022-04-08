@@ -77,8 +77,8 @@ public class PostSchedulingConsultImpl implements PostSchedulingConsult {
     private void makeSchedulingConsult(ConsultSchedulingRequestDTO consultSchedulingRequestDTO, Consult consult) {
         // TODO Adicionar Excpetion para médico não encontrado (procurar locais que precisam e adicionar; por logs tb
         Scheduling scheduling = consult.getScheduling();
-        Doctor doctor = doctorRepository.findDoctorsBySpecialtyIdAndUbsId
-                (consultSchedulingRequestDTO.getSpecialtyId(), consultSchedulingRequestDTO.getUbsId()).orElseThrow();
+        Doctor doctor = doctorRepository.findDoctorsBySpecialtyIdAndClinicId
+                (consultSchedulingRequestDTO.getSpecialtyId(), consultSchedulingRequestDTO.getClinicId()).orElseThrow();
         scheduling.setDoctor(doctor);
         scheduling.setPatient(patientRepository.findById(consultSchedulingRequestDTO.getPatientId()).get());
         scheduling.setSpecialty(doctor.getSpecialty());

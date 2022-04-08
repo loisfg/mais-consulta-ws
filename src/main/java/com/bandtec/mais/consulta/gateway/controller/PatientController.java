@@ -1,7 +1,7 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.Patient;
-import com.bandtec.mais.consulta.domain.Ubs;
+import com.bandtec.mais.consulta.domain.Clinic;
 import com.bandtec.mais.consulta.domain.User;
 import com.bandtec.mais.consulta.models.dto.request.PatientInfoPutRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.SignUpPatientRequestDTO;
@@ -13,7 +13,7 @@ import com.bandtec.mais.consulta.usecase.patient.GetSchedule;
 import com.bandtec.mais.consulta.usecase.patient.GetHistoric;
 import com.bandtec.mais.consulta.usecase.patient.GetPatientInfo;
 import com.bandtec.mais.consulta.usecase.patient.PutPatientInfo;
-import com.bandtec.mais.consulta.usecase.ubs.GetUbs;
+import com.bandtec.mais.consulta.usecase.clinic.GetClinic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +35,7 @@ public class PatientController {
     }
 
     @Autowired
-    private GetUbs getUbs;
+    private GetClinic getClinic;
 
     @Autowired
     private PatientSignUp patientSignUp;
@@ -52,7 +52,7 @@ public class PatientController {
     @Autowired
     private PutPatientInfo putPatientInfo;
 
-    @GetMapping("/{idPaciente}")
+    @GetMapping("/{patientId}")
     public ResponseEntity<PatientInfoResponseDTO> getPatientInfo(@PathVariable Integer patientId) {
         return ResponseEntity.of(getPatientInfo.execute(patientId));
     }
@@ -67,7 +67,7 @@ public class PatientController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.CONFLICT).build());
     }
 
-    @GetMapping("/agenda/{idPaciente}")
+    @GetMapping("/agenda/{patientId}")
     public ResponseEntity<List<PatientSchedulingResponseDTO>> getPatientSchedule(@PathVariable Integer patientId,
                                                                                  @RequestHeader(value = "dtStart") String startDate,
                                                                                  @RequestHeader(value = "dtEnd") String endDate
@@ -79,7 +79,7 @@ public class PatientController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 
-    @GetMapping("/historico/{idPaciente}")
+    @GetMapping("/historico/{patientId}")
     public ResponseEntity<List<PatientHistoricResponseDTO>> getPatientHistoric(@PathVariable Integer patientId) {
 
         Optional<List<PatientHistoricResponseDTO>> oHistoric = getHistoric.execute(patientId);
@@ -89,12 +89,12 @@ public class PatientController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
 
-    @GetMapping("/mapa/{idPaciente}")
-    public ResponseEntity<List<Ubs>> getUbsByLocalization(@PathVariable Integer patientId) {
-        return ResponseEntity.of(getUbs.execute(patientId));
+    @GetMapping("/mapa/{patientId}")
+    public ResponseEntity<List<Clinic>> getClinicByLocalization(@PathVariable Integer patientId) {
+        return ResponseEntity.of(getClinic.execute(patientId));
     }
 
-    @PutMapping("{idPaciente}")
+    @PutMapping("{patientId}")
     public ResponseEntity<Patient> putPatientInfos(@PathVariable Integer patientId,
                                                    @RequestBody PatientInfoPutRequestDTO patientInfoPutRequestDTO) {
         ResponseEntity.of(putPatientInfo.execute(patientId, patientInfoPutRequestDTO));
