@@ -33,14 +33,14 @@ public class SearchController {
     }
 
     @GetMapping("/clinica/{specialtyId}")
-    public ResponseEntity<List<Clinic>> getClinic(@PathVariable Integer specialtyId) {
+    public ResponseEntity<List<Clinic>> getClinicBySpeciality(@PathVariable Integer specialtyId) {
         List<Clinic> clinic = searchClinic.execute(specialtyId);
         return clinic.isEmpty() ?
                 ResponseEntity.status(204).build() : ResponseEntity.status(200).body(clinic);
     }
 
-    @GetMapping("/clinica/{district}")
-    public ResponseEntity<List<Clinic>> getClinic(@PathVariable String district) {
+    @GetMapping("/clinicas/{district}")
+    public ResponseEntity<List<Clinic>> getClinicByDistrict(@PathVariable String district) {
         List<Clinic> clinic = searchClinic.execute(district);
         return clinic.isEmpty() ?
                 ResponseEntity.status(204).build() : ResponseEntity.status(200).body(clinic);
