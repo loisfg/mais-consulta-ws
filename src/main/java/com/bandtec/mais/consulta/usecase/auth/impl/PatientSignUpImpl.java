@@ -37,7 +37,9 @@ public class PatientSignUpImpl implements PatientSignUp {
             patient.setName(StrFormat.toTitledCase(patient.getName()));
             patient.setBirthDate(LocalDate.parse(signUpPatientRequestDTO.getBirthDate()));
             patient.setUser(user);
-            addressRepository.save(patient.getAddress());
+            if(patient.getAddress() != null) {
+                addressRepository.save(patient.getAddress());
+            }
             patientRepository.save(patient);
             return Optional.of(userRepository.save(user));
         }
