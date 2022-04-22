@@ -13,6 +13,9 @@ public interface ClinicRepository extends JpaRepository<Clinic, Integer> {
 
     boolean existsByName(String name);
 
+    @Query("SELECT DISTINCT c.address.district FROM Clinic c")
+    List<String> findDistrictWithClinic();
+
     @Query("SELECT DISTINCT m.clinic FROM Doctor m WHERE m.specialty.specialtyId = ?1")
     List<Clinic> findClinicBySpecialty(Integer specialtyId);
 

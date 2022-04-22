@@ -1,6 +1,7 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.domain.*;
+import com.bandtec.mais.consulta.usecase.search.SearchDistricts;
 import com.bandtec.mais.consulta.usecase.search.SearchSpecialty;
 import com.bandtec.mais.consulta.usecase.search.SearchClinic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,17 @@ import java.util.Set;
 public class SearchController {
     private final SearchSpecialty searchSpecialties;
     private final SearchClinic searchClinic;
+    private final SearchDistricts searchDistricts;
 
     @Autowired
-    public SearchController(SearchSpecialty searchSpecialties,
-                            SearchClinic searchClinic) {
+    public SearchController(
+            SearchSpecialty searchSpecialties,
+            SearchClinic searchClinic,
+            SearchDistricts searchDistricts
+    ) {
         this.searchSpecialties = searchSpecialties;
         this.searchClinic = searchClinic;
+        this.searchDistricts = searchDistricts;
     }
 
     @GetMapping("/{specialty}")
@@ -44,5 +50,12 @@ public class SearchController {
         List<Clinic> clinic = searchClinic.execute(district);
         return clinic.isEmpty() ?
                 ResponseEntity.status(204).build() : ResponseEntity.status(200).body(clinic);
+    }
+
+    @GetMapping("/districts")
+    public ResponseEntity<List<String>> getDistrictWithClinic() {
+        List<String> districts = searchDistricts.execute();
+        return districts.isEmpty() ?
+                ResponseEntity.status(204).build() : ResponseEntity.status(200).body(districts);
     }
 }
