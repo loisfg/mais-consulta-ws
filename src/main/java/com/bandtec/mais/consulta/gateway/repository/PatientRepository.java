@@ -2,8 +2,9 @@ package com.bandtec.mais.consulta.gateway.repository;
 
 import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.domain.User;
-import com.bandtec.mais.consulta.models.dto.response.PatientSchedulingResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.PatientHistoricMobileResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.PatientHistoricResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.PatientSchedulingResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -38,4 +39,6 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
     Optional<List<PatientHistoricResponseDTO>> findAllPatientHistoric(@Param("idPaciente") Integer patientId);
 
 
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PatientHistoricMobileResponseDTO(a.doctor.clinic.address.street,a.doctor.clinic.address.district, a.doctor.clinic.address.state, a.schedulingId, a.schedulingDate, a.schedulingTime, a.doctor.specialty.description, a.doctor.name, a.doctor.clinic.name) FROM Scheduling a WHERE a.patient.patientId = :idPaciente")
+    Optional<List<PatientHistoricMobileResponseDTO>> findAllPatientHistoricMobile(@Param("idPaciente") Integer patientId);
 }

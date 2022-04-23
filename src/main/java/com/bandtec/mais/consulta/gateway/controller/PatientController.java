@@ -1,19 +1,21 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
-import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.domain.Clinic;
+import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.domain.User;
 import com.bandtec.mais.consulta.models.dto.request.PatientInfoPutRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.SignUpPatientRequestDTO;
-import com.bandtec.mais.consulta.models.dto.response.PatientSchedulingResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.PatientHistoricMobileResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.PatientHistoricResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.PatientInfoResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.PatientSchedulingResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.PatientSignUp;
-import com.bandtec.mais.consulta.usecase.patient.GetSchedule;
+import com.bandtec.mais.consulta.usecase.clinic.GetClinic;
 import com.bandtec.mais.consulta.usecase.patient.GetHistoric;
 import com.bandtec.mais.consulta.usecase.patient.GetPatientInfo;
+import com.bandtec.mais.consulta.usecase.patient.GetSchedule;
 import com.bandtec.mais.consulta.usecase.patient.PutPatientInfo;
-import com.bandtec.mais.consulta.usecase.clinic.GetClinic;
+import com.bandtec.mais.consulta.usecase.patient.impl.GetHistoricMobileImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +54,9 @@ public class PatientController {
     @Autowired
     private PutPatientInfo putPatientInfo;
 
+    @Autowired
+    private GetHistoricMobileImpl getHistoricMobile;
+
     @GetMapping("/{patientId}")
     public ResponseEntity<PatientInfoResponseDTO> getPatientInfo(@PathVariable Integer patientId) {
         return ResponseEntity.of(getPatientInfo.execute(patientId));
@@ -83,6 +88,16 @@ public class PatientController {
     public ResponseEntity<List<PatientHistoricResponseDTO>> getPatientHistoric(@PathVariable Integer patientId) {
 
         Optional<List<PatientHistoricResponseDTO>> oHistoric = getHistoric.execute(patientId);
+
+        return oHistoric
+                .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+    }
+
+    @GetMapping("/historicos/{patientId}")
+    public ResponseEntity<List<PatientHistoricMobileResponseDTO>> getPatientHistoricMobile(@PathVariable Integer patientId) {
+
+        Optional<List<PatientHistoricMobileResponseDTO>> oHistoric = getHistoricMobile.execute(patientId);
 
         return oHistoric
                 .map(it -> ResponseEntity.status(HttpStatus.OK).body(it))
