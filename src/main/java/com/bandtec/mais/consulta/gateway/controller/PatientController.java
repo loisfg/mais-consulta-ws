@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.gateway.controller;
 import com.bandtec.mais.consulta.domain.Clinic;
 import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.domain.User;
+import com.bandtec.mais.consulta.models.dto.PersonalDataDTO;
 import com.bandtec.mais.consulta.models.dto.request.PatientInfoPutRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.SignUpPatientRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.PatientHistoricMobileResponseDTO;
@@ -60,6 +61,11 @@ public class PatientController {
     @GetMapping("/{patientId}")
     public ResponseEntity<PatientInfoResponseDTO> getPatientInfo(@PathVariable Integer patientId) {
         return ResponseEntity.of(getPatientInfo.execute(patientId));
+    }
+
+    @GetMapping("/mobile/{patientId}")
+    public ResponseEntity<PersonalDataDTO> getPatientInfoMobile(@PathVariable Integer patientId) {
+        return ResponseEntity.of(getPatientInfo.run(patientId));
     }
 
     @PostMapping("/signup")
