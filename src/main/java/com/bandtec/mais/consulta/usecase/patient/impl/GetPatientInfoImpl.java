@@ -59,6 +59,27 @@ public class GetPatientInfoImpl implements GetPatientInfo {
         return Optional.empty();
     }
 
+    @Override
+    public Optional<PersonalDataDTO> run(Integer patientId) {
+        if (patientRepository.existsByPatientId(patientId)) {
+
+            Patient patient = patientRepository.findById(patientId).get();
+
+            User user = patient.getUser();
+
+            PersonalDataDTO personalDataDTO = PersonalDataDTO
+                    .builder()
+                    .name(patient.getName())
+                    .age(calculateAge(patient.getBirthDate()))
+                    .cpf(user.getCpf())
+                    .build();
+
+            return Optional.of(personalDataDTO);
+        }
+
+        return Optional.empty();
+    }
+
     @SneakyThrows
     public static int calculateAge(final LocalDate birthday) {
         return Period.between(birthday, LocalDate.now()).getYears();

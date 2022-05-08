@@ -65,7 +65,7 @@ public class PatientController {
 
     @GetMapping("/mobile/{patientId}")
     public ResponseEntity<PersonalDataDTO> getPatientInfoMobile(@PathVariable Integer patientId) {
-        return ResponseEntity.of(getPatientInfoMobile.execute(patientId));
+        return ResponseEntity.of(getPatientInfo.run(patientId));
     }
 
     @PostMapping("/signup")
