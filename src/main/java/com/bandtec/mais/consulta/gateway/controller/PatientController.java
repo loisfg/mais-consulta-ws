@@ -47,9 +47,6 @@ public class PatientController {
     private GetPatientInfo getPatientInfo;
 
     @Autowired
-    private GetPatientInfoMobile getPatientInfoMobile;
-
-    @Autowired
     private GetHistoric getHistoric;
 
     @Autowired
