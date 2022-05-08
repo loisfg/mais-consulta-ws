@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.gateway.controller;
 import com.bandtec.mais.consulta.domain.Clinic;
 import com.bandtec.mais.consulta.domain.Patient;
 import com.bandtec.mais.consulta.domain.User;
+import com.bandtec.mais.consulta.models.dto.PersonalDataDTO;
 import com.bandtec.mais.consulta.models.dto.request.PatientInfoPutRequestDTO;
 import com.bandtec.mais.consulta.models.dto.request.SignUpPatientRequestDTO;
 import com.bandtec.mais.consulta.models.dto.response.PatientHistoricMobileResponseDTO;
@@ -11,10 +12,7 @@ import com.bandtec.mais.consulta.models.dto.response.PatientInfoResponseDTO;
 import com.bandtec.mais.consulta.models.dto.response.PatientSchedulingResponseDTO;
 import com.bandtec.mais.consulta.usecase.auth.PatientSignUp;
 import com.bandtec.mais.consulta.usecase.clinic.GetClinic;
-import com.bandtec.mais.consulta.usecase.patient.GetHistoric;
-import com.bandtec.mais.consulta.usecase.patient.GetPatientInfo;
-import com.bandtec.mais.consulta.usecase.patient.GetSchedule;
-import com.bandtec.mais.consulta.usecase.patient.PutPatientInfo;
+import com.bandtec.mais.consulta.usecase.patient.*;
 import com.bandtec.mais.consulta.usecase.patient.impl.GetHistoricMobileImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,6 +47,9 @@ public class PatientController {
     private GetPatientInfo getPatientInfo;
 
     @Autowired
+    private GetPatientInfoMobile getPatientInfoMobile;
+
+    @Autowired
     private GetHistoric getHistoric;
 
     @Autowired
@@ -60,6 +61,11 @@ public class PatientController {
     @GetMapping("/{patientId}")
     public ResponseEntity<PatientInfoResponseDTO> getPatientInfo(@PathVariable Integer patientId) {
         return ResponseEntity.of(getPatientInfo.execute(patientId));
+    }
+
+    @GetMapping("/mobile/{patientId}")
+    public ResponseEntity<PersonalDataDTO> getPatientInfoMobile(@PathVariable Integer patientId) {
+        return ResponseEntity.of(getPatientInfoMobile.execute(patientId));
     }
 
     @PostMapping("/signup")

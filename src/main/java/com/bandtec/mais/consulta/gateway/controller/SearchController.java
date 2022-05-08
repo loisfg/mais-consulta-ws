@@ -1,15 +1,15 @@
 package com.bandtec.mais.consulta.gateway.controller;
 
-import com.bandtec.mais.consulta.domain.*;
+import com.bandtec.mais.consulta.domain.Clinic;
+import com.bandtec.mais.consulta.domain.Doctor;
+import com.bandtec.mais.consulta.usecase.search.SearchClinic;
 import com.bandtec.mais.consulta.usecase.search.SearchDistricts;
 import com.bandtec.mais.consulta.usecase.search.SearchSpecialty;
-import com.bandtec.mais.consulta.usecase.search.SearchClinic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @CrossOrigin("*")
 @RestController
@@ -30,12 +30,12 @@ public class SearchController {
         this.searchDistricts = searchDistricts;
     }
 
-    @GetMapping("/{specialty}")
-    public ResponseEntity<Set<Doctor>> getDoctorsSpecialties(@PathVariable String specialty) {
-        return searchSpecialties.execute(specialty).isEmpty() ?
-                ResponseEntity.status(204).build() : ResponseEntity.status(200).body(
-                (searchSpecialties.execute(specialty))
-        );
+    @GetMapping("/doctor/{specialty}/{district}")
+    public ResponseEntity<List<Doctor>> getDoctorsSpecialties(@PathVariable String specialty,
+                                                              @PathVariable String district) {
+        List<Doctor> doctorList = searchSpecialties.execute(specialty, district);
+        return doctorList.isEmpty() ?
+                ResponseEntity.status(204).build() : ResponseEntity.status(200).body(doctorList);
     }
 
     @GetMapping("/clinica/{specialtyId}")

@@ -1,10 +1,11 @@
 package com.bandtec.mais.consulta.usecase.patient.impl;
 
-import com.bandtec.mais.consulta.domain.*;
-import com.bandtec.mais.consulta.gateway.repository.*;
+import com.bandtec.mais.consulta.domain.Address;
+import com.bandtec.mais.consulta.domain.Patient;
+import com.bandtec.mais.consulta.domain.User;
+import com.bandtec.mais.consulta.gateway.repository.PatientRepository;
 import com.bandtec.mais.consulta.models.dto.PersonalDataDTO;
-import com.bandtec.mais.consulta.models.dto.response.PatientInfoResponseDTO;
-import com.bandtec.mais.consulta.usecase.patient.GetPatientInfo;
+import com.bandtec.mais.consulta.usecase.patient.GetPatientInfoMobile;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,13 @@ import java.time.Period;
 import java.util.Optional;
 
 @Service
-public class GetPatientInfoImpl implements GetPatientInfo {
+public class GetPatientInfoMobileImpl implements GetPatientInfoMobile {
 
     @Autowired
     private PatientRepository patientRepository;
 
     @Override
-    public Optional<PatientInfoResponseDTO> execute(Integer patientId) {
+    public Optional<PersonalDataDTO> execute(Integer patientId) {
 
         if (patientRepository.existsByPatientId(patientId)) {
 
@@ -48,12 +49,7 @@ public class GetPatientInfoImpl implements GetPatientInfo {
                     .email(user.getEmail())
                     .build();
 
-            PatientInfoResponseDTO patientInfoResponseDTO = PatientInfoResponseDTO
-                    .builder()
-                    .personalData(personalDataDTO)
-                    .build();
-
-            return Optional.of(patientInfoResponseDTO);
+            return Optional.of(personalDataDTO);
         }
 
         return Optional.empty();
@@ -63,5 +59,4 @@ public class GetPatientInfoImpl implements GetPatientInfo {
     public static int calculateAge(final LocalDate birthday) {
         return Period.between(birthday, LocalDate.now()).getYears();
     }
-
 }

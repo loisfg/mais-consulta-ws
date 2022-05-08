@@ -1,10 +1,9 @@
 package com.bandtec.mais.consulta.gateway.repository;
 
-import com.bandtec.mais.consulta.domain.Specialty;
 import com.bandtec.mais.consulta.domain.Doctor;
 import com.bandtec.mais.consulta.domain.User;
-import com.bandtec.mais.consulta.models.dto.response.DoctorSchedulingDTO;
 import com.bandtec.mais.consulta.models.dto.response.DoctorHistoricResponseDTO;
+import com.bandtec.mais.consulta.models.dto.response.DoctorSchedulingDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +12,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
@@ -34,7 +32,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     List<Doctor> findByName(String name);
 
-    Set<Doctor> findAllBySpecialty(Specialty specialty);
+    @Query("SELECT d FROM Doctor d WHERE d.specialty.description LIKE ?1 AND d.clinic.address.district LIKE ?2")
+    List<Doctor> findAllBySpecialty(String description, String district);
 
     @Query("select m from Doctor m")
     List<Doctor> findAllDoctors();

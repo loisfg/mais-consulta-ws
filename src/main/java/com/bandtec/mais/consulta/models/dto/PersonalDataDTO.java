@@ -23,4 +23,5 @@ public class PersonalDataDTO {
     private String state;
     private String cellPhone;
     private String cep;
+    private String email;
 }

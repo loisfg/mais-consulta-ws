@@ -15,7 +15,9 @@ import java.util.Set;
 @Setter
 @ToString
 @Builder
-@Table(name = "Especialidade", schema = "dbo", catalog = "maisconsultadb")
+@Table(name = "Especialidade", schema = "dbo", catalog = "maisconsultadb", indexes = {
+        @Index(name = "idx_specialty_descricao", columnList = "descricao")
+})
 @Entity
 public class Specialty {
     @Id
@@ -28,12 +30,12 @@ public class Specialty {
 
     @Transient
     @JsonIgnore
-    @OneToMany(mappedBy = "especialidade", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL)
     private Set<Doctor> doctors = new HashSet<>();
 
     @Transient
     @JsonIgnore
-    @OneToOne(mappedBy = "especialidade")
+    @OneToOne(mappedBy = "specialty")
     private Scheduling scheduling;
 
     @Override

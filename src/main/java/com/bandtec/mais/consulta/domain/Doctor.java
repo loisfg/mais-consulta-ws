@@ -25,7 +25,6 @@ public class Doctor {
     @Column(name = "nome")
     private String name;
 
-    @JsonIgnore
     @JoinColumn(name = "clinica_id", referencedColumnName = "id_clinica", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     private Clinic clinic;

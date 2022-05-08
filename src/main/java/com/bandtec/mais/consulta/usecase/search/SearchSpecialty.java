@@ -2,8 +2,8 @@ package com.bandtec.mais.consulta.usecase.search;
 
 import com.bandtec.mais.consulta.domain.Doctor;
 
-import java.util.Set;
+import java.util.List;
 
 public interface SearchSpecialty {
-    Set<Doctor> execute(String specialty);
+    List<Doctor> execute(String specialty, String district);
 }
