@@ -51,17 +51,28 @@ public class GetPatientInfoImpl implements GetPatientInfo {
 
     private PersonalDataDTO getPatient(Integer patientId) {
         Patient patient = patientRepository.findById(patientId).get();
-
+        Address address = null;
         User user = patient.getUser();
+        if (patient.getAddress() != null) {
+            address = patient.getAddress();
+        }
 
         return PersonalDataDTO
                 .builder()
                 .name(patient.getName())
                 .age(calculateAge(patient.getBirthDate()))
+                .address(address != null ? address.getStreet() : "")
+                .publicPlace(address != null ? address.getPublicPlace() : "")
+                .complement(address != null ? address.getComplement() : "")
+                .number(address != null ? address.getNumber(): "")
+                .district(address != null ? address.getDistrict(): "")
                 .susNumber(patient.getNumberWallet())
                 .cpf(user.getCpf())
                 .phone(patient.getPhone())
+                .city(address != null ? address.getCity(): "")
+                .state(address != null ? address.getState(): "")
                 .cellPhone(patient.getPhone())
+                .cep(address != null ? address.getZipCode(): "")
                 .email(user.getEmail())
                 .build();
     }
