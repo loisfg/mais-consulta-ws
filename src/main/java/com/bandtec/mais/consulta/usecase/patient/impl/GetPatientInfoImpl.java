@@ -24,29 +24,7 @@ public class GetPatientInfoImpl implements GetPatientInfo {
 
         if (patientRepository.existsByPatientId(patientId)) {
 
-            Patient patient = patientRepository.findById(patientId).get();
-
-            User user = patient.getUser();
-            Address address = patient.getAddress();
-
-            PersonalDataDTO personalDataDTO = PersonalDataDTO
-                    .builder()
-                    .name(patient.getName())
-                    .age(calculateAge(patient.getBirthDate()))
-                    .address(address.getStreet())
-                    .publicPlace(address.getPublicPlace())
-                    .complement(address.getComplement())
-                    .number(address.getNumber())
-                    .district(address.getDistrict())
-                    .susNumber(patient.getNumberWallet())
-                    .cpf(user.getCpf())
-                    .phone(patient.getPhone())
-                    .city(address.getCity())
-                    .state(address.getState())
-                    .cellPhone(patient.getPhone())
-                    .cep(address.getZipCode())
-                    .email(user.getEmail())
-                    .build();
+            PersonalDataDTO personalDataDTO = getPatient(patientId);
 
             PatientInfoResponseDTO patientInfoResponseDTO = PatientInfoResponseDTO
                     .builder()
@@ -63,21 +41,29 @@ public class GetPatientInfoImpl implements GetPatientInfo {
     public Optional<PersonalDataDTO> run(Integer patientId) {
         if (patientRepository.existsByPatientId(patientId)) {
 
-            Patient patient = patientRepository.findById(patientId).get();
-
-            User user = patient.getUser();
-
-            PersonalDataDTO personalDataDTO = PersonalDataDTO
-                    .builder()
-                    .name(patient.getName())
-                    .age(calculateAge(patient.getBirthDate()))
-                    .cpf(user.getCpf())
-                    .build();
+            PersonalDataDTO personalDataDTO = getPatient(patientId);
 
             return Optional.of(personalDataDTO);
         }
 
         return Optional.empty();
+    }
+
+    private PersonalDataDTO getPatient(Integer patientId) {
+        Patient patient = patientRepository.findById(patientId).get();
+
+        User user = patient.getUser();
+
+        return PersonalDataDTO
+                .builder()
+                .name(patient.getName())
+                .age(calculateAge(patient.getBirthDate()))
+                .susNumber(patient.getNumberWallet())
+                .cpf(user.getCpf())
+                .phone(patient.getPhone())
+                .cellPhone(patient.getPhone())
+                .email(user.getEmail())
+                .build();
     }
 
     @SneakyThrows
