@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.bandtec.mais.consulta.models.dto.response.PostSchedulingConsultImplTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 8.81 s <<< FAILURE! - in com.bandtec.mais.consulta.models.dto.response.PostSchedulingConsultImplTest
+createScheduling_TwoMonthsAfterWithHour  Time elapsed: 0.03 s  <<< ERROR!
+java.util.NoSuchElementException: No value present
+	at com.bandtec.mais.consulta.models.dto.response.PostSchedulingConsultImplTest.createScheduling_TwoMonthsAfterWithHour(PostSchedulingConsultImplTest.java:90)
+
