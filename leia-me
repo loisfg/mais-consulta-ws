@@ -1,0 +1,15 @@
+clone o projeto backend
+
+mova o dockerfile para dentro dele
+
+rode os seguintes comandos:
+
+	sudo docker build -t mais-consulta .
+
+	sudo docker run -dit --name mais-consulta -p 8080:8080 mais-consulta:latest
+
+após isso, pegue o CONTAINER ID com o comando:
+
+	sudo docker ps
+
+va no arquivo /etc/rc.local
