@@ -26,21 +26,27 @@ public class PostHoursClinicImpl implements PostHoursClinic {
 
     @SneakyThrows
     @Override
-    public HashMap<LocalTime, String> execute(Integer clinicId, String day) {
-        List<HoursResponseDTO> listHoursOccupied = schedulingRepository
-                .findTimeAndSchedulingDateByClinicId(clinicId, LocalDate.parse(day));
+    public HashMap<String, List<LocalTime>> execute(Integer clinicId, String day) {
+        List<HoursResponseDTO> listHoursOccupied = schedulingRepository.findTimeAndSchedulingDateByClinicId(clinicId, LocalDate.parse(day));
         List<LocalTime> workingHours = addHours();
-        LinkedHashMap<LocalTime, String> hours = new LinkedHashMap<>();
+        LinkedHashMap<String, List<LocalTime>> hours = new LinkedHashMap<>();
+        List<LocalTime> freeHours = new ArrayList<>();
+        List<LocalTime> occupiedHours = new ArrayList<>();
 
-        workingHours.forEach(workingHour -> {
-            hours.put(workingHour, "Livre");
-            listHoursOccupied.forEach(hourOccupied -> {
-                        if (hours.containsKey(hourOccupied.getSchedulingTime())) {
-                            hours.replace(hourOccupied.getSchedulingTime(), "Ocupado");
-                        }
+        workingHours.forEach(hour -> {
+            freeHours.add(hour);
+            listHoursOccupied.forEach(occupiedDoctors -> {
+                if (occupiedDoctors.getSchedulingDate().equals(LocalDate.parse(day))) {
+                    if (occupiedDoctors.getSchedulingTime().equals(hour)) {
+                        occupiedHours.add(hour);
+                        freeHours.remove(hour);
                     }
-            );
+                }
+            });
         });
+
+        hours.put("Livre", freeHours);
+        hours.put("Ocupado", occupiedHours);
 
         return hours;
     }

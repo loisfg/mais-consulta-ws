@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin("*")
@@ -57,9 +58,9 @@ public class SchedulingController {
     }
 
     @GetMapping("/horarios/livres/{day}/{clinicId}")
-    public ResponseEntity<HashMap<LocalTime, String>> getAvailableTime(@PathVariable Integer clinicId,
-                                                                       @PathVariable String day) {
-        HashMap<LocalTime, String> hoursList = postHoursClinic.execute(clinicId, day);
+    public ResponseEntity<HashMap<String, List<LocalTime>>> getAvailableTime(@PathVariable String day,
+                                                                             @PathVariable Integer clinicId) {
+        HashMap<String, List<LocalTime>> hoursList = postHoursClinic.execute(clinicId, day);
         if (hoursList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
