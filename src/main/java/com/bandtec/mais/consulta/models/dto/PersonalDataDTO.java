@@ -15,7 +15,6 @@ public class PersonalDataDTO {
     private String complement;
     private String number;
     private String district;
-    private String rg;
     private String susNumber;
     private String cpf;
     private String phone;

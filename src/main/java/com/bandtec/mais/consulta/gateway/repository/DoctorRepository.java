@@ -24,7 +24,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
     Optional<List<Integer>> findDoctorsIdsBySpecialtyIdAndClinic(@Param("idEspecialidade") Integer specialtyId,
                                                                  @Param("clinicId") Integer clinicId);
 
-    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.DoctorSchedulingDTO(a.patient.patientId, a.schedulingId, a.patient.name,  a.schedulingTime, a.patient.birthDate) FROM Scheduling a WHERE a.schedulingDate = :dtAtual AND a.doctor.doctorId = :id AND a.status = 'ATIVO'")
+    @Query(value = "SELECT new com.bandtec.mais.consulta.models.dto.response.DoctorSchedulingDTO(a.patient.patientId, a.schedulingId, a.patient.name,  a.schedulingTime, a.patient.birthDate) FROM Scheduling a WHERE a.schedulingDate = :dtAtual AND a.doctor.doctorId = :id AND a.status = 'ACTIVE'")
     Optional<List<DoctorSchedulingDTO>> findAllSchedulesByDoctorId(@Param("id") Integer doctorId,
                                                                    @Param("dtAtual") LocalDate date);
 
