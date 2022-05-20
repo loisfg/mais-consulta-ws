@@ -18,8 +18,6 @@ public class DoctorSchedulesImpl implements DoctorSchedules {
 
     @Override
     public Optional<List<DoctorSchedulingDTO>> execute(Integer patientId) {
-        LocalDate thais = LocalDate.now().plusDays(1);
-        System.out.println(thais);
-        return doctorRepository.findAllSchedulesByDoctorId(patientId, thais);
+        return doctorRepository.findAllSchedulesByDoctorId(patientId, LocalDate.now());
     }
 }
