@@ -14,7 +14,7 @@ spring:
     url: jdbc:sqlserver://mais-consulta.database.windows.net:1433;database=mais-consulta;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
     username: "mais-consulta"
     password: "4ADSBgrupo02"
-
+    
   jpa:
 #    show-sql: true
 #    format_sql: true
