@@ -9,11 +9,13 @@ import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "usuario")
+@ToString
 @Builder
 @Getter
 @Setter
-@Table(name = "Medico", schema = "dbo", catalog = "maisconsultadb")
+@Table(name = "Medico", schema = "dbo", indexes = {
+        @Index(name = "idx_doctor_clinica_id", columnList = "clinica_id")
+})
 @Entity
 public class Doctor {
 

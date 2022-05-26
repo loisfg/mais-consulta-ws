@@ -10,7 +10,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@Table(name = "Notification", schema = "dbo", catalog = "maisconsultadb")
+@Table(name = "Notification", schema = "dbo")
 @Entity
 public class Notification {
 

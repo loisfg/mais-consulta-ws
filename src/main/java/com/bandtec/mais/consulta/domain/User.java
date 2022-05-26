@@ -17,7 +17,7 @@ import java.util.Objects;
 @Table(name = "Usuario", indexes = {
         @Index(name = "idx_usuario_cpf", columnList = "cpf"),
         @Index(name = "idx_usuario_password", columnList = "password")
-}, schema = "dbo", catalog = "maisconsultadb")
+}, schema = "dbo")
 public class User {
 
     @Id

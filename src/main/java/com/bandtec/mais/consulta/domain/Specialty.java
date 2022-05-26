@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Builder
-@Table(name = "Especialidade", schema = "dbo", catalog = "maisconsultadb", indexes = {
+@Table(name = "Especialidade", schema = "dbo", indexes = {
         @Index(name = "idx_specialty_descricao", columnList = "descricao")
 })
 @Entity
