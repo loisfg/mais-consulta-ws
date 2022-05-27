@@ -18,17 +18,20 @@ public class PutPatientInfoImpl implements PutPatientInfo {
     @Override
     public Optional<Patient> execute(Integer patientId, PatientInfoPutRequestDTO patientInfoResponseDTO) {
         if (patientRepository.existsById(patientId)) {
+            Optional<Patient> patient = patientRepository.findByPatientId(patientId);
+            patient.get().setName(patientInfoResponseDTO.getPersonalData().getName());
+            patient.get().getAddress().setPublicPlace(patientInfoResponseDTO.getPersonalData().getPublicPlace());
+            patient.get().setPhone(patientInfoResponseDTO.getPersonalData().getCellPhone());
+            patient.get().getUser().setCpf(patientInfoResponseDTO.getPersonalData().getCpf());
+            patient.get().setNumberWallet(patientInfoResponseDTO.getPersonalData().getSusNumber());
+            patient.get().getAddress().setCity(patientInfoResponseDTO.getPersonalData().getCity());
+            patient.get().getAddress().setState(patientInfoResponseDTO.getPersonalData().getState());
+            patient.get().getAddress().setDistrict(patientInfoResponseDTO.getPersonalData().getDistrict());
+            patient.get().getAddress().setZipCode(patientInfoResponseDTO.getPersonalData().getCep());
 
-            Patient patient = Patient
-                    .builder()
-                    .patientId(patientId)
-                    .name(patientInfoResponseDTO.personalData.getName())
-                    .phone(patientInfoResponseDTO.personalData.getPhone())
-                    .build();
+            patientRepository.save(patient.get());
 
-            patientRepository.save(patient);
-
-            return Optional.of(patient);
+            return patient;
         }
 
         return Optional.empty();

@@ -30,7 +30,7 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     boolean existsByPatientId(Integer patientId);
 
-    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PatientSchedulingResponseDTO(a.schedulingId, a.specialty.description, a.schedulingDate, a.schedulingTime) FROM Scheduling a WHERE a.patient.patientId = :id_paciente AND a.schedulingDate BETWEEN :dt_start AND :dt_end")
+    @Query("SELECT new com.bandtec.mais.consulta.models.dto.response.PatientSchedulingResponseDTO(a.schedulingId, a.specialty.description, a.schedulingDate, a.schedulingTime) FROM Scheduling a WHERE a.patient.patientId = :id_paciente AND a.schedulingDate BETWEEN :dt_start AND :dt_end AND a.status = 'ACTIVE'")
     Optional<List<PatientSchedulingResponseDTO>> findSchedulesToPatient(@Param("id_paciente") Integer patientId,
                                                                         @Param("dt_start") LocalDate startDate,
                                                                         @Param("dt_end") LocalDate endDate);

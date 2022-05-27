@@ -11,9 +11,9 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:sqlserver://maisconsultadb.database.windows.net:1433;database=maisconsultadb;encrypt=true;trustServerCertificate=false;sendTimeAsDateTime=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-    username: "mais-consulta@maisconsultadb"
-    password: "#Grupo02"
+    url: jdbc:sqlserver://mais-consulta.database.windows.net:1433;database=mais-consulta;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: "mais-consulta"
+    password: "4ADSBgrupo02"
 
   jpa:
 #    show-sql: true
