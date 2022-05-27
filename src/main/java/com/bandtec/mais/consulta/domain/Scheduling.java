@@ -20,7 +20,9 @@ import java.util.Objects;
 @ToString
 @Builder
 @Entity
-@Table(name = "Agendamento", schema = "dbo", catalog = "maisconsultadb")
+@Table(name = "Agendamento", schema = "dbo", indexes = {
+        @Index(name = "idx_scheduling_status", columnList = "status")
+})
 public class Scheduling {
 
     @Id

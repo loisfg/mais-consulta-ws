@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "Email", schema = "dbo", catalog = "maisconsultadb")
+@Table(name = "Email", schema = "dbo")
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

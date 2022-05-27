@@ -13,7 +13,7 @@ import java.util.Objects;
 @ToString
 @Builder
 @Entity
-@Table(name = "Endereco", schema = "dbo", catalog = "maisconsultadb")
+@Table(name = "Endereco", schema = "dbo")
 public class Address {
 
     @Id
