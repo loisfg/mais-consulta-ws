@@ -16,7 +16,9 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity(name = "Paciente")
 @Builder
-@Table(name = "Paciente", schema = "dbo")
+@Table(schema = "dbo", indexes = {
+        @Index(name = "idx_patient_nome", columnList = "nome")
+})
 public class Patient {
 
     @Id
