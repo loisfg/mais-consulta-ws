@@ -21,7 +21,8 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "Agendamento", schema = "dbo", indexes = {
-        @Index(name = "idx_scheduling_status", columnList = "status")
+        @Index(name = "idx_scheduling_status", columnList = "status"),
+        @Index(name = "idx_scheduling_data_hr_status", columnList = "data_hr, status")
 })
 public class Scheduling {
 

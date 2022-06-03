@@ -14,7 +14,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @Table(name = "Medico", schema = "dbo", indexes = {
-        @Index(name = "idx_doctor_clinica_id", columnList = "clinica_id")
+        @Index(name = "idx_doctor_clinica_id", columnList = "clinica_id"),
+        @Index(name = "idx_doctor_nome", columnList = "nome")
 })
 @Entity
 public class Doctor {
