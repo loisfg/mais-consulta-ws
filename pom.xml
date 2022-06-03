@@ -117,6 +117,11 @@
             <version>2.0.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>br.com.gerencianet.gnsdk</groupId>
+            <artifactId>gn-api-sdk-java</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
     <build>
