@@ -15,7 +15,7 @@ public class SearchSpecialtyImpl implements SearchSpecialty {
     DoctorRepository doctorRepository;
 
     @Override
-    public List<Doctor> execute(String specialty, String district) {
-        return doctorRepository.findAllBySpecialty(specialty, district);
+    public List<Doctor> execute(String specialty) {
+        return doctorRepository.findAllBySpecialty(specialty);
     }
 }
