@@ -2,14 +2,14 @@ package com.bandtec.mais.consulta.gateway.controller;
 
 import com.bandtec.mais.consulta.Credentials;
 import com.bandtec.mais.consulta.models.dto.request.PaymentPostRequestDTO;
-import com.bandtec.mais.consulta.usecase.payment.pix.PaymentGetQrCode;
+import com.bandtec.mais.consulta.usecase.payment.pix.GetQrCodePixDetail;
+import com.bandtec.mais.consulta.usecase.payment.pix.GetQrCodePixIPayment;
 import com.bandtec.mais.consulta.usecase.payment.pix.PaymentPixGetList;
 import com.bandtec.mais.consulta.usecase.payment.pix.PaymentPixPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.ByteArrayInputStream;
 import java.util.Map;
 
 @CrossOrigin("*")
@@ -24,7 +24,10 @@ public class PaymentController {
     @Autowired
     PaymentPixPost iPaymentPost;
     @Autowired
-    PaymentGetQrCode iPaymentGetQr;
+    GetQrCodePixIPayment iPaymentGetQr;
+    @Autowired
+    GetQrCodePixDetail iPaymentGetQrDetail;
+
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> getPixPayment() {
@@ -39,7 +42,12 @@ public class PaymentController {
     }
 
     @GetMapping("/qrcode/{id}")
-    public ResponseEntity<String> getQrCodePixPayment(@PathVariable Integer id) {
-        return ResponseEntity.ok(iPaymentGetQr.execute(credentials, id.toString()));
+    public ResponseEntity<Map<String, Object>> getQrCodePixPayment(@PathVariable String id) {
+        return ResponseEntity.ok(iPaymentGetQr.execute(credentials, id));
+    }
+
+    @GetMapping("/qrcode/detail/{id}")
+    public ResponseEntity<Map<String, Object>> getQrCodePixPaymentDetail(@PathVariable String id) {
+        return ResponseEntity.ok(iPaymentGetQrDetail.execute(credentials, id));
     }
 }
