@@ -32,9 +32,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     List<Doctor> findByName(String name);
 
-    @Query("SELECT d FROM Doctor d WHERE d.specialty.description LIKE ?1 AND d.clinic.address.district LIKE ?2")
-    List<Doctor> findAllBySpecialty(String description, String district);
-
     @Query("SELECT d FROM Doctor d WHERE d.specialty.description LIKE ?1")
     List<Doctor> findAllBySpecialty(String description);
 
