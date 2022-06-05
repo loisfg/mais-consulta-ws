@@ -44,7 +44,7 @@ public class ImportCsvClinicGenerate implements ImportCsv {
                 Integer id = list.size() + 1;
                 String name = entrance.next();
                 String phone = "(11)" + generator.nextInt(8999) + "-" + generator.nextInt(9999);
-                list.add(new Clinic(id, name, phone, addressList.get(id - 1)));
+                list.add(new Clinic(id, name, phone,"", "", addressList.get(id - 1)));
             }
         } catch (NoSuchElementException error) {
             System.out.println("File with problems");

@@ -27,9 +27,16 @@ public class Clinic {
     @Column(name = "telefone")
     private String phone;
 
+    @Column(name = "pix_key", nullable = false)
+    private String pixKey;
+
+    @Column(name = "preco", nullable = false)
+    private String price;
+
     @JoinColumn(name = "endereco_id", referencedColumnName = "id_endereco", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
+
 
     @Override
     public boolean equals(Object o) {

@@ -3,6 +3,7 @@ package com.bandtec.mais.consulta.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -25,6 +26,7 @@ public class User {
     @Column(name = "idUsuario")
     private Integer userId;
 
+    @CPF
     @Column(nullable = false, name = "cpf")
     private String cpf;
 
