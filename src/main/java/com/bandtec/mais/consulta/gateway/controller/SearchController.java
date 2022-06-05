@@ -30,10 +30,9 @@ public class SearchController {
         this.searchDistricts = searchDistricts;
     }
 
-    @GetMapping("/doctor/{specialty}/{district}")
-    public ResponseEntity<List<Doctor>> getDoctorsSpecialties(@PathVariable String specialty,
-                                                              @PathVariable String district) {
-        List<Doctor> doctorList = searchSpecialties.execute(specialty, district);
+    @GetMapping("/doctor/{specialty}")
+    public ResponseEntity<List<Doctor>> getDoctorsSpecialties(@PathVariable String specialty) {
+        List<Doctor> doctorList = searchSpecialties.execute(specialty);
         return doctorList.isEmpty() ?
                 ResponseEntity.status(204).build() : ResponseEntity.status(200).body(doctorList);
     }
