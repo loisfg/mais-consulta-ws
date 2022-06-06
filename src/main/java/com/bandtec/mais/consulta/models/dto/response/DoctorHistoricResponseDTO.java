@@ -1,5 +1,6 @@
 package com.bandtec.mais.consulta.models.dto.response;
 
+import com.bandtec.mais.consulta.models.enums.SchedulingStatusEnum;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -11,15 +12,18 @@ public class DoctorHistoricResponseDTO {
     String name;
     Integer age;
     LocalDate lastScheduling;
+    SchedulingStatusEnum status;
 
     public DoctorHistoricResponseDTO(Integer schedulingId,
                                      String name,
                                      LocalDate dataNascimento,
-                                     LocalDate schedulingDate) {
+                                     LocalDate schedulingDate,
+                                     SchedulingStatusEnum status) {
         this.schedulingId = schedulingId;
         this.name = name;
         this.age = calculateAge(dataNascimento);
         this.lastScheduling = schedulingDate;
+        this.status = status;
     }
 
     public static Integer calculateAge(LocalDate birthDate) {

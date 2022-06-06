@@ -50,6 +50,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     boolean existsByDoctorId(Integer doctorId);
 
-    @Query("SELECT DISTINCT new com.bandtec.mais.consulta.models.dto.response.DoctorHistoricResponseDTO(a.schedulingId, a.patient.name, a.patient.birthDate, a.schedulingDate) FROM Scheduling a WHERE a.doctor.doctorId = :idMedico AND a.status = 'FINALIZADO'")
+    @Query("SELECT DISTINCT new com.bandtec.mais.consulta.models.dto.response.DoctorHistoricResponseDTO(a.schedulingId, a.patient.name, a.patient.birthDate, a.schedulingDate, a.status) FROM Scheduling a WHERE a.doctor.doctorId = :idMedico AND a.status = 'FINISHED'")
     Optional<List<DoctorHistoricResponseDTO>> findSchedulesHistoric(@Param("idMedico") Integer doctorId);
 }
