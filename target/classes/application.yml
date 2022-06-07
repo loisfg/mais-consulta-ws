@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: "/mais-consulta"
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://mais-consulta.database.windows.net:1433;database=mais-consulta;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: "mais-consulta"
+    password: "4ADSBgrupo02"
+
+  jpa:
+#    show-sql: true
+#    format_sql: true
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
