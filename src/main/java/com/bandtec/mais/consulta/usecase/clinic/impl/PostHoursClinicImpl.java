@@ -56,8 +56,8 @@ public class PostHoursClinicImpl implements PostHoursClinic {
         List<Integer> hrs = List.of(8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
         try {
             for (Integer hr : hrs) {
-                allHours.add(LocalTime.of(hr, 0));
-                allHours.add(LocalTime.of(hr, 30));
+                allHours.add(LocalTime.of(hr + 4, 0));
+                allHours.add(LocalTime.of(hr + 4, 30));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
