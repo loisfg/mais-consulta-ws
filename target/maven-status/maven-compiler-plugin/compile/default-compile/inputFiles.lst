@@ -8,7 +8,6 @@
 /home/luis.oliveira@VALEMOBI.CORP/my_gitHub/mais-consulta-ws/src/main/java/com/bandtec/mais/consulta/usecase/doctor/impl/DoctorHistoricImpl.java
 /home/luis.oliveira@VALEMOBI.CORP/my_gitHub/mais-consulta-ws/src/main/java/com/bandtec/mais/consulta/handler/RestExceptionHandler.java
 /home/luis.oliveira@VALEMOBI.CORP/my_gitHub/mais-consulta-ws/src/main/java/com/bandtec/mais/consulta/models/dto/request/ConsultSchedulingRequestDTO.java
-/home/luis.oliveira@VALEMOBI.CORP/my_gitHub/mais-consulta-ws/src/main/java/com/bandtec/mais/consulta/Credentials.java
 /home/luis.oliveira@VALEMOBI.CORP/my_gitHub/mais-consulta-ws/src/main/java/com/bandtec/mais/consulta/usecase/doctor/DoctorHistoric.java
 /home/luis.oliveira@VALEMOBI.CORP/my_gitHub/mais-consulta-ws/src/main/java/com/bandtec/mais/consulta/models/dto/PersonalDataDTO.java
 /home/luis.oliveira@VALEMOBI.CORP/my_gitHub/mais-consulta-ws/src/main/java/com/bandtec/mais/consulta/models/dto/request/PatientInfoPutRequestDTO.java

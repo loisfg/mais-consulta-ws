@@ -164,6 +164,5 @@ com/bandtec/mais/consulta/domain/Diagnosis$DiagnosisBuilder.class
 com/bandtec/mais/consulta/models/dto/request/SearchDoctorRequestDTO.class
 com/bandtec/mais/consulta/usecase/email/EmailSend.class
 com/bandtec/mais/consulta/infra/queue/impl/SchedulingConsultQueueImpl.class
-com/bandtec/mais/consulta/Credentials.class
 com/bandtec/mais/consulta/error/ResourceNotFoundException.class
 com/bandtec/mais/consulta/models/dto/NotificationDTO.class
